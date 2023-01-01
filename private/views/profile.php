@@ -6,22 +6,22 @@
             <?php
             
                 $image="./images/user_icon.png";
-                if(file_exists($user["profile_pic"])){
-                    $image=$user["profile_pic"];
-                }
-                ?>
+                // if(file_exists($user["profile_pic"])){
+                //     $image=$user["profile_pic"];
+                // }
+                // ?>
             <img src=" <?php echo $image?>" alt="" class="user-pic">
         </div>
         <div class="details">
-            <p class="name"><?=htmlspecialchars($user["first_name"])?> <?=htmlspecialchars($user["last_name"])?></p>
-            <p class="hometown"><?=htmlspecialchars($user["city"])?> </p>
+            <p class="pro-name"><?=Auth::getfirst_name()?> <?=Auth::getlast_name()?></p>
+            <p class="hometown"><?=Auth::getcity()?> </p>
             <a href="#certificates">Certificates</a>
             <a href="#activities">Volunteering</a>
             <a href="#donations">Donations</a>
         </div>
         <div class="button">
             <a class="edit_profile_btn" href="profile.php">Edit Profile</a>
-            <a class="edit_profile_btn" href="logout.php">Log out</a>
+            <a class="edit_profile_btn" href="<?=ROOT?>/logout">Log out</a>
         </div>
     </div>
     <div class="certificate_section" id="certificates">

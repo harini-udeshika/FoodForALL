@@ -7,9 +7,9 @@ class Profile extends Controller
         
         $data = $user->findAll();   
         
-        // if(!Auth::logged_in()){
-        //     $this->redirect('home');
-        // }
+        if(!Auth::logged_in()){
+            $this->redirect('home');
+        }
         
         $this->view('profile',['rows'=>$data]);
     }

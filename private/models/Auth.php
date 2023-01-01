@@ -20,4 +20,16 @@ class Auth{
         }
         return false;
     }
+    public static function __callStatic($method,$params){
+
+        $prop = strtolower(str_replace("get","",$method));
+        
+        if(isset($_SESSION['USER'])) {
+            return $_SESSION['USER']->$prop;
+            
+        }
+        return "Unknown";
+
+    }
 }
+
