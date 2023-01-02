@@ -20,6 +20,7 @@ if(isset($_SESSION['user_id'])){
 
 
 <?php $this->view('includes/header')?>
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
 <?php $this->view('includes/navbar')?>
     <div class="container-main">
         <div class="description">

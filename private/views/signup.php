@@ -1,7 +1,8 @@
 <?php $this->view('includes/header')?>
-<?php
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
+<!-- <?php
 print_r($errors);
-?>
+?> -->
 <body>
     <!-- <nav>Home</nav> -->
     <div class="signup-container">

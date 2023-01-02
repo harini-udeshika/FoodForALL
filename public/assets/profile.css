@@ -1,0 +1,250 @@
+html {
+    font-family: "Inter"
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.remove {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    color: #7681BF;
+    margin: 1rem 0rem 1rem 1.8rem;
+}
+
+.remove a {
+    color: #7681BF;
+    text-decoration: none;
+}
+.remove a:hover {
+    text-decoration:underline;
+}
+
+.remove_button {
+    background-color: #ffff;
+    border: none;
+    color: #7681BF;
+   
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.remove_button:hover{
+    text-decoration: underline;
+}
+.profile-pic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-right: 3rem;
+    color: #7681BF;
+
+}
+
+.heading {
+    color: #7681BF;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.profile {
+   
+    width: 60rem;
+    /* border: 0.09rem solid #7681BF; */
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+}
+
+.des-user-icon {
+    height: 15rem;
+    width: 15rem;
+    border-radius: 7.5rem;
+    border: 0.2rem solid #7681BF;
+}
+
+.nav-i>a:hover {
+    color: #4c62e0;
+}
+
+.name,
+.id_email,
+.address_n_city {
+    display: flex;
+    flex-direction: row;
+    width: 25rem;
+    justify-content: space-between;
+}
+
+.f1,
+.f2,
+.f3,
+.f4,
+.f {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    height: 2rem;
+    width: 12rem;
+    border-radius: 10px;
+    text-align: left;
+    padding-left: 0;
+    border: none;
+    color: #6F6F6F;
+    font-size: 0.9rem;
+    margin: 0rem 0 1rem 0.5rem;
+    background-color: #ffffff;
+    justify-content: center;
+
+
+}
+
+input:focus {
+    outline-color: #7681BF;
+}
+
+.f label,.f1 label,.f2 label,.f3 label,.f4 label {
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+/* .small{
+    width: 6.8rem;
+} */
+/* .name,
+.nic,
+.city,
+.f12
+ {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+} */
+.change-pwd {
+    height: 2.5rem;
+    width: 9rem;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2rem;
+    margin-left: 3rem;
+    text-align:center;
+    color: #7681BF;
+}
+
+.name,
+.id_email {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.save {
+    height: 2.5rem;
+    width: 9rem;
+    background-color: #7681BF;
+    color: #ffffff;
+    
+    border: 1px solid #7681BF;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    /* box-shadow: 0.05rem 0.05rem 0.05rem 0.05rem #7681BF; */
+
+
+}
+
+.change-pwd:hover {
+   
+   text-decoration: underline;
+   
+
+}
+
+.save:hover {
+    background-color: #626fbe;
+    color: #fff;
+    font-weight: bold;
+    border: 1.5px solid #626fbe;
+
+}
+.change_pic{
+    height:20rem;
+    width:60%;
+    background-color: #F2F3F9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+    margin-top: 5rem;
+    border:0.06rem solid #7681BF;
+}
+.file{
+    display:none;
+}
+.file_label{
+cursor: pointer;
+
+}
+.file_h{
+background-color: #dfe8cc;
+height:3rem;
+width:10rem;
+text-align: center;
+border-radius: 0.8rem;
+color: #98C03C;
+display:flex;
+flex-direction:row;
+align-items: center;
+justify-content:space-evenly;
+margin-right: 0.3rem;
+}
+.file_form{
+display: flex;
+flex-direction: column;
+align-items:center;
+font-size:0.9rem;
+}
+.file_name{
+max-width: 6rem;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis; 
+}
+.file_h:hover{
+    background-color: #d1e0a4;
+}
+.visible{
+    visibility: hidden;
+}
+.error 
+{
+    visibility: visible;
+    color: #ff8477;
+}

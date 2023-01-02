@@ -1,4 +1,5 @@
 <?php $this->view('includes/header')?>
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
 <?php $this->view('includes/navbar')?>
 
 <div class="intro">
@@ -20,7 +21,7 @@
             <a href="#donations">Donations</a>
         </div>
         <div class="button">
-            <a class="edit_profile_btn" href="profile.php">Edit Profile</a>
+            <a class="edit_profile_btn" href="<?=ROOT?>/edit_profile">Edit Profile</a>
             <a class="edit_profile_btn" href="<?=ROOT?>/logout">Log out</a>
         </div>
     </div>
