@@ -27,7 +27,7 @@
                 <button class="change-pwd">Change Password</button>
             </div>
             <div class="profile-details">
-                <form action="./edit_profile.php" class="form" method="post">
+                <form action="" class="form" method="post">
 
                     <div class="name">
 
