@@ -5,12 +5,13 @@ class Profile extends Controller
         
         $user =new User();
         
-        $data = $user->findAll();   
+        $data = $user->where('id',Auth::getid());   
         
         if(!Auth::logged_in()){
             $this->redirect('home');
         }
         
+        $data = $data[0];
         $this->view('profile',['rows'=>$data]);
     }
 }

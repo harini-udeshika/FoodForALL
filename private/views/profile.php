@@ -1,4 +1,5 @@
 <?php $this->view('includes/header')?>
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
 <?php $this->view('includes/navbar')?>
 
 <div class="intro">
@@ -6,10 +7,10 @@
             <?php
             
                 $image="./images/user_icon.png";
-                // if(file_exists($user["profile_pic"])){
-                //     $image=$user["profile_pic"];
-                // }
-                // ?>
+                if(file_exists($rows->profile_pic)){
+                    $image=$rows->profile_pic;
+                }
+                ?>
             <img src=" <?php echo $image?>" alt="" class="user-pic">
         </div>
         <div class="details">
@@ -20,7 +21,7 @@
             <a href="#donations">Donations</a>
         </div>
         <div class="button">
-            <a class="edit_profile_btn" href="profile.php">Edit Profile</a>
+            <a class="edit_profile_btn" href="<?=ROOT?>/edit_profile">Edit Profile</a>
             <a class="edit_profile_btn" href="<?=ROOT?>/logout">Log out</a>
         </div>
     </div>

@@ -1,25 +1,5 @@
-<!-- <?php
-session_start();
-
-if(isset($_SESSION['user_id'])){
-    
-    $mysqli=require __DIR__ ."/database.php";
-
-    $sql="SELECT * FROM user
-    WHERE id={$_SESSION["user_id"]}";
-
-    $result=$mysqli->query($sql);
-
-    $user=$result->fetch_assoc();
-    
-   
-}
-
-?> -->
-
-
-
 <?php $this->view('includes/header')?>
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
 <?php $this->view('includes/navbar')?>
     <div class="container-main">
         <div class="description">

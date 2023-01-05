@@ -1,4 +1,5 @@
 <?php $this->view('includes/header')?>
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
 <div class="container">
         <div class="login-image">
             <img src="./images/logo.png" alt="" class="image-login">
