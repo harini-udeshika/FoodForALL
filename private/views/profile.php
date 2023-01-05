@@ -7,10 +7,10 @@
             <?php
             
                 $image="./images/user_icon.png";
-                // if(file_exists($user["profile_pic"])){
-                //     $image=$user["profile_pic"];
-                // }
-                // ?>
+                if(file_exists($rows->profile_pic)){
+                    $image=$rows->profile_pic;
+                }
+                ?>
             <img src=" <?php echo $image?>" alt="" class="user-pic">
         </div>
         <div class="details">

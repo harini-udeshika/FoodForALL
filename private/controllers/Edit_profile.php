@@ -4,11 +4,6 @@ class Edit_profile extends Controller
     function index(){
         
         $user =new User();
-    
-
-        $data = $user->findAll();
-
-        $fg = 0;
         
         if(!Auth::logged_in()){
             $this->redirect('home');
@@ -22,10 +17,14 @@ class Edit_profile extends Controller
             $arr['postal_code'] = $_POST["postal_code"];
             $arr['telephone'] = $_POST["telephone"];
             $user->update($id,$arr);
-            $data = $user->findAll();
-            
-            }
-       
+            $this->redirect('edit_profile');   
+        }
+
+      
+        $data = $user->where('id',Auth::getid());    
+        // print_r ($data);
+        // echo ($data[0]->id);
+        $data = $data[0];
         $this->view('edit_profile',['rows'=>$data]);
        
         
