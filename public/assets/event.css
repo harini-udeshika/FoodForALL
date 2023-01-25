@@ -1,0 +1,231 @@
+.event-name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.event-name small {
+    font-size: 1rem;
+    color: #7FB432;
+}
+
+.event-body {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem;
+}
+
+.details {
+    width: 40%;
+    font-size: 0.9rem;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.des{
+    font-size: 1.2rem;
+}
+.details i {
+    color: #7FB432;
+    width: 10px;
+}
+
+.event-m {
+    color: #000;
+    font-weight: bold;
+}
+
+.event-body img {
+    height: 20rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ii {
+    display: flex;
+    flex-direction: row;
+    width: 15rem;
+    justify-content: space-between;
+}
+
+.ii span {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 10.5rem;
+}
+
+.date-time {
+    background-color: #f3f7f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    font-weight: bold;
+    color: #7FB432;
+    
+}
+.date-time hr{
+    width: 90%;
+    height: 0.02rem;
+    background-color: #7FB432;
+    border:0.01rem solid #7FB432;
+    border-radius: 1rem;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+}
+
+.donations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 60%;
+}
+
+.goal {
+    color: #7681BF;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.progress {
+    display: flex;
+    flex-direction: row;
+    width: 50rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 0.8rem;
+    background-color: #dfe1da;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+
+}
+
+.progress-bar div {
+    width: 70%;
+    height: 0.8rem;
+    border-radius: 0.5rem;
+    background-color: #7FB432;
+}
+.cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 40rem;
+    height: 25rem;
+  
+}
+.cards div{
+    height: 10rem;
+    width: 10rem;
+    background-color: #ffffff;
+    margin: 1rem;
+    padding: 2rem 1rem 2rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(127, 180, 50,0.2);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  color: #6F6F6F;
+    text-align: center;
+}
+.cards :hover{
+    background-color: #f1f9ec;
+}
+.cards div i{
+    margin:2rem 1rem 2rem 1rem;
+    color: #7FB432;
+    
+}
+.green{
+    font-weight: bold;
+}
+
+.card {
+    height: 25.7rem;
+    width: 20rem;
+    /* background-color: #97a27a; */
+    background-image: url("../images/bg1.png");
+    background-size: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 1.2rem;
+}
+.small-cards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly;
+}
+.small-cards :hover{
+    background-color:#7681BF;
+    color: #fff;
+}
+.small-cards div{
+    /* justify-content: center;
+    align-items: center; */
+   
+    height: 4rem;
+    width:4rem;
+    margin: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: #F9F9F9;
+    border: 1px solid #d2d2d2;
+    border-radius: 0.5rem;
+   
+}
+.card form{
+    height: 10rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content:space-evenly;
+}
+.card form input{
+width: 14rem;
+height: 1.5rem;
+border-radius: 0.5rem;
+border: 1px solid #d2d2d2;
+}
+.card form button{
+    height: 2.3rem;
+    width: 9rem;
+    border-radius: 0.5rem;
+    background-color: #7FB432;
+    border: 1px solid #7FB432;
+    color: white;
+    font-weight: bold;
+}
