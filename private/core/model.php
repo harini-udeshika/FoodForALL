@@ -17,7 +17,37 @@ class Model extends Database
             'value'=>$value
         ]);
     }
+    public function search($find,$fcolumn){
 
+        $fcolumn=addslashes($fcolumn);
+        $query = "select * from $this->table where $fcolumn like :find";
+        return $this->query($query,[
+            'find'=>$find
+        ]);
+    }
+    public function filter($f1,$f2,$col1,$col2){
+
+        // $column=addslashes($column);
+        if($f2="default"){
+            $query = "select * from $this->table where $col1= :f1";
+            return $this->query($query,[
+                'f1'=>$f1,
+               
+            ]);
+        }
+        else if(!$f1){
+            $query = "select * from $this->table where $col2= :f2";
+            return $this->query($query,[
+                'f2'=>$f2,
+               
+            ]);
+        }
+        $query = "select * from $this->table where $col1= :f1 && $col2= :f2";
+        return $this->query($query,[
+            'f1'=>$f1,
+            'f2'=>$f2
+        ]);
+    }
     public function findAll(){
 
         $query = "select * from $this->table";

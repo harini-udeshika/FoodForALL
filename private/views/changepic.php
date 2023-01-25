@@ -1,6 +1,7 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/profile.css">
 <?php $this->view('includes/navbar')?>
+<?php $this->view('includes/submenu')?>  
 
 <body>
     <div class="change_pic">
