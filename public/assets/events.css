@@ -54,6 +54,9 @@ background-color: #fff;
     border-radius:0.8rem;
     border: 0.15rem solid #dfe1da;
 }
+.search-btn{
+ margin-left: 3rem;   
+}
 input:focus {
     outline-color: #979797;
 }
@@ -71,6 +74,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     /* background-color: #F2F3F9; */
 }
 .event-details img{
@@ -81,7 +85,8 @@ input:focus {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+   */
     /* background-color: #96a1da; */
 }
 
@@ -110,7 +115,7 @@ input:focus {
     align-items: center;
     background-color: #FFFFFF;
     border-radius: 2rem;
-    height: 60%;
+    height: 80%;
     width: 100%;
     position: relative;
 
@@ -206,4 +211,4 @@ input:focus {
 .b2 {
     background-color: #7681BF;
     border: 1px solid #7681BF;
-}
+}  /* height: 30rem;
