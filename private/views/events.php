@@ -35,7 +35,7 @@
                 <option value="erlang">Matara</option>
                 <option value="erlang">Matara</option>
             </select>
-            <button class="b2">Search</button>
+            <button class="search-btn">Search</button>
             </form>
         </div>
     </div>
@@ -56,6 +56,8 @@
                     <div class="event-image">
                     </div>
                     <p class="date"><?php echo $rows[$i]->date?></p>
+                    <small>Interested <i class="fa-regular fa-star fa-sm"></i></i></small>
+                    <!-- //<i class="fa-solid fa-star fa-sm"> -->
                 </div>
 
                 <div class="event-details">
