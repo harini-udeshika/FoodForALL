@@ -8,7 +8,9 @@ class Login extends Controller
 
         if (count($_POST) > 0) {
             $user = new User();
-
+            $admin =new Admins();
+            // $p=password_hash("admin@123",PASSWORD_DEFAULT);
+            // echo ($p);
             if ($row = $user->where('email', $_POST['email'])) {
 
                 $row = $row[0];
@@ -25,6 +27,22 @@ class Login extends Controller
                         $this->redirect('/email_verify');
                     }
 
+                }
+
+            }
+            else if ($row = $admin->where('email', $_POST['email'])) {
+
+                $row = $row[0];
+                
+                if (password_verify($_POST['password'], $row->password_hash)) {
+
+                    Auth::authenticate($row);
+                    
+                    
+                             $this->redirect('/admin');
+                    
+                       
+                    
                 }
 
             }
