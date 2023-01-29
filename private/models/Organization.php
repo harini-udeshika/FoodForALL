@@ -25,11 +25,20 @@ class Organization extends Model{
         // echo "empty";
         // die;
 
-        if(isset($_SESSION['error1']) || isset($_SESSION['error1'])){
+        if(isset($_SESSION['error1']) || isset($_SESSION['error2'])){
             return false;
         }
         
         return true;
 
+    }
+
+    public function code()
+    {
+        $arr = array();
+        $arr['code'] = rand(10000, 99999);
+        $arr['email'] = $_SESSION['USER']->email;
+        $arr['expires'] = time() + (60) * 3;
+        return $arr;
     }
 }

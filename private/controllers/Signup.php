@@ -23,7 +23,6 @@ class Signup extends Controller
 
                 $arr['usertype'] = "reg_user";
 
- 
                 $user->insert($arr);
 
                 
