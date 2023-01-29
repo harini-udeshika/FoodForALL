@@ -1,7 +1,7 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage.css">
 <?php $this->view('includes/navbar')?>
-
+<?php $this->view('includes/submenu')?>  
 <div class="intro">
         <div class="profile_pic">
             <?php

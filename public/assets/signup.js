@@ -24,6 +24,7 @@ async function inputChecker() {
     const telVal = telephone.value.trim();
     const passwordVal = password.value.trim();
     const rePasswordVal = rePassword.value.trim();
+    const error=
 
     if (firstNameVal === "") {
         //error message
@@ -93,6 +94,7 @@ function displayError(input, message) {
     //add error class
     valid=false;
 }
+
 function displaySuccess(input) {
     const f = input.parentElement;
     if(input===check){

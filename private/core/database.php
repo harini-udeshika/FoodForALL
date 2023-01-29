@@ -9,6 +9,7 @@ class Database
         }
         return $con;
     }
+    
     public function query($query,$data=array(),$data_type="object"){
         $con=$this->connect();
         $stm=$con->prepare($query);

@@ -34,6 +34,11 @@ print_r($errors);
                         <small>error message</small>
                     </div>
                     <div class="f">
+                        <!-- <?php $user = new User(); ?>
+                        <?php if($user->where('email',get_var('email'))): ?>
+                        <?php $error="Email already exists!";?>
+                        <?php endif;
+                        ?> -->
                         <input type="text" placeholder="Email address" class="small" name="email" id="email" value="<?=get_var('email')?>" class="signup-input">
                         <i class="fa-solid fa-circle-check"></i>
                         <i class="fa-solid fa-circle-exclamation"></i>
@@ -92,5 +97,5 @@ print_r($errors);
         </div>
     </div>
 </body>
-<!-- <script src="<?=ROOT?>/assets/signup.js"></script> -->
+<script src="<?=ROOT?>/assets/signup.js"></script>
 </html>

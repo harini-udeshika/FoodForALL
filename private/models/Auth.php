@@ -20,6 +20,12 @@ class Auth{
         }
         return false;
     }
+    public static function check_verified(){
+        if($_SESSION['USER']->email==$_SESSION['USER']->email_verified){
+            return true;
+        }
+        return false;
+    }
     public static function __callStatic($method,$params){
 
         $prop = strtolower(str_replace("get","",$method));
