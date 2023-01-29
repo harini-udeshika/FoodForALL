@@ -3,7 +3,13 @@
 <?php $this->view('includes/navbar')?> 
 <?php $this->view('includes/submenu')?>  
 
-<h2> Hello <?php echo $rows->first_name?>!</h2>
+<h2> Hello <?php 
+if (Auth::getusertype() == 'organization'){
+    echo $rows->name;
+}
+else{
+    echo $rows->first_name;
+}?>!</h2>
 <h3>To proceed please verify your account</h3>
 <p>A verification code has been sent to your account <?php echo $rows->email?></p>
 <form action="" method="post">

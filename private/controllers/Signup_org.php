@@ -24,6 +24,7 @@ class Signup_org extends Controller
                 $this->redirect('login');
             }
             else{
+                // $this->redirect('signup_org');
                 $errors = $org->errors;
             }
            

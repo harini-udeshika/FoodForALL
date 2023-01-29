@@ -3,8 +3,12 @@ class Email_verify extends Controller
 {
     public function index()
     {
-
-        $user = new User();
+        if (Auth::getusertype() == 'organization'){
+            $user = new Organization();
+        }
+        else{
+            $user = new User();
+        }
         $verify = new Verify();
         $mail = new Mail();
         $data = $user->where('id', Auth::getid());
@@ -32,7 +36,12 @@ class Email_verify extends Controller
                         $id = Auth::getId();
                         $arr['email_verified'] = $email;
                         $user->update($id, $arr);
-                        $this->redirect('profile');
+                        if (Auth::getusertype() == 'organization'){
+                            $this->redirect('home_org');
+                        }
+                        else{
+                            $this->redirect('profile');
+                        }
                         die;
 
                     } else {
