@@ -19,6 +19,17 @@ class Model extends Database
             'value' => $value,
         ]);
     }
+    public function count($column,$column_con, $value)
+    {
+        
+        $column = addslashes($column);
+        $query = "select count($column) as count from  $this->table where $column_con= :value";
+       
+       
+        return $this->query($query, [
+            'value' => $value,
+        ]);
+    }
     public function email_exists($email)
     {
         $query = "select * from user where email= :value";

@@ -1,0 +1,9 @@
+.chart-1{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction:row;
+    align-items:space-between;
+    justify-content: space-evenly;
+    width:40%;
+    height:45rem;
+}
