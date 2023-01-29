@@ -1,7 +1,5 @@
 <?php
-//define('ROOT','http://localhost/food_for_all/public');
-define('ROOT','http://localhost/FoodForAll/public');
-// define('DBNAME', 'foodforall');
+define('ROOT','http://localhost/food_for_all/public');
 define('DBNAME', 'foodforall.0');
 define('DBHOST', 'localhost');
 define('DBUSER', 'root');
