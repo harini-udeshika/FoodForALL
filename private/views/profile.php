@@ -20,10 +20,10 @@
             <a href="#activities">Volunteering</a>
             <a href="#donations">Donations</a>
         </div>
-        <div class="button">
+        <!-- <div class="button">
             <a class="edit_profile_btn" href="<?=ROOT?>/edit_profile">Edit Profile</a>
             <a class="edit_profile_btn" href="<?=ROOT?>/logout">Log out</a>
-        </div>
+        </div> -->
     </div>
     <div class="certificate_section" id="certificates">
         <div class="heading_certificates">
