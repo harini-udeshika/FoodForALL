@@ -30,6 +30,17 @@ class Model extends Database
             'value' => $value,
         ]);
     }
+    public function sum($column,$column_con, $value)
+    {
+        
+        $column = addslashes($column);
+        $query = "select sum($column) as total from  $this->table where $column_con= :value";
+       
+       
+        return $this->query($query, [
+            'value' => $value,
+        ]);
+    }
     public function email_exists($email)
     {
         $query = "select * from user where email= :value";
