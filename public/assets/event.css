@@ -8,6 +8,7 @@
     color: #7FB432;
 }
 
+
 .event-body {
     width: 90%;
     display: flex;
@@ -75,6 +76,9 @@
     color: #7FB432;
     
 }
+.date-time :hover{
+    color: #538903;
+}
 .date-time hr{
     width: 90%;
     height: 0.02rem;
@@ -82,6 +86,7 @@
     border:0.01rem solid #7FB432;
     border-radius: 1rem;
 }
+
 .container {
     display: flex;
     flex-direction: row;
@@ -129,7 +134,7 @@
 }
 
 .progress-bar div {
-    width: 70%;
+    width: 50%;
     height: 0.8rem;
     border-radius: 0.5rem;
     background-color: #7FB432;
@@ -161,6 +166,7 @@
 }
 .cards :hover{
     background-color: #f1f9ec;
+    color: #538903;
 }
 .cards div i{
     margin:2rem 1rem 2rem 1rem;

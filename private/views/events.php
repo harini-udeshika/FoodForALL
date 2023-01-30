@@ -50,7 +50,9 @@
                 <div class="event-row">
              
             <?php endif ?>
+        <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>">
             <div class="event">
+            
                 <div class="event-top">
                     <p><?php echo $rows[$i] -> name?></p>
                     <div class="event-image">
@@ -89,7 +91,9 @@
                     <button class="b1">Donate</button>
                     <button class="b2">Volunteer</button>
                 </div>
+            
             </div>
+        </a>
             <?php $i++;
             // echo ($i); ?>
             
