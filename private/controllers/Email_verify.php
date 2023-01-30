@@ -3,11 +3,17 @@ class Email_verify extends Controller
 {
     public function index()
     {
-
-        $user = new User();
+        //echo(Auth::getusertype());
+        if (Auth::getusertype() == 'organization'){
+            $user = new Organization();
+        }
+        else{
+            $user = new User();
+        }
         $verify = new Verify();
         $mail = new Mail();
         $data = $user->where('id', Auth::getid());
+        print_r($data);
         if (($_SERVER['REQUEST_METHOD'] == 'GET') && (!Auth::check_verified())) {
 
             $arr = $user->code();
@@ -32,7 +38,12 @@ class Email_verify extends Controller
                         $id = Auth::getId();
                         $arr['email_verified'] = $email;
                         $user->update($id, $arr);
-                        $this->redirect('profile');
+                        if (Auth::getusertype() == 'organization'){
+                            $this->redirect('home_org');
+                        }
+                        else{
+                            $this->redirect('profile');
+                        }
                         die;
 
                     } else {
@@ -43,7 +54,12 @@ class Email_verify extends Controller
                 }
 
             } else {
-                $this->redirect('profile');
+                if (Auth::getusertype() == 'organization'){
+                    $this->redirect('home_org');
+                }else{
+                    $this->redirect('profile');
+                }
+                
             }
         }
         // $this->view('verify');
