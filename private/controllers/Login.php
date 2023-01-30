@@ -10,7 +10,7 @@ class Login extends Controller
             $user = new User();
             $admin =new Admins();
             $org = new Organization();
-           
+
             // $p=password_hash("admin@123",PASSWORD_DEFAULT);
             // echo ($p);
             if ($row = $user->where('email', $_POST['email'])) {
@@ -51,7 +51,7 @@ class Login extends Controller
             else if ($row = $org->where('email', $_POST['email'])) {
 
                 $row = $row[0];
-                print_r($row);
+
                 if (password_verify($_POST['password'], $row->password)) {
 
                     Auth::authenticate($row);

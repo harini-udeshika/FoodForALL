@@ -3,7 +3,7 @@ class Email_verify extends Controller
 {
     public function index()
     {
-        //echo(Auth::getusertype());
+
         if (Auth::getusertype() == 'organization'){
             $user = new Organization();
         }
