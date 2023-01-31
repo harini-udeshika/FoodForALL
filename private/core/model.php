@@ -86,6 +86,7 @@ class Model extends Database
             ]);
         }
         $query = "select * from $this->table where $col1= :f1 && $col2= :f2";
+        echo ($query);
         return $this->query($query, [
             'f1' => $f1,
             'f2' => $f2,

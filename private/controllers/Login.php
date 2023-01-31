@@ -10,7 +10,7 @@ class Login extends Controller
             $user = new User();
             $admin =new Admins();
             $org = new Organization();
-
+            $area_coordinator=new AreaCoordinator();
             // $p=password_hash("admin@123",PASSWORD_DEFAULT);
             // echo ($p);
             if ($row = $user->where('email', $_POST['email'])) {
@@ -63,6 +63,25 @@ class Login extends Controller
                     } else {
                         $this->redirect('/email_verify');
                     }
+                }
+
+            }
+            else if ($row = $area_coordinator->where('email', $_POST['email'])) {
+
+                $row = $row[0];
+                
+                if (password_verify($_POST['password'], $row->password)) {
+                print_r($row);
+                    Auth::authenticate($row);
+                    
+                    
+                             $this->redirect('/area_coordinator_view');
+                    
+                       
+                    
+                }
+                else{
+                    echo ("wrong password");
                 }
 
             }
