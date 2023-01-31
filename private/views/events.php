@@ -88,8 +88,8 @@
                 </div>
 
                 <div class="event-button">
-                    <button class="b1">Donate</button>
-                    <button class="b2">Volunteer</button>
+               <button class="b1"> <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>/#donate">Donate</a></button>
+               <button class="b2"> <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>/#volunteer">Volunteer</a></button>
                 </div>
             
             </div>

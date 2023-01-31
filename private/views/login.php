@@ -27,7 +27,7 @@
                             <button class="login">Log in</button>
                         </div>
                         <div class="forgotten-password">
-                            <a href="" class="forgot"> Forgotten Password?</a>
+                            <a href="email_forgot" class="forgot"> Forgotten Password?</a>
                         </div>
                        
                         

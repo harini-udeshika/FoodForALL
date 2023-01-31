@@ -26,8 +26,8 @@
     </div>
     <img src="images/event.jpeg" alt="">
 </div>
-<p class="event-name">Donations</p>
-<div class="container">
+<p class="event-name" id="donate">Donations</p>
+<div class="container" >
     <div class="donations">
         <p class="goal">Donation Goal <span><?=$rows->total_amount?> LKR</span></p>
         <div class="progress">
@@ -76,8 +76,8 @@ if (!$amount) {
 
     </div>
 </div>
-<p class="event-name">Volunteers</p>
-<div class="container">
+<p class="event-name" id="volunteer">Volunteers</p>
+<div class="container" >
     <div class="donations">
         <p class="goal">Number of volunteers<span><?=$rows->no_of_volunteers?> people</span></p>
         <div class="progress">

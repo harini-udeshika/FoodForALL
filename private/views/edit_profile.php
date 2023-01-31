@@ -24,7 +24,7 @@
                     <form method="post" action="./delete_pic.php" class="remove_form"><button type="submit"
                             class="remove_button">Remove</button> </form>
                 </div>
-                <button class="change-pwd">Change Password</button>
+                <a href="current_password"><button class="change-pwd">Change Password</button></a>
             </div>
             <div class="profile-details">
                 <form action="" class="form" method="post">

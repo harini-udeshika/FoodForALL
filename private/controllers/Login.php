@@ -26,7 +26,7 @@ class Login extends Controller
                         //}
                        
                     } else {
-                        // $this->redirect('/email_verify');
+                        $this->redirect('/email_verify');
                     }
 
                 }
