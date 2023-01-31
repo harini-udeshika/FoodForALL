@@ -12,7 +12,7 @@
             <div class="content">
                 <p class="main">FoodForALL</p>
                 <p class="sub">Join with us to donate and volunteer.<br>Let's end the hunger soon!</p>
-                <button class="donate">Donate/Volunteer</button>
+                <a href="<?=ROOT?>/events"><button class="donate">Donate/Volunteer</button></a>
             </div>
         </div>
         <div class="image_section">

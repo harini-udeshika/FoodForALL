@@ -44,5 +44,13 @@ class User extends Model
         $arr['expires'] = time() + (60) * 3;
         return $arr;
     }
+    public function change_pwd_code()
+    {
+        $arr = array();
+        $arr['code'] = rand(10000, 99999);
+        // $arr['email'] = $_SESSION['USER']->email;
+        $arr['expires'] = time() + (60) * 3;
+        return $arr;
+    }
 
 }
