@@ -4,17 +4,35 @@ class Email_forgot extends Controller
     public function index()
     {
         $user = new User();
+        $org = new Organization();
         $mail = new Mail();
         $change_pwd = new Change_pwd();
 
         if (isset($_POST['email'])) {
             $email = $_POST["email"];
             $_SESSION['email'] = $email;
-            $data = $user->where('email', $email);
-            $data = $data[0];
-            $this->view('code', ['rows' => $data]);
-            if ($data) {
+            // $data = $user->where('email', $email);
+            // $data = $data[0];
+            // $this->view('code', ['rows' => $data]);
+            if ($user->where('email', $email)) {
+                $data = $user->where('email', $email);
+                $data = $data[0];
+                $this->view('code', ['rows' => $data]);
                 $arr = $user->change_pwd_code();
+                $arr['email'] = $email;
+                $change_pwd->insert($arr);
+                $receipient = $arr['email'];
+                $subject = "Account Recovery FoodForALL";
+                $message = "Hello User!\r\nPlease enter the code given to change your password.\r\n" . $arr['code'];
+
+                $mail->send_mail($receipient, $subject, $message);
+            }elseif($org->where('email', $email)){
+                // echo "hello";
+                // die;
+                $data = $org->where('email', $email);
+                $data = $data[0];
+                $this->view('code', ['rows' => $data]);
+                $arr = $org->change_pwd_code();
                 $arr['email'] = $email;
                 $change_pwd->insert($arr);
                 $receipient = $arr['email'];
