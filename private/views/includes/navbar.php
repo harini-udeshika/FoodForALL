@@ -75,6 +75,29 @@
                 <a href="">Users</a>
             </div>
         <?php endif?>
+        
+
+        <?php if (Auth::getusertype() == 'organization'): ?>
+            <div class="nav-i">
+                <a href="home_org">Home</a>
+            </div>
+            <!-- <div class="nav-i">
+                <a href="">Donate/Volunteer</a>
+            </div> -->
+            <div class="nav-i">
+                <a href="./shop_org">Shop</a>
+            </div>
+            <div class="nav-i">
+                <a href="">Events</a>
+            </div>
+            <div class="nav-i">
+                <a href="">Managers</a>
+            </div>
+            <div class="nav-i">
+                <a href="">Packages</a>
+            </div>
+        <?php endif?>
+
             <div class="nav-i">
             <?php
 
@@ -96,6 +119,15 @@ if (Auth::getusertype() == 'admin') {
         $image = $data->profile_pic;
     }
 }
+if (Auth::getusertype() == 'organization') {
+    $user = new Organization();
+    $data = $user->where('id', Auth::getid());
+    $data = $data[0];
+    if ($data->profile_pic) {
+        $image = $data->profile_pic;
+    }
+}
+
 
 ?>
                 <img src="<?=$image?>" alt="" class="nav-user-icon" id="nav-user-icon" onclick="toggleMenu()">
