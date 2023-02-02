@@ -1,0 +1,252 @@
+.intro {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    /* background-color: #7681BF; */
+    justify-content: space-between;
+    align-items: center;
+    height: 16rem;
+    width: 60rem;
+}
+
+.user-pic {
+    height: 15rem;
+    width: 15rem;
+    border-radius: 8rem;
+    border: 0.2rem solid #7FB432;
+    margin-left: 5rem;
+}
+
+.details {
+
+    font-size: 1.5rem;
+    color: #7681BF;
+    font-weight: 500;
+    margin-right: 7em;
+}
+
+/* .name {
+    font-weight: 600;
+} */
+
+.details>a {
+    border: 1.5px solid #7FB432;
+    background-color: #7FB432;
+    color: #FFFFFF;
+    border-radius: 0.35rem;
+    height: 1.5rem;
+    width: 6rem;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 0.25rem;
+  
+}
+
+.details>a:hover {
+    background-color: #FFFFFF;
+    color: #7FB432;
+}
+
+.edit_profile_btn {
+    height: 1.5rem;
+    width: 6.5rem;
+    border: 1px solid #7681BF;
+    color: #FFFFFF;
+    background-color: #7681BF;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 0.25rem;
+    margin-top: 0.25rem;
+    
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 2.5rem;
+    
+}
+
+.edit_profile_btn:hover {
+    background-color: #F2F3F9;
+    color: #7681BF;
+    
+    border: 1.5px solid #7681BF;
+   
+
+}
+
+.certificate_section {
+    display: flex;
+    flex-direction: column;
+    margin:2rem 0 5rem 0;
+    height: 45rem;
+    width: 60rem;
+}
+
+.heading_certificates {
+    margin-bottom: 2rem;
+    color: #000;
+    font-weight: 800;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.certificates {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.certificates_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.certificate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image {
+    height: 15rem;
+    width: 17rem;
+    background-color: rgba(146, 146, 146, 0.2); 
+}
+.cert-image{
+    height: 15rem;
+    width: 17rem;
+    background-color:#ececec;
+}
+.activities_section.donation_section,
+table {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 20rem;
+    width: 60rem;
+}
+
+.table_headings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 2.5rem;
+
+}
+
+.table_headings,
+.heading_activities {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: left;
+    
+}
+
+.table_headings>th {
+    width: 10rem;
+text-align: center;
+}
+
+.table_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+align-items: center;
+    margin: 1.25rem 0 1.25rem 0;
+    border: 0.01rem solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5rem;
+   
+
+}
+
+.table_row>td {
+    display: flex;
+    flex-direction: column;
+justify-content: center;
+    width: 10rem;
+    height: 3rem;
+    text-align: center;
+    font-size: 1.1rem;
+
+}
+.table_row:hover{
+    background-color: #ececec;
+}
+.end_section {
+    width: 60rem;
+    height: 10rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 3rem;
+}
+.summary{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+height: 10rem;
+width: 15rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+.text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000;
+}
+.summary:hover{
+    background-color: #ececec;
+}
+.amount {
+    margin-top: 1rem;
+    color: #7681BF;
+    
+    font-size: 1.5rem;
+   
+   
+} 
+.news{
+    margin:4rem 0 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #6F6F6F;
+    font-weight: 600;
+}
+.news button{
+    background-color: #000;
+    height:2.5rem;
+    width:6rem;
+    color: #fff;
+    border-radius: 0.5rem;
+}
+.news button:hover{
+    background-color: #3d3a3a;
+    border-color: #3d3a3a;
+}
+.footer {
+    height: 5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
