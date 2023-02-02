@@ -43,6 +43,8 @@
         <div class="event-row">
         <?php $i=0;?>
         <?php if($rows):?>
+            <?php
+            //print_r($rows);?>
         <?php foreach($rows as $value):?>
             
             <?php if($i%3==0 && $i!=0) : ?>
