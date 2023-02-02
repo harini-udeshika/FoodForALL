@@ -5,6 +5,7 @@ class Login extends Controller
     {
 
         $errors = array();
+        $is_verified = true;
 
         if (count($_POST) > 0) {
             $user = new User();
@@ -29,6 +30,9 @@ class Login extends Controller
                         $this->redirect('/email_verify');
                     }
 
+                }
+                else{
+                    $is_verified = false;
                 }
 
             }
@@ -89,7 +93,7 @@ class Login extends Controller
         }
 
         $this->view('login', [
-            'errors' => $errors,
+            'is_verified' => $is_verified,
         ]);
     }
 }

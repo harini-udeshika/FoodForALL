@@ -53,6 +53,7 @@
             $tot_events=$event->count('event_id','org_gov_reg_no',$rows[$i]->gov_reg_no);
             $tot_events = $tot_events[0];
             ?>
+    <a href="<?=ROOT?>/organizationpage?id=<?=$rows[$i]->gov_reg_no?>">
     <div class="long-card">
         <div class="img">
             <img src="" alt="image">
@@ -60,7 +61,7 @@
         <p><?=$rows[$i]->name?></p>
         <p><?=$tot_events->count?></p>
     </div>
-    
+    </a>
 
     <?php $i++;
 // echo ($i); ?>
