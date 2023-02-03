@@ -95,7 +95,9 @@ if (file_exists($rows->profile_pic)) {
         </tr>
         <?php
 $i = 0;?>
+
         <?php if ($event_data): ?>
+
 
 
         <?php foreach ($event_data as $value): ?>
@@ -126,7 +128,9 @@ $i = 0;?>
         </tr>
 <?php
 $i = 0;?>
+
         <?php if ($donor_data): ?>
+
         <?php foreach ($donor_data as $value): ?>
         <tr class="table_row">
 
@@ -158,6 +162,7 @@ $i = 0;?>
          <?php endif?>
 
         </div>
+
     </div>
     <div class="summary">
         <div class="text">
@@ -167,6 +172,7 @@ $i = 0;?>
        <?=$tot_events[0]->count?>
         </div>
     </div>
+
 </div>
 <div class="news">
     <p>Need more news? Subscribe to our news services right now!</p>
