@@ -95,7 +95,7 @@ if (file_exists($rows->profile_pic)) {
         </tr>
         <?php
 $i = 0;?>
-        <?php if ($rows): ?>
+        <?php if ($event_data): ?>
 
 
         <?php foreach ($event_data as $value): ?>
@@ -126,12 +126,17 @@ $i = 0;?>
         </tr>
 <?php
 $i = 0;?>
-        <?php if ($rows): ?>
+        <?php if ($donor_data): ?>
         <?php foreach ($donor_data as $value): ?>
         <tr class="table_row">
            
             <td><?=substr($donor_data[$i]->date_time,0,-8)?></td>
             <td>name</td>
+            <?php
+            if($donor_data[$i]->amount==NULL){
+                $donor_data[$i]->amount = 0;
+            }
+            ?>
             <td><?=$donor_data[$i]->amount?></td>
 
         </tr>
