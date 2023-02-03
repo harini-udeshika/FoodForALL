@@ -103,8 +103,8 @@ $i = 0;?>
         <tr class="table_row">
 
             <td><?=$event_data[$i]->name?></td>
-            <td></td>
-            <td><?=$event_data[$i]->volunteer_type?></td>
+            <td><?=$org_name[$i]->name?></td>
+            <td><?=$event_data[$i]->volunteer_type?> volunteer</td>
             <td><?=$event_data[$i]->date?></td>
         </tr>
         <?php $i++;
@@ -129,14 +129,10 @@ $i = 0;?>
         <?php if ($donor_data): ?>
         <?php foreach ($donor_data as $value): ?>
         <tr class="table_row">
-           
-            <td><?=substr($donor_data[$i]->date_time,0,-8)?></td>
-            <td>name</td>
-            <?php
-            if($donor_data[$i]->amount==NULL){
-                $donor_data[$i]->amount = 0;
-            }
-            ?>
+
+            <td><?=substr($donor_data[$i]->date_time, 0, -8)?></td>
+            <td><?=$d_org_name[$i]->name?></td>
+
             <td><?=$donor_data[$i]->amount?></td>
 
         </tr>
@@ -154,7 +150,13 @@ $i = 0;?>
             Total Donated Amount
         </div>
         <div class="amount">
+            <?php if ($tot_amount[0]->total): ?>
          <?=$tot_amount[0]->total?>
+         <?php endif?>
+         <?php if (!$tot_amount[0]->total): ?>
+         0
+         <?php endif?>
+
         </div>
     </div>
     <div class="summary">

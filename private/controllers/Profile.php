@@ -7,6 +7,7 @@ class Profile extends Controller
         $user = new User();
         $donor = new Donate();
         $volunteer = new Volunteer();
+        $org=new Organization();
 
         $data = $user->where('id', Auth::getid());
 
@@ -31,11 +32,31 @@ class Profile extends Controller
             'v_id' => $v_id,
 
         ];
+       
         $donor_data = $user->query($query, $arr);
         $tot_amount = $donor->sum('amount', 'donor_id', Auth::getid());
         $tot_events = $volunteer->count('user_id','user_id',Auth::getid());
+        $query = "SELECT organization.name
+        FROM organization
+        INNER JOIN event ON event.org_gov_reg_no=organization.gov_reg_no
+        INNER JOIN volunteer ON volunteer.event_id=event.event_id where volunteer.user_id= :v_id";
+        $arr = [
+            'v_id' => $v_id,
+
+        ];
+        $org_name = $org->query($query, $arr);
+        $query = "SELECT organization.name
+        FROM organization
+        INNER JOIN event ON event.org_gov_reg_no=organization.gov_reg_no
+        INNER JOIN donate ON donate.event_id=event.event_id where donate.donor_id= :v_id";
+        $arr = [
+            'v_id' => $v_id,
+
+        ];
+        $d_org_name = $org->query($query, $arr);
+      //  print_r($org_name);
         // print_r($tot_events[0]->count);
 
-            $this->view('profile', ['rows' => $data, 'event_data' => $event_data, 'donor_data' => $donor_data,'tot_amount'=>$tot_amount,'tot_events'=>$tot_events]);
+            $this->view('profile', ['rows' => $data, 'event_data' => $event_data, 'donor_data' => $donor_data,'tot_amount'=>$tot_amount,'tot_events'=>$tot_events,'org_name'=>$org_name,'d_org_name'=>$d_org_name]);
     }
 }

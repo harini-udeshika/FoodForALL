@@ -200,16 +200,19 @@
 <h2>Reviews</h2>
 <?php $i = 0;?>
         <?php if ($comment_data): ?>
+           
 <div class="reviews scroll">
 <?php foreach ($comment_data as $value): ?>
     <div class="review-card">
         <div class="review-left">
             <img src="<?=$comment_data[$i]->profile_pic?>" alt="">
             <p><?=$comment_data[$i]->first_name?></p>
-            <p><?=$comment_data[$i]->date_time?></p>
+           
         </div>
         <div class="review-right">
             <p><?=$comment_data[$i]->comment?></p>
+            <p class='date-time'><?=substr($comment_data[$i]->date_time,0,-8)?>
+           &emsp;<?=substr($comment_data[$i]->date_time,10,6)?></p>
         </div>
 
     </div>
