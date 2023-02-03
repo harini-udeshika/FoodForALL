@@ -10,6 +10,7 @@ $data = $data[0];
 if ($data->profile_pic) {
     $image = $data->profile_pic;
 }?>
+
             <img src=<?=$image?> alt="">
             <p>Hello
                 <?php echo $data->first_name ?> !
@@ -34,6 +35,7 @@ if ($data->profile_pic) {
         <?php endif?>
         <?php if (Auth::getusertype() == 'admin'): ?>
         <?php
+
 $admin = new Admins();
 $data = $admin->where('email', Auth::getemail());
 $data = $data[0];
@@ -95,5 +97,6 @@ if ($data->profile_pic) {
 
 </div>
 </div>
+
 
 </div>
