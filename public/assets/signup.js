@@ -24,7 +24,7 @@ async function inputChecker() {
     const telVal = telephone.value.trim();
     const passwordVal = password.value.trim();
     const rePasswordVal = rePassword.value.trim();
-    const error=
+    // const error=
 
     if (firstNameVal === "") {
         //error message

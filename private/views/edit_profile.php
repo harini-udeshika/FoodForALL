@@ -78,5 +78,5 @@
             </div>
         </div>
     </div>
-
+<script src=" navbar.js"></script>
 <?php $this->view('includes/footer')?>
