@@ -710,10 +710,12 @@
     <div class="center-box-blank" style="height: 210px; width: 800px; 
         background-color: rgb(190, 223, 143, 0); text-align:center;" >
 
+        <a href="Add_event" style="text-decoration: none;">
         <button class="more-btn" style="width: 25%; border-radius: 12px; height: 100px; font-size: 20px; background-color: #000000;">Add Event</button>  
+        </a>
         <button class="more-btn" style="width: 25%; border-radius: 12px; height: 100px; font-size: 20px; background-color: #000000;">Reviews</button>
         
-        <a href="managers.php" style="text-decoration: none;">
+        <a href="Add_managers" style="text-decoration: none;">
             <button class="more-btn" style="width: 25%; border-radius: 12px; height: 100px; font-size: 20px; background-color: #000000;">Event Managers</button>
         </a>
         

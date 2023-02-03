@@ -93,37 +93,5 @@ if ($data->profile_pic) {
         </div>
         </div>
 
-<?php if (Auth::getusertype() == 'organization'): ?>
-<?php
-$org = new Organization();
-$data = $org->where('id', Auth::getid());
-$data = $data[0];
-if ($data->profile_pic) {
-    $image = $data->profile_pic;
-}?>
-                         <img src=<?=$image?> alt="">
-                         <p>Hello <?php echo $data->name ?> !</p>
-                        </div>
-                    <hr>
-                    <a href="profile" class="sub-menu-link">
-                        <i class="fa-solid fa-user"></i>
-                        <p>View profile</p>
-                        <span>></span>
-                    </a>
-                    <a href="edit_profile" class="sub-menu-link">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <p>Edit profile</p>
-                        <span>></span>
-                    </a>
-                    <a href="logout" class="sub-menu-link">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <p>Log out</p>
-                        <span>></span>
-                    </a>
-<?php endif?>
-
-
-        </div>
-        </div>
 
 </div>

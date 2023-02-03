@@ -31,14 +31,15 @@
             <?php 
                 // $sql = "SELECT * FROM shop ORDER BY id ASC";
                 // $res = mysqli_query($con,$sql);
-                $count = sizeof($allitems);
+                // $count = sizeof($allitems);
                 // echo "<pre>";
                 // print_r($allitems);
                 
                 // die;
                 $i = 0;
 
-                if($count>0){
+                if($allitems){
+                    $count = sizeof($allitems);
                     while($count > 0){
                         $img = $allitems[$i]->image;
                         $name = $allitems[$i]->name;
