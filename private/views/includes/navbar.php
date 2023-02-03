@@ -88,10 +88,10 @@
                 <a href="./shop_org">Shop</a>
             </div>
             <div class="nav-i">
-                <a href="">Events</a>
+                <a href="./Add_event">Events</a>
             </div>
             <div class="nav-i">
-                <a href="">Managers</a>
+                <a href="./add_managers">Managers</a>
             </div>
             <div class="nav-i">
                 <a href="">Packages</a>

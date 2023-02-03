@@ -30,7 +30,6 @@ if ($data->profile_pic) {
                         <span>></span>
                     </a>
 <?php endif?>
-
 <?php if (Auth::getusertype() == 'admin'): ?>
 <?php
 $admin = new Admins();
@@ -93,5 +92,6 @@ if ($data->profile_pic) {
 
         </div>
         </div>
+
 
 </div>
