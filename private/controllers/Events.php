@@ -37,6 +37,10 @@ class Events extends Controller
                 $filter_data = $event->filter($date,$location,'date','location');
                 $this->view('events',['rows' => $filter_data]);
             }
+            else if($date && $location){
+                $filter_data = $event->filter($date,$location,'date','location');
+                $this->view('events',['rows' => $filter_data]);
+            }
             else{
                 $data=$event->findAll();
                 $this->view('events',['rows' => $data]);

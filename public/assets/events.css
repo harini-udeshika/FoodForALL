@@ -222,4 +222,70 @@ margin-left: 2rem;
 .b2 {
     background-color: #7681BF;
     border: 1px solid #7681BF;
-}  /* height: 30rem;
+}  /* height: 30rem;*/
+/* -----------------------------organizations search---------------------- */
+h1{
+    margin: 3rem 0 3rem 0;
+}
+.long-card,.headings{
+    width: 40rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    margin: 1rem;
+    padding: 1rem;
+}
+.long-card{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 0.5rem;
+}
+.long-card:hover{
+   background: #fbfff3;
+   border: 1px solid rgb(127, 180, 50);
+}
+.long-card p,.headings p{
+    width:10rem;
+    text-align: center;
+}
+.long-card .img{
+    width:10rem;
+}
+.org_container{
+    background-image: url("../images/bg2.png");
+    background-size: 49rem;
+    height: 44.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space space-evenly;
+    margin: 2rem;
+    padding: 2rem;
+    
+}
+.scroll{
+    height: 43.5rem;
+    overflow-y: scroll;
+}
+.scroll::-webkit-scrollbar {
+    width: 16px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+  border: 3px solid transparent;
+   background-clip: content-box;
+    background-color: #7FB432;
+}
+
+.headings{
+    font-weight: bold;
+}
