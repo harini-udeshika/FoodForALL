@@ -117,7 +117,7 @@
             <img src="images/org1.png" alt="">
         </div>
         <div class="row">
-            <img src="images/org2.png"">
+            <img src="images/org2.png">
             <img src=" images/org3.png" alt="">
             <img src="images/org1.png" alt="">
         </div>

@@ -106,7 +106,7 @@ $i = 0;?>
 
             <td><?=$event_data[$i]->name?></td>
             <td><?=$org_name[$i]->name?></td>
-            <td><?=$event_data[$i]->volunteer_type?> volunteer</td>
+            <td><?=$event_data[$i]->volunteer_type?></td>
             <td><?=$event_data[$i]->date?></td>
         </tr>
         <?php $i++;

@@ -16,7 +16,7 @@
         <div class="org-logo">
             <img src="" alt="">
         </div>
-        <p class="des">       
+        <p class="des">
             <?=$org->about?>
         </p>
         <div class="contact-info">
@@ -186,43 +186,112 @@
 </div>
 <h2>We would like to hear from you!</h2>
 <div class="form-container">
-    <form action="" class="review" method="post">
+    <form action="" class="review" method="post" id="form">
         <div class="comment">
             <p>Add a review</p>
 
             <textarea name="comment" id="comment" placeholder="Add your comment">
 
-</textarea>
+            </textarea>
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div>
+            <div class="dropdowns">
+                <div class="dropdown-role">
+                    <!-- <label for="cars">Role</label> -->
+                    <select name="user_type" id="user_type">
+                        <option value="" selected disabled hidden>Role</option>
+                        <option value="donor">Donor</option>
+                        <option value="volunteer">Volunteer</option>
+                    </select>
+                </div>
+                <div class="dropdown-role">
+                    <!-- <label for="cars">Role</label> -->
+
+                    <select name="event" id="event">
+                        <option value="" selected disabled hidden>Event</option>
+                        <?php $i = 0;?>
+                        <?php if ($v_event_name): ?>
+                        <?php
+//print_r($rows);?>
+                        <?php foreach ($v_event_name as $value): ?>
+                        <option value="<?=$v_event_name[$i]->name?>"><?=$v_event_name[$i]->name?></option>
+                        <?php $i++;
+// echo ($i); ?>
+
+                        <?php endforeach;?>
+                        <?php endif?>
+
+                        <?php $i = 0;?>
+                        <?php if ($d_event_name): ?>
+                        <?php
+//print_r($rows);?>
+                        <?php foreach ($d_event_name as $value): ?>
+                        <option value="<?=$d_event_name[$i]->name?>"><?=$d_event_name[$i]->name?></option>
+                        <?php $i++;
+// echo ($i); ?>
+
+                        <?php endforeach;?>
+                        <?php endif?>
+                    </select>
+                </div>
+
+                
+            </div>
+                <div class="hide">
+                    <i class="fa-solid fa-circle-exclamation"></i><small id="small">error message</small>
+                </div>
             <button><i class="fa-solid fa-paper-plane"></i>&emsp;Send</button>
         </div>
+
     </form>
 </div>
 <h2>Reviews</h2>
 <?php $i = 0;?>
-        <?php if ($comment_data): ?>
-           
+<?php if ($comment_data): ?>
+
 <div class="reviews scroll">
-<?php foreach ($comment_data as $value): ?>
+    <?php foreach ($comment_data as $value): ?>
     <div class="review-card">
         <div class="review-left">
+
+
             <img src="<?=$comment_data[$i]->profile_pic?>" alt="">
             <p><?=$comment_data[$i]->first_name?></p>
-           
+            <div class="stars">
+                <?php for ($j = 0; $j < $comment_data[$i]->star_rate; $j++): ?>
+                <span>★</span>
+                <?php endfor?>
+            </div>
         </div>
         <div class="review-right">
             <p><?=$comment_data[$i]->comment?></p>
-            <p class='date-time'><?=substr($comment_data[$i]->date_time,0,-8)?>
-           &emsp;<?=substr($comment_data[$i]->date_time,10,6)?></p>
+            <p class='date-time'><?=substr($comment_data[$i]->date_time, 0, -8)?>
+                &emsp;<?=substr($comment_data[$i]->date_time, 10, 6)?></p>
+            <div class="rating">
+                <span class="tag-1"><?=$comment_data[$i]->user_type?></span>
+                <span class="tag-2"><?=$comment_data[$i]->event_name?></span>
+            </div>
         </div>
 
     </div>
 
-<?php $i++;
+    <?php $i++;
 // echo ($i); ?>
 
-<?php endforeach;?>
-    </div>
-        <?php endif?>
+    <?php endforeach;?>
+</div>
+<?php endif?>
 
 <?php $this->view('includes/footer')?>
 <script src=" navbar.js"></script>
+<script src="<?=ROOT?>/assets/organizationpage.js"></script>
