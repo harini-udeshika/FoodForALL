@@ -67,15 +67,26 @@ if (!$amount) {
     <div class="card">
     <h2><b>Donate</b></h2>
         <p>Amount</p>
+        <form>
         <div class="small-cards">
-            <div>1 package <small>300 LKR</small></div>
-            <div>2 packages <small>600 LKR</small></div>
-            <div>5 packages <small>1500 LKR</small></div>
+        <div class="button">
+  <input type="radio" id="a25" name="check-substitution-2"  value="300"/>
+  <label class="btn one" for="a25">1 packet Rs.300</label>
+</div>
+<div class="button">
+  <input type="radio" id="a50" name="check-substitution-2" value="600" />
+  <label class="btn two" for="a50">2 packets Rs.600</label>
+</div>
+<div class="button">
+  <input type="radio" id="a75" name="check-substitution-2"  value="1500"/>
+  <label class="btn three" for="a75">5 packets Rs.1500</label>
+</div>
         </div>
+        </form>
         <p>OR</p>
         <form action="">
             <input type="text" placeholder="Other Amount">
-            <button>Continue</button>
+            <button class="continue">Continue</button>
         </form>
 
     </div>
@@ -104,7 +115,7 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
             </div>
             <div><i class="fa-solid fa-people-carry-box fa-2xl"></i>
                 <p>Need more</p>
-              
+
 
                 <p class="green"><?=$rows->no_of_volunteers - $volunteer_count?> people</p>
             </div>
@@ -116,16 +127,27 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
     </div>
     <div class="card">
         <h2><b>Volunteer</b></h2>
-        <p>Select Catergory</p>
+        <p>Select Category</p>
+        <form action="">
         <div class="small-cards">
-            <div>Mild <small>Level 1</small></div>
-            <div>Moderate <small>Level 2</small></div>
-            <div>Heavy <small>Level 3</small></div>
+        <div class="button">
+  <input type="radio" id="a25" name="check-substitution-2" value="Mild"/>
+  <label class="btn one" for="a25">Mild <br><small>LEVEL 1</small></label>
+</div>
+<div class="button">
+  <input type="radio" id="a50" name="check-substitution-2" value="Moderate"/>
+  <label class="btn two" for="a50">Moderate <br><small>LEVEL 2</small></label>
+</div>
+<div class="button">
+  <input type="radio" id="a75" name="check-substitution-2" value="Heavy"/>
+  <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
+</div>
         </div>
+        </form>
         <!-- <p>OR</p> -->
         <form action="">
             <!-- <input type="text" placeholder="Other Amount"> -->
-            <button>Continue</button>
+            <button class="continue">Continue</button>
         </form>
 
     </div>
