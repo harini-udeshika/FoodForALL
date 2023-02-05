@@ -4,7 +4,6 @@
 <?php $this->view('includes/submenu')?>
 
 
-
 <p class="event-name">
     <?=$rows->name?><small> by <?=$org->name?></small>
 </p>
@@ -26,26 +25,31 @@
     </div>
     <img src="images/event.jpeg" alt="">
 </div>
+<?php
+$donor = new Donate();
+$donor = $donor->sum("amount", "event_id", $rows->event_id);
+$amount = ($donor[0]->total);
+$donorp = ($amount / $rows->total_amount) * 100;
+
+if (!$amount) {
+    $amount = 0;
+}
+// echo ($rows->total_amount);
+?>
+
 <p class="event-name" id="donate">Donations</p>
 <div class="container" >
     <div class="donations">
         <p class="goal">Donation Goal <span><?=$rows->total_amount?> LKR</span></p>
         <div class="progress">
             <div class="progress-bar">
-                <div></div>
+                <div style="width:<?=$donorp?>%"></div>
             </div>
 
         </div>
         <div class="cards">
-        <?php
-$donor = new Donate();
-$donor = $donor->sum("amount", "event_id", $rows->event_id);
-$amount = ($donor[0]->total);
-if (!$amount) {
-    $amount = 0;
-}
-// echo ($rows->total_amount);
-?>
+
+
             <div><i class="fa-solid fa-circle-check fa-2xl"></i>
                 <p>Collected Donations</p>
                 <p class="green"><?=$amount?> LKR</p>
@@ -76,13 +80,20 @@ if (!$amount) {
 
     </div>
 </div>
+<?php
+$volunteer = new Volunteer();
+$volunteer_count = $volunteer->count("user_id", "event_id", $rows->event_id);
+$volunteer_count = ($volunteer_count[0]->count);
+$volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
+?>
+
 <p class="event-name" id="volunteer">Volunteers</p>
 <div class="container" >
     <div class="donations">
         <p class="goal">Number of volunteers<span><?=$rows->no_of_volunteers?> people</span></p>
         <div class="progress">
             <div class="progress-bar">
-                <div></div>
+                <div style="width:<?=$volunteerp?>%"></div>
             </div>
 
         </div>
@@ -93,11 +104,8 @@ if (!$amount) {
             </div>
             <div><i class="fa-solid fa-people-carry-box fa-2xl"></i>
                 <p>Need more</p>
-                <?php
-$volunteer = new Volunteer();
-$volunteer_count = $volunteer->count("user_id", "event_id", $rows->event_id);
-$volunteer_count = ($volunteer_count[0]->count);
-?>
+              
+
                 <p class="green"><?=$rows->no_of_volunteers - $volunteer_count?> people</p>
             </div>
             <div><i class="fa-solid fa-hourglass-start fa-2xl"></i>

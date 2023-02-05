@@ -1,5 +1,5 @@
 .sub-menu-wrap{
-    position:absolute;
+    position:fixed;
     top:13%;
     right: 2%;
     width: 18rem;

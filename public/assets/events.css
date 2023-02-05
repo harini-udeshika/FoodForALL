@@ -13,7 +13,7 @@ body {
 
 a {
     text-decoration: none;
-    color: inherit;    
+    color: inherit;
 }
 
 .heading {
@@ -462,10 +462,10 @@ h1 {
 
 .comment button {
     background-color: #7681BF;
-    height: 2.5rem;
-    width: 5rem;
+    height: 3rem;
+    width: 6rem;
     color: #fff;
-    border-radius: 0.6rem;
+    border-radius: 0.8rem;
     border: none;
     margin: 2rem 0rem 2rem 0rem;
     margin-right: 1rem;
@@ -479,18 +479,23 @@ h1 {
     border: 0.1rem solid #7FB432;
     padding: 1.5rem;
     border-radius: 1.5rem;
-    height: 20rem;
+    height: 25rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin: 2rem 0 2rem 0;
 }
-.reviews{
-    height: 30rem;
+
+.reviews {
+    max-height: 25rem;
     overflow-y: scroll;
+    background-color: #f7f6f6;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
 }
+
 .review-card {
     width: 30rem;
     min-height: 5rem;
-    border: 0.05rem solid #7FB432;
+    border: 0.1rem solid #7FB432;
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
@@ -498,20 +503,22 @@ h1 {
     justify-content: space-evenly;
     padding: 0.5rem;
     margin: 2rem;
+    background-color: #fff;
 }
 
 .review-left {
-  
+
     width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     padding: 1rem;
+    text-align: center;
 }
 
-.review-right {'
-  
+.review-right {
+
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -519,10 +526,129 @@ h1 {
     align-items: flex-start;
     margin: 1rem;
     justify-content: flex-start;
-   
+
 }
-.review-left img{
-    width: 40%;
+
+.review-left p {
+    font-weight: bold;
+    color: #7681BF;
+}
+
+.review-right .date-time {
+    color: #979797;
+    font-size: small;
+}
+
+.review-left img {
+    width: 50%;
     border-radius: 3rem;
     border: 0.1rem solid #7681BF;
+}
+
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+    position: absolute;
+    top: auto;
+    left: -9999px;
+}
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate>input:checked~label {
+    color: #ffc700;
+
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+    color: #fcdc66;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+    color: #eece5d;
+}
+
+.dropdowns {
+    width: 17rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+.dropdown-role select {
+    width: 8rem;
+    border: none;
+    background-color: #cde0b1;
+    border-radius: 0.5rem;
+    color: #000;
+}
+
+.dropdown-role select:focus {
+    border: 0.1rem solid #7FB432;
+}
+
+.rating .tag-1 {
+    background-color: #7FB432;
+    color: #fff;
+
+    padding: 0.25rem;
+    font-size: small;
+    border-radius: 0.5rem;
+}
+
+.rating .tag-2 {
+    background-color: #7681BF;
+    color: #fff;
+
+    padding: 0.25rem;
+    font-size: small;
+    border-radius: 0.5rem;
+}
+.stars{
+    background-color: #7681BF;
+    width: 6rem;
+    padding: 0.1rem;
+    border-radius: 0.7rem;
+}
+.stars span {
+    color: #ffc700;
+   
+}
+.hide{
+    visibility: hidden;
+}
+.error{
+   visibility: visible;
+    color: #ff8477;
+}
+.error i{
+    visibility: visible;
+    color: #ff8477;
 }
