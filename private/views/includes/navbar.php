@@ -66,7 +66,10 @@
                 <a href="">Organizations</a>
             </div>
             <div class="nav-i">
-                <a href="./events">Events</a>
+                <a href="adminevents">Events</a>
+            </div>
+            <div class="nav-i">
+                <a href="Add_areacoordinator">Add Area Coordinators</a>
             </div>
             <div class="nav-i">
                 <a href="">Area Coordinators</a>
