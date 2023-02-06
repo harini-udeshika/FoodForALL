@@ -67,12 +67,13 @@ $data = $org->where('id', Auth::getid());
 $data = $data[0];
 if ($data->profile_pic) {
     $image = $data->profile_pic;
+    // $image2 = "./images/user_icon.png";
 }?>
-                         <img src=<?=$image?> alt="">
+                         <img src="<?php echo $image?>"alt="">
                          <p>Hello <?php echo $data->name ?> !</p>
                         </div>
                     <hr>
-                    <a href="profile" class="sub-menu-link">
+                    <a href="Edit_org_profile" class="sub-menu-link">
                         <i class="fa-solid fa-user"></i>
                         <p>View profile</p>
                         <span>></span>
