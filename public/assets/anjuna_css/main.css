@@ -1,0 +1,19 @@
+body-container {
+    margin: 0px 100px;
+}
+
+@media screen and (max-width: 992px) {
+    body-container {
+        margin: 0px 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body-container {
+        margin: 0px 20px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}

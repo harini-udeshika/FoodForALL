@@ -37,5 +37,17 @@ class Auth{
         return "Unknown";
 
     }
+
+    public static function isuser($usertype){
+        if (Auth::logged_in()) {
+            if (Auth::getusertype()==$usertype) {
+                // echo ("called");
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 }
 
