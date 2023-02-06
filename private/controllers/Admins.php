@@ -1,6 +1,6 @@
 <?php
-class Admins extends Controller
-{
+// class Admins extends Controller
+// {
    
    
-}
+// }

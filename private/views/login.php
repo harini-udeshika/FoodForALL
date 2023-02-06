@@ -15,13 +15,13 @@
 
                         </div>   
                            
-                        <!-- <?php if($is_invalid): ?>
+                        <?php if(!$is_verified): ?>
             
              <div class="error">
                         <i class="fa-solid fa-circle-exclamation"></i>
                         <small>&nbsp; Email and password does not match</small>
                         </div>
-                        <?php endif; ?> -->
+                        <?php endif; ?>
                        
                         <div class="log-button">
                             <button class="login">Log in</button>

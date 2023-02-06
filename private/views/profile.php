@@ -95,7 +95,9 @@ if (file_exists($rows->profile_pic)) {
         </tr>
         <?php
 $i = 0;?>
-        <?php if ($rows): ?>
+
+        <?php if ($event_data): ?>
+
 
 
         <?php foreach ($event_data as $value): ?>
@@ -103,7 +105,7 @@ $i = 0;?>
         <tr class="table_row">
 
             <td><?=$event_data[$i]->name?></td>
-            <td></td>
+            <td><?=$org_name[$i]->name?></td>
             <td><?=$event_data[$i]->volunteer_type?></td>
             <td><?=$event_data[$i]->date?></td>
         </tr>
@@ -126,12 +128,15 @@ $i = 0;?>
         </tr>
 <?php
 $i = 0;?>
-        <?php if ($rows): ?>
+
+        <?php if ($donor_data): ?>
+
         <?php foreach ($donor_data as $value): ?>
         <tr class="table_row">
-           
-            <td><?=substr($donor_data[$i]->date_time,0,-8)?></td>
-            <td>name</td>
+
+            <td><?=substr($donor_data[$i]->date_time, 0, -8)?></td>
+            <td><?=$d_org_name[$i]->name?></td>
+
             <td><?=$donor_data[$i]->amount?></td>
 
         </tr>
@@ -149,8 +154,15 @@ $i = 0;?>
             Total Donated Amount
         </div>
         <div class="amount">
+            <?php if ($tot_amount[0]->total): ?>
          <?=$tot_amount[0]->total?>
+         <?php endif?>
+         <?php if (!$tot_amount[0]->total): ?>
+         0
+         <?php endif?>
+
         </div>
+
     </div>
     <div class="summary">
         <div class="text">
@@ -160,6 +172,7 @@ $i = 0;?>
        <?=$tot_events[0]->count?>
         </div>
     </div>
+
 </div>
 <div class="news">
     <p>Need more news? Subscribe to our news services right now!</p>

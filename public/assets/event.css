@@ -28,9 +28,11 @@
     justify-content: center;
     align-items: flex-start;
 }
-.des{
+
+.des {
     font-size: 1.2rem;
 }
+
 .details i {
     color: #7FB432;
     width: 10px;
@@ -75,16 +77,18 @@
     padding: 0.5rem;
     font-weight: bold;
     color: #7FB432;
-    
+
 }
-.date-time :hover{
+
+.date-time :hover {
     color: #538903;
 }
-.date-time hr{
+
+.date-time hr {
     width: 90%;
     height: 0.02rem;
     background-color: #7FB432;
-    border:0.01rem solid #7FB432;
+    border: 0.01rem solid #7FB432;
     border-radius: 1rem;
 }
 
@@ -135,46 +139,51 @@
 }
 
 .progress-bar div {
-    width: 50%;
+
     height: 0.8rem;
     border-radius: 0.5rem;
     background-color: #7FB432;
 }
-.cards{
+
+.cards {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 40rem;
     height: 25rem;
-  
+
 }
-.cards div{
+
+.cards div {
     height: 10rem;
     width: 10rem;
     background-color: #ffffff;
     margin: 1rem;
     padding: 2rem 1rem 2rem 1rem;
     border-radius: 1rem;
-    border: 1px solid rgba(127, 180, 50,0.2);
+    border: 1px solid rgba(127, 180, 50, 0.2);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-  color: #6F6F6F;
+    color: #6F6F6F;
     text-align: center;
 }
-.cards :hover{
+
+.cards :hover {
     background-color: #f1f9ec;
     color: #538903;
 }
-.cards div i{
-    margin:2rem 1rem 2rem 1rem;
+
+.cards div i {
+    margin: 2rem 1rem 2rem 1rem;
     color: #7FB432;
-    
+
 }
-.green{
+
+.green {
     font-weight: bold;
 }
 
@@ -190,44 +199,111 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 1.2rem;
 }
-.small-cards{
+
+/* .small-cards{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content:space-evenly;
+
 }
 .small-cards :hover{
-    background-color:#7681BF;
-    color: #fff;
-}
-.small-cards div{
+    background-color:#ffffff;
+    color: #000;
+} */
+.small-cards input {
     /* justify-content: center;
     align-items: center; */
-   
-    height: 4rem;
-    width:4rem;
+
+    /* height: 4rem;
+    width:5rem;
     margin: 1rem;
     padding: 0.5rem;
     text-align: center;
-    background-color: #F9F9F9;
+    
+    border-radius: 0.5rem; */
+
+}
+
+/* .one{
+    background-color: rgb(133, 215, 131);
     border: 1px solid #d2d2d2;
+}
+.two{
+    background-color: rgb(237, 237, 126);
+    border: 1px solid #d2d2d2;
+}
+.three{
+    background-color: rgb(222, 86, 86);
+    border: 1px solid #d2d2d2;
+} */
+.button {
+    float: left;
+    margin: 0 5px 0 0;
+    width: 100px;
+    height: 40px;
+    position: relative;
+}
+
+.button label,
+.button input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.button input[type="radio"] {
+    opacity: 0.011;
+    z-index: 100;
+
+}
+
+.button input[type="radio"]:checked+label {
+    background: #bebafc;
+    border-radius: 4px;
+    font-weight: bold;
+
+}
+
+.one{
+    background-color: rgb(133, 215, 131);
+}
+.two{
+    background-color:rgb(237, 237, 126);
+}
+.three{
+    background-color:rgb(220, 126, 126);
+}
+.button label {
+    cursor: pointer;
+    z-index: 90;
+    line-height: 1.8em;
+    /* background-color: #bfe388; */
     border-radius: 0.5rem;
-   
+    height: 4rem;
+    text-align: center;
 }
-.card form{
+
+
+.card form {
     height: 10rem;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content:space-evenly;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
-.card form input{
-width: 14rem;
-height: 1.5rem;
-border-radius: 0.5rem;
-border: 1px solid #d2d2d2;
+
+.card form input {
+    width: 14rem;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d2d2d2;
 }
-.card form button{
+
+.continue {
     height: 2.3rem;
     width: 9rem;
     border-radius: 0.5rem;

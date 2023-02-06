@@ -1,0 +1,21 @@
+.input-field {
+    height: 36px;
+    width: fit-content;
+    /* width: 100px; */
+
+    /* color: var(--projectGray); */
+
+    border: 1px solid var(--projectGray);
+    border-radius: 8px;
+
+    padding: 5px 5px 5px 10px;
+}
+
+.input-field-block {
+    width: 100%;
+}
+
+.search-field {
+    height: 54px;
+    border-radius: 20px;
+}
