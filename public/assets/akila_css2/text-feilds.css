@@ -1,0 +1,16 @@
+.input-field {
+    height: 36px;
+    width: fit-content;
+    /* width: 100px; */
+
+    color: var(--projectGray);
+
+    border: 2px solid var(--projectGray);
+    border-radius: 8px;
+
+    padding: 5px;
+}
+
+.input-field-block {
+    width: 70%;
+}

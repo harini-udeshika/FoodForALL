@@ -2,6 +2,10 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/home_org.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>  
+<?php if(Auth::logged_in()){
+    $this->view('includes/submenu');
+}
+?>
 
 <?php 
 //  echo "<pre>";
@@ -121,11 +125,11 @@
                         <div class="mySlides" style="border: 4px solid #98A0CF; border-radius: 13px;">
                             <?php
                             $image = "./images/logo.png";
-                            if ($_SESSION['USER']->profile_pic) {
-                                $image = $_SESSION['USER']->profile_pic;
+                            if (file_exists($rows->profile_pic)) {
+                                $image = $rows->profile_pic;
                             }
                             ?>
-                            <img src="<?=$image?>" width="100%" height="240px">
+                            <img src="<?php echo $image?>" width="100%" height="240px">
                         </div>
 
                     <!-- <a class="prev" onclick="plusSlides(-1)">â®</a>
@@ -713,8 +717,11 @@
         <a href="Add_event" style="text-decoration: none;">
         <button class="more-btn" style="width: 25%; border-radius: 12px; height: 100px; font-size: 20px; background-color: #000000;">Add Event</button>  
         </a>
+
+        <a href="Reply_reviews" style="text-decoration: none;">
         <button class="more-btn" style="width: 25%; border-radius: 12px; height: 100px; font-size: 20px; background-color: #000000;">Reviews</button>
-        
+        </a>
+
         <a href="Add_managers" style="text-decoration: none;">
             <button class="more-btn" style="width: 25%; border-radius: 12px; height: 100px; font-size: 20px; background-color: #000000;">Event Managers</button>
         </a>
