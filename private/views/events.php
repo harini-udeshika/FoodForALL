@@ -17,14 +17,14 @@
             <form action="">
             
             <label for="date" >Date</label>
-            <input type="date" name="date">
+            <input type="date" name="date" value="<?=isset($_GET['date'])?$_GET['date']:''?>">
             <label for="location">Location</label>
-            <select name="location" id="location">
-                <option value="default">Select</option>
-                <option value="Kalutara">Kalutara</option>
+            <select name="location" id="location" >
+                <option value="default" ><?=isset($_GET['location'])?$_GET['location']:'Select'?></option>
+                <option value="Kalutara" >Kalutara</option>
                 <option value="Colombo">Colombo</option>
                 <option value="Gampaha">Gampaha</option>
-                <option value="Kandy">Kandy</option>
+                <option value="Kandy" >Kandy</option>
                 <option value="Matale">Matale</option>
                 <option value="Nuwara Eliya">Nuwara Eliya</option>
                 <option value="Galle">Galle</option>

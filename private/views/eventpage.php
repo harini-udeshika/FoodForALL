@@ -70,15 +70,15 @@ if (!$amount) {
         <form>
         <div class="small-cards">
         <div class="button">
-  <input type="radio" id="a25" name="check-substitution-2"  value="300"/>
+  <input type="radio"  name="packet"  value="300"/>
   <label class="btn one" for="a25">1 packet Rs.300</label>
 </div>
 <div class="button">
-  <input type="radio" id="a50" name="check-substitution-2" value="600" />
+  <input type="radio"  name="packet" value="600" />
   <label class="btn two" for="a50">2 packets Rs.600</label>
 </div>
 <div class="button">
-  <input type="radio" id="a75" name="check-substitution-2"  value="1500"/>
+  <input type="radio"  name="packet"  value="1500"/>
   <label class="btn three" for="a75">5 packets Rs.1500</label>
 </div>
         </div>
@@ -128,28 +128,28 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
     <div class="card">
         <h2><b>Volunteer</b></h2>
         <p>Select Category</p>
-        <form action="">
+        <form action="" class="select_type">
         <div class="small-cards">
         <div class="button">
-  <input type="radio" id="a25" name="check-substitution-2" value="Mild"/>
+  <input type="radio"  name="type" value="Mild <?=$rows->event_id?>"/>
   <label class="btn one" for="a25">Mild <br><small>LEVEL 1</small></label>
 </div>
 <div class="button">
-  <input type="radio" id="a50" name="check-substitution-2" value="Moderate"/>
+  <input type="radio" name="type" value="Moderate <?=$rows->event_id?>"/>
   <label class="btn two" for="a50">Moderate <br><small>LEVEL 2</small></label>
 </div>
 <div class="button">
-  <input type="radio" id="a75" name="check-substitution-2" value="Heavy"/>
+  <input type="radio"  name="type" value="Heavy <?=$rows->event_id?>"/>
   <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
 </div>
         </div>
-        </form>
+      
         <!-- <p>OR</p> -->
-        <form action="">
+       
             <!-- <input type="text" placeholder="Other Amount"> -->
             <button class="continue">Continue</button>
         </form>
-
+       
     </div>
 </div>
 <?php $this->view('includes/footer')?>
