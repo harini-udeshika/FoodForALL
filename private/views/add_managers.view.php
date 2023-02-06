@@ -53,6 +53,7 @@
                         <td id='button-col'>
                         <a id='delete-edit-btn-2' href=''><i class='fa-regular fa-pen-to-square'></i></a></td>
                         </tr>";
+                        $x=$x+1;
                         $totManagers=$totManagers-1;
                     }
                     echo "</tbody></table>";
