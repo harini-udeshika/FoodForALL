@@ -40,6 +40,9 @@
     <div class="event-container">
         <div class="event-row">
             <?php $i = 0;?>
+            <?php if (!$ongoing): ?>
+                <h4><i class="fa-solid fa-calendar-xmark fa-xl"></i>&nbsp;&nbsp;Sorry! No ongoing events<h4>
+            <?php endif?>
             <?php if ($ongoing): ?>
             <?php
 //print_r($rows);?>
@@ -47,7 +50,7 @@
 
             <?php if ($i % 3 == 0 && $i != 0): ?>
         </div>
-        <div class="event-row">
+        <div class="event-row"> 
 
             <?php endif?>
             <a href="<?=ROOT?>/eventpage?id=<?=$ongoing[$i]->event_id?>">
@@ -115,6 +118,9 @@
     <div class="event-container">
         <div class="event-row">
             <?php $i = 0;?>
+            <?php if (!$completed): ?>
+                <h4><i class="fa-solid fa-calendar-xmark fa-xl"></i>&nbsp;&nbsp;Completed events not found!<h4>
+            <?php endif?>
             <?php if ($completed): ?>
             <?php
 //print_r($rows);?>
@@ -256,7 +262,9 @@
     </form>
 </div>
 <h2>Reviews</h2>
+
 <?php $i = 0;?>
+
 <?php if ($comment_data): ?>
 
 <div class="reviews scroll">
@@ -291,7 +299,9 @@
     <?php endforeach;?>
 </div>
 <?php endif?>
-
+<?php if (!$comment_data): ?>
+        <h4><i class="fa-solid fa-comments fa-xl"></i> &nbsp;Be the first to comment</h4>
+<?php endif?>
 <?php $this->view('includes/footer')?>
 <script src=" navbar.js"></script>
 <script src="<?=ROOT?>/assets/organizationpage.js"></script>
