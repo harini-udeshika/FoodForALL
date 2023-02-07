@@ -79,6 +79,10 @@
     color: black;
 }
 
+.btn-red {
+    background-color: var(--projectRed);
+}
+
 
 
 /* ------------------- button styles:hover -------------------*/
@@ -96,6 +100,10 @@
 
 .btn-gray:hover {
     background-color: var(--grayHover);
+}
+
+.btn-red:hover {
+    background-color: var(--redHover);
 }
 
 
