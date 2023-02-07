@@ -14,7 +14,7 @@
 .table_head_i {
     font-weight: 600;
     color: white;
-    padding: 20px 0px 10px 0px;
+    padding: 20px 4px 10px 4px;
     text-align: center;
     align-items: center;
     border-right: 1px solid white;
@@ -25,6 +25,8 @@
 }
 
 .table_record {
+    
+    /* font-size: 0.8rem; */
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
@@ -37,6 +39,8 @@
 }
 
 .table_record_i {
+    font-size: 0.9rem;
+    overflow: auto;
     font-weight: 500;
     color: black;
     padding: 0px 5px;

@@ -63,19 +63,19 @@
                 <a href="">Donate/Volunteer</a>
             </div> -->
             <div class="nav-i">
-                <a href="">Organizations</a>
-            </div>
-            <div class="nav-i">
-                <a href="adminevents">Events</a>
+                <a href="admin_events">Events</a>
             </div>
             <div class="nav-i">
                 <a href="Add_areacoordinator">Add Area Coordinators</a>
             </div>
             <div class="nav-i">
+                <a href="Admin_search_org">Organizations</a>
+            </div>
+            <div class="nav-i">
                 <a href="">Area Coordinators</a>
             </div>
             <div class="nav-i">
-                <a href="">Users</a>
+                <a href="Admin_search_users">Users</a>
             </div>
         <?php endif?>
         

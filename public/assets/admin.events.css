@@ -26,3 +26,9 @@
     border-radius: 5px;
     background-color: var(--projectGreen);
 }
+
+.event-holder{
+    overflow: auto;
+    height: 410px;
+    width: 100%;
+}
