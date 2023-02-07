@@ -90,4 +90,21 @@ class Admins extends Model
         $data = $this->query($query);
         return $data;
     }
+
+    public function select_users_bydate()
+    {
+        $query = "SELECT * FROM user ORDER BY id DESC LIMIT 4";
+        $data = $this->query($query);
+        return $data;
+    }
+
+    public function search_in_users($keyword)
+    {
+        $keyword=addslashes($keyword);
+
+        $query = "SELECT * FROM user WHERE first_name LIKE '%$keyword%' OR last_name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR nic LIKE '%$keyword%' OR id LIKE '%$keyword%'";
+        
+        $data = $this->query($query);
+        return $data;
+    }
 }
