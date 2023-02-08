@@ -1,0 +1,27 @@
+h1{
+    font-size:3rem;
+}
+.main{
+    font-size:1.1rem;
+}
+h1 .p{
+    color:#7681BF;
+}
+h1 .g{
+    color:#7FB432;
+}
+p{
+    text-align: justify;
+    /* margin: 2rem; */
+}
+.cards1{
+    margin: 2rem;
+    width: 60rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+.card1{
+    width: 45%;
+}

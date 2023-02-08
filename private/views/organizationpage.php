@@ -14,7 +14,7 @@
 <div class="intro">
     <div class="intro-2">
         <div class="org-logo">
-            <img src="" alt="">
+            <img src="<?=$org->profile_pic?>" alt="">
         </div>
         <p class="des">
             <?=$org->about?>

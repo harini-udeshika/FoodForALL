@@ -7,7 +7,7 @@
 <p class="event-name">
     <?=$rows->name?><small> by <?=$org->name?></small>
 </p>
-<div class="event-body">
+<div class="event-body"> 
     <div class=details>
         <p class="des">
         <?=$rows->description?>
@@ -60,7 +60,7 @@ if (!$amount) {
             </div>
             <div><i class="fa-solid fa-hourglass-start fa-2xl"></i>
                 <p>Closing date</p>
-                <p class="green">2023/04/25</p>
+                <p class="green"><?=$closing_date?></p>
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
             </div>
             <div><i class="fa-solid fa-hourglass-start fa-2xl"></i>
                 <p>Closing date</p>
-                <p class="green">2023/04/25</p>
+                <p class="green"><?=$closing_date?></p>
             </div>
         </div>
     </div>

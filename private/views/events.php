@@ -41,6 +41,7 @@
     </div>
     <div class="event-container">
         <div class="event-row">
+        
         <?php $i=0;?>
         <?php if($rows):?>
             <?php
@@ -50,8 +51,16 @@
             <?php if($i%3==0 && $i!=0) : ?>
                 </div>
                 <div class="event-row">
-             
+              
             <?php endif ?>
+            <?php
+            $total_donated=$rows[$i]->total_donated;
+            $total_amount=$rows[$i]->total_amount;
+            $donorp=round(($total_donated/$total_amount)*100,2);
+            $tot_volunteers=$rows[$i]->no_of_volunteers;
+            $volunteers=$rows[$i]->volunteers;
+            $volunteerp =round(($volunteers/$tot_volunteers)*100,2);
+            ?>
         <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>">
             <div class="event">
             
@@ -72,9 +81,9 @@
 
                     <div class="progress">
                         <div class="progress-bar">
-                            <div></div>
+                        <div style="width:<?=$donorp?>%"></div>
                         </div>
-                        <span>50%</span>
+                        <span><?=$donorp?>%</span>
                     </div>
                     <div class="volunteers">
                         <p>Volunteers </p>
@@ -83,9 +92,9 @@
 
                     <div class="progress">
                         <div class="progress-bar">
-                            <div></div>
+                        <div style="width:<?=$volunteerp?>%"></div>
                         </div>
-                        <span>50%</span>
+                        <span><?=$volunteerp?>%</span>
                     </div>
                 </div>
 
