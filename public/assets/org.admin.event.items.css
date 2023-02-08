@@ -1,0 +1,17 @@
+.event-card{
+    width: 900px;
+}
+
+.event-card img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.sp-1{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.item-card{
+    max-width: 360px;
+    height: fit-content;
+}
