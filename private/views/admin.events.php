@@ -28,7 +28,7 @@
 
     <div class="events-card card event-holder col-lg-10 p-20 p-bottom-35 m-lr-auto">
         <div class="heading-2 p-top-10">Ongoing Events</div>
-        <div class="p-left-40 p-right-40">
+        <div class="event_scroll p-left-40 p-right-40">
             <div class="grid-9">
                 <!-- EVENT-ONGOING -->
                 <div class="card-simple event-card-on col-lg-3 col-md-3 p-20 p-top-10">
@@ -266,7 +266,7 @@
 
     <div class="events-card card event-holder col-lg-10 p-20 m-top-75 m-bottom-75 p-bottom-35 m-lr-auto">
         <div class="heading-2 p-top-10">Completed Events</div>
-        <div class="p-left-40 p-right-40">
+        <div class="event_scroll p-left-40 p-right-40">
             <div class="grid-9">
                 <!-- EVENT-COMPLETED -->
                 <div class="card-simple event-card-on col-lg-3 col-md-3 p-20 p-top-10">
