@@ -14,3 +14,15 @@
 .input-field-block {
     width: 70%;
 }
+
+.input-field-sm {
+    height: 25px;
+    width: 20%;
+}
+
+.file_name{
+    max-width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    }
