@@ -19,7 +19,9 @@ class Events extends Controller
             $find = '%' . $_GET['find'] . '%';
             $query = "select * from event where name like :find && date> CURRENT_DATE";
             $arr = ['find' => $find];
+
             $search_data = $event->query($query, $arr);
+
             $this->view('events', ['rows' => $search_data]);
         } else if (isset($_GET['date']) && isset($_GET['location'])) {
 
@@ -29,7 +31,9 @@ class Events extends Controller
             if (!$date && $location != "default") {
                 $query = "select * from event where location= :location && date> CURRENT_DATE";
                 $arr = ['location' => $location];
+
                 $search_data = $event->query($query, $arr);
+
                 $this->view('events', ['rows' => $search_data]);
             } else if ($date) {
                 $filter_data = $event->filter($date, $location, 'date', 'location');
@@ -38,6 +42,7 @@ class Events extends Controller
                 $filter_data = $event->filter($date, $location, 'date', 'location');
                 $this->view('events', ['rows' => $filter_data]);
             } else {
+
 
                 $query = "SELECT * FROM event WHERE date > CURRENT_DATE";
                 $data = $event->query($query);
@@ -53,6 +58,7 @@ class Events extends Controller
         GROUP BY event.event_id";
             $data = $event->query($query);
             // print_r($data);
+
             $this->view('events', ['rows' => $data]);
         }
 

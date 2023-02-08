@@ -7,7 +7,7 @@
 <body>
     <div class="container">
         <!-- main heading -->
-        <div class="heading-2 col-lg-12">Add Area Coordinator</div>
+        <div class="heading-1 col-lg-12">Add Area Coordinator</div>
 
         <!-- space -->
         <div class="blank col-lg-3"></div>

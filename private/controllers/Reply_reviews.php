@@ -2,7 +2,7 @@
 class Reply_reviews extends Controller
 {
     function index(){
-        $event = new Event();
+        $comment = new Comments();
 
         if(count($_POST)>0){  
             // echo "hello1";
@@ -21,8 +21,8 @@ class Reply_reviews extends Controller
         // die;
     }
 
-    $data = $event->where('org_gov_reg_no',$_SESSION['USER']->gov_reg_no);
-    $this->view('reply_reviews.view', ['allevents' => $data]);
+    $data = $comment->where('org_gov_reg_no',$_SESSION['USER']->gov_reg_no);
+    $this->view('reply_reviews.view', ['allcoms' => $data]);
     }
    
 }
