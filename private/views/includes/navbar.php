@@ -51,7 +51,7 @@
                 <i class="fa-solid fa-bell"></i>
             </div>
             <div class="nav-i">
-                <i class="fa-solid fa-crown"></i>
+                <a href="leaderboard"><i class="fa-solid fa-crown"></i></a>
 
             </div>
         <?php endif?>

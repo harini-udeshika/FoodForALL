@@ -64,7 +64,7 @@ class Image extends model {
                 echo "Image type is not valid";
             }
         } 
-        else {
+        else if($_POST){
             echo "Upload a valid profile picture";
         }
     }

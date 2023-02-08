@@ -56,7 +56,7 @@
     <a href="<?=ROOT?>/organizationpage?id=<?=$rows[$i]->gov_reg_no?>">
     <div class="long-card">
         <div class="img">
-            <img src="" alt="image">
+            <img src="<?=$rows[$i]->profile_pic?>" alt="image" class="search-org-img">
         </div>
         <p><?=$rows[$i]->name?></p>
         <p><?=$tot_events->count?></p>

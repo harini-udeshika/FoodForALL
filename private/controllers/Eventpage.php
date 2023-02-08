@@ -10,13 +10,17 @@ class Eventpage extends Controller
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $data = $event->where("event_id", $id);
+            $query = "SELECT DATE(date-2) as cd from event where event_id =:id";
+            $arr = ['id' => $id];
+            $closing_date=$event->query($query,$arr);
+            // print_r($closing_date[0]);
             $org_data = $org->where("gov_reg_no", $data[0]->org_gov_reg_no);
             $v_req = new Volunteer_request();
             $query = "SELECT volunteer_type from volunteer_request where id = :user_id";
             $arr = ['user_id' => Auth::getid()];
             $types = $v_req->query($query, $arr);
            // print_r ($types);
-            $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0],'types'=>$types]);
+            $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0],'types'=>$types,'closing_date'=>$closing_date[0]->cd]);
         }
 
         else if (isset($_GET['type'])) {

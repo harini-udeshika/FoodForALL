@@ -78,7 +78,7 @@ if ($data->profile_pic) {
                          <p>Hello <?php echo $data->name ?> !</p>
                         </div>
                     <hr>
-                    <a href="Edit_org_profile" class="sub-menu-link">
+                    <a href="edit_org_profile" class="sub-menu-link">
                         <i class="fa-solid fa-user"></i>
                         <p>View profile</p>
                         <span>></span>

@@ -279,7 +279,9 @@ h1 {
 .long-card .img {
     width: 10rem;
 }
-
+.search-org-img{
+    width: 3rem;
+}
 .org_container {
     background-image: url("../images/bg2.png");
     background-size: 49rem;
@@ -326,14 +328,20 @@ h1 {
 }
 
 .org-logo {
-    background-color: #eae8e8; 
+    /* background-color: #eae8e8; 
     height: 12rem;
     width: 12rem;
     border-radius: 8rem;
     border: 0.1rem solid #7681BF;
+    margin-bottom: 2rem; */
+}
+.org-logo img{
+    height: 12rem;
+    width: 12rem;
+    border-radius: 8rem;
+    border: 0.2rem solid #7681BF;
     margin-bottom: 2rem;
 }
-
 .intro {
     display: flex;
     flex-direction: row;
