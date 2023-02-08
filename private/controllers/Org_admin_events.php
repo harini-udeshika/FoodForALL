@@ -4,18 +4,27 @@ class Org_admin_events extends Controller
 {
     function index()
     {
-        // $user = new User();
-        // $data = $user->findAll();
-        $user = new Org_admin_events();
-        $results = array();
+        $event = new Event();
+        
+        $org_reg = $_SESSION['USER']->gov_reg_no;
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved=0";
+        $arr = ['id'=>$org_reg];
+        $pending = $event->query($query,$arr);
+        // echo "<pre>";
+        // echo "pending";
+        // print_r($pending);
 
-        // if (Auth::isuser('org_admin')) {
-        //     $admin_model = new Admins();
-        //     // $defaults=array();
-        //     $defaults = $admin_model->select_orgs_bydate();
-        //     $user->view('org.admin.events', ['defaults' => $defaults]);
-        // } else {
-        //     $this->redirect('login');
-        // }
-        $user->view('org.admin.events');
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
+        $arr = ['id'=>$org_reg];
+        $ongoing = $event->query($query,$arr);
+        // echo "<br>ongoing";
+        // print_r($ongoing);
+
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date<CURRENT_DATE";
+        $arr = ['id'=>$org_reg];
+        $past = $event->query($query,$arr);
+        // echo "<br>past";
+        // print_r($past);
+        // die;
+        $this->view('org.admin.events',['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past]);
     }}

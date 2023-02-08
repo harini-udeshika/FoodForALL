@@ -91,7 +91,7 @@
                 <a href="./shop_org">Shop</a>
             </div>
             <div class="nav-i">
-                <a href="./Add_event">Events</a>
+                <a href="./Org_admin_events">Events</a>
             </div>
             <div class="nav-i">
                 <a href="./add_managers">Managers</a>

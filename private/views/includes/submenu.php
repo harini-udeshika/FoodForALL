@@ -83,7 +83,7 @@ if ($data->profile_pic) {
                         <p>View profile</p>
                         <span>></span>
                     </a>
-                    <a href="edit_profile" class="sub-menu-link">
+                    <a href="" class="sub-menu-link">
                         <i class="fa-solid fa-pen-to-square"></i>
                         <p>Edit profile</p>
                         <span>></span>
