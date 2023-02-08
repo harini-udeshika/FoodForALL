@@ -42,8 +42,10 @@
     <div class="event-container">
         <div class="event-row">
 
+
         <?php $i = 0;?>
         <?php if ($rows): ?>
+
             <?php
 //print_r($rows);?>
         <?php foreach ($rows as $value): ?>
@@ -51,6 +53,7 @@
             <?php if ($i % 3 == 0 && $i != 0): ?>
                 </div>
                 <div class="event-row">
+
 
             <?php endif?>
             <?php
@@ -73,6 +76,7 @@ if ($tot_volunteers) {
 }
 
 ?>
+
         <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>">
             <div class="event">
 

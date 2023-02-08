@@ -25,7 +25,9 @@ class Events extends Controller
             GROUP BY event.event_id";
             //$query = "select * from event where name like :find && date> CURRENT_DATE && approved=1";
             $arr = ['find' => $find];
+
             $search_data = $event->query($query, $arr);
+
             $this->view('events', ['rows' => $search_data]);
         } else if (isset($_GET['date']) && isset($_GET['location'])) {
 
@@ -41,7 +43,9 @@ class Events extends Controller
                 GROUP BY event.event_id";
                 //$query = "select * from event where location= :location && date> CURRENT_DATE && approved=1";
                 $arr = ['location' => $location];
+
                 $search_data = $event->query($query, $arr);
+
                 $this->view('events', ['rows' => $search_data]);
             } else if ($date) {
                 $query = "SELECT event.event_id ,event.name, event.date,event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) as volunteers, SUM(donate.amount) as total_donated
@@ -68,16 +72,20 @@ class Events extends Controller
                 $this->view('events', ['rows' => $filter_data]);
             } else {
 
+
                 $query = "SELECT event.event_id ,event.name, event.date,event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) as volunteers, SUM(donate.amount) as total_donated
         FROM event
         LEFT JOIN donate ON event.event_id = donate.event_id
         LEFT JOIN volunteer ON event.event_id = volunteer.event_id
         WHERE event.date>CURRENT_DATE && event.approved=1
         GROUP BY event.event_id";
+
                 $data = $event->query($query);
                 $this->view('events', ['rows' => $data]);
             }
         } else {
+
+
 
             $query = "SELECT event.event_id ,event.name, event.date,event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) as volunteers, SUM(donate.amount) as total_donated
         FROM event

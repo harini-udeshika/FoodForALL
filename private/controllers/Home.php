@@ -3,6 +3,7 @@ class Home extends Controller{
     function index(){
         $user = new User();
         $event=new Event();
+
         $org=new Organization();
         $query = "SELECT profile_pic from organization";
         $pics=$org->query($query);
@@ -12,6 +13,7 @@ class Home extends Controller{
         //print_r($event_data);
         $data = $user->findAll();
         $this->view('home', ['rows' => $data,'event_data'=>$event_data,'pics'=>$pics]);
+
     }
    
 }
