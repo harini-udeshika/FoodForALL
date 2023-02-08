@@ -28,7 +28,12 @@
 }
 
 .event-holder{
-    overflow: auto;
-    height: 410px;
+    /* overflow: auto; */
+    
     width: 100%;
+}
+.event_scroll{
+    /* background-color: red; */
+    height: 400px;
+    overflow: auto; 
 }
