@@ -61,6 +61,7 @@
                             <?php echo $ongoing[$i]->name ?>
                         </p>
                         <div class="event-image">
+                            <img src="<?=$ongoing[$i]->thumbnail_pic?>">
                         </div>
                         <p class="date">
                             <?php echo $ongoing[$i]->date ?>

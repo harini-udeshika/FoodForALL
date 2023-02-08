@@ -21,7 +21,9 @@ class Eventpage extends Controller
             $types = $v_req->query($query, $arr);
            // print_r ($types);
 
+
             $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0],'types'=>$types,'closing_date'=>$closing_date[0]->cd]);
+
 
         }
 

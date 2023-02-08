@@ -14,7 +14,7 @@
     <p> Nam itaque dolorem, neque vel nihil
         praesentium laboriosam! Omnis blanditiis </p>
     <p> repellendus non minima dolores cupiditate, qui a ullam quae fuga.</p>
-    <form action="" method="POST"><button class="proceed" id="send">Send Request</button></form>
+    <form action="" method="POST" id="form"><button class="proceed" id="send">Send Request</button></form>
     <div class="popup" id="popup">
             <img src="./images/check.png" alt="">
             <h2>Request sent</h2>

@@ -23,7 +23,7 @@
             <p class="ii"><i class="fa-solid fa-heart"></i><span><?=ucfirst($org->name)?></span></p>
         </div>
     </div>
-    <img src="images/event.jpeg" alt="">
+    <img src="<?=$rows->thumbnail_pic?>" alt="">
 </div>
 <?php
 $donor = new Donate();

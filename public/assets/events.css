@@ -152,10 +152,16 @@ select {
 .event-image {
     height: 10rem;
     width: 15rem;
-    background-color: #e7e7e7;
+    background-color: #f9f8f8;
     text-align: center;
 }
-
+.event-image img{
+    height: 10rem;
+    max-width: 15rem;
+    /* min-width: 10rem; */
+    /* background-color: #e7e7e7; */
+    text-align: center;
+}
 .event-details {
     display: flex;
     flex-direction: column;
@@ -329,7 +335,7 @@ h1 {
 
 .org-logo {
 
-    /* background-color: #eae8e8; 
+
 
     height: 12rem;
     width: 12rem;
