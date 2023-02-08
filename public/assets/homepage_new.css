@@ -8,7 +8,71 @@
     background-repeat: no-repeat;
     background-size:100% 35rem ;
 }
+/* ----------gallery------------------------- */
 
+  .grid-container {
+    -webkit-columns: 5 200px;
+       -moz-columns: 5 200px;
+            columns: 5 200px;
+    -webkit-column-gap: 1.5rem;
+       -moz-column-gap: 1.5rem;
+            column-gap: 1.5rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .grid-container div {
+    width: 150px;
+    margin: 0 1.5rem 1.5rem 0;
+    display: inline-block;
+    width: 100%;
+    border: solid 2px black;
+    padding: 5px;
+    -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+       -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+            box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-transition: all .25s ease-in-out;
+       -moz-transition: all .25s ease-in-out;
+         -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+  }
+  
+  .grid-container div:hover img {
+    -webkit-filter: grayscale(0);
+       -moz-filter: grayscale(0);
+         -o-filter: grayscale(0);
+            filter: grayscale(0);
+  }
+  
+  .grid-container div:hover {
+    border-color:#7FB432;
+  }
+  
+  .grid-container div img {
+    width: 100%;
+    -webkit-filter: grayscale(100%);
+       -moz-filter: grayscale(100%);
+         -o-filter: grayscale(100%);
+            filter: grayscale(100%);
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-transition: all .25s ease-in-out;
+       -moz-transition: all .25s ease-in-out;
+         -o-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+  }
+  
+  .grid-container div p {
+    margin: 5px 0;
+    padding: 0;
+    text-align: center;
+    font-style: italic;
+  }
+  
 .description {
     width: 50%;
     display: flex;
@@ -55,7 +119,9 @@
     margin-top: 8rem;
     margin-left: 5rem;
 }
-
+.about_us-sub{
+    color: #7FB432;
+}
 .donate {
     height: 3rem;
     /* width:auto; */
@@ -174,7 +240,7 @@ hr {
     margin-bottom: 2rem;
 }
 .about_us-images{
-    
+    width: 50rem;
 }
 .dark{
     color: #000;
@@ -258,10 +324,22 @@ hr {
     text-align:left;
     width: 90%;
 }
-.section>img {
-    max-width: 90%;
+.img>img {
+    width: 88%;
+    /* max-height: 40%;  */
+    align: center;
+border: 1px solid #2e2e2e;
+border-radius: 0.5rem;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 5px, rgba(0, 0, 0, 0.22) 0px 5px 5px;
+}
+.img{
+    width: 90%;
+    height: 40%;
     max-height: 40%;
-
+    /* background-color: #efefef; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .section span{
     margin-top: 0.5rem;

@@ -1,8 +1,8 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/events.css">
 <?php $this->view('includes/navbar')?>
-<?php $this->view('includes/submenu')?>  
- 
+<?php $this->view('includes/submenu')?>
+
 
 <div class="heading">Upcoming Events</div>
     <div class="search">
@@ -10,17 +10,17 @@
              <input type="text" name="find" placeholder="Search event by name " class="search-bar">
          <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
-       
+
 
         <div class="filter">
             <p>Filter by</p>
             <form action="">
-            
+
             <label for="date" >Date</label>
-            <input type="date" name="date" value="<?=isset($_GET['date'])?$_GET['date']:''?>">
+            <input type="date" name="date" value="<?=isset($_GET['date']) ? $_GET['date'] : ''?>">
             <label for="location">Location</label>
             <select name="location" id="location" >
-                <option value="default" ><?=isset($_GET['location'])?$_GET['location']:'Select'?></option>
+                <option value="default" ><?=isset($_GET['location']) ? $_GET['location'] : 'Select'?></option>
                 <option value="Kalutara" >Kalutara</option>
                 <option value="Colombo">Colombo</option>
                 <option value="Gampaha">Gampaha</option>
@@ -41,34 +41,47 @@
     </div>
     <div class="event-container">
         <div class="event-row">
-        
-        <?php $i=0;?>
-        <?php if($rows):?>
+
+        <?php $i = 0;?>
+        <?php if ($rows): ?>
             <?php
-            //print_r($rows);?>
-        <?php foreach($rows as $value):?>
-            
-            <?php if($i%3==0 && $i!=0) : ?>
+//print_r($rows);?>
+        <?php foreach ($rows as $value): ?>
+
+            <?php if ($i % 3 == 0 && $i != 0): ?>
                 </div>
                 <div class="event-row">
-              
-            <?php endif ?>
+
+            <?php endif?>
             <?php
-            $total_donated=$rows[$i]->total_donated;
-            $total_amount=$rows[$i]->total_amount;
-            $donorp=round(($total_donated/$total_amount)*100,2);
-            $tot_volunteers=$rows[$i]->no_of_volunteers;
-            $volunteers=$rows[$i]->volunteers;
-            $volunteerp =round(($volunteers/$tot_volunteers)*100,2);
-            ?>
+$total_donated = 0;
+if ($rows[$i]->total_donated) {
+    $total_donated = $rows[$i]->total_donated;
+}
+$total_amount = $rows[$i]->total_amount;
+if ($total_amount) {
+    $donorp = round(($total_donated / $total_amount) * 100, 2);
+}
+$tot_volunteers = $rows[$i]->no_of_volunteers;
+if ($tot_volunteers) {
+    $volunteers = 0;
+
+    if ($rows[$i]->volunteers) {
+        $volunteers = $rows[$i]->volunteers;
+    }
+    $volunteerp = round(($volunteers / $tot_volunteers) * 100, 2);
+}
+
+?>
         <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>">
             <div class="event">
-            
+
                 <div class="event-top">
-                    <p><?php echo $rows[$i] -> name?></p>
+                    <p><?php echo $rows[$i]->name ?></p>
                     <div class="event-image">
+                        <img src="<?=$rows[$i]->thumbnail_pic?>">
                     </div>
-                    <p class="date"><?php echo $rows[$i]->date?></p>
+                    <p class="date"><?php echo $rows[$i]->date ?></p>
                     <small>Interested <i class="fa-regular fa-star fa-sm"></i></i></small>
                     <!-- //<i class="fa-solid fa-star fa-sm"> -->
                 </div>
@@ -102,16 +115,16 @@
                <button class="b1"> <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>/#donate">Donate</a></button>
                <button class="b2"> <a href="<?=ROOT?>/eventpage?id=<?=$rows[$i]->event_id?>/#volunteer">Volunteer</a></button>
                 </div>
-            
+
             </div>
         </a>
             <?php $i++;
-            // echo ($i); ?>
-            
-        <?php endforeach; ?>
+// echo ($i); ?>
+
+        <?php endforeach;?>
         <?php endif?>
         </div>
-        
+
 
     </div>
 <?php $this->view('includes/footer')?>

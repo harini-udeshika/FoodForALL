@@ -73,19 +73,20 @@ class Model extends Database
 
         // $column=addslashes($column);
         if ($f2 = "default") {
-            $query = "select * from $this->table where $col1= :f1  && date> CURRENT_DATE";
+            
+            $query = "select * from $this->table where $col1= :f1  && date> CURRENT_DATE && approved=1";
             return $this->query($query, [
                 'f1' => $f1,
 
             ]);
         } else if (!$f1) {
-            $query = "select * from $this->table where $col2= :f2 && date> CURRENT_DATE";
+            $query = "select * from $this->table where $col2= :f2 && date> CURRENT_DATE && approved=1";
             return $this->query($query, [
                 'f2' => $f2,
 
             ]);
         }
-        $query = "select * from $this->table where $col1= :f1 && $col2= :f2 && date> CURRENT_DATE";
+        $query = "select * from $this->table where $col1= :f1 && $col2= :f2 && date> CURRENT_DATE && approved=1";
         echo ($query);
         return $this->query($query, [
             'f1' => $f1,
