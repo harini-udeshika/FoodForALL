@@ -27,7 +27,8 @@
         <!-- END : search bar -->
 
         <!-- heading 2 -->
-        <div class="heading-2 col-12"><?= isset($results) ? 'Search Results' : 'Recent registered users'; ?></div>
+        <div class="heading-2 col-12"><?= $results['result_type'] != 'recent' ? 'Search Results' : 'Recent registered users'; ?></div>
+        <?php unset($results['result_type'])?>
 
         <?php if (isset($results)) : ?>
             <?php if (count($results) > 0) : ?>
@@ -75,7 +76,7 @@
                                 <?= $result->telephone ?>
                             </div>
                             <div class="table_record_i col-lg-2">
-                                <?= $result->city." / ".$result->city ?>
+                                <?= $result->city . " / " . $result->city ?>
                             </div>
                             <div class="table_record_i table_record_i_f col-lg-1">
                                 <button class="btn btn-sm btn-red">Delete</button>
@@ -90,62 +91,6 @@
                     <div class="txt-red w-semibold txt-12">No matching results</div>
                 </div>
             <?php endif; ?>
-        <?php elseif (isset($defaults)) : ?>
-            <!-- table -->
-            <div class="table admin_table col-12 m-left-20 m-right-20">
-                <div class="table_head">
-                    <div class="table_head_i col-lg-2">
-                        Name
-                    </div>
-                    <div class="table_head_i col-lg-1">
-                        Reg. number
-                    </div>
-                    <div class="table_head_i col-lg-2">
-                        Email
-                    </div>
-                    <div class="table_head_i col-lg-2">
-                        NIC
-                    </div>
-                    <div class="table_head_i col-lg-2">
-                        Contact Number
-                    </div>
-                    <div class="table_head_i col-lg-2">
-                        District/Town
-                    </div>
-                    <div class="table_head_i table_head_i_f col-lg-1">
-                        Actions
-                    </div>
-                </div>
-                <?php $res_count = count($defaults) < 3 ? count($defaults) : 3 ?>
-                <?php for ($x = 0; $x < $res_count; $x++) : ?>
-                    <!-- table record -->
-                    <div class="table_record">
-                        <div class="table_record_i col-lg-2">
-                            <?= $defaults[$x]->first_name . " " . $defaults[$x]->last_name ?>
-                        </div>
-                        <div class="table_record_i col-lg-1">
-                            <?= $defaults[$x]->id ?>
-                        </div>
-                        <div class="table_record_i col-lg-2">
-                            <?= $defaults[$x]->email ?>
-                        </div>
-                        <div class="table_record_i col-lg-2">
-                            <?= $defaults[$x]->nic ?>
-                        </div>
-                        <div class="table_record_i col-lg-2">
-                            <?= $defaults[$x]->telephone ?>
-                        </div>
-                        <div class="table_record_i col-lg-2">
-                            <?= $defaults[$x]->city." / ".$defaults[$x]->city ?>
-                        </div>
-                        <div class="table_record_i table_record_i_f col-lg-1">
-                            <button class="btn btn-sm btn-red">Delete</button>
-                        </div>
-                    </div>
-                    <!-- END : table record -->
-                <?php endfor; ?>
-            </div>
-            <!-- END:table -->
         <?php else : ?>
             <div class="col-12 txt-al-center">
                 <div class="txt-red w-semibold txt-12">Unknown error occured</div>
