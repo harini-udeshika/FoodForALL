@@ -107,4 +107,11 @@ class Admins extends Model
         $data = $this->query($query);
         return $data;
     }
+
+    public function delete_org($id)
+    {
+        $query = "delete from $this->table where gov_reg_no = :id";
+        $data['id'] = $id;
+        return $this->query($query, $data);
+    }
 }
