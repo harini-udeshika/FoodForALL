@@ -101,7 +101,7 @@
             </div>
         <?php endif?>
 
-        <?php if (Auth::getusertype() == 'areacoordinator'): ?>
+        <?php if (Auth::getusertype() == 'area_coordinator'): ?>
             <div class="nav-i">
                 <a href="./area_coordinator_home">Home</a>
             </div>
@@ -121,7 +121,7 @@
             </div>
             
             <div class="nav-i">
-                <a href="">About us</a>
+                <a href="about">About us</a>
             </div>
         <?php endif?>
 
@@ -146,7 +146,7 @@
             </div>
             
             <div class="nav-i">
-                <a href="">About us</a>
+                <a href="about">About us</a>
             </div>
         <?php endif?>
 
@@ -180,7 +180,7 @@ if (Auth::getusertype() == 'organization') {
     }
 }
 
-if (Auth::getusertype() == 'areacoordinator') {
+if (Auth::getusertype() == 'area_coordinator') {
     $areacoordinator = new AreaCoordinator();
     $data = $areacoordinator->where('email', Auth::getemail());
 
