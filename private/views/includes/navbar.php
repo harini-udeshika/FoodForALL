@@ -15,13 +15,13 @@
                 <a href="">Donate/Volunteer</a>
             </div> -->
             <div class="nav-i">
-                <a href="">Organizations</a>
+                <a href="login">Organizations</a>
             </div>
             <div class="nav-i">
-                <a href="./events">Events</a>
+                <a href="login">Events</a>
             </div>
             <div class="nav-i">
-                <a href="">About us</a>
+                <a href="about">About us</a>
             </div>
 
             <div class="nav-i">
@@ -42,7 +42,7 @@
                 <a href="./events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="">About us</a>
+                <a href="about">About us</a>
             </div>
 
 

@@ -4,13 +4,16 @@
 <?php $this->view('includes/submenu')?>
 
 <h1><span class="p">Food</span><span class="g">For</span><span class="p">ALL</span></h1>
-<p class="main">FoodForALL is a web platofrm that is making a difference in the lives of the less fortunate in Sri Lanka.
+<div class="big-card">
+<p class="main">FoodForALL is a web platform that is making a difference in the lives of the less fortunate in Sri Lanka.
     By creating a network of charities across the country, they are able to provide much-needed assistance to those who
     are struggling with food insecurity. With a mission to ensure that no one goes hungry, FoodForALL is working
     tirelessly to bring together resources and support to those in need. By joining forces with other organizations,
     they are able to make an even bigger impact and bring hope to communities that have been struggling. If you're
     looking to make a difference in the world, consider supporting FoodForALL in their mission to end hunger in Sri
     Lanka.</p>
+    <img src="./images/image.png">
+</div>    
 <div class="cards1">
     <div class="card1">
         <h2>Become a Donor</h2>
@@ -24,6 +27,7 @@
             for
             charity events.</p>
     </div>
+   
     <div class="card1">
         <h2>Why donate food?</h2>
         <p>Donating food during an economic crisis is critical to those in need and helps the community. By providing
