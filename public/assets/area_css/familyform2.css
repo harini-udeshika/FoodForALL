@@ -1,0 +1,43 @@
+.box1 i{
+    position: absolute;
+    /* right: 100px; */
+    visibility: hidden;
+}
+
+.box1 small{
+    position: absolute;
+    visibility: hidden;
+}
+
+.box1.success i.fa-check-circle{
+    visibility: visible;
+    color: #2ecc71;
+}
+
+.box1.error i.fa-exclamation-circle{
+    visibility: visible;
+    color: #e74c3c;
+}
+
+.box1.error small{
+    color: #e74c3c;
+    font-weight: 600;
+    visibility: visible;
+}
+
+.box1.success input{
+    border-color: #2ecc71;
+}
+
+.box1.error input{
+    border-color: #e74c3c;
+}
+
+.box1{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* .familyform{
+    text-align: center;
+} */

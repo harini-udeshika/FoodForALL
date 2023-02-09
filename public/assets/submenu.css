@@ -61,6 +61,7 @@
     font-size:0.8rem;
     font-weight: 600;
     transition: transform 0.5s;
+    color: #7681BF;
 }
 .sub-menu-link:hover span{
     transform: translateX(0.3rem);

@@ -421,14 +421,14 @@ input:hover {
     margin-bottom: 1rem;
 }
 
-.sub {
-    color: #7681BF;
+.sub1 {
+    color: #2E3561;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 3rem;
 }
 
 .content {
-    margin-top: 8rem;
+    margin-top: 3rem;
     margin-left: 5rem;
 }
 
@@ -792,8 +792,4 @@ table {
     border-radius: 1rem;
     border: 1px solid #98C03C;
 }
-
-
-/* .num2{
-    margin: 30px;
-} */
+1
