@@ -51,4 +51,33 @@ class Admin_search_users extends Controller
             $this->redirect('login');
         }
     }
+
+    public function delete($id = null)
+    {
+
+        if (Auth::isuser('admin')) {
+            $admin_model = new Admins();
+            $admin_model->change_table('user');
+
+            if (isset($_POST)) {
+                if (count($_POST) > 0) {
+                    $admin_model->delete($id);
+                    $this->redirect('Admin_search_users');
+                }
+            }
+
+            $row = $admin_model->where('id', $id);
+
+            if ($row != false) {
+                $this->view('admin.delete.user', [
+                    'row' => $row[0],
+                ]);
+            }
+            else{
+                $this->view('admin.delete.user');
+            }
+        } else {
+            $this->redirect('login');
+        }
+    }
 }

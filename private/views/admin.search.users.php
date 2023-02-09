@@ -28,7 +28,7 @@
 
         <!-- heading 2 -->
         <div class="heading-2 col-12"><?= $results['result_type'] != 'recent' ? 'Search Results' : 'Recent registered users'; ?></div>
-        <?php unset($results['result_type'])?>
+        <?php unset($results['result_type']) ?>
 
         <?php if (isset($results)) : ?>
             <?php if (count($results) > 0) : ?>
@@ -79,7 +79,9 @@
                                 <?= $result->city . " / " . $result->city ?>
                             </div>
                             <div class="table_record_i table_record_i_f col-lg-1">
-                                <button class="btn btn-sm btn-red">Delete</button>
+                                <a href="<?=ROOT?>/Admin_search_users/delete/<?= $result->id?>">
+                                    <button class="btn btn-sm btn-red">Delete</button>
+                                </a>
                             </div>
                         </div>
                         <!-- END : table record -->
