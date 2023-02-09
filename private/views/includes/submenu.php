@@ -98,7 +98,7 @@ if ($data->profile_pic) {
 
 
 <!-- Areacoordinator's submenue -->
-<?php if (Auth::getusertype() == 'areacoordinator'): ?>
+<?php if (Auth::getusertype() == 'area_coordinator'): ?>
 <?php
 $areacoordinator = new AreaCoordinator();
 $data = $areacoordinator->where('email', Auth::getemail());
