@@ -1,0 +1,128 @@
+.top {
+    width: 90%;
+    height: 10rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    
+    
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.search {
+    width: 60rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.search form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+}
+
+.search input {
+    width: 100%;
+    height: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #d3d3d3;
+    padding: 0.5rem;
+}
+
+.search button {
+    position: relative;
+    right: 3rem;
+    border: none;
+    background-color: #fff;
+    color: #9a9a9a;
+}
+
+.shop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 20rem;
+    margin: 2rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50rem;
+
+}
+
+.categories {
+    width: 15rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border: 0.05rem solid #7681BF;
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.range {
+    color: #7681BF;
+    font-size: small;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0.5rem;
+}
+
+.item {
+    margin: 1rem;
+    height: 18rem;
+    width: 15rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.item img {
+    max-height: 40%;
+    border-radius: 0.5rem;
+}
+
+.buttons {
+    display: inline;
+}
+
+.cart,
+.view {
+    height: 2rem;
+    width: 6rem;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.view {
+    background-color: #7FB432;
+    color: #fff;
+}
+
+.radio {
+    font-size: small;
+    color: #696868;
+}

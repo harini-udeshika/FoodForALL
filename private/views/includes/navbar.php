@@ -101,7 +101,7 @@
             </div>
         <?php endif?>
 
-        <?php if (Auth::getusertype() == 'areacoordinator'): ?>
+        <?php if (Auth::getusertype() == 'area_coordinator'): ?>
             <div class="nav-i">
                 <a href="./area_coordinator_home">Home</a>
             </div>
@@ -121,7 +121,7 @@
             </div>
             
             <div class="nav-i">
-                <a href="">About us</a>
+                <a href="about">About us</a>
             </div>
         <?php endif?>
 
@@ -142,7 +142,7 @@
             </div>
             </div>
             <div class="nav-i">
-                <a href="">My Events</a>
+                <a href="my_events">My Events</a>
             </div>
             
             <div class="nav-i">

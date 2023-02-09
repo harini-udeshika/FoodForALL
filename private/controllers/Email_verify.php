@@ -13,7 +13,7 @@ class Email_verify extends Controller
         $verify = new Verify();
         $mail = new Mail();
         $data = $user->where('id', Auth::getid());
-        print_r($data);
+        //print_r($data);
         if (($_SERVER['REQUEST_METHOD'] == 'GET') && (!Auth::check_verified())) {
 
             $arr = $user->code();
