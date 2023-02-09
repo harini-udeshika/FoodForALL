@@ -20,7 +20,11 @@ class Eventpage extends Controller
             $arr = ['user_id' => Auth::getid()];
             $types = $v_req->query($query, $arr);
            // print_r ($types);
+
+
             $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0],'types'=>$types,'closing_date'=>$closing_date[0]->cd]);
+
+
         }
 
         else if (isset($_GET['type'])) {

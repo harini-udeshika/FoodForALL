@@ -2,7 +2,7 @@
 
         <div class="left">
             <div class="nav-i-logo">
-                <img src="./images/logo.png" alt="" class="nav-logo">
+                <img src="<?=ROOT?>/images/logo.png" alt="" class="nav-logo">
             </div>
         </div>
         <div class="right">
@@ -57,25 +57,25 @@
         <?php endif?>
         <?php if (Auth::getusertype() == 'admin'): ?>
             <div class="nav-i">
-                <a href="homepage">Home</a>
+                <a href="<?=ROOT?>/homepage">Home</a>
             </div>
             <!-- <div class="nav-i">
                 <a href="">Donate/Volunteer</a>
             </div> -->
             <div class="nav-i">
-                <a href="admin_events">Events</a>
+                <a href="<?=ROOT?>/admin_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="Add_areacoordinator">Add Area Coordinators</a>
+                <a href="<?=ROOT?>/Add_areacoordinator">Add Area Coordinators</a>
             </div>
             <div class="nav-i">
-                <a href="Admin_search_org">Organizations</a>
+                <a href="<?=ROOT?>/Admin_search_org">Organizations</a>
             </div>
             <div class="nav-i">
                 <a href="">Area Coordinators</a>
             </div>
             <div class="nav-i">
-                <a href="Admin_search_users">Users</a>
+                <a href="<?=ROOT?>/Admin_search_users">Users</a>
             </div>
         <?php endif?>
         
@@ -91,7 +91,7 @@
                 <a href="./shop_org">Shop</a>
             </div>
             <div class="nav-i">
-                <a href="./Add_event">Events</a>
+                <a href="./Org_admin_events">Events</a>
             </div>
             <div class="nav-i">
                 <a href="./add_managers">Managers</a>
@@ -104,7 +104,7 @@
             <div class="nav-i">
             <?php
 
-$image = "./images/user_icon.png";
+$image = ROOT.'/images/user_icon.png';
 if (Auth::getusertype() == 'reg_user') {
     $user = new User();
     $data = $user->where('id', Auth::getid());

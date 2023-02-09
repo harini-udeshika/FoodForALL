@@ -9,6 +9,8 @@
 
 .event-image {
     width: 100%;
+    /* height: 50%; */
+    /* max-height: 150px; */
     border-radius: 5px;
 }
 
@@ -34,6 +36,6 @@
 }
 .event_scroll{
     /* background-color: red; */
-    height: 400px;
+    height: 450px;
     overflow: auto; 
 }

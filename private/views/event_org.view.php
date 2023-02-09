@@ -5,10 +5,17 @@
 <?php $this->view('includes/submenu') ?>
 
 <div class="body-container">
-    <div class="heading-1">Event Name</div>
+    <div class="heading-1">Event Name : <?php echo $event_details->name ?></div>
     <div class="container">
         <div class="heading-2 col-lg-2 p-left-25 p-top-7">Event Status : </div>
-        <div class="card col-lg-2 heading-3 height-30px" style="text-align: center; color:red;">Ongoing</div>
+        <div class="card col-lg-2 heading-3 height-30px" style="text-align: center; color:red;">
+        <?php 
+            if($event_details->date < date("Y-m-d")){
+                echo "Completed";
+            }else{
+                echo "Ongoing";
+            }
+        ?></div>
         <div class="blank col-lg-8"></div>
         <!-- <div class="heading-2 col-lg-2 p-left-25 p-top-7" style="border: 1px solid red;"></div> -->
     </div>
@@ -19,33 +26,33 @@
             <div class="row">
                 <div class="heading-3 col-lg-12 p-left-20 p-top-40">Event Manager :</div>
                 <div class="blank col-lg-3"></div>
-                <div class="card-green col-lg-6 height-35px heading-event2" style="text-align: center; margin-top:-20px;">Manager Name</div>
+                <div class="card-green col-lg-6 height-35px heading-event2" style="text-align: center; margin-top:-20px;"><?php echo $em_details->full_name ?></div>
                 <div class="blank col-lg-3"></div>
                 <div class="heading-3 col-lg-12 p-left-20 p-top-15 p-bottom-20">Event Details</div>
 
                 <div class="blank col-lg-1"></div>
                 <div class="heading-4 col-lg-4 txt-purple p-bottom-1 p-top-5">Location Address</div>
-                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: Adress</div>
+                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: <?php echo $event_details->location ?></div>
                 <div class="blank col-lg-1"></div><br>
 
                 <div class="heading-4 col-lg-4 txt-purple p-bottom-1 p-top-5">Date</div>
-                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: xx/xx/xxxx</div>
+                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: <?php echo $event_details->date ?></div>
                 <div class="blank col-lg-1"></div>
 
                 <div class="blank col-lg-1"></div>
                 <div class="heading-4 col-lg-4 txt-purple p-bottom-1 p-top-5">Total Volunteers</div>
-                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: 00</div>
+                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: <?php echo $event_details->no_of_volunteers ?></div>
                 <div class="blank col-lg-1"></div>
 
                 <div class="blank col-lg-1"></div>
                 <div class="heading-4 col-lg-4 txt-purple p-bottom-1 p-top-5">Total Donations</div>
-                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: Rs. 00.00</div>
+                <div class="heading-4 col-lg-6 p-bottom-1 p-top-1">: Rs. <?php echo $event_details->total_amount ?></div>
                 <div class="blank col-lg-1"></div>
 
-                <div class="heading-3 col-lg-12 p-left-20 p-top-15 p-bottom-20">Event Details</div>
+                <div class="heading-3 col-lg-12 p-left-20 p-top-15 p-bottom-20">Event Description</div>
 
                 <div class="blank col-lg-1"></div>
-                <div class="card-simple col-lg-9 p-bottom-1 p-top-1 height-120px" style="border: 2px solid black;"></div>
+                <div class="card-simple col-lg-9 p-bottom-1 p-top-1 height-120px" style="border: 2px solid black; text-align:left;"><?php echo $event_details->description ?></div>
                 <div class="blank col-lg-2"></div>
 
 

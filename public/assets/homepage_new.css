@@ -8,6 +8,7 @@
     background-repeat: no-repeat;
     background-size:100% 35rem ;
 }
+
 /* ----------gallery------------------------- */
 
   .grid-container {
@@ -73,6 +74,7 @@
     font-style: italic;
   }
   
+
 .description {
     width: 50%;
     display: flex;
@@ -119,9 +121,11 @@
     margin-top: 8rem;
     margin-left: 5rem;
 }
+
 .about_us-sub{
     color: #7FB432;
 }
+
 .donate {
     height: 3rem;
     /* width:auto; */
@@ -240,7 +244,9 @@ hr {
     margin-bottom: 2rem;
 }
 .about_us-images{
+
     width: 50rem;
+
 }
 .dark{
     color: #000;
@@ -324,6 +330,7 @@ hr {
     text-align:left;
     width: 90%;
 }
+
 .img>img {
     width: 88%;
     /* max-height: 40%;  */
@@ -340,6 +347,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 5px, rgba(0, 0, 0, 0.22) 0px 5px 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 .section span{
     margin-top: 0.5rem;

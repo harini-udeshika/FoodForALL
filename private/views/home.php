@@ -16,6 +16,7 @@
                 <p>For</p><small>ALL</small>
             </div>
             <p class="sub">Join with us to donate and volunteer.<br>Let's end the hunger soon!</p>
+
             <?php if(Auth::logged_in()){
                 $path='events';
             }else{
@@ -24,10 +25,12 @@
             <button class="donate"><a href="<?=$path?>">Donate/Volunteer</a> </button>
             
           
+
         </div>
     </div>
     <div class="image_section">
         <img src="./images/image.png" alt="" class="image">
+
     </div>
 </div>
 <div class="sub_section">
@@ -37,6 +40,35 @@
             quasi maxime
             rerum optio.Lorem
             rerum optio.
+        </p>
+        <button class="readmore">Read more...</button>
+    </div>
+    <div class="section">
+        <p class="h">Why donate food?</p>
+        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
+            quasi maxime
+            rerum optio.Lorem
+            rerum optio.
+        </p>
+        <button class="readmore">Read more...</button>
+    </div>
+    <div class="section">
+        <p class="h">How donation helps ?</p>
+        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
+            quasi maxime
+            rerum optio.Lorem
+            rerum optio.
+        </p>
+        <button class="readmore">Read more...</button>
+    </div>
+    <div class="section">
+        <p class="h">Become a volunteer !</p>
+
+        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
+            quasi maxime
+            rerum optio.Lorem
+            rerum optio.
+
         </p>
         <button class="readmore">Read more...</button>
     </div>
@@ -136,6 +168,7 @@
                 $path='signup';
             }?>
             <a href="<?=$path?>"><button class="donate">Donate now</button></a><a href="about"><button class="read">Read More</button></a>
+
         </div>
 
     </div>
@@ -185,6 +218,7 @@
     <div class="ngo">
         
         <div class="row">
+
     <?php if ($pics): ?>
     <?php $i = 0;?>
     <?php foreach ($pics as $value): ?>
@@ -203,6 +237,7 @@
     </div>
 
 </div>
+
 
 <div class="final">
     <hr>

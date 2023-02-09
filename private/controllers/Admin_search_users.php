@@ -11,8 +11,10 @@ class Admin_search_users extends Controller
         if (Auth::isuser('admin')) {
             $admin_model = new Admins();
             // $defaults=array();
-            $defaults = $admin_model->select_users_bydate();
-            $user->view('admin.search.users', ['defaults' => $defaults]);
+            $results = $admin_model->select_users_bydate();
+            $results['result_type'] = 'recent';
+
+            $user->view('admin.search.users', ['results' => $results]);
         } else {
             $this->redirect('login');
         }
@@ -32,8 +34,11 @@ class Admin_search_users extends Controller
 
                     if ($results == false) {
                         $results = array();
+                        $results['result_type'] = 'search_result';
+
                         $new_user->view('admin.search.users', ['results' => $results]);
                     } else {
+                        $results['result_type'] = 'search_result';
                         $new_user->view('admin.search.users', ['results' => $results]);
                     }
                 } else {

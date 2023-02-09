@@ -429,7 +429,7 @@
             <!-- row end---------------------------------------------------- -->
         </div>
         <center>
-            <a href="events.html"><button class="detail-btn">
+            <a href="./org_admin_events"><button class="detail-btn">
                     View More</button></a>
 </div><br><br><br>
 
@@ -687,7 +687,7 @@
             <!-- row end---------------------------------------------------- -->
         </div>
         <center>
-            <a href="events.html"><button class="detail-btn">
+            <a href="./org_admin_events"><button class="detail-btn">
                     View More</button></a>
 </div>
 
