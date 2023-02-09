@@ -38,12 +38,6 @@
                             <input type="text" value="<?php echo $rows->name?>" class="small"
                                 name="name" >
                         </div>
-
-                        <div class="f2">
-                            <label for="username">User name</label>
-                            <input type="text" value="<?php echo $rows->username?>" class="small" name="username" >
-
-                        </div>
                     </div>
                     <div class="f3">
                         <label for="NIC">NIC</label>
