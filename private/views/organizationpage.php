@@ -9,7 +9,7 @@
 
 <div class="shop">
     <p><?=ucfirst($org->name)?></p>
-    <button class="shop-button"><i class="fa-solid fa-cart-shopping fa-xl"></i> Shop here!</button>
+    <a href="<?=ROOT?>/shop?id=<?=$org->gov_reg_no?>"><button class="shop-button"><i class="fa-solid fa-cart-shopping fa-xl"></i> Shop here!</button></a>
 </div>
 <div class="intro">
     <div class="intro-2">
