@@ -31,6 +31,7 @@
                  </div>
                  <!-- row segment for comment -->
                  <div class="row-flex jf-center p-top-5 p-bottom-5">
+                    
                      <div class="comment-txt txt-8 p-top-10 p-bottom-5 height-100px">
                          <?php echo $comment_data[$i]->comment; ?>
                      </div>

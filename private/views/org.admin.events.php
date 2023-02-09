@@ -178,6 +178,7 @@
 
                             <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div>
 
+                            
                             <div class="row-flex jf-center">
                             <a href="<?=ROOT?>/event_org?id=<?=$past[$i]->event_id?>">
                                 <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>

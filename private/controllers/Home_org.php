@@ -7,6 +7,7 @@ class Home_org extends Controller
         $data = $data[0];
 
 
+        
         $event = new Event();
         
         $org_reg = $_SESSION['USER']->gov_reg_no;
