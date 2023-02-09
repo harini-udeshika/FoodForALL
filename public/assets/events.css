@@ -557,7 +557,15 @@ h4{
     color: #979797;
     font-size: small;
 }
-
+.admin{
+    background-color: #ececec;
+    min-width: 70%;
+    height:1.2rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    text-align: left;
+   
+}
 .review-left img {
     width: 50%;
     border-radius: 3rem;
@@ -656,9 +664,12 @@ h4{
     padding: 0.1rem;
     border-radius: 0.7rem;
 }
-.stars span {
+.bright {
     color: #ffc700;
    
+}
+.dull{
+    color: #dfe1da;
 }
 .hide{
     visibility: hidden;

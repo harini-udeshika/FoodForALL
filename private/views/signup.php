@@ -10,7 +10,7 @@ print_r($errors);
             <img src="./images/logo.png" alt="" class="image-signup">
         </div>
         
-        <div class="signup-form">
+        <div class="">
             <form action="" method="POST" id="form" class="signup-form">
                 <div class="name">
                     <div class="f">

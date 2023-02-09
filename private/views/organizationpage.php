@@ -277,13 +277,19 @@
             <img src="<?=$comment_data[$i]->profile_pic?>" alt="">
             <p><?=$comment_data[$i]->first_name?></p>
             <div class="stars">
-                <?php for ($j = 0; $j < $comment_data[$i]->star_rate; $j++): ?>
-                <span>★</span>
+                <?php for ($j = 0; $j < 5; $j++): ?>
+                <?php if($j<$comment_data[$i]->star_rate):?>
+                <span class="bright">★</span>
+                <?php endif;?>
+                <?php if($j>=$comment_data[$i]->star_rate):?>
+                <span class="dull">★</span>
+                <?php endif;?>
                 <?php endfor?>
             </div>
         </div>
         <div class="review-right">
             <p><?=$comment_data[$i]->comment?></p>
+            <p class="admin">&nbsp;<i class="fa-solid fa-comment-dots"></i><?=$comment_data[$i]->reply?></p>
             <p class='date-time'><?=substr($comment_data[$i]->date_time, 0, -8)?>
                 &emsp;<?=substr($comment_data[$i]->date_time, 10, 6)?></p>
             <div class="rating">
