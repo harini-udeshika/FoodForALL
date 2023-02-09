@@ -18,10 +18,12 @@
             <p class="sub">Join with us to donate and volunteer.<br>Let's end the hunger soon!</p>
 
             <?php if(Auth::logged_in()){
+
                 $path='events';
             }else{
                 $path='signup';
                 }?>
+
             <button class="donate"><a href="<?=$path?>">Donate/Volunteer</a> </button>
             
           

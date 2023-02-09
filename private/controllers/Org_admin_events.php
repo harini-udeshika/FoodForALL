@@ -13,6 +13,7 @@ class Org_admin_events extends Controller
         // echo "<pre>";
         // echo "pending";
         // print_r($pending);
+        
 
         $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
         $arr = ['id'=>$org_reg];
