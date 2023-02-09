@@ -1,6 +1,7 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/home_org.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/autoload.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/org.admin.events.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/event_page.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
@@ -181,252 +182,72 @@
                 height: 3px;
                 background: black;">
 
-<div class="center-box-border" style="height: 800px; width: 1100px;">
+<div class="center-box-border" style="height: 540px; width: 1100px; padding-top:20px;">
     <center>
         <div class="event-container">
-            <div class="event-row">
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
 
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
+            <div class="grid-9">
 
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
+                <?php
+                $i = 0;
+                if ($ongoin) {
+                    $count = sizeof($ongoin);
+                    while ($count > 0) { ?>
+                        <!-- EVENT-ONGOING -->
+                        <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
+
+                            <div class="heading-event txt-al-center m-top-4 m-bottom-4"><?php echo $ongoin[$i]->name ?></div>
+
+                            <img class="event-image m-bottom-4 height-50" src="<?= ROOT ?>/<?php echo $ongoin[$i]->thumbnail_pic ?>" alt="" srcset="">
+
+                            <div class="event-date txt-al-center txt-08">Event Date - <?php echo $ongoin[$i]->date ?></div>
+
+                            <div class="m-top-10">
+                                <div class="row-flex jf-btwn">
+                                    <div class="txt-06 w-semibold txt-purple arrow-icon">Donations</div>
+
+                                    <div class="row-flex">
+                                        <img class="width-25px height-25px" src="<?= ROOT ?>/images/Icons/ArrowLog.png" alt="" srcset="">
+                                        <div class="txt-07 w-semibold txt-purple arrow-icon">Rs.<?php echo $ongoin[$i]->total_amount ?></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-back width-100">
+                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                </div>
                             </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
 
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
+                            <div class="m-top-10">
+                                <div class="row-flex jf-btwn">
+                                    <div class="txt-06 w-semibold txt-purple arrow-icon">Volunteers</div>
+                                    <div class="row-flex">
+                                        <img class="width-25px height-25px" src="<?= ROOT ?>/images/Icons/ArrowLog.png" alt="" srcset="">
+                                        <div class="txt-07 w-semibold txt-purple arrow-icon"><?php echo $ongoin[$i]->no_of_volunteers ?></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-back width-100">
+                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                </div>
                             </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
 
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- end ------------------------------------------------- -->
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
+                            <div class="row-flex jf-center">
+                                <a href="<?= ROOT ?>/event_org?id=<?= $ongoin[$i]->event_id ?>">
+                                    <button class="btn btn-green btn-xsm m-top-30">View Details</button>
+                                </a>
                             </div>
-                            <span>50%</span>
                         </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
+                        <!--end of EVENT-ONGOING -->
+                    <?php $count--;
+                        $i++;
+                    }
+                } else { ?>
+                    <div class="heading-event txt-al-center m-top-5 m-bottom-5">No Ongoing Events</div>
+                <?php }
+                ?>
 
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
-
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
             </div>
-            <!-- row end---------------------------------------------------- -->
 
-            <div class="event-row">
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- end ------------------------------------------------- -->
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
-
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
-            </div>
-            <!-- row end---------------------------------------------------- -->
         </div>
         <center>
             <a href="./org_admin_events"><button class="detail-btn">
@@ -439,252 +260,45 @@
                 background: black;">
 
 
-<div class="center-box-border" style="height: 800px; width: 1100px;">
+<div class="center-box-border" style="height: 520px; width: 1100px; padding-top:20px;">
     <center>
         <div class="event-container">
-            <div class="event-row">
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
+            <div class="grid-9">
 
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
+                <?php
+                $i = 0;
+                if ($past) {
+                    $count = sizeof($past);
+                    while ($count > 0) { ?>
+                        <!-- EVENT-COMPLETED -->
+                        <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
 
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
+                            <div class="heading-event txt-al-center m-top-5 m-bottom-5"><?php echo $past[$i]->name ?></div>
+
+                            <img class="event-image m-bottom-4 height-50" src="<?= ROOT ?>/<?php echo $past[$i]->thumbnail_pic ?>" alt="" srcset="">
+
+                            <div class="event-date txt-al-center txt-08">Event Date - <?php echo $past[$i]->date ?></div>
+
+                            <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div>
+
+                            <div class="row-flex jf-center">
+                                <a href="<?= ROOT ?>/event_org?id=<?= $past[$i]->event_id ?>">
+                                    <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
+                                </a>
                             </div>
-                            <span>50%</span>
                         </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
+                        <!--end of EVENT-COMPLETED -->
 
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
+                    <?php $count--;
+                        $i++;
+                    }
+                } else { ?>
+                    <div class="heading-event txt-al-center m-top-5 m-bottom-5">No Completed Events</div>
+                <?php }
+                ?>
 
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- end ------------------------------------------------- -->
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
 
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
-
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
             </div>
-            <!-- row end---------------------------------------------------- -->
-
-            <div class="event-row">
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- end ------------------------------------------------- -->
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
-
-                <div class="event">
-                    <div class="event-top">
-                        <p>Event name</p>
-                        <div class="event-image">
-                        </div>
-                        <p class="date">12/13/2022</p>
-                    </div>
-
-                    <div class="event-details">
-                        <div class="donations">
-                            <p>Donations</p>
-                            <p><i class="fa-solid fa-sack-dollar"></i> 50000 LKR</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <div class="volunteers">
-                            <p>Volunteers </p>
-                            <p><i class="fa-solid fa-people-group"></i> 20 people</p>
-                        </div>
-
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                    </div>
-
-                    <div class="event-button">
-                        <button>Visit Page</button>
-                        <!-- <button>Volunteer</button> -->
-                    </div>
-                </div>
-                <!-- event end---------------------------------------------------- -->
-            </div>
-            <!-- row end---------------------------------------------------- -->
         </div>
         <center>
             <a href="./org_admin_events"><button class="detail-btn">

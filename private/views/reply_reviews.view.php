@@ -40,7 +40,7 @@
                  <form method="post" action="<?=ROOT?>/reply_reviews?id=<?=$comment_data[$i]->comment_id?>">
                      <div class="txt-11 w-semibold p-top-15">Reply</div>
                      <div class="row-flex p-top-12 p-bottom-12">
-                         <textarea type="text" name="reply" id="" rows="4" cols="50" class="input-reply txt-12" style="width:100%; text-align:left;">
+                         <textarea type="text" name="reply" id="" class="input-reply txt-12" style="width:100%; text-align:left;">
                          <?php if (isset($comment_data[$i]->reply)) {
                                 echo $comment_data[$i]->reply;
                             } ?>

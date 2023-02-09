@@ -63,7 +63,9 @@
                             <p class='item-text-3' style="font-weight: bold;">Stock : <?php echo $stock; ?></p>
                             </p><br><br><br>
                             <button class="btn-2"><i class="fa-regular fa-trash-can"></i></button>
+                            <a href="./org_admin_event_items">
                             <button class="btn-3" style="right: 160px;">edit</button>
+                            </a>
                         </div>
                     <?php
                         $count = $count - 1;

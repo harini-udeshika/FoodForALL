@@ -97,7 +97,7 @@
                 <a href="./add_managers">Managers</a>
             </div>
             <div class="nav-i">
-                <a href="">Packages</a>
+                <a href="./Org_packages">Packages</a>
             </div>
         <?php endif?>
 

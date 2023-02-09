@@ -38,7 +38,7 @@
                     $count = sizeof($pending);
                     while ($count > 0) { ?>
                         <!-- EVENT-PENDING -->
-                        <div class="card-simple event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
+                        <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
 
                             <div class="heading-event txt-al-center m-top-5 m-bottom-5"><?php echo $pending[$i]->name ?></div>
 
@@ -90,7 +90,7 @@
                     $count = sizeof($ongoin);
                     while ($count > 0) { ?>
                         <!-- EVENT-ONGOING -->
-                        <div class="card-simple event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
+                        <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
 
                             <div class="heading-event txt-al-center m-top-4 m-bottom-4"><?php echo $ongoin[$i]->name ?></div>
 
@@ -168,7 +168,7 @@
                     $count = sizeof($past);
                     while ($count > 0) { ?>
                         <!-- EVENT-COMPLETED -->
-                        <div class="card-simple event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
+                        <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
 
                             <div class="heading-event txt-al-center m-top-5 m-bottom-5"><?php echo $past[$i]->name ?></div>
 
