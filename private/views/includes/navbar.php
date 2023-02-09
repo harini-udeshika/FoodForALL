@@ -129,6 +129,18 @@
             <div class="nav-i">
                 <a href="./event_manager_home">Home</a>
             </div>
+
+            <div class="nav-i">    
+
+                <div class="dropdown">
+                <a onclick="myFunction()" class="dropbtn">Doonee details</a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a class="udrop" href="./familytable_EM">Families' Details</a>
+                    <a class="udrop" href="./eldertable_EM">Elders' Home Details</a>
+                    <a class="udrop" href="./childrentable_EM">Children's Home Details</a>
+                </div>
+            </div>
+            </div>
             <div class="nav-i">
                 <a href="">My Events</a>
             </div>
