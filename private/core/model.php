@@ -127,6 +127,21 @@ class Model extends Database
         return $this->query($query, $data);
     }
 
+    public function update_U_email($email, $data)
+    {
+
+        $str = "";
+        foreach ($data as $key => $value) {
+            $str .= $key . "=:" . $key . ",";
+        }
+        $str = trim($str, ",");
+        $data['email'] = $email;
+
+        $query = "update $this->table set $str where email=:email";
+        // $query="insert into $this->table($columns) values(:$values)";
+        return $this->query($query, $data);
+    }
+
     public function delete($id)
     {
 

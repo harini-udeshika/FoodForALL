@@ -1,0 +1,73 @@
+.center {
+    padding-top: 40px;
+    text-align: center;
+}
+
+.containor2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.familydetailform{
+    width: 900px;;
+    height: auto;
+    margin: 10px;
+    background-color: #F2F3F9;
+    border-radius: 50px;
+    background-image: url('./backgroundform.png');
+    background-size: cover;
+    border-radius: 50px;
+    padding: 20px;
+    right: 10px;
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom:200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+label{
+    font-weight:bold;
+    font-family: "Inter";
+}
+
+
+.p1{
+    color: #000;
+}
+
+/* .box1 i{
+    position: absolute;
+    top: 140px;
+    right: 10px;
+} */
+
+.fillingbox{
+    height: 10px;
+    border-radius: 15px;
+}
+
+.filling{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.para{
+    font-weight: bold;
+    font-family: "Inter";
+}
+/* .children{
+    display:none;
+} */
+
+.coor{
+    padding-top: 30px;
+    font-size: medium;
+}
+
+.form-footer{
+    color: white;
+    margin-top: 10px;
+}

@@ -37,9 +37,11 @@ if (file_exists($rows->profile_pic)) {
 <div class="certificate_section" id="certificates">
     <div class="heading_certificates">
         <p>Volunteering Certificates</p>
+        <button>Add +</button>
     </div>
 
     <div class="certificates">
+        
         <div class="certificates_row">
             <div class="certificate">
                 <div class="image">
@@ -124,6 +126,7 @@ $i = 0;?>
         <tr class="table_headings">
             <th>Date</th>
             <th>Organization</th>
+            <th>Event</th>
             <th>Amount</th>
         </tr>
 <?php
@@ -136,7 +139,7 @@ $i = 0;?>
 
             <td><?=substr($donor_data[$i]->date_time, 0, -8)?></td>
             <td><?=$d_org_name[$i]->name?></td>
-
+            <td><?=$d_org_name[$i]->e_name?></td>
             <td><?=$donor_data[$i]->amount?></td>
 
         </tr>

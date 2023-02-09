@@ -6,6 +6,7 @@ class Current_password extends Controller
         $user=new User();
         $data = $user->where('id', Auth::getid());
         $data = $data[0];
+        $error = false;
         if($_POST){
             $password_entered = $_POST['password'];
             $password_hash=$data->password_hash;
@@ -13,10 +14,10 @@ class Current_password extends Controller
                 $this->redirect('change_password');
             }
             else{
-                echo ("Incorrect password");
+               $error=true;
             }
         }
 
-        $this->view('current_password',['rows'=>$data]);
+        $this->view('current_password',['rows'=>$data,'error'=>$error]);
     }
 }

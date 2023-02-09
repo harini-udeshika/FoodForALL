@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+body{
+    font-family: 'Inter', sans-serif;
+}
+.attendenceB{
+    padding-left: 150px;
+    padding-right: 70px;
+    padding-top: 232px;
+    padding-bottom:200px ;
+    float: left;
+}
+
+.attendencecard{
+    height: auto;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    /* margin-left: 25%; */
+    background-image: url("../images/bg2.png");
+    background-size: cover;
+    
+}
+
+
+
+.attendenceTitle{
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    color: #000000;
+    /* padding-left: 2%; */
+    padding-bottom: 3%;
+    /* float: left; */
+    
+}
+
+.attendencesearch{
+    width: 70%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius: 15px;
+    border: solid #7a7a7a;
+    margin-top: 7%;
+    margin-left: 14%;
+    padding: 2%;
+    font-size: 15px;
+}
+
+.or{
+    text-align: center;
+    color:#7a7a7a ;
+}
+
+.scanqr{
+    width: 20%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    background-color: #000000;
+    color: #FFFFFF;
+    margin-left: 40%;
+    margin-bottom: 3%;
+    border-radius: 5px;
+}
+
+.qrbutton{
+    padding-bottom: 3%;
+    padding-top: 5%;
+}
+
+.subsearch{
+    width: 25%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    padding-left: 3%;
+    border-radius: 5px;
+    margin-left: 15%;
+    margin-bottom: 12%;
+    margin-top: 5%;
+    border:solid #7a7a7a;
+    color: #7a7a7a;
+}
+
+#back{
+    width: 20%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    border-radius: 8px;
+    margin-left: 10%;
+    margin-right: 40%;
+    margin-bottom: 3%;
+    font-weight: 700;
+    background-color: #DADADA;
+    border: none;
+}
+
+#conform{
+    width: 20%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    border-radius: 8px;
+    margin-bottom: 3%;
+    font-weight: 700;
+    background-color:#7FB432;
+    color: #FFFFFF;
+    border: none;
+}
+
+.lastbutton{
+    margin-bottom: 5%;
+}

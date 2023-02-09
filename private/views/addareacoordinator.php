@@ -767,4 +767,4 @@
     </script>
 </body>
 
-</html>
+<?php $this->view('includes/footer') ?>

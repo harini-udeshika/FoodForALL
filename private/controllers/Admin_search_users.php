@@ -11,8 +11,10 @@ class Admin_search_users extends Controller
         if (Auth::isuser('admin')) {
             $admin_model = new Admins();
             // $defaults=array();
-            $defaults = $admin_model->select_users_bydate();
-            $user->view('admin.search.users', ['defaults' => $defaults]);
+            $results = $admin_model->select_users_bydate();
+            $results['result_type'] = 'recent';
+
+            $user->view('admin.search.users', ['results' => $results]);
         } else {
             $this->redirect('login');
         }
@@ -32,8 +34,11 @@ class Admin_search_users extends Controller
 
                     if ($results == false) {
                         $results = array();
+                        $results['result_type'] = 'search_result';
+
                         $new_user->view('admin.search.users', ['results' => $results]);
                     } else {
+                        $results['result_type'] = 'search_result';
                         $new_user->view('admin.search.users', ['results' => $results]);
                     }
                 } else {
@@ -41,6 +46,35 @@ class Admin_search_users extends Controller
                 }
             } else {
                 $new_user->view('admin.search.users');
+            }
+        } else {
+            $this->redirect('login');
+        }
+    }
+
+    public function delete($id = null)
+    {
+
+        if (Auth::isuser('admin')) {
+            $admin_model = new Admins();
+            $admin_model->change_table('user');
+
+            if (isset($_POST)) {
+                if (count($_POST) > 0) {
+                    $admin_model->delete($id);
+                    $this->redirect('Admin_search_users');
+                }
+            }
+
+            $row = $admin_model->where('id', $id);
+
+            if ($row != false) {
+                $this->view('admin.delete.user', [
+                    'row' => $row[0],
+                ]);
+            }
+            else{
+                $this->view('admin.delete.user');
             }
         } else {
             $this->redirect('login');

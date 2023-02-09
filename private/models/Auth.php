@@ -49,5 +49,42 @@ class Auth{
         }
         return false;
     }
+
+    public static function area_user(){
+        //code
+        if(isset($_SESSION['USER'])){
+            return $_SESSION['USER']->name;
+        }
+        return false;
+    }
+
+    public static function event_user(){
+        //code
+        if(isset($_SESSION['USER'])){
+            return $_SESSION['USER']->full_name;
+        }
+        return false;
+    }
+
+    public static function time(){
+        //code
+        if(isset($_SESSION['USER'])){
+            $morning=" Morning";
+            $afternoon=" Afternoon";
+            $evening=" Evening";
+            date_default_timezone_set('Asia/Colombo');
+            if(date("H")>=0&&date("H")<12){
+                return $morning;
+            }
+            elseif(date("H")>=12&&date("H")<18){
+                return $afternoon;
+            }
+            else{
+                return $evening ;
+            }
+            
+        }
+        return false;
+    }
 }
 
