@@ -30,3 +30,4 @@
         </form>
 
     </div>
+<script src="<?=ROOT?>/assets/change_pic.js"></script>

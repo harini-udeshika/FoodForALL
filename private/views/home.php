@@ -16,10 +16,14 @@
                 <p>For</p><small>ALL</small>
             </div>
             <p class="sub">Join with us to donate and volunteer.<br>Let's end the hunger soon!</p>
-            <?php if(Auth::logged_in()):?>
-            <button class="donate"><a href="./events">Donate/Volunteer</a> </button>
-            <?php endif;?>
-            <button class="donate"><a href="./signup">Donate/Volunteer</a> </button>
+            <?php if(Auth::logged_in()){
+                $path='events';
+            }else{
+                $path='signup';
+                }?>
+            <button class="donate"><a href="<?=$path?>">Donate/Volunteer</a> </button>
+            
+          
         </div>
     </div>
     <div class="image_section">

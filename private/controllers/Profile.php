@@ -45,7 +45,7 @@ class Profile extends Controller
 
         ];
         $org_name = $org->query($query, $arr);
-        $query = "SELECT organization.name
+        $query = "SELECT organization.name, event.name as e_name
         FROM organization
         INNER JOIN event ON event.org_gov_reg_no=organization.gov_reg_no
         INNER JOIN donate ON donate.event_id=event.event_id where donate.donor_id= :v_id";
@@ -54,7 +54,7 @@ class Profile extends Controller
 
         ];
         $d_org_name = $org->query($query, $arr);
-      //  print_r($org_name);
+        // print_r($d_org_name);
         // print_r($tot_events[0]->count);
 
             $this->view('profile', ['rows' => $data, 'event_data' => $event_data, 'donor_data' => $donor_data,'tot_amount'=>$tot_amount,'tot_events'=>$tot_events,'org_name'=>$org_name,'d_org_name'=>$d_org_name]);
