@@ -16,7 +16,7 @@
                         </div>   
                            
                         <?php if(!$is_verified): ?>
-            
+                            
              <div class="error">
                         <i class="fa-solid fa-circle-exclamation"></i>
                         <small>&nbsp; Email and password does not match</small>
@@ -41,4 +41,5 @@
                     </form>
         </div>
     </div>
+
    

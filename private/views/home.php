@@ -18,12 +18,15 @@
             <p class="sub">Join with us to donate and volunteer.<br>Let's end the hunger soon!</p>
 
             <?php if(Auth::logged_in()){
-            $path='events'}
-            else{
-            $path='signup'}?>
+
+                $path='events';
+            }else{
+                $path='signup';
+                }?>
+
             <button class="donate"><a href="<?=$path?>">Donate/Volunteer</a> </button>
-           
-           
+            
+          
 
         </div>
     </div>
@@ -35,69 +38,40 @@
 <div class="sub_section">
     <div class="section">
         <p class="h">Become a donor !</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
+        <p class="des">Becoming a donor for charity events is a simple yet powerful way to make a positive impact on the world. By
+            giving to
+            a worthy cause ...
         </p>
         <button class="readmore">Read more...</button>
     </div>
     <div class="section">
         <p class="h">Why donate food?</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
+        <p class="des">Donating food during an economic crisis is critical to those in need and helps the community. By providing
+            stability
+            and hope to those struggling to put food on the table ...
         </p>
         <button class="readmore">Read more...</button>
     </div>
     <div class="section">
         <p class="h">How donation helps ?</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
+        <p class="des">Cash donations can be a powerful tool in helping food donating charities make a difference. With the
+            flexibility to
+            purchase exactly what is needed, such as wholesome and nutritious food ...
         </p>
         <button class="readmore">Read more...</button>
     </div>
     <div class="section">
         <p class="h">Become a volunteer !</p>
 
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
+        <p class="des">By giving your time and skills, you provide valuable support to organizations working to improve the lives of
+            those
+            in need. Whether it's sorting donations, serving food, or providing comfort to those in crisis, your
+            contributions ...
 
         </p>
         <button class="readmore">Read more...</button>
     </div>
-    <div class="section">
-        <p class="h">Why donate food?</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
-        </p>
-        <button class="readmore">Read more...</button>
-    </div>
-    <div class="section">
-        <p class="h">How donation helps ?</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
-        </p>
-        <button class="readmore">Read more...</button>
-    </div>
-    <div class="section">
-        <p class="h">Become a volunteer !</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, magnam! Animi sunt nihil
-            quasi maxime
-            rerum optio.Lorem
-            rerum optio.
-        </p>
-        <button class="readmore">Read more...</button>
-    </div>
+    
 </div>
 <div class="about_us">
     <div class="about_us-images">
@@ -119,30 +93,7 @@
     <img class='grid-item grid-item-4' src='https://images.unsplash.com/photo-1609139027234-57570f43f692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGZvb2QlMjBkb25hdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60' alt=''>
     <p>"Spread love, Donate"</p>
   </div>
-  <!-- <div>
-    <img class='grid-item grid-item-5' src='https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <p>"Are you gunna throw the ball?"</p>
-  </div>
-  <div>
-    <img class='grid-item grid-item-6' src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <p>"C'mon friend!"</p>
-  </div>
-  <div>
-    <img class='grid-item grid-item-7' src='https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <p>"A rose for mommy!"</p>
-  </div>
-  <div>
-    <img class='grid-item grid-item-8' src='https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <p>"You gunna finish that?"</p>
-  </div>
-  <div>
-    <img class='grid-item grid-item-9' src='https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <p>"We can't afford a cat!"</p>
-  </div>
-  <div>
-    <img class='grid-item grid-item-10' src='https://images.unsplash.com/photo-1504595403659-9088ce801e29?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <p>"Dis my fren!"</p>
-  </div> -->
+
 </div>
     </div>
 

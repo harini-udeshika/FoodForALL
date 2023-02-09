@@ -16,7 +16,7 @@
     <div class="card event-card p-20 p-bottom-35 col-lg-8 m-lr-auto grid-8">
         <!-- ivent item -->
         <div class="blank item-card col-lg-4 card-simple m-20 p-20 ">
-            <img src="<?= ROOT ?>/images/merch_items/item.1675442025.jpg" alt="ballo maramu malli" style="width:100%;">
+            <img src="<?= ROOT ?>/images/logo.png" alt="" style="width:100%; height:200px; border:2px solid black;">
 
             <div class="txt-gray w-semibold txt-al-center m-top-14 txt-12">T-shirt</div>
 

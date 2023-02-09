@@ -154,7 +154,7 @@ input:focus {
     background-color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 2rem;
-    margin-left: 3rem;
+    /* margin-left: 3rem; */
     text-align:center;
     color: #7681BF;
 }
@@ -184,7 +184,6 @@ input:focus {
    
    text-decoration: underline;
    
-
 }
 
 .save:hover {
@@ -197,13 +196,14 @@ input:focus {
 .change_pic{
     height:20rem;
     width:60%;
-    background-color: #F2F3F9;
+    border: 0.01rem solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:space-evenly;
     margin-top: 5rem;
-    border:0.06rem solid #7681BF;
+   border-radius: 1rem;
 }
 .file{
     display:none;

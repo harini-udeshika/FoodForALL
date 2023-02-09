@@ -2,13 +2,17 @@
 class Area_coordinator_home extends Controller
 {
     function index(){
-        // $user = new User();
-        // $data = $user->findAll();
-        $area_coordinator = new AreaCoordinator();
+        $user = new AreaCoordinator();
+        $data = $user->findAll();
+        if(Auth::logged_in()){
+   
+            $this->view('Area_coordinator_home', ['rows' => $data]);
+        }
+        else{
+            $this->redirect('home');
+        }
         
-        $data = $area_coordinator->where('email',Auth::getemail());
-        $data = $data[0];
-        $this->view('area_coordinator_view',['rows'=>$data]);
         
     }
+   
 }

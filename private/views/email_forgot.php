@@ -1,8 +1,12 @@
 <?php $this->view('includes/header')?>
-<h3>FoodForALL</h3>
+<link rel="stylesheet" href="<?=ROOT?>/assets/change_password.css">
+
+<div class="card">
+<h3><span class="one">Food</span><span class="two">For</span><span class="one">ALL</span></h3>
 <p>Reset your password</p>
-<p>Enter your email address</p>
-<form method="post">
+<small>Enter your email address</small>
+<form method="post" class="form">
 <input type="text" placeholder="Email address" name="email">
 <button>Next</button>
 </form>
+</div>
