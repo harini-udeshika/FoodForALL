@@ -131,18 +131,10 @@
             </div>
 
             <div class="nav-i">    
-
-                <div class="dropdown">
-                <a onclick="myFunction()" class="dropbtn">Doonee details</a>
-                <div id="myDropdown" class="dropdown-content">
-                    <a class="udrop" href="./familytable_EM">Families' Details</a>
-                    <a class="udrop" href="./eldertable_EM">Elders' Home Details</a>
-                    <a class="udrop" href="./childrentable_EM">Children's Home Details</a>
-                </div>
-            </div>
+                <a href="./eventmanager_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="">My Events</a>
+                <a href="./eventmanager_myevents">My Events</a>
             </div>
             
             <div class="nav-i">
