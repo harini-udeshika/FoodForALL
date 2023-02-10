@@ -44,6 +44,7 @@
                 <h4><i class="fa-solid fa-calendar-xmark fa-xl"></i>&nbsp;&nbsp;Sorry! No ongoing events<h4>
             <?php endif?>
             <?php if ($ongoing): ?>
+                
             <?php
 //print_r($rows);?>
             <?php foreach ($ongoing as $value): ?>
@@ -53,6 +54,26 @@
         <div class="event-row"> 
 
             <?php endif?>
+            <?php
+$total_donated = 0;
+$volunteers = 0;
+if ($ongoing[$i]->total_donated) {
+    $total_donated = $ongoing[$i]->total_donated;
+}
+$total_amount = $ongoing[$i]->total_amount;
+if ($total_amount) {
+    $donorp = round(($total_donated / $total_amount) * 100, 2);
+}
+if($ongoing[$i]->volunteers){
+    $volunteers = $ongoing[$i]->volunteers;
+}
+$tot_volunteers = $ongoing[$i]->no_of_volunteers;
+
+if ($tot_volunteers) {
+    $volunteerp = round(($volunteers / $tot_volunteers) * 100, 2);
+}
+
+?>
             <a href="<?=ROOT?>/eventpage?id=<?=$ongoing[$i]->event_id?>">
                 <div class="event">
 
@@ -78,9 +99,9 @@
 
                         <div class="progress">
                             <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
+                            <div style="width:<?=$donorp?>%"></div>
+                        </div>
+                        <span><?=$donorp?>%</span>
                         </div>
                         <div class="volunteers">
                             <p>Volunteers </p>
@@ -277,13 +298,19 @@
             <img src="<?=$comment_data[$i]->profile_pic?>" alt="">
             <p><?=$comment_data[$i]->first_name?></p>
             <div class="stars">
-                <?php for ($j = 0; $j < $comment_data[$i]->star_rate; $j++): ?>
-                <span>★</span>
+                <?php for ($j = 0; $j < 5; $j++): ?>
+                <?php if($j<$comment_data[$i]->star_rate):?>
+                <span class="bright">★</span>
+                <?php endif;?>
+                <?php if($j>=$comment_data[$i]->star_rate):?>
+                <span class="dull">★</span>
+                <?php endif;?>
                 <?php endfor?>
             </div>
         </div>
         <div class="review-right">
             <p><?=$comment_data[$i]->comment?></p>
+            <p class="admin">&nbsp;<i class="fa-solid fa-comment-dots"></i><?=$comment_data[$i]->reply?></p>
             <p class='date-time'><?=substr($comment_data[$i]->date_time, 0, -8)?>
                 &emsp;<?=substr($comment_data[$i]->date_time, 10, 6)?></p>
             <div class="rating">
