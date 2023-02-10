@@ -4,10 +4,10 @@
 <?php $this->view('includes/submenu')?>
 
 
-<h2>Donor Leaderboard</h2>
+<h2>Volunteer Leaderboard</h2>
 <div class="change">
-<a href="leaderboard" class="donor">Donor</a>
-<a href="leaderboard_v" class="volunteer">Volunteer</a> 
+<a  href="leaderboard" class="volunteer">Donor</a>
+<a href="leaderboard_v" class="donor">Volunteer</a> 
 </div>
 
 <div class="top">

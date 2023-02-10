@@ -66,13 +66,10 @@
                 <a href="<?=ROOT?>/admin_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="<?=ROOT?>/Add_areacoordinator">Add Area Coordinators</a>
-            </div>
-            <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_org">Organizations</a>
             </div>
             <div class="nav-i">
-                <a href="">Area Coordinators</a>
+                <a href="<?=ROOT?>/Admin_search_areacoords">Area Coordinators</a>
             </div>
             <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_users">Users</a>
@@ -134,7 +131,9 @@
                 <a href="./eventmanager_events">Events</a>
             </div>
             <div class="nav-i">
+
                 <a href="./eventmanager_myevents">My Events</a>
+
             </div>
             
             <div class="nav-i">

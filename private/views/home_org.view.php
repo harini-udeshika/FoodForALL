@@ -176,6 +176,47 @@
     </div>
 
 </div><br><br>
+<?php 
+    $totevents = 0;
+    $totamount = 0;
+    if($past){
+        $totevents = sizeof($past);
+    }
+    if($allevents){
+        $num =0;
+        $count = sizeof($allevents);
+
+        while($count>0){
+            $num = $num + $allevents[$num]->total_amount;
+
+            $count--;
+            $num++;
+        }
+    }
+?>
+<div class="body-container" style="width: 100%;">
+    <div class="container m-top-75 m-bottom-50">
+        <div class="blank col-lg-2 col-sm-12"></div>
+        <div class="card col-lg-4 m-bottom-30 col-sm-12 height-170px grid-10">
+            <div class="heading-2 col-10 " style="text-align: center;">Total events Completed
+                <div class="heading-1 p-top-20 txt-purple" style="font-size: 3.5rem;"><?php echo $totevents ?></div>            
+            </div>
+        </div>
+        <div class="card col-lg-4 m-bottom-30 col-sm-12 height-170px grid-10">
+            <div class="heading-2 col-10 " style="text-align: center;">Total Donations Acquired
+                <div class="heading-1 p-top-20 txt-purple" style="font-size: 3.5rem;"><?php echo $totamount ?>/=</div>            
+            </div>
+        </div>
+        <div class="blank col-lg-2 col-sm-12"></div>
+
+        <!-- <div class="blank col-lg-3 col-sm-12"></div>
+        <div class="card col-lg-6 col-sm-12 height-150px"></div>
+        <div class="blank col-lg-3 col-sm-12"></div> -->
+    </div>
+
+</div>
+
+
 
 <h1 style="font-family: consolas; color: #000000; text-align: center;">Ongoing Events</h1>
 <hr size="3px" noshade style="width: 45%; opacity: 0.7; text-align: center;
@@ -213,7 +254,7 @@
                                 </div>
 
                                 <div class="progress-back width-100">
-                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                    <div class="progress-fill width-80 height-4px m-top-2" style="float: left;"></div>
                                 </div>
                             </div>
 
@@ -227,13 +268,13 @@
                                 </div>
 
                                 <div class="progress-back width-100">
-                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                    <div class="progress-fill width-50 height-4px m-top-2" style="float: left;"></div>
                                 </div>
                             </div>
 
                             <div class="row-flex jf-center">
                                 <a href="<?= ROOT ?>/event_org?id=<?= $ongoin[$i]->event_id ?>">
-                                    <button class="btn btn-green btn-xsm m-top-30">View Details</button>
+                                    <button class="btn btn-green btn-xsm m-top-25 height-40px">View Details</button>
                                 </a>
                             </div>
                         </div>

@@ -41,6 +41,7 @@
 
                     while($totManagers > 0) {
                         // $_SESSION['nic'] = $row['nic'];
+                        // Add_managers/delete_manager?id=".$allmanagers[$x]->email."
                         echo "<tr>
                                 <td>".$allmanagers[$x]->full_name."</td>
                                 <td>".$allmanagers[$x]->email."</td>
@@ -72,7 +73,7 @@
         background-position: right bottom;
 	    background-size: cover;
         ">
-        <h1 style="font-family: consolas;">Add Managers</h1>
+        <h1 style="font-family: inter;">Add Managers</h1>
         
         <form method="POST" id="input-form-em" class="eminput-form">
             <div class="eminput-control">
@@ -106,6 +107,6 @@
     </div></center>
     <br><br><br>
     
-    <!-- <script src="script/script.js"></script> -->
+    <script src="<?= ROOT ?>/assets/script/em_form_check.js"></script>
 
 <?php $this->view('includes/footer')?>
