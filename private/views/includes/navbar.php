@@ -66,9 +66,6 @@
                 <a href="<?=ROOT?>/admin_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="<?=ROOT?>/Add_areacoordinator">Add Area Coordinators</a>
-            </div>
-            <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_org">Organizations</a>
             </div>
             <div class="nav-i">

@@ -27,8 +27,13 @@
         <!-- END : search bar -->
 
         <!-- heading 2 -->
-        <div class="heading-2 col-12"><?= $results['result_type'] != 'recent' ? 'Search Results' : 'Recent registrations'; ?></div>
-        
+        <div class="col-12 grid-12 p-right-20">
+            <div class="heading-2 col-10"><?= $results['result_type'] != 'recent' ? 'Search Results' : 'Recent registrations'; ?></div>
+            <a class=" m-top-40  col-2" href="<?= ROOT ?>/Admin_search_areacoords/new_areacoord">
+                <button class="btn btn-red btn-md btn-block"><i class="fa-solid fa-plus p-right-5"></i>Add new</button>
+            </a>
+        </div>
+
         <?php if (isset($results)) : ?>
             <?php if (count($results) > 1) : ?>
                 <?php unset($results['result_type']) ?>
@@ -79,7 +84,7 @@
                                 <?= $result->district . " / " . $result->town ?>
                             </div>
                             <div class="table_record_i table_record_i_f col-lg-2">
-                                <a href="<?=ROOT?>/Admin_search_areacoords/delete/<?= $result->id?>">
+                                <a href="<?= ROOT ?>/Admin_search_areacoords/delete/<?= $result->id ?>">
                                     <button class="btn btn-sm btn-red">Delete</button>
                                 </a>
                             </div>
