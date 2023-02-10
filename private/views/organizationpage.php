@@ -44,6 +44,7 @@
                 <h4><i class="fa-solid fa-calendar-xmark fa-xl"></i>&nbsp;&nbsp;Sorry! No ongoing events<h4>
             <?php endif?>
             <?php if ($ongoing): ?>
+                
             <?php
 //print_r($rows);?>
             <?php foreach ($ongoing as $value): ?>
@@ -53,6 +54,26 @@
         <div class="event-row"> 
 
             <?php endif?>
+            <?php
+$total_donated = 0;
+$volunteers = 0;
+if ($ongoing[$i]->total_donated) {
+    $total_donated = $ongoing[$i]->total_donated;
+}
+$total_amount = $ongoing[$i]->total_amount;
+if ($total_amount) {
+    $donorp = round(($total_donated / $total_amount) * 100, 2);
+}
+if($ongoing[$i]->volunteers){
+    $volunteers = $ongoing[$i]->volunteers;
+}
+$tot_volunteers = $ongoing[$i]->no_of_volunteers;
+
+if ($tot_volunteers) {
+    $volunteerp = round(($volunteers / $tot_volunteers) * 100, 2);
+}
+
+?>
             <a href="<?=ROOT?>/eventpage?id=<?=$ongoing[$i]->event_id?>">
                 <div class="event">
 
@@ -78,9 +99,9 @@
 
                         <div class="progress">
                             <div class="progress-bar">
-                                <div></div>
-                            </div>
-                            <span>50%</span>
+                            <div style="width:<?=$donorp?>%"></div>
+                        </div>
+                        <span><?=$donorp?>%</span>
                         </div>
                         <div class="volunteers">
                             <p>Volunteers </p>

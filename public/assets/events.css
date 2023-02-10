@@ -558,12 +558,15 @@ h4{
     font-size: small;
 }
 .admin{
+    display: flex;
+    flex-direction: row;
     background-color: #ececec;
     min-width: 70%;
-    height:1.2rem;
+    min-height:1.2rem;
     border-radius: 0.5rem;
     padding: 0.5rem;
     text-align: left;
+    
    
 }
 .review-left img {

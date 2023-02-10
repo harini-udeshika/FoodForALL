@@ -30,7 +30,12 @@ class Organizationpage extends Controller
             $arr = ['id' => $id];
             $completed = $event->query($query, $arr);
             //  print_r($completed);
-            $query = "SELECT * FROM event WHERE date>CURRENT_DATE && org_gov_reg_no= :id";
+            $query = "SELECT event.event_id ,event.name, event.date,event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) as volunteers, SUM(donate.amount) as total_donated
+            FROM event
+            LEFT JOIN donate ON event.event_id = donate.event_id
+            LEFT JOIN volunteer ON event.event_id = volunteer.event_id
+            WHERE event.org_gov_reg_no = :id && event.date>CURRENT_DATE && event.approved=1
+            GROUP BY event.event_id";
             $arr = ['id' => $id];
             $ongoing = $event->query($query, $arr);
             //  print_r($ongoing);

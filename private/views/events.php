@@ -69,7 +69,7 @@ $tot_volunteers = $rows[$i]->no_of_volunteers;
 if ($tot_volunteers) {
     $volunteers = 0;
 
-    if ($rows[$i]->volunteers) {
+    if ($rows[$i]->volunteers) { 
         $volunteers = $rows[$i]->volunteers;
     }
     $volunteerp = round(($volunteers / $tot_volunteers) * 100, 2);
