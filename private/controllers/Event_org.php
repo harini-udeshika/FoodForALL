@@ -12,11 +12,13 @@ class Event_org extends Controller
             $em = new Eventmanager();
             $event_details = $event->where('event_id',$id);
             // echo "<pre>";
+            
             // print_r($event_details);
             $event_details = $event_details[0];
 
             $em_details = $em->where('email',$event_details->event_manager_email);
             $em_details = $em_details[0];
+
             // echo $em_details->full_name;
             // die;
 
@@ -27,6 +29,7 @@ class Event_org extends Controller
         if (count($_POST) > 0) {
             // echo "hello1";
             // die;
+
             $event = new Event();
             $arr['event_manager_email'] = $_POST['manager'];
             $arr['name'] = $_POST['name'];
@@ -40,8 +43,6 @@ class Event_org extends Controller
             // echo "hello error";
             // die;
         }
-
-
 
         // $data = $manager->where('org_gov_reg_no', $_SESSION['USER']->gov_reg_no);
         // $this->view('event_org.view', ['allmanagers' => $data]);

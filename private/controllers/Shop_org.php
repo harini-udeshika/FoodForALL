@@ -44,5 +44,15 @@ class Shop_org extends Controller
     $data = $item->where('org_gov_reg_no',$_SESSION['USER']->gov_reg_no);
     $this->view('shop_org.view', ['allitems' => $data]);
     }
+
+    public function delete_item(){
+        $code = $_GET['id'];
+        // echo $code;
+        // die;
+        $item_del = new Merchandise_item();
+        $item_del->delete_item($code);
+
+        $this->redirect('shop_org');
+    }
    
 }
