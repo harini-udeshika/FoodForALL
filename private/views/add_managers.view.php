@@ -41,6 +41,7 @@
 
                     while($totManagers > 0) {
                         // $_SESSION['nic'] = $row['nic'];
+                        // Add_managers/delete_manager?id=".$allmanagers[$x]->email."
                         echo "<tr>
                                 <td>".$allmanagers[$x]->full_name."</td>
                                 <td>".$allmanagers[$x]->email."</td>

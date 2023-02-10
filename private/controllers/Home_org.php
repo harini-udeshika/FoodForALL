@@ -30,7 +30,12 @@ class Home_org extends Controller
         // echo "<br>past";
         // print_r($past);
         // die;
-        $this->view('home_org.view',['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past , 'rows' => $data]);
+
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0";
+        $arr = ['id'=>$org_reg];
+        $allevents = $event->query($query,$arr);
+
+        $this->view('home_org.view',['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past , 'rows' => $data, 'allevents' => $allevents]);
     }
    
 }

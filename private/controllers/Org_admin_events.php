@@ -28,4 +28,15 @@ class Org_admin_events extends Controller
         // print_r($past);
         // die;
         $this->view('org.admin.events',['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past]);
-    }}
+    }
+
+    public function delete_pending(){
+        $id = $_GET['id'];
+        // echo $id;
+        // die;
+        $item_del = new Event();
+        $item_del->delete_event($id);
+
+        $this->redirect('org_admin_events');
+    }
+}
