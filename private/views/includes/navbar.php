@@ -72,7 +72,7 @@
                 <a href="<?=ROOT?>/Admin_search_org">Organizations</a>
             </div>
             <div class="nav-i">
-                <a href="">Area Coordinators</a>
+                <a href="<?=ROOT?>/Admin_search_areacoords">Area Coordinators</a>
             </div>
             <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_users">Users</a>

@@ -114,4 +114,20 @@ class Admins extends Model
         $data['id'] = $id;
         return $this->query($query, $data);
     }
+
+    public function select_areacoords_bydate()
+    {
+        $query = "SELECT * FROM area_coodinator  ORDER BY id DESC LIMIT 4";
+        $data = $this->query($query);
+        return $data;
+    }
+
+    public function search_in_areacoords($keyword){
+        $keyword=addslashes($keyword);
+
+        $query = "SELECT * FROM area_coodinator WHERE first_name LIKE '%$keyword%' OR last_name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR nic LIKE '%$keyword%' OR id LIKE '%$keyword%'";
+        
+        $data = $this->query($query);
+        return $data;
+    }
 }
