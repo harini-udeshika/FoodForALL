@@ -39,8 +39,8 @@
                         </div>
 
                         <div class="f2">
-                            <label for="last-name">User name</label>
-                            <input type="text" value="<?php echo $rows->username?>" class="small" name="username" >
+                            <label for="last-name">User NIC</label>
+                            <input type="text" value="<?php echo $rows->nic?>" class="small" name="username" >
 
                         </div>
                     </div>

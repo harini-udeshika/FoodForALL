@@ -66,7 +66,7 @@
                         <!-- table record -->
                         <div class="table_record">
                             <div class="table_record_i col-lg-2">
-                                <?= $result->first_name . " " . $result->last_name ?>
+                                <?= $result->name ?>
                             </div>
                             <div class="table_record_i col-lg-1">
                                 <?= $result->id ?>
@@ -81,7 +81,7 @@
                                 <?= $result->phone_no ?>
                             </div>
                             <div class="table_record_i col-lg-2">
-                                <?= $result->district . " / " . $result->town ?>
+                                <?= $result->district . " / " . $result->area ?>
                             </div>
                             <div class="table_record_i table_record_i_f col-lg-2">
                                 <a href="<?= ROOT ?>/Admin_search_areacoords/delete/<?= $result->id ?>">
