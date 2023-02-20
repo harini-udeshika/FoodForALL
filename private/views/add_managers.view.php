@@ -97,7 +97,7 @@
 
             <div class="eminput-control">
                 <label for="name">Set Password:</label><br>&nbsp;&nbsp;
-                <input type="text" id="pw-em" name="password" placeholder="Set Password" ><br>
+                <input type="password" id="pw-em" name="password" placeholder="Set Password" ><br>
                 <div class="client-error"></div>
             </div>
 
