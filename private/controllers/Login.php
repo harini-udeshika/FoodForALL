@@ -46,7 +46,7 @@ class Login extends Controller
                     Auth::authenticate($row);
                     
                     
-                             $this->redirect('/admin');
+                             $this->redirect('/home');
                     
                        
                     

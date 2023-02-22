@@ -118,5 +118,5 @@
 <?php endforeach;?>
 <?php endif?>
 
-
+<?php $this->view('includes/footer')?>
 <!-- <script src="<?=ROOT?>/assets/organizationpage.js"></script> -->

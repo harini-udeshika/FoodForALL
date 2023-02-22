@@ -14,7 +14,7 @@
     <div class="container">
 
         <?php $place = "2nd Place"?>
-        <?php if ($data[1]->tot_amount == $data[0]->tot_amount) {
+        <?php if ($data[1]->v_count == $data[0]->v_count) {
             $place = "1st Place";
         }?>
 
@@ -26,7 +26,7 @@
                         $pic = $data[1]->profile_pic;}?>
 
             <img src="<?=$pic?>">
-            <p>Rs. <?=$data[1]->tot_amount?></p>
+            <p> <?=$data[1]->v_count?></p>
 
         </div>
 
@@ -46,7 +46,7 @@
 
             <img src="<?=$pic?>">
             <i class="fa-solid fa-trophy fa-2xl"></i>
-            <p>Rs. <?=$data[0]->tot_amount?> </p>
+            <p><?=$data[0]->v_count?> </p>
 
         </div>
 
@@ -58,7 +58,7 @@
 
     <div class="container">
     <?php $place = "3rd Place"?>
-    <?php   if ($data[1]->tot_amount == $data[2]->tot_amount) {
+    <?php   if ($data[1]->v_count == $data[2]->v_count) {
                 $place = "2nd Place";
             }?>
         <p><?=$place?></p>
@@ -68,7 +68,7 @@
                 if ($data[2]->profile_pic) {
                     $pic = $data[2]->profile_pic;}?>
                         <img src="<?=$pic?>">
-                        <p>Rs. <?=$data[2]->tot_amount?></p>
+                        <p><?=$data[2]->v_count?></p>
          
         </div><span><?=$data[2]->first_name?></span>
         <span><i class="fa-solid fa-location-dot"></i>&nbsp;<?=$data[2]->city?></span>
@@ -79,24 +79,27 @@
 <?php $data_sliced = array_slice($data, 3);
 // print_r($data_sliced);?>
 
+<?php $place = 3;?>
 <?php $i = 0;?>
-
 <?php if ($data_sliced): ?>
 
 <?php foreach ($data_sliced as $value): ?>
 
 <div class="long-card">
     <small>
-    <?php $place = $i + 4?>
+    <!-- <?php $place = $i + 4?> -->
     <?php 
-    if ($place == 4 && $data_sliced[$i]->tot_amount == $data[2]->tot_amount)
+    if ($place == 4 && $data_sliced[$i]->v_count == $data[2]->v_count)
         {
-            $place = 3;
+                $place = 3;
         } 
-    else if ($i > 0 && ($data_sliced[$i]->tot_amount == $data_sliced[$i - 1]->tot_amount)) 
+    else if ($i > 0 && ($data_sliced[$i]->v_count == $data_sliced[$i - 1]->v_count)) 
         {
-            $place = $i + 3;
+            $place;
         }
+    else if(($data_sliced[$i]->v_count < $data_sliced[$i - 1]->v_count)){
+        $place++;
+    }
     ?>
 
     <?=$place?>
@@ -110,7 +113,7 @@
     <img src="<?=$pic?>">
     <p><?=$data_sliced[$i]->first_name?></p>
     <p><i class="fa-solid fa-location-dot"></i>&nbsp;<?=$data_sliced[$i]->city?></p>
-    <span><b>Rs. <?=$data_sliced[$i]->tot_amount?></b></span>
+    <span><b><?=$data_sliced[$i]->v_count?></b></span>
 
 </div>
 
@@ -118,5 +121,5 @@
 <?php endforeach;?>
 <?php endif?>
 
-
+<?php $this->view('includes/footer')?>
 <!-- <script src="<?=ROOT?>/assets/organizationpage.js"></script> -->

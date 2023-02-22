@@ -1,7 +1,7 @@
 <?php $this->view('includes/header')?>
 <?php $this->view('includes/navbar')?>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-<link src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_area.css">
 
 <?php if(Auth::logged_in()){
@@ -10,7 +10,7 @@
 }
 ?>
 
-    <div class="container-main">
+    <div class="container-main manin1">
         <div class="description">
             <div class="content">
                 <p class="main">Good <?=Auth::time()?></p>
@@ -23,23 +23,40 @@
             <img src="images/image.png" alt="" class="main-image">
         </div>
     </div>
+    <div>
+    
+        <p class="sub1">MY AREA</p>
+       
+    </div>
+
+    
+        
     
     <div class="sub_section">
-        <div class="section num2">
-        <p class="sub1">30</p>
-        <p class="sub1">Number of individual Families</p>
+        <div class="sec2">
+        <p class="sub3">30</p>
+        <hr>
+        <p class="sub2">Number of individual Families</p>
             
         </div>
-        <div class="section num2">
-            <p class="sub1">26</p>
-            <p class="sub1">Number of Children's Homes</p>
+        <div class="sec2">
+            <p class="sub3">26</p>
+            <hr>
+            <p class="sub2">Number  of Children's Homes</p>
         </div>
-        <div class="section num2">
-        <p class="sub1">48</p>
-        <p class="sub1">Number of Elder homes</p>
+        <div class="sec2">
+        <p class="sub3">48</p>
+        <hr>
+        <p class="sub2">Number  of Elder homes</p>
         </div>
     </div>
-    <div class="about_us">
+    <div class="map">
+        <p class="sub1">Area map</p>
+    <iframe width="100%"height="500" src="https://maps.google.com/maps?q=<?=Auth::area_area()?>&output=embed" ></iframe>
+    </div>
+
+    
+    <!-- <div class="about_us">
         <hr>
         <p class="sub">About us</p>
         <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi molestiae maiores non et neque
@@ -101,9 +118,16 @@
         <hr>
         <div>
         </div>
+    </div> -->
+
+
+    
+    <div>
+    <p class="sub1">All records</p>
     </div>
 
-    <div class="container">
+    <div class="mychart" >
+    
         <canvas id="myChart"></canvas>
     </div>
     <script>

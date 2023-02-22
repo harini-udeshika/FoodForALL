@@ -58,6 +58,14 @@ class Auth{
         return false;
     }
 
+    public static function area_area(){
+        //code
+        if(isset($_SESSION['USER'])){
+            return $_SESSION['USER']->area;
+        }
+        return false;
+    }
+
     public static function event_user(){
         //code
         if(isset($_SESSION['USER'])){

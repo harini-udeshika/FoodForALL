@@ -13,7 +13,7 @@
         <div class="blank col-lg-3"></div>
 
         <!-- START : form -->
-        <form class="col-lg-6" action="<?= ROOT ?>/Add_areacoordinator/addacoordinator" method="post" id="form1">
+        <form class="col-lg-6 m-top-20 m-bottom-100" action="<?= ROOT ?>/Admin_search_areacoords/new_areacoord" method="post" id="form1">
             <div class="card card-back1 p-40 p-bottom-30 grid-8 max-w-400px m-lr-auto">
                 <?php if (isset($errors)) : ?>
                     <div class="col-lg-8 server_errors p-10">

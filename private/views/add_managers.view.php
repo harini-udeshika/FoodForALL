@@ -41,6 +41,7 @@
 
                     while($totManagers > 0) {
                         // $_SESSION['nic'] = $row['nic'];
+                        // Add_managers/delete_manager?id=".$allmanagers[$x]->email."
                         echo "<tr>
                                 <td>".$allmanagers[$x]->full_name."</td>
                                 <td>".$allmanagers[$x]->email."</td>
@@ -96,7 +97,7 @@
 
             <div class="eminput-control">
                 <label for="name">Set Password:</label><br>&nbsp;&nbsp;
-                <input type="text" id="pw-em" name="password" placeholder="Set Password" ><br>
+                <input type="password" id="pw-em" name="password" placeholder="Set Password" ><br>
                 <div class="client-error"></div>
             </div>
 

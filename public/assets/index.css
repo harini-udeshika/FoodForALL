@@ -17,4 +17,11 @@
     padding-right: 25px;
     display: flex;
     justify-content: right;
+
+}
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+
 }

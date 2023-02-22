@@ -62,7 +62,9 @@
                             <p class='item-text-3' style="font-weight: bold;">Code : <?php echo $code; ?></p><br>
                             <p class='item-text-3' style="font-weight: bold;">Stock : <?php echo $stock; ?></p>
                             </p><br><br><br>
-                            <button class="btn-2"><i class="fa-regular fa-trash-can"></i></button>
+                            <a href="<?=ROOT?>/Shop_org/delete_item?id=<?=$allitems[$i]->item_no?>">
+                                <button class="btn-2"><i class="fa-regular fa-trash-can"></i></button>
+                            </a>
                             <a href="./org_admin_event_items">
                                 <button class="btn-3" style="right: 160px;">edit</button>
                             </a>
@@ -115,13 +117,13 @@
                     <input type="text" name="code" id="code-item" placeholder="Item code"><br>
                     <div class="client-error"></div>
                 </div>
-        <label for="image">Item Image:</label><br>&nbsp;&nbsp;
-        <input type="file" name="image" id="image" style="background-color: rgba(255, 255, 255, 0);
-            box-shadow: 0 0px 0px 0px;" accept="image/png, image/jpeg, image/jpg" ><br>
+                <label for="image">Item Image:</label><br>&nbsp;&nbsp;
+                <input type="file" name="image" id="image" style="background-color: rgba(255, 255, 255, 0);
+            box-shadow: 0 0px 0px 0px;" accept="image/png, image/jpeg, image/jpg"><br>
 
-        <button type="submit" class="submit-btn" style="font-size: 20px; margin-bottom:15px;">ADD</button>
-        </form>
-    </div>
+                <button type="submit" class="submit-btn" style="font-size: 20px; margin-bottom:15px;">ADD</button>
+            </form>
+        </div>
     </div>
 </center>
 

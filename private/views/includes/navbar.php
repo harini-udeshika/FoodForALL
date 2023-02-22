@@ -66,13 +66,10 @@
                 <a href="<?=ROOT?>/admin_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="<?=ROOT?>/Add_areacoordinator">Add Area Coordinators</a>
-            </div>
-            <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_org">Organizations</a>
             </div>
             <div class="nav-i">
-                <a href="">Area Coordinators</a>
+                <a href="<?=ROOT?>/Admin_search_areacoords">Area Coordinators</a>
             </div>
             <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_users">Users</a>
@@ -131,22 +128,16 @@
             </div>
 
             <div class="nav-i">    
-
-                <div class="dropdown">
-                <a onclick="myFunction()" class="dropbtn">Doonee details</a>
-                <div id="myDropdown" class="dropdown-content">
-                    <a class="udrop" href="./familytable_EM">Families' Details</a>
-                    <a class="udrop" href="./eldertable_EM">Elders' Home Details</a>
-                    <a class="udrop" href="./childrentable_EM">Children's Home Details</a>
-                </div>
-            </div>
+                <a href="./eventmanager_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="my_events">My Events</a>
+
+                <a href="./eventmanager_myevents">My Events</a>
+
             </div>
             
             <div class="nav-i">
-                <a href="">About us</a>
+                <a href="about">About us</a>
             </div>
         <?php endif?>
 
@@ -180,7 +171,7 @@ if (Auth::getusertype() == 'organization') {
     }
 }
 
-if (Auth::getusertype() == 'areacoordinator') {
+if (Auth::getusertype() == 'area_coordinator') {
     $areacoordinator = new AreaCoordinator();
     $data = $areacoordinator->where('email', Auth::getemail());
 
