@@ -319,7 +319,7 @@ hr {
 .events {
     display: flex;
     flex-direction: row;
-   justify-content: space-between;
+   justify-content: space-evenly;
    width: 90%;
 }
 .events-des{

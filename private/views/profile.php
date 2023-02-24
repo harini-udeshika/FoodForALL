@@ -4,6 +4,7 @@ use function PHPSTORM_META\type;
 
 $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/user_profile.css">
+
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
 <div class="intro">
@@ -37,50 +38,60 @@ if (file_exists($rows->profile_pic)) {
 <div class="certificate_section" id="certificates">
     <div class="heading_certificates">
         <p>Volunteering Certificates</p>
-        <button>Add +</button>
-    </div>
-
-    <div class="certificates">
+        <button id="add">Add +</button>
         
-        <div class="certificates_row">
-            <div class="certificate">
-                <div class="image">
+    </div>
+    <div class="change_pic visible" id="cert">
 
-                </div>
-                <p>Event 1</p>
-            </div>
-            <div class="certificate">
-                <div class="image">
+<p class="heading"><b>Upload Certificates to display</b></p>
 
-                </div>
-                <p>Event 2</p>
-            </div>
-            <div class="certificate">
-                <div class="image">
+<div class="visible">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <small>error message</small>
+</div>
 
-                </div>
-                <p>Event 3</p>
-            </div>
+<form method="post" enctype="multipart/form-data" class="file_form"  id="change_pic">
+
+    <label for="file" class="file_label" id="file_label">
+
+        <div class="file_h">
+            <i class="fa-regular fa-image"></i>
+            <p id="file_name" class="file_name">Certificate</p>
         </div>
+        <input type="file" name="file" id="file" class="file">
+    </label>
+    <br>
+<textarea name="description" placeholder="Write your thoughts" class="form_text"></textarea>
+    <button type="submit" class="save" >Submit</button>
+
+</form>
+
+</div>
+    <div class="certificates">
+
         <div class="certificates_row">
-            <div class="certificate">
-                <div class="image">
+        <?php $i = 0;?>
+        <?php if ($cert): ?>
 
-                </div>
-                <p>Event 4</p>
-            </div>
-            <div class="certificate">
-                <div class="image">
+            <?php
+//print_r($rows);?>
+        <?php foreach ($cert as $value): ?>
 
+            <?php if ($i % 3 == 0 && $i != 0): ?>
                 </div>
-                <p>Event 5</p>
+                <div class="certificates_row">
+            <?php endif?>
+            <div class="image"><img src="<?=$cert[$i]->file_name?>">
+            <?php if($cert[$i]->description):?>
+            <p class="des"><?=$cert[$i]->description?></p>
+            <?php endif?>
             </div>
-            <div class="certificate">
-                <div class="image">
+            <?php $i++;
+// echo ($i); ?>
 
-                </div>
-                <p>Event 6</p>
-            </div>
+        <?php endforeach;?>
+        <?php endif?>
+                
         </div>
     </div>
 </div>
@@ -186,5 +197,6 @@ $i = 0;?>
 <!-- <p><a href="login.php">Log in</a>or <a href="../signup/signup.html">Signup</a></p> -->
 
 <script src=" navbar.js"></script>
-
+<script src="<?=ROOT?>/assets/profile.js"></script>
+<script src="<?=ROOT?>/assets/change_pic.js"></script>
 <?php $this->view('includes/footer')?>

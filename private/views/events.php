@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="event-container">
-        <div class="event-row">
+        <div class="event-row"> 
 
 
         <?php $i = 0;?>
