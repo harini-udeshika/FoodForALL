@@ -8,16 +8,17 @@
 
 
     <div class=top>
-    <h1><?=$org_data->name?></h1>
+    <div class="h1"><h1><?=$org_data->name?></h1> <a href=""><button class="shop-button"><i class="fa-solid fa-cart-shopping fa-xl"></i></button></a></div>
+   
     <div class="search">
-        <form action="">
+        <form action="" method="post">
             <input type="text" name="find" placeholder="Search items here! " class="search-bar">
             <button><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
         </form>
     </div>
     </div>
     <div class="container">
-    <div class="shop">
+    <!-- <div class="shop">
         <div class="categories">
             <h5>Price range</h5>
             <div class="range">
@@ -35,7 +36,7 @@
                 <label for="badges">Badges</label><br>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="items-display">
         <div class="row">
             <?php $i = 0;?>
@@ -52,18 +53,18 @@
                 <small><?=$rows[$i]->name?></small>
                 <p>Rs.<?=$rows[$i]->price?></p>
                 <div class="buttons">
-                    <button class="view">View details</button>
-                    <button class="cart">Add to cart</button>
+                <a href="<?=ROOT?>/product_details/<?=$rows[$i]->item_no?>"><button class="view">View details</button></a>
+                <a href="<?=ROOT?>/add_to_cart/<?=$rows[$i]->item_no?>"><button class="cart">Add to cart</button></a>
                 </div>
             </div>
 
             <?php $i++;?>
     <?php endforeach;?>
-    <?php endif?>  
+    <?php endif?>
         </div>
-    
-    </div> 
-    
+
+    </div>
+
 </div>
 
 

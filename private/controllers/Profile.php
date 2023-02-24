@@ -3,12 +3,27 @@ class Profile extends Controller
 {
     public function index()
     {
-
         $user = new User();
         $donor = new Donate();
         $volunteer = new Volunteer();
-        $org=new Organization();
+        $org = new Organization();
 
+        $certificate = new Certificate();
+        $image = new Image();
+        if ($_POST > 0) {
+            if ($image->pic_validate()) {
+               
+                $filename = $image->pic_validate();
+                $arr['file_name'] = $filename;
+                $arr['user_id'] = Auth::getid();
+                $arr['description']=$_POST['description'];
+                $certificate->insert($arr);
+                $this->redirect('profile');
+            }
+        }
+
+       
+        $certificate=$certificate->where('user_id', Auth::getid());
         $data = $user->where('id', Auth::getid());
 
         if (!Auth::logged_in()) {
@@ -32,10 +47,10 @@ class Profile extends Controller
             'v_id' => $v_id,
 
         ];
-       
+
         $donor_data = $user->query($query, $arr);
         $tot_amount = $donor->sum('amount', 'donor_id', Auth::getid());
-        $tot_events = $volunteer->count('user_id','user_id',Auth::getid());
+        $tot_events = $volunteer->count('user_id', 'user_id', Auth::getid());
         $query = "SELECT organization.name
         FROM organization
         INNER JOIN event ON event.org_gov_reg_no=organization.gov_reg_no
@@ -57,6 +72,6 @@ class Profile extends Controller
         // print_r($d_org_name);
         // print_r($tot_events[0]->count);
 
-            $this->view('profile', ['rows' => $data, 'event_data' => $event_data, 'donor_data' => $donor_data,'tot_amount'=>$tot_amount,'tot_events'=>$tot_events,'org_name'=>$org_name,'d_org_name'=>$d_org_name]);
+        $this->view('profile', ['rows' => $data, 'event_data' => $event_data, 'donor_data' => $donor_data, 'tot_amount' => $tot_amount, 'tot_events' => $tot_events, 'org_name' => $org_name, 'd_org_name' => $d_org_name,'cert'=>$certificate]);
     }
 }

@@ -10,8 +10,6 @@ body {
     align-items: center;
 }
 
-
-
 .remove {
     display: flex;
     flex-direction: row;
@@ -70,7 +68,7 @@ body {
 }
 
 .form {
-    display: flex;
+    display: flex; 
     flex-direction: column;
     margin-top: 4rem;
 
