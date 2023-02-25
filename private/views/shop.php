@@ -43,23 +43,26 @@
             <?php if ($rows): ?>
 <?php foreach ($rows as $value): ?>
 
-    <?php if ($i % 3 == 0 && $i != 0): ?>
+    <?php if ($i % 4 == 0 && $i != 0): ?>
         </div>
         <div class="row">
     <?php endif?>
-
+           
             <div class="item">
-                <img src="images/merch_items/<?=$rows[$i]->image?>">
+                <img src="images/merch_items/<?=$rows[$i]->image?> ">
                 <small><?=$rows[$i]->name?></small>
                 <p>Rs.<?=$rows[$i]->price?></p>
                 <div class="buttons">
-                <a href="<?=ROOT?>/product_details/<?=$rows[$i]->item_no?>"><button class="view">View details</button></a>
+                <a href="<?=ROOT?>/shop?product_id=<?=$rows[$i]->item_no?>"><button class="view">View details</button></a>
                 <a href="<?=ROOT?>/add_to_cart/<?=$rows[$i]->item_no?>"><button class="cart">Add to cart</button></a>
                 </div>
             </div>
-
+            
             <?php $i++;?>
     <?php endforeach;?>
+    <?php endif?>
+    <?php if(!$rows):?>
+        <p class="no_products"><i class="fa-solid fa-magnifying-glass fa-l"></i>&nbsp;&nbsp;&nbsp;Sorry! No products found.<p>
     <?php endif?>
         </div>
 

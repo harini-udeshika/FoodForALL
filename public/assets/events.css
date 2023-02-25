@@ -383,11 +383,15 @@ h4{
     width: 9rem;
     background-color: #7FB432;
     color: #fff;
-    border: 1px solid #7FB432;
+    border: none;
     border-radius: 1rem;
     font-size: medium;
     padding: 1rem;
     margin-right: 3rem;
+    cursor: pointer;
+}
+.shop-button:hover{
+    background-color: #9ad442;
 }
 
 .shop {
