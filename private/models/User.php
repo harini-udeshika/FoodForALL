@@ -3,7 +3,7 @@ class User extends Model
 {
     // protected $table = "user";
     public function validate($DATA)
-    {
+    { 
         $this->errors = array();
         // if(email_exists($DATA['email'])){
 

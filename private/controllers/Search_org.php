@@ -14,7 +14,7 @@ class Search_org extends Controller
             $this->view('search_org',['rows' => $search_data]);
         }
         else{
-             $this->view('search_org', ['rows' => $data]);
+             $this->view('search_org', ['rows' => $data]); 
         }
        
     }

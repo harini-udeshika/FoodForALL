@@ -8,7 +8,7 @@ class Home extends Controller{
         $query = "SELECT profile_pic from organization";
         $pics=$org->query($query);
         //print_r($pics);
-        $query = "SELECT * FROM event WHERE date>CURRENT_DATE ORDER BY date DESC LIMIT 4";
+        $query = "SELECT * FROM event WHERE date>CURRENT_DATE && approved=1 ORDER BY date DESC LIMIT 4";
         $event_data = $event->query($query);
         //print_r($event_data);
         $data = $user->findAll();
