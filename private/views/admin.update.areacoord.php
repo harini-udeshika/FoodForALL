@@ -1,14 +1,16 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/addareacoordinator.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
+<?= print_r($user_data) ?>
 
 <body>
     <div class="container">
+        <div class="heading-1 col-12 ">Update Details</div>
         <!-- space -->
         <div class="blank col-lg-3"></div>
 
         <!-- START : form -->
-        <form class="col-lg-6 m-top-100 m-bottom-100" method="post" id="form1">
+        <form class="col-lg-6 m-top-20 m-bottom-100" method="post" id="form1">
             <div class="card card-back1 p-40 p-bottom-30 grid-8 max-w-400px m-lr-auto">
                 <?php if (isset($errors)) : ?>
                     <div class="col-lg-8 server_errors p-10">
@@ -18,25 +20,18 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="col-lg-4">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">First Name</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="first_name" id="first_name" value="<?= $user_data->name ?>" type="text">
+                <div class="col-lg-8">
+                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Name</label>
+                    <input class="input-field input-field-block txt-08 w-medium" name="name" id="name" value=<?= $user_data->name ?> type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Last Name</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="last_name" id="last_name" value="<?= $user_data->name ?>" type="text">
-                    <div class="error-holder">
-                        <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
-                        <div class="err_message inline">error message</div>
-                    </div>
-                </div>
+
                 <div class="col-lg-8">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">E-mail</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="email" value="<?= $user_data->email ?>" id="email" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="email" value=<?= $user_data->email ?> id="email" type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -44,7 +39,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">NIC</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="nic" id="nic" value="<?= $user_data->nic ?>" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="nic" id="nic" value=<?= $user_data->nic ?> type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -52,7 +47,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Contact Number</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="phone_no" id="phone_no" value="<?= $user_data->phone_no ?>" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="phone_no" id="phone_no" value=<?= $user_data->phone_no ?> type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -69,8 +64,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Town</label>
-                    <select type="text" name="town" id="town" placeholder="Town" class="input-field input-field-block txt-08 w-medium">
+                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Area</label>
+                    <select type="text" name="area" id="area" placeholder="Area" class="input-field input-field-block txt-08 w-medium">
                         <option value="" selected="selected">Please select Distrct</option>
                     </select>
                     <div class="error-holder">
@@ -78,29 +73,12 @@
                         <div class="err_message inline">error message</div>
                     </div>
                 </div>
-                <!-- <div class="col-lg-8">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Password</label>
-                    <input class="input-field input-field-block txt-08 w-medium" type="password" name="password" id="password">
-                    <div class="error-holder">
-                        <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
-                        <div class="err_message inline">error message</div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Re-enter Password</label>
-                    <input class="input-field input-field-block txt-08 w-medium" type="password" name="password2" id="password2">
-                    <div class="error-holder">
-                        <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
-                        <div class="err_message inline">error message</div>
-                    </div>
-                </div> -->
 
-                <div class="col-lg-4 m-top-40">
-                    <button class="btn btn-sm btn-block btn-gray m-top-20" type="submit" name="add">Cancel</button>
+                <div class="col-lg-4 m-top-20">
+                    <button class="btn btn-sm btn-block btn-gray m-top-20" type="submit">Cancel</button>
                 </div>
-                
-                <div class="col-lg-4 m-top-40">
-                    <button class="btn btn-sm btn-block btn-blue m-top-20" type="submit" name="add">Save changes</button>
+                <div class="col-lg-4 m-top-20">
+                    <button class="btn btn-sm btn-block btn-blue m-top-20" type="submit" name="add">Change</button>
                 </div>
             </div>
         </form>
@@ -116,13 +94,12 @@
 
         // selecting form elements
 
-        const first_name = document.getElementById('first_name');
-        const last_name = document.getElementById('last_name');
+        const name = document.getElementById('name');
         const email = document.getElementById('email');
         const nic = document.getElementById('nic');
         const phone_no = document.getElementById('phone_no');
         const district = document.getElementById('district');
-        const town = document.getElementById('town');
+        const area = document.getElementById('area');
         const password = document.getElementById('password');
         const password2 = document.getElementById('password2');
 
@@ -133,33 +110,23 @@
 
         function checkInputs(event) {
 
-            const first_name_value = first_name.value.trim();
-            const last_name_value = last_name.value.trim();
+            const name_value = name.value.trim();
             const email_value = email.value.trim();
             const nic_value = nic.value.trim();
             const phone_no_value = phone_no.value.trim();
             const district_value = district.value.trim();
-            const town_value = town.value.trim();
+            const area_value = area.value.trim();
             const password_value = password.value.trim();
             const password2_value = password2.value.trim();
 
 
             //------validate first name-----
-            if (first_name_value == '') {
-                displayErrorMessage(event, first_name, "cannot be empty");
-            } else if (!isValidName(first_name_value)) {
-                displayErrorMessage(event, first_name, "Not a valid username.");
+            if (name_value == '') {
+                displayErrorMessage(event, name, "cannot be empty");
+            } else if (!isValidName(name_value)) {
+                displayErrorMessage(event, name, "Not a valid username.");
             } else {
-                offErrorMessage(first_name);
-            }
-
-            //------validate last name-----
-            if (last_name_value == '') {
-                displayErrorMessage(event, last_name, "Cannot be blank");
-            } else if (!isValidName(last_name_value)) {
-                displayErrorMessage(event, last_name, "Not a valid username.");
-            } else {
-                offErrorMessage(last_name);
+                offErrorMessage(name);
             }
 
             //------validate email-----
@@ -242,11 +209,11 @@
                 offErrorMessage(district);
             }
 
-            // -----Validate town------
-            if (town_value == '') {
-                displayErrorMessage(event, town, "Please select a town");
+            // -----Validate area------
+            if (area_value == '') {
+                displayErrorMessage(event, area, "Please select a town");
             } else {
-                offErrorMessage(town);
+                offErrorMessage(area);
             }
 
             // validate password
@@ -266,7 +233,7 @@
                 displayErrorMessage(event, password, "Can not be blank.");
             } else if (password_value.length < 8) {
                 displayErrorMessage(event, password, "Password should at least 8 characters");
-            } else if (first_name_value != '' && last_name_value != '' && (password_value.includes(first_name_value) || password_value.includes(last_name_value))) {
+            } else if (name_value != '' && (password_value.includes(name_value))) {
                 displayErrorMessage(event, password, "Can not use your name as a password.");
             } else if (password_value != password2_value) {
                 displayErrorMessage(event, password2, "Password does not match.");
@@ -749,19 +716,18 @@
 
         window.onload = function() {
             var districtSelector = document.getElementById("district"),
-                townSelector = document.getElementById("town");
+                areaSelector = document.getElementById("area");
             for (var country in districtObject) {
                 districtSelector.options[districtSelector.options.length] = new Option(country, country);
             }
             districtSelector.onchange = function() {
-                townSelector.length = 1;
+                areaSelector.length = 1;
                 if (this.selectedIndex < 1) return;
                 for (var state in districtObject[this.value]) {
-                    townSelector.options[townSelector.options.length] = new Option(state, state);
+                    areaSelector.options[areaSelector.options.length] = new Option(state, state);
                 }
             }
             // districtSelector.onchange();
         }
     </script>
 </body>
-s

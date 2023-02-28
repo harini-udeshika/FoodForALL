@@ -56,7 +56,7 @@
 
                             <img class="event-image m-bottom-4" src="/img.jpeg" alt="" srcset="">
 
-                            <div class="event-date txt-al-center txt-08">Event Date - <?= $event->date ?></div>
+                            <div class="event-date txt-al-center txt-09 w-semibold">Event Date - <?= $event->date ?></div>
 
                             <div class="m-top-10">
                                 <div class="row-flex jf-btwn">
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div class="progress-back width-100">
-                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                    <div class="progress-fill width-80 height-5px m-top-2"></div>
                                 </div>
                             </div>
 
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="progress-back width-100">
-                                    <div class="progress-fill width-<?= $event->vol_percentage ?> height-4px m-top-2"></div>
+                                    <div class="progress-fill width-<?= $event->vol_percentage ?> height-6px m-top-2"></div>
                                 </div>
                             </div>
 

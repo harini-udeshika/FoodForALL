@@ -13,14 +13,9 @@ class Admins extends Model
 
         $this->errors = array();
 
-        // validate first name
-        if (empty($DATA['first_name']) || !preg_match('/^[a-zA-Z]+$/', $DATA['first_name'])) {
-            $this->errors['first_name'] = "An error in first name";
-        }
-
-        //validate last name
-        if (empty($DATA['last_name']) || !preg_match('/^[a-zA-Z]+$/', $DATA['last_name'])) {
-            $this->errors['last_name'] = "An error in last name";
+        // validate name
+        if (empty($DATA['name']) || !preg_match('/^[a-zA-Z]+$/', $DATA['name'])) {
+            $this->errors['name'] = "An error in name";
         }
 
         //validate email
@@ -58,9 +53,9 @@ class Admins extends Model
             $this->errors['district'] = "An error in district";
         }
 
-        //validate town
-        if (empty($DATA['town'])) {
-            $this->errors['town'] = "An error in town";
+        //validate area
+        if (empty($DATA['area'])) {
+            $this->errors['area'] = "An error in area";
         }
 
         //validate for usertype

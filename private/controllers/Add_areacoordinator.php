@@ -10,7 +10,7 @@ class Add_areacoordinator extends Controller
         if (Auth::isuser('admin')) {
             $user->view('addareacoordinator');
         } else {
-            $this->redirect('login');
+            echo ("You have no access right");
         }
     }
 
