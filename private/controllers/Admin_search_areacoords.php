@@ -80,6 +80,33 @@ class Admin_search_areacoords extends Controller
         }
     }
 
+    public function update($id = null)
+    {
+        if (Auth::isuser('admin')) {
+            $admin_model = new Admins();
+            $admin_model->change_table('area_coodinator');
+
+            if (isset($id)) {
+                $user_data = $admin_model->where('id', $id);
+                $user_data = $user_data[0];
+            }
+
+            if (isset($_POST)) {
+                if (count($_POST) > 0) {
+                    $admin_model->update($id);
+                    $this->redirect('Admin_search_areacoords');
+                }
+            }
+
+            $this->view('admin.update.areacoord', [
+                'user_data' => $user_data,
+            ]);
+
+        } else {
+            $this->redirect('login');
+        }
+    }
+
     public function new_areacoord()
     {
         if (Auth::isuser('admin')) {
@@ -111,10 +138,9 @@ class Admin_search_areacoords extends Controller
                     $_POST["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
                     $admin_model->insert($_POST);
-                    
-                    $user =new Admin_search_areacoords();
-                    $user->redirect('Admin_search_areacoords');
 
+                    $user = new Admin_search_areacoords();
+                    $user->redirect('Admin_search_areacoords');
                 }
             }
         } else {

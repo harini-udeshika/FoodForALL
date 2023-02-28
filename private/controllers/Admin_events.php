@@ -8,7 +8,7 @@ class Admin_events extends Controller
         if (Auth::isuser('admin')) {
             $user->view('admin.events');
         } else {
-            echo ("You have no access right");
+            $this->redirect('login');
         }
     }
 }
