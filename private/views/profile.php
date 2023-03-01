@@ -39,7 +39,7 @@ if (file_exists($rows->profile_pic)) {
     <div class="heading_certificates">
         <p>Volunteering Certificates</p>
         <button id="add">Add +</button>
-        
+
     </div>
     <div class="change_pic visible" id="cert">
 
@@ -82,7 +82,7 @@ if (file_exists($rows->profile_pic)) {
                 <div class="certificates_row">
             <?php endif?>
             <div class="image"><img src="<?=$cert[$i]->file_name?>">
-            <?php if($cert[$i]->description):?>
+            <?php if ($cert[$i]->description): ?>
             <p class="des"><?=$cert[$i]->description?></p>
             <?php endif?>
             </div>
@@ -91,7 +91,7 @@ if (file_exists($rows->profile_pic)) {
 
         <?php endforeach;?>
         <?php endif?>
-                
+
         </div>
     </div>
 </div>
@@ -99,6 +99,7 @@ if (file_exists($rows->profile_pic)) {
     <div class="heading_activities">
         <p>Recent Activities</p>
     </div>
+    <div class="scroll">
     <table>
         <tr class="table_headings">
             <th>Event</th>
@@ -115,24 +116,29 @@ $i = 0;?>
 
         <?php foreach ($event_data as $value): ?>
 
-        <tr class="table_row">
+        <tr class="table_row ">
 
             <td><?=$event_data[$i]->name?></td>
             <td><?=$org_name[$i]->name?></td>
             <td><?=$event_data[$i]->volunteer_type?></td>
             <td><?=$event_data[$i]->date?></td>
         </tr>
-        <?php $i++;
-//  echo ($i); ?>
+        <?php $i++;?>
+
+
 
         <?php endforeach;?>
+
         <?php endif?>
+
     </table>
+    </div>
 </div>
 <div class="donation_section" id="donations">
     <div class="heading_activities">
         <p>Recent Donations</p>
     </div>
+    <div class="scroll">
     <table>
         <tr class="table_headings">
             <th>Date</th>
@@ -160,6 +166,7 @@ $i = 0;?>
         <?php endforeach;?>
         <?php endif?>
     </table>
+        </div>
 </div>
 
 <div class="end_section">

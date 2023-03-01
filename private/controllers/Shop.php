@@ -4,8 +4,14 @@ class Shop extends Controller
     public function index()
     {$item = new Merchandise_item();
         $org = new Organization();
-        if (Auth::logged_in()) {
-            if (isset($_GET['id'])) {
+        if (Auth::logged_in()) { 
+            if(isset($_GET['product_id'])){
+                $item_id=$_GET['product_id'];
+                $item_data=$item->where('item_no',$item_id);
+                //print_r($item_data);
+                $this->view('product_details',['data'=>$item_data[0]]);
+            }
+            else if (isset($_GET['id'])) {
                 $org_id = $_GET['id'];
 
                 $org_data = $org->where('gov_reg_no', $org_id);

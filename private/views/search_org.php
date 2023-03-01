@@ -11,7 +11,7 @@
         </form>
 
 
-        <!-- <div class="filter">
+        <!-- <div class="filter"> 
             <p>Filter by</p>
             <form action="">
 
