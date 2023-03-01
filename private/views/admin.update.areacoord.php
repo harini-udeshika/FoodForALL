@@ -1,4 +1,4 @@
-<?php $this->view('includes/header') ?>
+<?php $this->view('includes/header_2')?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/addareacoordinator.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 

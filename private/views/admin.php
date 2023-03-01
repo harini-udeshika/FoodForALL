@@ -1,5 +1,5 @@
 <!-- include header -->
-<?php $this->view('includes/header')?>
+<?php $this->view('includes/header_2')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/styles-temp/styles.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>  

@@ -120,7 +120,7 @@ class Admins extends Model
     public function search_in_areacoords($keyword){
         $keyword=addslashes($keyword);
 
-        $query = "SELECT * FROM area_coodinator WHERE first_name LIKE '%$keyword%' OR last_name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR nic LIKE '%$keyword%' OR id LIKE '%$keyword%'";
+        $query = "SELECT * FROM area_coodinator WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR nic LIKE '%$keyword%' OR id LIKE '%$keyword%'";
         
         $data = $this->query($query);
         return $data;
