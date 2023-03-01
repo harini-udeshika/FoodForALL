@@ -1,10 +1,9 @@
-<?php $this->view('includes/header') ?>
+<?php $this->view('includes/header_2') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/addareacoordinator.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
-<?= print_r($_POST)?>
 
 <body>
     <div class="container">
