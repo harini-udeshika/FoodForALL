@@ -80,21 +80,45 @@ class Admin_search_areacoords extends Controller
         }
     }
 
+    public function update($id = null)
+    {
+        if (Auth::isuser('admin')) {
+            $admin_model = new Admins();
+            $admin_model->change_table('area_coodinator');
+
+            if (isset($id)) {
+                $user_data = $admin_model->where('id', $id);
+                $user_data = $user_data[0];
+            }
+
+            if (isset($_POST)) {
+                if (count($_POST) > 0) {
+                    unset($_POST['add']);
+                    $admin_model->update($id,$_POST);
+                    $this->redirect('Admin_search_areacoords');
+                }
+            }
+
+            $this->view('admin.update.areacoord', [
+                'user_data' => $user_data,
+            ]);
+        } else {
+            $this->redirect('login');
+        }
+    }
+
     public function new_areacoord()
     {
         if (Auth::isuser('admin')) {
-            $this->view('addareacoordinator');
-
             if (isset($_POST)) {
                 // check post's empty or not and the name of form
-                if (count($_POST) != 10 || !array_key_exists("add", $_POST)) {
-
+                if (count($_POST) > 0 && array_key_exists("add", $_POST)) {
                     // crate new admin model
                     $admin_model = new Admins();
 
                     // change table name
                     $admin_model->change_table("area_coodinator");
-
+                    
                     // validate inputs
                     if (!$admin_model->validate_Acoordinator($_POST)) {
                         $errors = $admin_model->errors;
@@ -111,10 +135,11 @@ class Admin_search_areacoords extends Controller
                     $_POST["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
                     $admin_model->insert($_POST);
-                    
-                    $user =new Admin_search_areacoords();
-                    $user->redirect('Admin_search_areacoords');
 
+                    $user = new Admin_search_areacoords();
+                    $user->redirect('Admin_search_areacoords');
+                }else{
+                    $this->view('addareacoordinator');
                 }
             }
         } else {

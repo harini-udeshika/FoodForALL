@@ -10,6 +10,9 @@
     --projectBlack: #000;
     --blackHover: #1D1D1D;
 
+    --projectBlue: 	#0275d8;
+    --blueHover: #0b5ed7;
+
     --projectGrey: #DADADA;
     --grayHover: #CACACA;
 
@@ -83,6 +86,9 @@
     background-color: var(--projectRed);
 }
 
+.btn-blue {
+    background-color: var(--projectBlue);
+}
 
 
 /* ------------------- button styles:hover -------------------*/
@@ -104,6 +110,10 @@
 
 .btn-red:hover {
     background-color: var(--redHover);
+}
+
+.btn-blue:hover {
+    background-color: var(--blueHover);
 }
 
 

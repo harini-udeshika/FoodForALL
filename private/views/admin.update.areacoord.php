@@ -1,21 +1,15 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/addareacoordinator.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
-<?php $this->view('includes/navbar') ?>
-<?php $this->view('includes/submenu') ?>
-
-<?= print_r($_POST)?>
 
 <body>
     <div class="container">
-        <!-- main heading -->
-        <div class="heading-1 col-lg-12">Add Area Coordinator</div>
-
+        <div class="heading-1 col-12 ">Update Details</div>
         <!-- space -->
         <div class="blank col-lg-3"></div>
 
         <!-- START : form -->
-        <form class="col-lg-6 m-top-20 m-bottom-100" action="<?= ROOT ?>/Admin_search_areacoords/new_areacoord" method="post" id="form1">
+        <form class="col-lg-6 m-top-20 m-bottom-100" method="post" id="form1">
             <div class="card card-back1 p-40 p-bottom-30 grid-8 max-w-400px m-lr-auto">
                 <?php if (isset($errors)) : ?>
                     <div class="col-lg-8 server_errors p-10">
@@ -27,7 +21,7 @@
 
                 <div class="col-lg-8">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Name</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="name" id="name" value="<?= get_var('name') ?>" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="name" id="name" value=<?= $user_data->name ?> type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -36,7 +30,7 @@
 
                 <div class="col-lg-8">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">E-mail</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="email" value="<?= get_var('email') ?>" id="email" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="email" value=<?= $user_data->email ?> id="email" type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -44,7 +38,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">NIC</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="nic" id="nic" value="<?= get_var('nic') ?>" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="nic" id="nic" value=<?= $user_data->nic ?> type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -52,7 +46,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Contact Number</label>
-                    <input class="input-field input-field-block txt-08 w-medium" name="phone_no" id="phone_no" value="<?= get_var('phone_no') ?>" type="text">
+                    <input class="input-field input-field-block txt-08 w-medium" name="phone_no" id="phone_no" value=<?= $user_data->phone_no ?> type="text">
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
@@ -61,7 +55,7 @@
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">District</label>
                     <select type="text" name="district" id="district" placeholder="District" class="input-field input-field-block txt-08 w-medium">
-                        <option value="" selected="selected">Select District</option>
+                        <option value="" selected="selected"></option>
                     </select>
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
@@ -71,32 +65,21 @@
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Area</label>
                     <select type="text" name="area" id="area" placeholder="Area" class="input-field input-field-block txt-08 w-medium">
-                        <option value="" selected="selected">Please select Distrct</option>
+                        <option value=""></option>
                     </select>
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
                         <div class="err_message inline">error message</div>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Password</label>
-                    <input class="input-field input-field-block txt-08 w-medium" type="password" name="password" id="password">
-                    <div class="error-holder">
-                        <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
-                        <div class="err_message inline">error message</div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Re-enter Password</label>
-                    <input class="input-field input-field-block txt-08 w-medium" type="password" name="password2" id="password2">
-                    <div class="error-holder">
-                        <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
-                        <div class="err_message inline">error message</div>
-                    </div>
-                </div>
 
-                <div class="col-lg-8">
-                    <button class="btn btn-sm btn-block btn-green m-top-20" type="submit" name="add">Add</button>
+                <div class="col-lg-4 m-top-20">
+                    <a href="<?=ROOT?>/Admin_search_areacoords">
+                        <button class="btn btn-sm btn-block btn-gray m-top-20" type="submit">Cancel</button>
+                    </a>
+                </div>
+                <div class="col-lg-4 m-top-20">
+                    <button class="btn btn-sm btn-block btn-blue m-top-20" type="submit" name="add">Change</button>
                 </div>
             </div>
         </form>
@@ -251,7 +234,7 @@
                 displayErrorMessage(event, password, "Can not be blank.");
             } else if (password_value.length < 8) {
                 displayErrorMessage(event, password, "Password should at least 8 characters");
-            } else if (name_value != ''&& (password_value.includes(name_value))) {
+            } else if (name_value != '' && (password_value.includes(name_value))) {
                 displayErrorMessage(event, password, "Can not use your name as a password.");
             } else if (password_value != password2_value) {
                 displayErrorMessage(event, password2, "Password does not match.");
@@ -733,14 +716,15 @@
         }
 
         window.onload = function() {
-            var selected_district = "<?php get_var('district') ?>";
-            var selected_area = "<?php get_var('area') ?>";
+            var selected_district = "<?= $user_data->district ?>";
+            var selected_area = "<?= $user_data->area ?>";
 
             var districtSelector = document.getElementById("district"),
                 areaSelector = document.getElementById("area");
-            for (var country in districtObject) {
-                districtSelector.options[districtSelector.options.length] = new Option(country, country);
+            for (var district in districtObject) {
+                districtSelector.options[districtSelector.options.length] = new Option(district, district);
             }
+
             districtSelector.onchange = function() {
                 areaSelector.length = 1;
                 if (this.selectedIndex < 1) return;
@@ -760,5 +744,3 @@
         }
     </script>
 </body>
-
-<?php $this->view('includes/footer') ?>
