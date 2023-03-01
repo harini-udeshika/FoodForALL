@@ -1,7 +1,6 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/addareacoordinator.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
-<?= print_r($user_data) ?>
 
 <body>
     <div class="container">
@@ -56,7 +55,7 @@
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">District</label>
                     <select type="text" name="district" id="district" placeholder="District" class="input-field input-field-block txt-08 w-medium">
-                        <option value="" selected="selected">Select District</option>
+                        <option value="" selected="selected"></option>
                     </select>
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
@@ -66,7 +65,7 @@
                 <div class="col-lg-4">
                     <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Area</label>
                     <select type="text" name="area" id="area" placeholder="Area" class="input-field input-field-block txt-08 w-medium">
-                        <option value="" selected="selected">Please select Distrct</option>
+                        <option value=""></option>
                     </select>
                     <div class="error-holder">
                         <i class="fa-solid fa-triangle-exclamation exclanation_icon"></i>
@@ -75,7 +74,9 @@
                 </div>
 
                 <div class="col-lg-4 m-top-20">
-                    <button class="btn btn-sm btn-block btn-gray m-top-20" type="submit">Cancel</button>
+                    <a href="<?=ROOT?>/Admin_search_areacoords">
+                        <button class="btn btn-sm btn-block btn-gray m-top-20" type="submit">Cancel</button>
+                    </a>
                 </div>
                 <div class="col-lg-4 m-top-20">
                     <button class="btn btn-sm btn-block btn-blue m-top-20" type="submit" name="add">Change</button>
@@ -715,11 +716,15 @@
         }
 
         window.onload = function() {
+            var selected_district = "<?= $user_data->district ?>";
+            var selected_area = "<?= $user_data->area ?>";
+
             var districtSelector = document.getElementById("district"),
                 areaSelector = document.getElementById("area");
-            for (var country in districtObject) {
-                districtSelector.options[districtSelector.options.length] = new Option(country, country);
+            for (var district in districtObject) {
+                districtSelector.options[districtSelector.options.length] = new Option(district, district);
             }
+
             districtSelector.onchange = function() {
                 areaSelector.length = 1;
                 if (this.selectedIndex < 1) return;
@@ -728,6 +733,14 @@
                 }
             }
             // districtSelector.onchange();
+            if (selected_district != "") {
+                districtSelector.value = selected_district;
+                var event = new Event("change");
+                districtSelector.dispatchEvent(event);
+
+                if (selected_area != "")
+                    areaSelector.value = selected_area;
+            }
         }
     </script>
 </body>

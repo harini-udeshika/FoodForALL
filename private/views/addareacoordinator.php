@@ -733,6 +733,9 @@
         }
 
         window.onload = function() {
+            var selected_district = "<?php get_var('district') ?>";
+            var selected_area = "<?php get_var('area') ?>";
+
             var districtSelector = document.getElementById("district"),
                 areaSelector = document.getElementById("area");
             for (var country in districtObject) {
@@ -746,6 +749,14 @@
                 }
             }
             // districtSelector.onchange();
+            if (selected_district != "") {
+                districtSelector.value = selected_district;
+                var event = new Event("change");
+                districtSelector.dispatchEvent(event);
+
+                if (selected_area != "")
+                    areaSelector.value = selected_area;
+            }
         }
     </script>
 </body>
