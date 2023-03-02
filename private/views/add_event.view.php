@@ -63,8 +63,8 @@
                                         <label for="description" class="heading-4">Event description</label>
                                         <textarea name="description" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" style="height: 75px;" rows="5" cols="50"></textarea>
 
-                                        <button class="btn btn-sm btn-black float-right m-top-10 m-bottom-15 m-right-20" type="submit">Add Event</button>
-                                        <a href="home_org/event">
+                                        <button class="btn btn-sm btn-black float-right m-top-10 m-bottom-15 m-right-20" id="add_event" type="submit">Add Event</button>
+                                        <a href="home_org">
                                                 <button class="btn btn-sm btn-black float-left m-top-10 m-bottom-15" style="margin-left: -70px;" type="button">Back</button>
                                         </a>
 
@@ -79,6 +79,11 @@
 <!-- <div class="card col-lg-12 grid-10 p-left-30 p-right-30 p-bottom-30 m-top-80">
             <div class="heading-2 col-10">Details</div>
 </div> -->
-
+<script>
+  const button = document.getElementById("add_event");
+  button.addEventListener("click", () => {
+    alert("This action will add a new Event");
+  });
+</script>
 
 <?php $this->view('includes/footer') ?>

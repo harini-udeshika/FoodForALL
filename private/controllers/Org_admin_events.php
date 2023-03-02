@@ -14,12 +14,16 @@ class Org_admin_events extends Controller
         // echo "pending";
         // print_r($pending);
         
-
-        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
-        $arr = ['id'=>$org_reg];
-        $ongoing = $event->query($query,$arr);
-        // echo "<br>ongoing";
+        // ---------------------------------------------------------------------------------------
+        // $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
+        // $arr = ['id'=>$org_reg];
+        // $ongoing = $event->query($query,$arr);
+        // ---------------------------------------------------------------------------------------------------
+        $org = new Organization();
+        $ongoing = $org->selectOngoing($org_reg);
+        // echo "<pre>";
         // print_r($ongoing);
+        // die;
 
         $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date<CURRENT_DATE";
         $arr = ['id'=>$org_reg];
