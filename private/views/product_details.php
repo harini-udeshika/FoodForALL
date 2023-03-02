@@ -3,7 +3,7 @@
 
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
-
+<script src="<?=ROOT?>/assets/add_to_cart.js"></script>
 <div class="container">
     <div class="corner">
         
@@ -25,4 +25,5 @@
 </div>
 
 <script src=" navbar.js"></script>
+<script src="<?=ROOT?>/assets/add_to_cart.js"></script>
 <?php $this->view('includes/footer')?>

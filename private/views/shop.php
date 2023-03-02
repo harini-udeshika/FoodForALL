@@ -8,7 +8,7 @@
 
 
     <div class=top>
-    <div class="h1"><h1><?=$org_data->name?></h1> <a href=""><button class="shop-button"><i class="fa-solid fa-cart-shopping fa-xl"></i></button></a></div>
+    <div class="h1"><h1><?=$org_data->name?></h1> <a href="<?=ROOT?>/shop?cartid=<?=$org_data->gov_reg_no?>+cart"><button class="shop-button"><i class="fa-solid fa-cart-shopping fa-xl"></i></button></a></div>
    
     <div class="search">
         <form action="" method="post">
@@ -17,6 +17,7 @@
         </form>
     </div>
     </div>
+    <div class="alert" id="alert"></div>
     <div class="container">
     <!-- <div class="shop">
         <div class="categories">
@@ -54,7 +55,7 @@
                 <p>Rs.<?=$rows[$i]->price?></p>
                 <div class="buttons">
                 <a href="<?=ROOT?>/shop?product_id=<?=$rows[$i]->item_no?>"><button class="view">View details</button></a>
-                <a href="<?=ROOT?>/add_to_cart/<?=$rows[$i]->item_no?>"><button class="cart">Add to cart</button></a>
+                <a href="<?=ROOT?>/shop/add_to_cart?item=<?=$rows[$i]->item_no?>+<?=$org_data->gov_reg_no?>"><button class="cart" id="add_to_cart<?=$i?>">Add to cart</button></a>
                 </div>
             </div>
             
@@ -75,3 +76,5 @@
 <?php $this->view('includes/footer')?>
 <script src=" navbar.js"></script>
 <script src="<?=ROOT?>/assets/organizationpage.js"></script>
+
+<script src="<?=ROOT?>/assets/add_to_cart.js"></script>
