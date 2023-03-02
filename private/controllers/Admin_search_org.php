@@ -20,7 +20,7 @@ class Admin_search_org extends Controller
         }
     }
 
-    public function search_user()
+    public function search_org()
     {
         $new_user = new Admin_search_org();
         $results = array();

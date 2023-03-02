@@ -11,7 +11,7 @@
         </form>
 
 
-        <!-- <div class="filter">
+        <!-- <div class="filter"> 
             <p>Filter by</p>
             <form action="">
 
@@ -61,7 +61,7 @@
         <p><?=$rows[$i]->name?></p>
         <p><?=$tot_events->count?></p>
     </div>
-    </a>
+    </a> 
 
     <?php $i++;
 // echo ($i); ?>

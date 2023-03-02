@@ -82,7 +82,7 @@ class Model extends Database
         } else if (!$f1) {
             $query = "select * from $this->table where $col2= :f2 && date> CURRENT_DATE && approved=1";
             return $this->query($query, [
-                'f2' => $f2,
+                'f2' => $f2, 
 
             ]);
         }

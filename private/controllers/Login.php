@@ -24,7 +24,7 @@ class Login extends Controller
                     Auth::authenticate($row);
                     if (Auth::check_verified()) {
                         // if($row->usertype=="reg_user"){
-                             $this->redirect('/profile');
+                             $this->redirect('/home');
                         //}
                        
                     } else {
@@ -46,7 +46,7 @@ class Login extends Controller
                     Auth::authenticate($row);
                     
                     
-                             $this->redirect('/admin');
+                             $this->redirect('/home');
                     
                        
                     
