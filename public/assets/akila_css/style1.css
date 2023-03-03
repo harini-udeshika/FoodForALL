@@ -15,16 +15,23 @@ a {
 }
 
 .photo_holder {
-    height: 0px;
-    padding-bottom: 100%;
+    height: 180px;
+    /* padding-bottom: 100%; */
 
     border: 3px solid var(--projectPurple);
     border-radius: 10px;
 
-    overflow: hidden;
-    background-position: center;
-    background-size: cover;
+    /* overflow: hidden; */
 }
+
+/* .photo_holder img {
+    position: absolute;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%; 
+    height: 100%;
+    
+} */
 
 .addmore_link_holder {
     padding: 20px;

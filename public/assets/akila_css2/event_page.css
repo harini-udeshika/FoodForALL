@@ -59,3 +59,17 @@ a {
     width: 50%;
     float: right;
 }
+
+.volunteer_scroll{
+    /* background-color: red; */
+    height: auto;
+    max-height: 275px;
+    overflow: auto; 
+}
+
+.accepted_scroll{
+    /* background-color: red; */
+    height: auto;
+    max-height: 275px;
+    overflow: auto; 
+}

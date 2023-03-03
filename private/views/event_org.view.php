@@ -9,13 +9,13 @@
     <div class="container">
         <div class="heading-2 col-lg-2 p-left-25 p-top-7">Event Status : </div>
         <div class="card col-lg-2 heading-3 height-30px" style="text-align: center; color:red;">
-        <?php 
-            if($event_details->date < date("Y-m-d")){
+            <?php
+            if ($event_details->date < date("Y-m-d")) {
                 echo "Completed";
-            }else{
-                echo "Ongoing";
+            } else {
+                echo "Upcoming";
             }
-        ?></div>
+            ?></div>
         <div class="blank col-lg-8"></div>
         <!-- <div class="heading-2 col-lg-2 p-left-25 p-top-7" style="border: 1px solid red;"></div> -->
     </div>
@@ -173,66 +173,71 @@
 
     <div class="blank col-lg-12 height-75px"></div>
 
-    <div class="container">
-        <div class="blank col-lg-1"></div>
-        <div class="card col-lg-10 height-auto p-top-30 p-bottom-15">
-            <div class="heading-2 col-lg-2 p-left-25 p-top-20">Volunteer Requests </div>
-            <div class="row">
-                <div class="blank col-2"></div>
-                <div class="card col-8 height-90px p-bottom-15 grid-10">
-                    <div class="col-2" style="display: flex; justify-content: center;">
-                        <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-6" style="height:5rem; border-radius: 50%; margin-left:-15px;">
-                    </div>
-                    <div class="col-6 heading-event3 p-top-30 txt-purple">Volunteer name <br>
-                        <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                    </div>
-                    <div class="blank col-1">
-                        <button class="btn btn-sm btn-green m-top-26 m-right-15">Accept</button>
-                    </div>
-                    <div class="blank col-1">
-                        <button class="btn btn-sm btn-gray m-top-26 m-right-15">Reject</button>
-                    </div>
-                </div>
-                <div class="blank col-2"></div>
+    <?php if ($event_details->date >= date("Y-m-d")) { ?>
 
-                <div class="blank col-2"></div>
-                <div class="card col-8 height-90px p-bottom-15 grid-10">
-                    <div class="col-2" style="display: flex; justify-content: center;">
-                        <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-6" style="height:5rem; border-radius: 50%; margin-left:-15px;">
-                    </div>
-                    <div class="col-6 heading-event3 p-top-30 txt-purple">Volunteer name <br>
-                        <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                    </div>
-                    <div class="blank col-1">
-                        <button class="btn btn-sm btn-green m-top-26 m-right-15">Accept</button>
-                    </div>
-                    <div class="blank col-1">
-                        <button class="btn btn-sm btn-gray m-top-26 m-right-15">Reject</button>
-                    </div>
-                </div>
-                <div class="blank col-2"></div>
+        <div class="container">
+            <div class="blank col-lg-1"></div>
+            <div class="card col-lg-10 height-450px p-right-20 p-top-30 p-bottom-35">
+                <div class="heading-2 col-lg-2 p-left-25 p-top-20">Volunteer Requests </div>
+                <div class="row volunteer_scroll">
+                    <?php
+                    $i = 0;
+                    if ($volunteer_req) {
+                        $count = count($volunteer_req);
+                        while ($count > 0) {
+                            $volunteer = new User();
+                            $query = "SELECT * FROM user WHERE id = :id";
+                            $arr = ['id' => $volunteer_req[$i]->id];
+                            $user_volunteer = $volunteer->query($query, $arr);
+                            $user_volunteer = $user_volunteer[0];
 
-                <div class="blank col-2"></div>
-                <div class="card col-8 height-90px p-bottom-15 grid-10">
-                    <div class="col-2" style="display: flex; justify-content: center;">
-                        <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-6" style="height:5rem; border-radius: 50%; margin-left:-15px;">
-                    </div>
-                    <div class="col-6 heading-event3 p-top-30 txt-purple">Volunteer name <br>
-                        <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                    </div>
-                    <div class="blank col-1">
-                        <button class="btn btn-sm btn-green m-top-26 m-right-15">Accept</button>
-                    </div>
-                    <div class="blank col-1">
-                        <button class="btn btn-sm btn-gray m-top-26 m-right-15">Reject</button>
-                    </div>
-                </div>
-                <div class="blank col-2"></div>
+                            $image = "./images/user_icon.png";
+                            if (file_exists($user_volunteer->profile_pic)) {
+                                $image = $user_volunteer->profile_pic;
+                                // echo $user["profile_pic"];
+                            }
 
+                            // print_r($user_volunteer);
+                            // die;
+
+                    ?>
+
+                            <div class="blank col-2"></div>
+                            <div class="card col-8 height-90px p-bottom-15 grid-10">
+                                <div class="col-2" style="display: flex; justify-content: center;">
+                                    <img src="<?php echo $image ?>" alt="" class="m-top-6" style="height:5rem; border-radius: 50%; margin-left:-15px;">
+                                </div>
+                                <div class="col-6 heading-event3 p-top-30 txt-purple"><?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?> <br>
+                                    <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;"><?php echo $volunteer_req[$i]->volunteer_type; ?></div>
+                                </div>
+                                <div class="blank col-1">
+                                    <a href="event_org/accept?uid=<?php echo $user_volunteer->id ?>&event_id=<?php echo $volunteer_req[$i]->event_id ?>">
+                                        <button class="btn btn-sm btn-green m-top-26 m-right-15">Accept</button>
+                                    </a>
+                                </div>
+                                <div class="blank col-1">
+                                    <a href="event_org/reject?uid=<?php echo $user_volunteer->id ?>&event_id=<?php echo $volunteer_req[$i]->event_id ?>">
+                                        <button class="btn btn-sm btn-gray m-top-26 m-right-15">Reject</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="blank col-2"></div>
+
+                        <?php
+                            $count--;
+                            $i++;
+                        }
+                    } else { ?>
+                        <div class="heading-3 col-lg-12 p-left-25 m-top-5 m-bottom-5">No New Volunteer Requests</div>
+                    <?php }
+                    ?>
+
+                </div>
             </div>
+            <div class="blank col-lg-1"></div>
         </div>
-        <div class="blank col-lg-1"></div>
-    </div>
+
+    <?php } ?>
 
     <div class="blank col-lg-12 height-75px"></div>
 
@@ -243,56 +248,48 @@
             <div class="row">
 
                 <div class="blank col-2"></div>
-                <div class="card-simple col-8 height-auto p-20 grid-10">
-                    <div class="card col-5 height-80px grid-8">
-                        <div class="col-2" style="display: flex; justify-content: center;">
-                            <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
-                        </div>
-                        <div class="col-6 heading-event3 p-top-20 p-left-20 txt-purple">Volunteer name <br>
-                            <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                        </div>
+                <div class="card-simple col-8 height-275px p-20 grid-10 accepted_scroll">
 
-                    </div>
+                    <?php
+                    $i = 0;
+                    if ($accepted_vol) {
+                        $count = count($accepted_vol);
+                        while ($count > 0) {
+                            $volunteer = new User();
+                            $query = "SELECT * FROM user WHERE id = :id";
+                            $arr = ['id' => $accepted_vol[$i]->id];
+                            $user_volunteer = $volunteer->query($query, $arr);
+                            $user_volunteer = $user_volunteer[0];
 
-                    <div class="card col-5 height-80px grid-8">
-                        <div class="col-2" style="display: flex; justify-content: center;">
-                            <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
-                        </div>
-                        <div class="col-6 heading-event3 p-top-20 p-left-20 txt-purple">Volunteer name <br>
-                            <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                        </div>
+                            $image = "./images/user_icon.png";
+                            if (file_exists($user_volunteer->profile_pic)) {
+                                $image = $user_volunteer->profile_pic;
+                                // echo $user["profile_pic"];
+                            }
 
-                    </div>
+                            // print_r($user_volunteer);
+                            // die;
 
-                    <div class="card col-5 height-80px grid-8">
-                        <div class="col-2" style="display: flex; justify-content: center;">
-                            <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
-                        </div>
-                        <div class="col-6 heading-event3 p-top-20 p-left-20 txt-purple">Volunteer name <br>
-                            <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                        </div>
+                    ?>
+                            <div class="card col-5 height-80px grid-8">
+                                <div class="col-2" style="display: flex; justify-content: center;">
+                                    <img src="<?php echo $image ?>" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
+                                </div>
+                                <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?><br>
+                                    <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;"><?php echo $accepted_vol[$i]->volunteer_type; ?></div>
+                                </div>
 
-                    </div>
+                            </div>
 
-                    <div class="card col-5 height-80px grid-8">
-                        <div class="col-2" style="display: flex; justify-content: center;">
-                            <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
-                        </div>
-                        <div class="col-6 heading-event3 p-top-20 p-left-20 txt-purple">Volunteer name <br>
-                            <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                        </div>
+                        <?php
+                            $count--;
+                            $i++;
+                        }
+                    } else { ?>
+                        <div class="heading-3 col-lg-12 p-left-25 m-top-5 m-bottom-5">No Volunteers Accepted</div>
+                    <?php }
+                    ?>
 
-                    </div>
-
-                    <div class="card col-5 height-80px grid-8">
-                        <div class="col-2" style="display: flex; justify-content: center;">
-                            <img src="<?= ROOT ?>/images/user_icon.png" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
-                        </div>
-                        <div class="col-6 heading-event3 p-top-20 p-left-20 txt-purple">Volunteer name <br>
-                            <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;">Mild</div>
-                        </div>
-
-                    </div>
 
                 </div>
                 <div class="blank col-2"></div>
