@@ -31,10 +31,10 @@ class Event_org extends Controller
             $em_details = $em->where('email', $event_details->event_manager_email);
             $em_details = $em_details[0];
 
-            // echo $em_details->full_name;
-            // die;
 
-            $this->view('event_org.view', ['event_details' => $event_details, 'em_details' => $em_details, 'volunteer_req' => $volunteer_req, 'accepted_vol' => $volunteer_accepted]);
+            $event_images = $event->get_images($id);
+            
+            $this->view('event_org.view', ['event_details' => $event_details, 'em_details' => $em_details, 'volunteer_req' => $volunteer_req, 'accepted_vol' => $volunteer_accepted, 'event_images' => $event_images]);
         }
 
         if (count($_POST) > 0) {
@@ -74,22 +74,23 @@ class Event_org extends Controller
         $volunteer = new Volunteer();
 
         $query = "SELECT * FROM volunteer_request WHERE event_id = :id && id = :uid";
-        $arr = ['id' => $event_id,'uid' => $uid];
+        $arr = ['id' => $event_id, 'uid' => $uid];
         $request = $vol_request->query($query, $arr);
         $request = $request[0];
 
         // print_r($request);
         // die;
 
-        $arr['user_id'] = $uid;
-        $arr['volunteer_type'] = $request->volunteer_type;
-        $arr['event_id'] = $event_id;
+        $arr_data['user_id'] = $uid;
+        $arr_data['volunteer_type'] = $request->volunteer_type;
+        $arr_data['event_id'] = $event_id;
 
         $query = "UPDATE volunteer_request SET status = 1 WHERE event_id = :id && id = :uid";
-        $arr = ['id' => $event_id,'uid' => $uid];
-        $update_req = $vol_request->query($query,$arr);
+        $arr = ['id' => $event_id, 'uid' => $uid];
+        // $update_req = $vol_request->query($query, $arr);
 
-        // $volunteer->insert($arr);
+        $volunteer->insert($arr_data);
+        $update_req = $vol_request->query($query, $arr);
         // $vol_request->delete_request($uid,$event_id);
 
 
@@ -101,12 +102,56 @@ class Event_org extends Controller
         $this->redirect('event_org?id=' . $event_id);
     }
 
-    public function reject(){
+    public function reject()
+    {
         $uid = $_GET["uid"];
         $event_id = $_GET["event_id"];
         $vol_request = new Volunteer_request();
 
-        $vol_request->delete_request($uid,$event_id);
+        $vol_request->delete_request($uid, $event_id);
         $this->redirect('event_org?id=' . $event_id);
+    }
+
+    public function send_mails()
+    {
+        if (Auth::getusertype() == 'organization') {
+            $event_id = $_GET["id"];
+            $event = new Event();
+            $event->volunteer_email($event_id);
+
+            // echo $event_id;
+            // die;
+            $this->redirect('event_org?id=' . $event_id);
+        } else {
+            $this->redirect('home');
+        }
+    }
+
+    function add_images()
+    {
+
+        if (Auth::getusertype() == 'organization') {
+            // echo "hello 2";
+            // die;
+            $event = new Event();
+            $event_id = $_GET['id'];
+
+            if (count($_FILES['images']) > 0) {
+                // echo count($_FILES['images']);
+
+                $event_images = $event->add_images($event_id);
+
+                // echo "<pre>";
+                // echo "hello";
+                // print_r($event_images);
+                // die;
+
+                $arr['photographs'] = $event_images;
+                $event->update_event($event_id, $arr);
+            }
+            $this->redirect('event_org?id=' . $event_id);
+        } else {
+            $this->redirect('home');
+        }
     }
 }
