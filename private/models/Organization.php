@@ -76,14 +76,18 @@ class Organization extends Model
 
     public function get_images($id)
     {
+
         $query = "SELECT * FROM organization WHERE id= :id";
         $arr = ['id' => $id];
         $data = $this->query($query, $arr);
         $org_data = $data[0];
+        // print_r($org_data);
+        if ($org_data->images) {
+            $imagesList = $org_data->images;
+            $img_arr = explode(',', $imagesList);
+            return $img_arr;
+        }
 
-        $imagesList  = $org_data->images;
-        $img_arr = explode(',', $imagesList);
-        return $img_arr;
     }
 
     public function crop_org_image($original_file_name, $cropped_file_name, $max_width, $max_height)
@@ -172,7 +176,7 @@ class Organization extends Model
                 // volunteer percentage
                 $event->vol_count = $vol_tot;
                 if ($event->no_of_volunteers && $event->no_of_volunteers > 0) {
-                    $event->vol_percentage = (int)($vol_tot * 100 / $event->no_of_volunteers);
+                    $event->vol_percentage = (int) ($vol_tot * 100 / $event->no_of_volunteers);
                 } else {
                     $event->vol_percentage = 0;
                 }
@@ -180,7 +184,7 @@ class Organization extends Model
                 // donation percentage
                 $event->collected = $total;
                 if ($event->total_amount && $event->total_amount > 0) {
-                    $event->amount_percentage = (int)($total * 100 / $event->total_amount);
+                    $event->amount_percentage = (int) ($total * 100 / $event->total_amount);
                 } else {
                     $event->amount_percentage = 0;
                 }
@@ -229,8 +233,6 @@ class Organization extends Model
 
         return $allEvents;
     }
-
-
 
     public function selectLastmonth($reg_no)
     {

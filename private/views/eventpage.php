@@ -7,7 +7,8 @@
 <p class="event-name">
     <?=$rows->name?><small> by <?=$org->name?></small>
 </p>
-<div class="event-body"> 
+<?php if ($rows->date>date("Y-m-d")):?>
+<div class="event-body">
     <div class=details>
         <p class="des">
         <?=$rows->description?>
@@ -91,6 +92,7 @@ if (!$amount) {
 
     </div>
 </div>
+<?php if ($rows->no_of_volunteers != 0): ?>
 <?php
 $volunteer = new Volunteer();
 $volunteer_count = $volunteer->count("user_id", "event_id", $rows->event_id);
@@ -143,13 +145,15 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
   <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
 </div>
         </div>
-      
+
         <!-- <p>OR</p> -->
-       
+
             <!-- <input type="text" placeholder="Other Amount"> -->
             <button class="continue">Continue</button>
         </form>
-       
+
     </div>
 </div>
+<?php endif?>
+<?php endif?>
 <?php $this->view('includes/footer')?>
