@@ -1,6 +1,6 @@
 .event-card-on {
-    max-width: 250px;
-    margin: 0px auto;
+    max-width: 300px;
+    margin: 10px;
 }
 
 .events-card {
@@ -34,6 +34,6 @@
 }
 .event_scroll{
     /* background-color: red; */
-    height: 400px;
+    height: 500px;
     overflow: auto; 
 }

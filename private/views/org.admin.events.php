@@ -49,7 +49,7 @@
                             <!-- <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div> -->
 
                             <div class="row-flex jf-btwn">
-                                <a href="<?=ROOT?>/Org_admin_events/delete_pending?id=<?= $pending[$i]->event_id ?>">
+                                <a href="<?= ROOT ?>/Org_admin_events/delete_pending?id=<?= $pending[$i]->event_id ?>">
                                     <button class="btn btn-gray btn-xsm m-top-30">Remove</button>
                                 </a>
                                 <a href="">
@@ -110,8 +110,12 @@
                                     </div>
                                 </div>
 
-                                <div class="progress-back width-100">
-                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                <div class="progress-back width-100 height-4px m-top-2">
+                                    <div class="progress-fill width-<?php if ($ongoin[$i]->amount_percentage) {
+                                                                        echo $ongoin[$i]->amount_percentage;
+                                                                    }else{
+                                                                        echo 0;
+                                                                    } ?> height-4px"></div>
                                 </div>
                             </div>
 
@@ -124,13 +128,17 @@
                                     </div>
                                 </div>
 
-                                <div class="progress-back width-100">
-                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
+                                <div class="progress-back width-100 height-4px m-top-2">
+                                    <div class="progress-fill width-<?php if ($ongoin[$i]->vol_percentage) {
+                                                                        echo $ongoin[$i]->vol_percentage;
+                                                                    }else{
+                                                                        echo 0;
+                                                                    } ?> height-4px "></div>
                                 </div>
                             </div>
 
                             <div class="row-flex jf-center">
-                                <a href="<?=ROOT?>/event_org?id=<?=$ongoin[$i]->event_id?>">
+                                <a href="<?= ROOT ?>/event_org?id=<?= $ongoin[$i]->event_id ?>">
                                     <button class="btn btn-green btn-xsm m-top-30">View Details</button>
                                 </a>
                             </div>
@@ -180,11 +188,11 @@
 
                             <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div>
 
-                            
+
                             <div class="row-flex jf-center">
-                            <a href="<?=ROOT?>/event_org?id=<?=$past[$i]->event_id?>">
-                                <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
-                            </a>
+                                <a href="<?= ROOT ?>/event_org?id=<?= $past[$i]->event_id ?>">
+                                    <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
+                                </a>
                             </div>
                         </div>
                         <!--end of EVENT-COMPLETED -->
@@ -197,7 +205,7 @@
                 <?php }
                 ?>
 
-                
+
             </div>
         </div>
 

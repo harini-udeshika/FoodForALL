@@ -59,7 +59,7 @@
         <?php endif?>
         <?php if (Auth::getusertype() == 'admin'): ?>
             <div class="nav-i">
-                <a href="<?=ROOT?>/homepage">Home</a>
+                <a href="<?=ROOT?>/admin/home">Home</a>
             </div>
             <!-- <div class="nav-i">
                 <a href="">Donate/Volunteer</a>

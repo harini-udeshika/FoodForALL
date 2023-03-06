@@ -1,4 +1,4 @@
-<?php $this->view('includes/header') ?>
+<?php $this->view('includes/header_2') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/admin.search.org.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 
@@ -12,7 +12,7 @@
                 Are you sure you want to delete Area Coordinator?
             </div>
             <div class="txt-12 m-top-40 m-bottom-60">
-                <span class="w-semibold txt-14 txt-red"><?= $row->first_name ?></span> with Registrtion number <span class="w-semibold txt-14 txt-red"><?= $row->id ?></span>
+                <span class="w-semibold txt-14 txt-red"><?= $row->name ?></span> with Registrtion number <span class="w-semibold txt-14 txt-red"><?= $row->id ?></span>
             </div>
 
             <div class="width-90 m-lr-auto flex jf-btwn">

@@ -65,7 +65,7 @@
                             <a href="<?=ROOT?>/Shop_org/delete_item?id=<?=$allitems[$i]->item_no?>">
                                 <button class="btn-2"><i class="fa-regular fa-trash-can"></i></button>
                             </a>
-                            <a href="./org_admin_event_items">
+                            <a href="./org_admin_event_items?id=<?=$allitems[$i]->item_no?>">
                                 <button class="btn-3" style="right: 160px;">edit</button>
                             </a>
                         </div>
