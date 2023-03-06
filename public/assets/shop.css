@@ -6,32 +6,42 @@
     flex-direction: column;
     align-items: center;
 }
-h1{
+
+h1 {
     padding-left: 23rem;
 }
-.h1{
+
+.h1 {
 
     width: 80%;
     display: flex;
     flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.h1 button{
+.h1 button {
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: #dfeccc;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    color: #7FB432;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border: none;
-    background-color: #fff;
- 
 }
-
-.h1 a{
-   align-self: center;
+.h1 button:hover{
+    background-color: #ecf1e3;
+    color: #69af01;
+}
+.h1 a {
+    align-self: center;
     justify-self: flex-end;
 }
 
 .container {
     width: 90%;
-    
+
     min-height: 18rem;
 
     display: flex;
@@ -39,12 +49,14 @@ h1{
     justify-content: center;
     align-items: flex-start;
 }
-.no_products{
-    font-size:large;
+
+.no_products {
+    font-size: large;
     font-weight: bold;
     color: #696868;
-    margin:5rem 0 1rem 8rem;
+    margin: 5rem 0 1rem 8rem;
 }
+
 .search {
     width: 60rem;
     display: flex;
@@ -74,35 +86,56 @@ h1{
     background-color: #fff;
     color: #9a9a9a;
 }
-.alert{
-   position: fixed;
-   z-index: 1;
-   top: 12rem;
+
+.reset{
+    position: fixed;
+    z-index: 1;
+    top: 8rem;
+    height: 3rem;
+    width: 13rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 0.35rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: rgb(244, 130, 130);
+   color: rgb(202, 7, 7);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    visibility: hidden;
+}
+.alert {
+    position: fixed;
+    z-index: 1;
+    top: 12rem;
     height: 2rem;
-    width:19rem;
+    width: 19rem;
     background-color: #d7eeb4;
     border-radius: 0.5rem;
     text-align: center;
     padding: 0.25rem;
     display: flex;
     flex-direction: row;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     color: #69af01;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     visibility: hidden;
-    
+
 }
-.visible{
+
+.visible {
     visibility: visible;
 }
+
 .shop {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     width: 20rem;
-    margin: 2rem;
+    margin: 1.5rem;
 }
 
 .row {
@@ -110,7 +143,7 @@ h1{
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 50rem;
+    width: 70rem;
 
 }
 
@@ -141,7 +174,7 @@ h1{
     height: 22rem;
     min-width: 15rem;
     border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -156,23 +189,60 @@ h1{
     border-radius: 0.5rem;
     transition: transform 0.4s;
     margin: 0.25rem;
-   
+
 }
+
 .item:hover img {
     transform: scale(1.1);
-  }
-.item p{
+}
+
+.remain {
+    font-size: smaller;
+    color: #696868;
+    font-weight: bold;
+    height: 1rem;
+    margin: none;
+}
+
+.item span {
     font-weight: bold;
     color: #7681BF;
+    margin: 0.25rem;
 }
+
 .item small {
-    margin-top:1rem;
+    margin-top: 1rem;
+}
+.scale{
+    margin-top: -1rem;
+    width:9rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.scale button{
+    width: 1.75rem;
+    background-color:#acacac;
+    border:none;
+    padding:0.25rem;
+    border-radius:0.2rem;
+    color: #fff;
+    font-weight:bold;
+    cursor: pointer;
+}
+.scale input{
+    width: 2rem;
+    border: 1.5px solid #9a9a9a;
+    border-radius: 0.25rem;
+   
+    text-align: center;
 }
 .buttons {
     display: inline;
+    margin: 0.25rem;
 }
 
-.cart,
+.cart1,
 .view {
     height: 2rem;
     width: 6rem;
@@ -184,15 +254,18 @@ h1{
     background-color: #7FB432;
     color: #fff;
 }
-.view:hover{
+
+.view:hover {
     background-color: #94ce3b;
     cursor: pointer;
 }
-.cart:hover{
+
+.cart1:hover {
     background-color: #7681BF;
     color: #fff;
     cursor: pointer;
 }
+
 .radio {
     font-size: small;
     color: #696868;
