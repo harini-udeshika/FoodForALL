@@ -15,8 +15,8 @@ a {
 }
 
 .photo_holder {
-    height: 0px;
-    padding-bottom: 100%;
+    height: 220px;
+    /* padding-bottom: 100%; */
 
     border: 3px solid var(--projectPurple);
     border-radius: 10px;
@@ -26,6 +26,10 @@ a {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+}
+
+.photo_holder img {
+    z-index: 10000000;
 }
 
 .addmore_link_holder {

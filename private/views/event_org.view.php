@@ -63,7 +63,11 @@
             <div class="row">
                 <!-- each image -->
                 <div class="added_image_holder col-lg-6 col-md-6 col-sm-6 m-10">
-                    <div class="photo_holder"></div>
+                    <div class="photo_holder">
+                        <img src="<?= ROOT ?>/uploads/<?php if ($event_images[0]) {
+                                                            echo $event_images[0];
+                                                        } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                    </div>
                     <div class="row-flex jf-center">
                         <button class="btn btn-sm btn-gray remove_button">Remove</button>
                     </div>
@@ -71,7 +75,11 @@
 
                 <!-- each image -->
                 <div class="added_image_holder col-lg-6 col-md-6 col-sm-6 m-10">
-                    <div class="photo_holder"></div>
+                    <div class="photo_holder">
+                        <img src="<?= ROOT ?>/uploads/<?php if ($event_images[1]) {
+                                                            echo $event_images[1];
+                                                        } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                    </div>
                     <div class="row-flex jf-center">
                         <button class="btn btn-sm btn-gray remove_button">Remove</button>
                     </div>
@@ -79,27 +87,39 @@
 
                 <!-- each image -->
                 <div class="added_image_holder col-lg-6 col-md-6 col-sm-6 m-10">
-                    <div class="photo_holder"></div>
+                    <div class="photo_holder">
+                        <img src="<?= ROOT ?>/uploads/<?php if ($event_images[2]) {
+                                                            echo $event_images[2];
+                                                        } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                    </div>
                     <div class="row-flex jf-center">
                         <button class="btn btn-sm btn-gray remove_button">Remove</button>
                     </div>
                 </div>
 
-                <a class="addmore_link_holder col-lg-6 col-md-6 col-sm-6 m-10" href="">
-                    <div class="added_image_holder">
-                        <div class="added_image_holder">
-                            <div class="link_holder row-flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 80%; fill:var(--projectPurple); margin-bottom: 20px;">
-                                    <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" />
-                                </svg>
-                                <div class="addmore-txt txt-center">
-                                    Add Images <br>
-                                    <div style="font-size: 0.9rem;">(Up to 3 Images)</div>
+                <div class=" col-lg-3 col-md-6 col-sm-6 m-10">
+                    <form method="POST" action="event_org/add_images?id=<?php echo $event_details->event_id ?>" enctype="multipart/form-data">
+                        <div class="added_image_holder addmore_link_holder" style="width:245px;">
+                            <div>
+                                <div class="link_holder row-flex">
+                                    <label class="p-10 width-100 txt-al-center m-lr-auto sp-1" style="cursor:pointer;" for="inputTag">
+                                        <input id="inputTag" name="images[]" type="file" multiple="multiple" style="display:none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 80%; fill:var(--projectPurple);">
+                                            <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" />
+                                        </svg>
+                                    </label>
+                                    <div class="addmore-txt txt-center" style="font-size: 1.0rem;">(upto 3 images)</div>
+
                                 </div>
+
                             </div>
+
                         </div>
-                    </div>
-                </a>
+
+                        <button class="btn btn-sm btn-black m-top-10 float-right" type="submit">Save</button>
+                </div>
+
+                </form>
 
             </div>
 
@@ -272,7 +292,7 @@
 
                     ?>
                             <div class="card col-5 height-80px grid-8">
-                                <div class="col-2" style="display: flex; justify-content: center;">
+                                <div class="col-lg-2" style="display: flex; justify-content: center;">
                                     <img src="<?php echo $image ?>" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
                                 </div>
                                 <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?><br>
@@ -296,6 +316,17 @@
 
             </div>
         </div>
+    </div>
+
+    <!-- Email sending button -->
+    <div class="container">
+        <div class="blank col-1"></div>
+        <div class="col-lg-10 height-75px m-top-60">
+            <a href="event_org/send_mails?id=<?php echo $event_details->event_id ?>">
+                <button class="btn btn-lg btn-green ">Send Reminder Emails</button>
+            </a>
+        </div>
+        <div class="blank col-1"></div>
     </div>
 </div>
 
