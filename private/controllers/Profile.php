@@ -22,7 +22,16 @@ class Profile extends Controller
             }
         }
 
+       if(isset($_GET['subscribe'])){
+        $arr['newsletter_status'] = 1;
+        $user->update(Auth::getid(),$arr);
+       }
+       if(isset($_GET['delete'])){
        
+        $cert_id=$_GET['delete'];
+        $certificate->delete($cert_id);
+        
+       }
         $certificate=$certificate->where('user_id', Auth::getid());
         $data = $user->where('id', Auth::getid());
 

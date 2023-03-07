@@ -162,6 +162,7 @@ select {
     /* background-color: #e7e7e7; */
     text-align: center;
 }
+
 .event-details {
     display: flex;
     flex-direction: column;

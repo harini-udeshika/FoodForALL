@@ -181,6 +181,7 @@ if ($tot_volunteers) {
                             <?php echo $completed[$i]->name ?>
                         </p>
                         <div class="event-image">
+                            <img src="<?=$completed[$i]->thumbnail_pic?>">
                         </div>
                         <p class="date">
                             <?php echo $completed[$i]->date ?>

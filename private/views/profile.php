@@ -81,7 +81,12 @@ if (file_exists($rows->profile_pic)) {
                 </div>
                 <div class="certificates_row">
             <?php endif?>
-            <div class="image"><img src="<?=$cert[$i]->file_name?>">
+            <div class="cert_del_confirm visible">
+                <span>Are you sure you want to delete?</span>
+                <a href="<?=ROOT?>/profile?delete=<?=$cert[$i]->id?>"><button>Delete</button></a>
+            </div>
+            <div><a class="cert_del"><i class="fa-solid fa-trash fa-xl"></a></i><div class="image"><img src="<?=$cert[$i]->file_name?>"></div>
+            
             <?php if ($cert[$i]->description): ?>
             <p class="des"><?=$cert[$i]->description?></p>
             <?php endif?>
@@ -197,7 +202,13 @@ $i = 0;?>
 </div>
 <div class="news">
     <p>Need more news? Subscribe to our news services right now!</p>
-    <button>Subscribe</button>
+    <?php if($rows->newsletter_status==0):?>
+        <a href="http://localhost/food_for_all/public/profile?subscribe=1"><button>Subscribe</button></a>
+    <?php endif;?>
+    
+    <?php if($rows->newsletter_status==1):?>
+     <button disabled>Subscribed</button>
+    <?php endif;?>
 </div>
 <!-- <div><a href="logout.php">Log out</a></div> -->
 
