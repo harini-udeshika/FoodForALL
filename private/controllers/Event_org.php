@@ -33,23 +33,14 @@ class Event_org extends Controller
 
 
             $event_images = $event->get_images($id);
-            
+
             $this->view('event_org.view', ['event_details' => $event_details, 'em_details' => $em_details, 'volunteer_req' => $volunteer_req, 'accepted_vol' => $volunteer_accepted, 'event_images' => $event_images]);
         }
 
         if (count($_POST) > 0) {
             // echo "hello1";
+            $this->redirect('home');
             // die;
-
-            $event = new Event();
-            $arr['event_manager_email'] = $_POST['manager'];
-            $arr['name'] = $_POST['name'];
-            $arr['date'] = $_POST['date'];
-            $arr['description'] = $_POST['description'];
-            $arr['location'] = $_POST['address'];
-            $arr['org_gov_reg_no'] = $_SESSION['USER']->gov_reg_no;
-            // $event->insert($arr);
-            $this->view('event_org.view');
         } else {
             // echo "hello error";
             // die;
@@ -150,6 +141,43 @@ class Event_org extends Controller
                 $event->update_event($event_id, $arr);
             }
             $this->redirect('event_org?id=' . $event_id);
+        } else {
+            $this->redirect('home');
+        }
+    }
+
+    function volunteer_levels()
+    {
+        $id = $_GET['id'];
+        if (Auth::getusertype() == 'organization' || 'eventmanager') {
+            $event = new Event();
+            if($_POST){
+                if($_POST['mild-des'] > 0){
+                    $arr['mild_description'] = $_POST['mild-des'];
+                }
+                if($_POST['heavy-des'] > 0){
+                    $arr['heavy_description'] = $_POST['heavy-des'];
+                }
+                if($_POST['moderate-des'] > 0){
+                    $arr['moderate_description'] = $_POST['moderate-des'];
+                }
+                if($_POST['tot-moderate'] > 0){
+                    $arr['moderate_vol_total'] = $_POST['tot-moderate'];
+                }
+                if($_POST['tot-mild'] > 0){
+                    $arr['mild_vol_total'] = $_POST['tot-mild'];
+                }
+                if($_POST['tot-heavy'] > 0){
+                    $arr['heavy_vol_total'] = $_POST['tot-heavy'];
+                }
+
+                if(isset($arr)){
+                    $event->update_event($id, $arr);
+                }
+
+                // die;
+                $this->redirect('event_org?id=' . $id);
+            }
         } else {
             $this->redirect('home');
         }

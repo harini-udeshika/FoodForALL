@@ -14,6 +14,8 @@ class Event extends Model
         $data['id'] = $id;
 
         $query = "update $this->table set $str where event_id=:id";
+        // echo $query;
+        // die;
         // $query="insert into $this->table($columns) values(:$values)";
         return $this->query($query, $data);
     }

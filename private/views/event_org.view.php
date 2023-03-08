@@ -126,72 +126,101 @@
         </div>
         <div class="blank col-lg-1"></div>
     </div>
-    <div class="blank col-lg-12 height-75px"></div>
 
-    <div class="container">
-        <div class="blank col-lg-1"></div>
-        <div class="card col-lg-10 height-auto">
-            <div class="heading-2 col-lg-2 p-left-25 p-top-20">Set Volunteer Levels </div>
-            <div class="heading-4 col-lg-2 p-left-25 p-top-5" style="font-weight: 500;">You can have your required volunteers
-                divided into 3 categories according to the dificulty of their respective tasks(optional)</div>
-            <form action="">
-                <div class="row grid-11">
 
-                    <div class="blank col-lg-1"></div>
-                    <div class="card card-back1 col-lg-3 height-300px m-25">
-                        <div style="text-align: center;">
-                            <div class="heading-4">Mild</div>
-                            <hr style="width: 75%;">
-                            <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
-                                Please add a description for volunteer activities of mild difficulty level.
+    <!-- Adding volunteer levels section -->
+
+    <?php if ($event_details->date >= date("Y-m-d")) { ?>
+        <div class="blank col-lg-12 height-75px"></div>
+        <div class="container">
+            <div class="blank col-lg-1"></div>
+            <div class="card col-lg-10 height-auto">
+                <div class="heading-2 col-lg-2 p-left-25 p-top-20">Set Volunteer Levels </div>
+                <div class="heading-4 col-lg-2 p-left-25 p-top-5" style="font-weight: 500;">You can have your required volunteers
+                    divided into 3 categories according to the dificulty of their respective tasks(optional)</div>
+                <form method="post" action="event_org/volunteer_levels?id=<?php echo $event_details->event_id ?>">
+                    <div class="row grid-11">
+
+                        <div class="blank col-lg-1"></div>
+                        <div class="card card-back1 col-lg-3 height-300px m-25">
+                            <div style="text-align: center;">
+                                <div class="heading-4">Mild</div>
+                                <hr style="width: 75%;">
+                                <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
+                                    Please add a description for volunteer activities of mild difficulty level.
+                                </div>
+                                <textarea name="mild-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"><?php
+                                                                                                                                                                    if (isset($event_details->mild_description)) {
+                                                                                                                                                                        echo $event_details->mild_description;
+                                                                                                                                                                    }
+                                                                                                                                                                    ?></textarea>
+                                <br>
+                                <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
+                                <input class="input-field input-field-sm m-top-6" name="tot-mild" type="number" value="<?php
+                                                                                                                        if (isset($event_details->mild_vol_total)) {
+                                                                                                                            echo $event_details->mild_vol_total;
+                                                                                                                        }
+                                                                                                                        ?>" min="0">
                             </div>
-                            <textarea name="mild-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"></textarea>
-                            <br>
-                            <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
-                            <input class="input-field input-field-sm m-top-6" name="tot-moderate" type="text">
                         </div>
-                    </div>
-                    <div class="card card-back1 col-lg-3 height-300px m-25">
-                        <div style="text-align: center;">
-                            <div class="heading-4">Modarate</div>
-                            <hr style="width: 75%;">
-                            <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
-                                Please add a description for volunteer activities of moderate difficulty level.
+                        <div class="card card-back1 col-lg-3 height-300px m-25">
+                            <div style="text-align: center;">
+                                <div class="heading-4">Modarate</div>
+                                <hr style="width: 75%;">
+                                <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
+                                    Please add a description for volunteer activities of moderate difficulty level.
+                                </div>
+                                <textarea name="moderate-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"><?php
+                                                                                                                                                                        if (isset($event_details->moderate_description)) {
+                                                                                                                                                                            echo $event_details->moderate_description;
+                                                                                                                                                                        }
+                                                                                                                                                                        ?></textarea>
+                                <br>
+                                <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
+                                <input class="input-field input-field-sm m-top-6" name="tot-moderate" type="number" value="<?php
+                                                                                                                        if (isset($event_details->moderate_vol_total)) {
+                                                                                                                            echo $event_details->moderate_vol_total;
+                                                                                                                        }
+                                                                                                                        ?>" min="0">
                             </div>
-                            <textarea name="moderate-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"></textarea>
-                            <br>
-                            <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
-                            <input class="input-field input-field-sm m-top-6" name="tot-moderate" type="text">
                         </div>
-                    </div>
-                    <div class="card card-back1 col-lg-3 height-300px m-25">
-                        <div style="text-align: center;">
-                            <div class="heading-4">Heavy</div>
-                            <hr style="width: 75%;">
-                            <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
-                                Please add a description for volunteer activities of Heavy difficulty level.
+                        <div class="card card-back1 col-lg-3 height-300px m-25">
+                            <div style="text-align: center;">
+                                <div class="heading-4">Heavy</div>
+                                <hr style="width: 75%;">
+                                <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
+                                    Please add a description for volunteer activities of Heavy difficulty level.
+                                </div>
+                                <textarea name="heavy-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"><?php
+                                                                                                                                                                        if (isset($event_details->heavy_description)) {
+                                                                                                                                                                            echo $event_details->heavy_description;
+                                                                                                                                                                        }
+                                                                                                                                                                        ?></textarea>
+                                <br>
+                                <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
+                                <input class="input-field input-field-sm m-top-6" name="tot-heavy" type="number" value="<?php
+                                                                                                                        if (isset($event_details->heavy_vol_total)) {
+                                                                                                                            echo $event_details->heavy_vol_total;
+                                                                                                                        }
+                                                                                                                        ?>" min="0">
                             </div>
-                            <textarea name="heavy-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"></textarea>
-                            <br>
-                            <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
-                            <input class="input-field input-field-sm m-top-6" name="tot-moderate" type="text">
                         </div>
+                        <div class="blank col-lg-1"></div>
+
+                        <label for="total" class="heading-3 col-lg-2 p-left-25 p-top-12">Total Volunteers</label>
+                        <input class="input-field input-field-block col-lg-2 m-bottom-15 m-left-15 m-top-5" value="00" name="tot" type="text" readonly>
+                        <div class="blank col-lg-7"></div>
+
                     </div>
-                    <div class="blank col-lg-1"></div>
+                    <button class="btn btn-sm btn-green float-right m-top-30 m-bottom-25 m-right-20" type="submit">Save</button></button>
+                </form>
+            </div>
+            <div class="blank col-lg-1"></div>
 
-                    <label for="total" class="heading-3 col-lg-2 p-left-25 p-top-12">Total Volunteers</label>
-                    <input class="input-field input-field-block col-lg-2 m-bottom-15 m-left-15 m-top-5" value="00" name="tot" type="text" readonly>
-                    <div class="blank col-lg-7"></div>
-
-                </div>
-                <button class="btn btn-sm btn-green float-right m-top-30 m-bottom-25 m-right-20" type="submit">Save</button></button>
-            </form>
         </div>
-        <div class="blank col-lg-1"></div>
-
-    </div>
-
-    <div class="blank col-lg-12 height-75px"></div>
+        <div class="blank col-lg-12 height-75px"></div>
+    <?php } ?>
+    <!-- Adding volunteer levels section end -->
 
     <?php if ($event_details->date >= date("Y-m-d")) { ?>
 
