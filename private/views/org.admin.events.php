@@ -11,16 +11,27 @@
     <!-- Search bar -->
     <div class="blank col-lg-2"></div>
 
-    <form class="col-lg-8 row-flex jf-center m-bottom-15" action="" method="" id="search">
-        <input class="search-field width-100" type="text" name="search_term" id="" placeholder="Search here">
+    <form class="col-lg-8 row-flex jf-center" action="" method="post" id="">
+        <input class="search-field width-100" type="text" name="search" id="search" placeholder="Search here" autocomplete="off">
         <button type="submit" class="search_logo">
             <i class="fa-solid fa-magnifying-glass "></i>
         </button>
 
     </form>
 
+
     <div class="blank col-lg-2"></div>
     <!-- END : Search bar -->
+
+    <div class="col-12 grid-12 " id="search_result">
+        <div class="blank col-3"></div>
+        <div class="col-6 grid-12 card-simple" id="dropdown">
+            
+        </div>
+        <div class="blank col-3"></div>
+    </div>
+
+
 
     <!-- statrt of pending events section -->
     <!-- for spacing -->
@@ -113,7 +124,7 @@
                                 <div class="progress-back width-100 height-4px m-top-2">
                                     <div class="progress-fill width-<?php if ($ongoin[$i]->amount_percentage) {
                                                                         echo $ongoin[$i]->amount_percentage;
-                                                                    }else{
+                                                                    } else {
                                                                         echo 0;
                                                                     } ?> height-4px"></div>
                                 </div>
@@ -131,7 +142,7 @@
                                 <div class="progress-back width-100 height-4px m-top-2">
                                     <div class="progress-fill width-<?php if ($ongoin[$i]->vol_percentage) {
                                                                         echo $ongoin[$i]->vol_percentage;
-                                                                    }else{
+                                                                    } else {
                                                                         echo 0;
                                                                     } ?> height-4px "></div>
                                 </div>
@@ -215,4 +226,6 @@
 </div>
 
 <!-- statrt of copleted events section -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<?= ROOT ?>/assets/script/event_search.js"></script>
 <?php $this->view('includes/footer') ?>

@@ -276,7 +276,7 @@ class Organization extends Model
             }
         }
         // echo "<pre>";
-        // print_r($ongoing);
+        // print_r($lastmonth);
         // die;
 
         return $lastmonth;

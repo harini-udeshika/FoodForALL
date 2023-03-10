@@ -126,7 +126,7 @@
             }
             if ($lastmonth[$i]->no_of_volunteers) {
                 $volunteers[] = $lastmonth[$i]->no_of_volunteers;
-                $arrived_volunteers[] = 10;
+                $arrived_volunteers[] = $lastmonth[$i]->vol_count;
             }
             $i++;
             $count--;
