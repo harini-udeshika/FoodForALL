@@ -5,17 +5,24 @@
 <?php $this->view('includes/submenu');?>
 <h1>User Statistics</h1>
 <div class="headings">
-<p>So far this year, your activity has been...</p><p>Overall activity</p>
+<p>So far this year, your activity has been...</p>
 </div>
 <div class="charts">
   
   <canvas id="myChart" class="chart1"></canvas> 
+  <canvas id="myChart_3" class="chart1"></canvas> 
+
+</div>
+<div class="headings">
+<p>Overall activity</p>
+</div>
+<div class="charts">
+  
+ 
   <canvas id="myChart_2" class="chart2" ></canvas>
 </div>
-
-
 <?php $this->view('includes/footer')?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<?=ROOT?>/assets/chart.js"></script>
 </body>
- 
+  

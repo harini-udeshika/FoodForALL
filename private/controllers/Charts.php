@@ -34,20 +34,22 @@ class Charts extends Controller
         $arr=['id'=>$id];
         $volunteer_yearly=$volunteer->query($query,$arr);
 
-        $query="select count(donate.donor_id) as count , month(event.date) as month from donate 
+        $query="select sum(donate.amount) as amount , month(donate.date_time) as month from donate 
         INNER JOIN event on event.event_id=donate.event_id 
-        where YEAR( event.date ) = YEAR( CURDATE() )  && donate.donor_id= :id   
-        group by month(event.date)";
+        where YEAR( event.date ) = YEAR( CURDATE() ) && donate.donor_id= :id 
+        group by month(donate.date_time)";
         $arr=['id'=>$id];
         $donate_yearly=$donor->query($query,$arr);
+        // print_r($donate_yearly);
 
         $volunteer_count = $volunteer->count("user_id","user_id",Auth::getid());
         $donor_count=$donor->count("donor_id","donor_id",Auth::getid());
         $arr=[$volunteer_count,$donor_count,$volunteer_yearly,$donate_yearly];
         // $data = $volunteer->where('user_id', Auth::getid());
-        echo json_encode($arr);
+         echo json_encode($arr);
         // echo json_encode($donor_count);
         // echo json_encode($volunteer_count);
     }
 
 }
+ 

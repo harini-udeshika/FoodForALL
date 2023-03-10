@@ -4,7 +4,12 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/cart.css">
 
 <h2><?=$data->name?> Merch Store</h2>
-<div class="corner"><a href=""><div class="clear"><i class="fa-solid fa-trash-can fa-xl"></i></div></a><div><i class="fa-solid fa-cart-shopping fa-xl"></i><a href="<?=ROOT?>/shop?id=<?=$data->gov_reg_no?>"><button>Continue Shopping</button></a></div></div>
+<div class="corner"><div class="clear" id="trash"><i class="fa-solid fa-trash-can fa-xl"></i></div>
+<div class="trash" id="trash_conf">
+    <p>Are you sure you want to clear the cart?</p>
+    <a href="<?=ROOT?>/shop/clear_cart?cart=<?=$data->gov_reg_no?>" ><button>Clear</button></a>
+</div>
+<div><i class="fa-solid fa-cart-shopping fa-xl"></i><a href="<?=ROOT?>/shop?id=<?=$data->gov_reg_no?>"><button>Continue Shopping</button></a></div></div>
 <div class="alert" id="alert"><i class="fa-solid fa-circle-exclamation">&nbsp;&nbsp;</i>Available 13 only</div>
 <div class="cart_table">
     <table>

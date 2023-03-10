@@ -7,7 +7,8 @@ let bill_total = document.getElementById("bill_total");
 let rows = document.querySelectorAll(".table_row");
 let remove_btns = document.querySelectorAll(".remove");
 const alert = document.getElementById("alert");
-
+let trash=document.getElementById("trash");
+let trash_conf=document.getElementById("trash_conf");
 var data;
 var quantity, i;
 console.log("hii");
@@ -158,3 +159,7 @@ for (let i = 0; i < cart_qty.length; i++) {
        
     })
 }
+trash.addEventListener('click', ()=>{
+    console.log('trash clicked');
+    trash_conf.classList.toggle("visible");
+})

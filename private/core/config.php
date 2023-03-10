@@ -1,9 +1,9 @@
 <?php
 
-//  define('ROOT','http://localhost/food_for_all/public');
+ define('ROOT','http://localhost/food_for_all/public');
 
 
-define('ROOT','http://localhost/FoodForAll/public');
+// define('ROOT','http://localhost/FoodForAll/public');
 
 //define('ROOT','http://localhost/projectNew/FoodForAll/public');
 
