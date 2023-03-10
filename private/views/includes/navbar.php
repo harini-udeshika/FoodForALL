@@ -44,7 +44,10 @@
             <div class="nav-i">
                 <a href="about">About us</a>
             </div>
-
+            <div class="nav-i">
+            <a href="search"><span class="material-symbols-outlined">person_search</span></a>
+            </div>
+            
 
              <?php
 $user = new User();

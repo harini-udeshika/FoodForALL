@@ -3,7 +3,7 @@ const alert = document.getElementById("alert");
 const reset = document.getElementById("reset");
 let remaning = document.querySelectorAll(".remain");
 let add = document.querySelectorAll(".add");
-let sub = document.querySelectorAll(".sub");
+let sub = document.querySelectorAll(".sub")
 let input = document.querySelectorAll(".qty");
 var data;
 console.log("hello");
@@ -13,7 +13,7 @@ for (let i = 0; i < add.length; i++) {
   add[i].addEventListener("click", () => {
 
     let items_in_stock = parseInt(remaning[i].innerText.split(" ")[0]);
-    // console.log(remaning[i]);
+    // console.log(remaning[i]); 
     if (input[i].value < items_in_stock) {
       input[i].value = parseInt(input[i].value) + 1;
       // remaning[i].innerText=items_in_stock-1+' remaining';
@@ -35,9 +35,9 @@ for (let i = 0; i < sub.length; i++) {
 // -----------------------add to cart---------------------
 for (let i = 0; i < buttons.length; i++) {
   input[i].addEventListener('input', () => {
-   
+
     if (parseInt(input[i].value) > parseInt(remaning[i].innerHTML.split(' ')[0])) {
-     
+
       input[i].value = parseInt(remaning[i].innerHTML.split(' ')[0]);
     }
   })
