@@ -9,7 +9,8 @@ class Familydetails extends Controller{
             if($family->validate($_POST)){
                 $arr['FullName']=$_POST['FullName'];
                 $arr['Iname']=$_POST['NameWithInitial'];
-                $arr['nic']=$_POST['FamilyID'];
+                $arr['nic']=$_POST['nic'];
+                $arr['familymembers']=$_POST['fnum'];
                 $arr['profession']=$_POST['profession'];
                 $arr['netsalary']=$_POST['salary'];
                 $arr['contact1']=$_POST['Contact1'];
@@ -20,6 +21,8 @@ class Familydetails extends Controller{
                 $arr['diabetes_patients']=$_POST['Diabetes_patients'];
                 $arr['malnutritioned_children']=$_POST['Malnutrition_children'];
                 $arr['healthy_children']=$_POST['Healthy_children'];
+                $arr['familymembers']=$_POST['Familymembers'];
+                $arr['relationship']=$_POST['Relationship'];
                 $arr['area_coodinator_email']=$_POST['email'];
                 
                 $family->insert($arr);
