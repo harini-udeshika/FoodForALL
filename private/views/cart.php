@@ -25,7 +25,7 @@
         <?php foreach ($cart_data as $rows): ?>
         <tr class="table_row">
             <td><?=$cart_data[$i]->name?><br><img src="images/merch_items/<?=$cart_data[$i]->image?>"></td>
-            <td><a href="<?=ROOT?>/shop/add_qty?cart=<?=$data->gov_reg_no?>+<?=$cart_data[$i]->item_no?>" class="cart_quantity_up" >+</a><input type="text" value="<?=$cart_data[$i]->qty?> " class="qty"><a class="cart_quantity_down" href="<?=ROOT?>/shop/sub_qty?cart=<?=$data->gov_reg_no?>+<?=$cart_data[$i]->item_no?>" >-</a></td>
+            <td><input type="text" value="<?=$cart_data[$i]->qty?> " class="qty"><a class="cart_quantity_down" href="<?=ROOT?>/shop/sub_qty?cart=<?=$data->gov_reg_no?>+<?=$cart_data[$i]->item_no?>" >-</a></td>
             <td><span class="price"><?=$cart_data[$i]->price?></span></td>
             <td><span class="total"><?=$cart_data[$i]->price * $cart_data[$i]->qty?></span><a href="<?=ROOT?>/shop/delete_qty?cart=<?=$data->gov_reg_no?>+<?=$cart_data[$i]->item_no?>" class="remove"><button >Remove</button></a></td>
         </tr>
@@ -40,10 +40,10 @@
 </div>
 <div class="down">
     <div class="row" >Bill Total <span id="bill_total">Rs. <?php if (isset($total)) {echo ($total);} else {echo "0";}?>.00<span></div>
-    <div class="row">Delivery Charges<span>Rs.<span></div>
-    <div class="row">Total Amount<span>Rs.<span></div>
+    <!-- <div class="row">Delivery Charges<span>Rs.<span></div>
+    <div class="row">Total Amount<span>Rs.<span></div> -->
 </div>
-<button class="checkout">Checkout</button>
+<a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout">Checkout</button></a>
 
 <?php $this->view('includes/footer')?>
 

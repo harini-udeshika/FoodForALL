@@ -26,8 +26,10 @@ class Shop extends Controller
                 // $item_data=$item->where('item_no',$item_id);
 
                 $prod_ids = array();
-                if (isset($_SESSION['CART'])) {
-                    $prod_ids = array_column($_SESSION['CART'], 'id');
+                $org_id = $org_id[0];
+                if (isset($_SESSION['CART' . $org_id])) {
+
+                    $prod_ids = array_column($_SESSION['CART' . $org_id], 'id');
                     $ids_str = "'" . implode("','", $prod_ids) . "'";
                     $query = "SELECT * FROM merchandise_item where item_no in ($ids_str)";
                     $cart_data = $item->query($query);
@@ -41,7 +43,7 @@ class Shop extends Controller
 
                     foreach ($cart_data as $key => $row) {
                         // print_r($_SESSION['CART']);
-                        foreach ($_SESSION['CART'] as $i) {
+                        foreach ($_SESSION['CART' . $org_id] as $i) {
                             if ($row->item_no == $i['id']) {
                                 $cart_data[$key]->qty = $i['qty'];
                                 break;
@@ -89,15 +91,17 @@ class Shop extends Controller
     public function add_to_cart()
     {
         $item = new Merchandise_item();
-
+        $org_id = $_GET['item'];
+        $org_id = explode(" ", $org_id)[1];
+        // echo($org_id);
         if (isset($_GET['item'])) {
 
             $timeout = 1 * 600;
 
-            if (isset($_SESSION['CART']) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout) {
-                foreach ($_SESSION['CART'] as $key => $product) {
+            if (isset($_SESSION['CART' . $org_id]) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout) {
+                foreach ($_SESSION['CART' . $org_id] as $key => $product) {
 
-                    $items_in_cart = $_SESSION['CART'][$key]['qty'];
+                    $items_in_cart = $_SESSION['CART' . $org_id][$key]['qty'];
                     // print_r($_SESSION['CART']);
                     // $current_stock = $_SESSION['CART'][$key]['s'];
                     $current_stock = "SELECT stock from merchandise_item where item_no= :id";
@@ -115,7 +119,7 @@ class Shop extends Controller
 
                 echo ("<i class='fa-solid fa-circle-exclamation'></i>&nbsp;&nbsp;Shopping cart has been reset due to inactivity:");
 
-                $_SESSION['CART'] = array();
+                $_SESSION['CART' . $org_id] = array();
 
                 // $_SESSION['CART'] = array_values($_SESSION['CART']);
             }
@@ -134,15 +138,15 @@ class Shop extends Controller
             $item_data = $item_data[0];
             $update = array();
             if ($item_data) {
-                if (isset($_SESSION['CART'])) {
-                    $ids = array_column($_SESSION['CART'], "id");
+                if (isset($_SESSION['CART' . $org_id])) {
+                    $ids = array_column($_SESSION['CART' . $org_id], "id");
                     if (in_array($item_data->item_no, $ids)) {
                         $key = array_search($item_data->item_no, $ids);
                         $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
                         $arr = ['s' => $item_data->stock - $qty,
                             'id' => $item_data->item_no];
                         $updated_stock = $item->query($query, $arr);
-                        $_SESSION['CART'][$key]['qty'] += $qty;
+                        $_SESSION['CART' . $org_id][$key]['qty'] += $qty;
 
                     } else {
                         $arr = array();
@@ -152,7 +156,7 @@ class Shop extends Controller
                             'id' => $item_data->item_no];
                         $updated_stock = $item->query($query, $arr);
                         $arr['qty'] = $qty;
-                        $_SESSION['CART'][] = $arr;
+                        $_SESSION['CART' . $org_id][] = $arr;
 
                     }
                 } else {
@@ -164,7 +168,7 @@ class Shop extends Controller
                         'id' => $item_data->item_no];
                     $updated_stock = $item->query($query, $arr);
                     $arr['qty'] = $qty;
-                    $_SESSION['CART'][] = $arr;
+                    $_SESSION['CART' . $org_id][] = $arr;
 
                 }
             }
@@ -179,26 +183,32 @@ class Shop extends Controller
     public function add_qty()
     {
         $product = new Merchandise_item();
+
         if (isset($_GET['cart'])) {
             $params = $_GET['cart'];
 
             $params = explode(' ', $params);
+          
+            $org_id = explode('=', $params[0]);
+            $org_id=$org_id[1];
+            
             $params = explode('=', $params[1]);
-
+           
             // print_r($params);
             $id = $params[0];
+            // echo($id);
             $item_data = $product->where('item_no', $id);
             $item_data = $item_data[0];
-            if (isset($_SESSION['CART'])) {
-                foreach ($_SESSION['CART'] as $key => $item) {
+            if (isset($_SESSION['CART' . $org_id])) {
+                foreach ($_SESSION['CART' . $org_id] as $key => $item) {
 
                     if ($item['id'] == $id) {
                         $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
                         $arr = ['s' => $item_data->stock - 1,
                             'id' => $item_data->item_no];
                         $updated_stock = $product->query($query, $arr);
-                        $_SESSION['CART'][$key]['qty'] += 1;
-                        echo ($_SESSION['CART'][$key]['qty']);
+                        $_SESSION['CART' . $org_id][$key]['qty'] += 1;
+                        echo ($_SESSION['CART' . $org_id][$key]['qty']);
                         break;
                     }
 
@@ -217,32 +227,35 @@ class Shop extends Controller
             $params = $_GET['cart'];
 
             $params = explode(' ', $params);
+            $org_id = explode('=', $params[0]);
+            $org_id=$org_id[1];
             $params = explode('=', $params[1]);
+            
             // print_r($params);
             $id = $params[0];
             $item_data = $product->where('item_no', $id);
             $item_data = $item_data[0];
-            if (isset($_SESSION['CART'])) {
-                foreach ($_SESSION['CART'] as $key => $item) {
+            if (isset($_SESSION['CART' . $org_id])) {
+                foreach ($_SESSION['CART' . $org_id] as $key => $item) {
                     if ($item['id'] == $id) {
-                        if ($_SESSION['CART'][$key]['qty'] == 0) {
+                        if ($_SESSION['CART' . $org_id][$key]['qty'] == 0) {
                             echo (0);
-                            unset($_SESSION['CART'][$key]);
-                            $_SESSION['CART'] = array_values($_SESSION['CART']);
+                            unset($_SESSION['CART' . $org_id][$key]);
+                            $_SESSION['CART' . $org_id] = array_values($_SESSION['CART' . $org_id]);
                             break;
                         } else {
                             $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
                             $arr = ['s' => $item_data->stock + 1,
                                 'id' => $item_data->item_no];
                             $updated_stock = $product->query($query, $arr);
-                            $_SESSION['CART'][$key]['qty'] -= 1;
-                            if ($_SESSION['CART'][$key]['qty'] == 0) {
+                            $_SESSION['CART' . $org_id][$key]['qty'] -= 1;
+                            if ($_SESSION['CART' . $org_id][$key]['qty'] == 0) {
                                 echo (0);
                                 unset($_SESSION['CART'][$key]);
-                                $_SESSION['CART'] = array_values($_SESSION['CART']);
+                                $_SESSION['CART' . $org_id] = array_values($_SESSION['CART' . $org_id]);
                                 break;
                             }
-                            echo ($_SESSION['CART'][$key]['qty']);
+                            echo ($_SESSION['CART' . $org_id][$key]['qty']);
                             break;
                         }
 
@@ -260,21 +273,24 @@ class Shop extends Controller
             $product = new Merchandise_item();
             $params = $_GET['cart'];
             $params = explode(' ', $params);
+            $org_id = explode('=', $params[0]);
+            $org_id=$org_id[1];
             $params = explode('=', $params[1]);
+           
             // print_r($params);
             $id = $params[0];
             $item_data = $product->where('item_no', $id);
             $item_data = $item_data[0];
-            if (isset($_SESSION['CART'])) {
-                foreach ($_SESSION['CART'] as $key => $item) {
+            if (isset($_SESSION['CART' . $org_id])) {
+                foreach ($_SESSION['CART' . $org_id] as $key => $item) {
                     if ($item['id'] == $id) {
-                        $items_in_cart = $_SESSION['CART'][$key]['qty'];
+                        $items_in_cart = $_SESSION['CART' . $org_id][$key]['qty'];
                         $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
                         $arr = ['s' => $item_data->stock + $items_in_cart,
                             'id' => $item_data->item_no];
                         $updated_stock = $product->query($query, $arr);
-                        unset($_SESSION['CART'][$key]);
-                        $_SESSION['CART'] = array_values($_SESSION['CART']);
+                        unset($_SESSION['CART' . $org_id][$key]);
+                        $_SESSION['CART' . $org_id] = array_values($_SESSION['CART' . $org_id]);
                         break;
                     }
                 }
@@ -289,17 +305,20 @@ class Shop extends Controller
         $data = json_decode(file_get_contents("php://input"), true);
         $quantity = $data["quantity"];
         $index = $data["index"];
-
+        $params = $_GET['cart'];
+        $params = explode(' ', $params);
+        $org_id = explode('=', $params[0]);
+        $org_id=$org_id[1];
         //if stock's aren't available
-        if ($quantity > $_SESSION['CART'][$index]['s']) {
-            $available = $_SESSION['CART'][$index]['s'] + 1;
+        if ($quantity > $_SESSION['CART' . $org_id][$index]['s']) {
+            $available = $_SESSION['CART' . $org_id][$index]['s'] + 1;
             echo ("<i class='fa-solid fa-circle-exclamation'></i>&nbsp;&nbsp; Available " . $available . " only");
             exit();
         }
         // print_r($_SESSION['CART']);
         //getting cart quantity and inserted quantity
-        $id = $_SESSION['CART'][$index]['id'];
-        $current_qty = $_SESSION['CART'][$index]['qty'];
+        $id = $_SESSION['CART' . $org_id][$index]['id'];
+        $current_qty = $_SESSION['CART' . $org_id][$index]['qty'];
         $new_qty = $quantity - $current_qty;
 
         //get remaining stock
@@ -319,29 +338,30 @@ class Shop extends Controller
                 's' => $stock_left + (-1 * $new_qty)];
             $item->query($query, $arr);
         }
-        $_SESSION['CART'][$index]['qty'] = $quantity;
+        $_SESSION['CART' . $org_id][$index]['qty'] = $quantity;
         // print_r($quantity.$index.$current_qty);
     }
     public function clear_cart()
     {
         $product = new Merchandise_item();
-        $id=$_GET['cart'];
-        // print_r($id);   
-        if (isset($_SESSION['CART'])) {
-           
-            foreach ($_SESSION['CART'] as $key => $item) {
-                $item_id = $_SESSION['CART'][$key]['id'];
-                $items_in_cart = $_SESSION['CART'][$key]['qty'];
-                $stock = $product->where('item_no',$item_id)[0]->stock;
+        $id = $_GET['cart'];
+        // print_r($id);
+
+        if (isset($_SESSION['CART' . $id])) {
+
+            foreach ($_SESSION['CART' . $id] as $key => $item) {
+                $item_id = $_SESSION['CART' . $id][$key]['id'];
+                $items_in_cart = $_SESSION['CART' . $id][$key]['qty'];
+                $stock = $product->where('item_no', $item_id)[0]->stock;
                 $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
                 $arr = ['s' => +$stock + $items_in_cart,
                     'id' => $item_id];
                 $updated_stock = $product->query($query, $arr);
-                unset($_SESSION['CART'][$key]);
-               
+                unset($_SESSION['CART' . $id][$key]);
+
             }
-            $_SESSION['CART'] = array_values($_SESSION['CART']);
-            $this->redirect('shop?cartid='.$id);
+            $_SESSION['CART' . $id] = array_values($_SESSION['CART' . $id]);
+            $this->redirect('shop?cartid=' . $id);
         }
     }
 }

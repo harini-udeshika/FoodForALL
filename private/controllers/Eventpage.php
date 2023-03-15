@@ -10,7 +10,7 @@ class Eventpage extends Controller
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $data = $event->where("event_id", $id);
-            $query = "SELECT DATE(date-2) as cd from event where event_id =:id";
+            $query = "SELECT DATE(date-2) as cd from event where event_id =:id";  
             $arr = ['id' => $id];
             $closing_date=$event->query($query,$arr);
             // print_r($closing_date[0]);
@@ -30,7 +30,14 @@ class Eventpage extends Controller
         else if (isset($_GET['type'])) {
             $type = $_GET['type'];
             $data = explode(" ",$type);
-            $this->view('volunteer_confirmation', ['data' => $data]);
+            $v_type=(lcfirst($data[0]));
+            $id=($data[1]);
+            $query="select ".$v_type."_description as description from event where event_id=:id";
+            $arr=['id'=>$id];
+            $des=$event->query($query,$arr);
+            $des=$des[0]->description;
+           
+            $this->view('volunteer_confirmation', ['data' => $data,'des'=>$des]);
             if($_POST>0){
 
                 $request = new Volunteer_request();

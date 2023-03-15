@@ -138,8 +138,8 @@ for (let i = 0; i < cart_qty.length; i++) {
 
 
         bill_total.innerHTML = "Rs." + updated_total + ".00";
-
-        ajax.open('POST', 'http://localhost/food_for_all/public/shop/update_qty', true);
+        var cart = remove_btns[i].href.split('?')[1];
+        ajax.open('POST', 'http://localhost/food_for_all/public/shop/update_qty?cart='+ cart, true);
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         ajax.send(JSON.stringify(data));
