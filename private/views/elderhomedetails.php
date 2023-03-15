@@ -25,6 +25,9 @@
             <?php endforeach;?>
         <?php endif;?>
         </div>
+        <div class="coor2">
+            <h1>Owner's Details</h1>
+        </div>
               <input type="hidden" name="areacoordinator_email" value=<?=Auth::getemail()?>>
                 <div class="box1 filling">
                     <label for="FullName"> Name of the elsers' home*</label><br>
@@ -56,14 +59,14 @@
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact1">Contact No1*</label><br>
+                    <label for="contact1">Lane Phone Number*</label><br>
                     <input type="text" name="Contact1" placeholder="Contact" class="in fillingbox" id="contact1">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact2">Contact No2</label><br>
+                    <label for="contact2">Mobile Phone Number</label><br>
                     <input type="text" name="Contact2" placeholder="Contact" class="in fillingbox" id="contact2">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
@@ -82,11 +85,10 @@
                 <div class="box1 filling ">
                     <table>
                         <hr>
-                        <div id="children" >
-                      
-                        
-                              
+                        <div class="coor2">
+                            <h1>Members' Details</h1>
                         </div>
+                        
                         <!-- <tr>
                             <td>
                                 <label for="reasons">Other reasons</label><br>
@@ -95,21 +97,30 @@
                         </tr>
                         <hr> -->
                         <tr class="tr1">
-                            <td>
+                            <td class="childrenbox">
+                                <label for="members">Number of members</label><br>
+                                <input type="number" min='1' name="Members" class="in new fillingbox" id="mem">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                        </tr>
+                        <tr class="tr1">
+                            <td class="childrenbox">
                                 <label for="Healthy_adults">Number of Healthy Adults</label><br>
                                 <input type="number" min='0' name="Healthy_adults" class="in new fillingbox" id="ha">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
-                            <td>
+                            <td class="childrenbox">
                                 <label for="Diabetes_patients">Number of Diabetes Patients</label><br>
                                 <input type="number" min='0' name="Diabetes_patients" class="in new fillingbox" id="dp">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
-                            <td>
+                            <td class="childrenbox">
                                 <label for="Cholesterol_patients">Number of Cholesterol Patients</label><br>
                                 <input type="number" min='0' name="Cholesterol_patients" class="in new fillingbox" id="cp">
                                 <i class="fas fa-check-circle"></i>

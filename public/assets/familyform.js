@@ -12,6 +12,8 @@ const mc =document.getElementById('mc');
 const ha =document.getElementById('ha');
 const dp =document.getElementById('dp');
 const cp =document.getElementById('cp');
+const fnum =document.getElementById('fnum');
+const re =document.getElementById('re');
 var valid=true;
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
@@ -43,6 +45,7 @@ function inputChecker(){
    const contact1Value=contact1.value.trim();
    const contact2Value=contact2.value.trim();
    const addressValue=address.value.trim();
+   const familynumValue=fnum.value.trim();
     //get the values from the inputs
     
         if(fullnameValue===''){
@@ -122,6 +125,15 @@ function inputChecker(){
         }else{
             //success
             setSuccessFor(address);
+            
+        }
+        if(familynumValue===''){
+            // show error
+            setErrorFor(fnum, 'Number of family members cannot be blank');
+            
+        }else{
+            //success
+            setSuccessFor(fnum);
             
         }
         

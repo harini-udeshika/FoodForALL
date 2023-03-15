@@ -18,6 +18,10 @@
     <div class="familydetailform">
     
         <form  method="POST" id="elderform" class="familyform" >
+
+        <div class="coor2">
+            <h1>Owner's Details</h1>
+        </div>
        
               <input type="hidden" name="areacoordinator_email" value="<?php echo $rows->areacoordinator_email?>">
                 <div class="box1 filling">
@@ -50,14 +54,14 @@
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact1">Contact No1*</label><br>
+                    <label for="contact1">Mobile Phone Number*</label><br>
                     <input type="text" name="Contact1" placeholder="Contact" class="in fillingbox" id="contact1"  value="<?php echo $rows->contact1?>">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact2">Contact No2</label><br>
+                    <label for="contact2">Land Phone Number</label><br>
                     <input type="text" name="Contact2" placeholder="Contact" class="in fillingbox" id="contact2"  value="<?php echo $rows->contact2?>">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
@@ -76,10 +80,8 @@
                 <div class="box1 filling ">
                     <table>
                         <hr>
-                        <div id="children" >
-                      
-                        
-                              
+                        <div class="coor2">
+                            <h1>Members' Details</h1>
                         </div>
                         <!-- <tr>
                             <td>
@@ -89,21 +91,30 @@
                         </tr>
                         <hr> -->
                         <tr class="tr1">
-                            <td>
+                            <td class="childrenbox">
+                                <label for="members">Number of members</label><br>
+                                <input type="number" min='1' name="Members" class="in new fillingbox" id="mem" value="<?php echo $rows->members?>">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                        </tr>
+                        <tr class="tr1">
+                            <td class="childrenbox">
                                 <label for="Healthy_adults">Number of Healthy Adults</label><br>
                                 <input type="number" min='0' name="Healthy_adults" class="in new fillingbox" id="ha"  value="<?php echo $rows->Healthy_adults?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
-                            <td>
+                            <td class="childrenbox">
                                 <label for="Diabetes_patients">Number of Diabetes Patients</label><br>
                                 <input type="number" min='0' name="Diabetes_patients" class="in new fillingbox" id="dp"  value="<?php echo $rows->Diabetes_patients?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
-                            <td>
+                            <td class="childrenbox">
                                 <label for="Cholesterol_patients">Number of Cholesterol Patients</label><br>
                                 <input type="number" min='0' name="Cholesterol_patients" class="in new fillingbox" id="cp"  value="<?php echo $rows->cholesterol_patients?>">
                                 <i class="fas fa-check-circle"></i>
@@ -117,17 +128,15 @@
                 <div class="box box1">
                     <button type="submit" name="Enter">Save</button>
                 </div>
-
-                <div class="box box1">
-                    <button type="submit" name="Enter" href="eldertable.php">Back</button>
-                </div><br>
                 
                 <!-- <a href="#top"><i class="fa-sharp fa-solid fa-arrow-up">TOP</i></a> -->
                 <!-- <div class="box box1">
                     <button><a href="familydetails.php">View family details</a></button>
                 </div> -->
         </form>
-        
+        <div class="box box1">
+        <a href="<?=ROOT?>/eldertable"><button name="cancel">Back</button></a>
+        </div><br>
     </div>
 </div>
 
