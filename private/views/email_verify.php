@@ -17,4 +17,4 @@ else{
     <div><input type="text" placeholder="Enter verification code" name="code"></div>
     <div> <button>Verify</button></div>       
 </form>
-<div>
+<div> 

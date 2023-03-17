@@ -1,7 +1,8 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css/style1.css">
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTET7frzRd7t4FvurRzw28rbqEE7_oWFU&callback=initMap&libraries=places"></script>
+<script src="http://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 <?php
@@ -24,15 +25,20 @@
                 <div class="blank col-lg-1"></div>
                 <div class="grid-10 col-lg-10 p-20">
                         <div class="blank col-lg-3"></div>
-                        <div class="card card-back1 col-lg-4 height-auto p-left-20">
+                        <div class="card card-back1 col-lg-8 height-auto p-left-20">
                                 <div class="heading-1 col-4 p-top-20 p-bottom-20">Add Events</div>
                                 <form method="post" action="" enctype="multipart/form-data" class="p-top-10 p-left-80 p-right-5">
                                         <label for="name" class="heading-4">Event Name</label>
                                         <input name="name" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="text"><br>
 
-                                        <label for="address" class="heading-4">Location Address</label>
+                                        <label for="address" class="heading-4">Location</label>
                                         <input name="address" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="text"><br>
+                                        <input type="text" id="p-longitude" hidden name="longitude">
+                                        <input type="text" id="p-latitude" hidden name="latitude">
+                                        <input type="text" id="locationInp" class="location">
+<div class="map" id="map">
 
+</div><br>
                                         <label for="date" class="heading-4">Event Date</label>
                                         <input name="date" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="date"><br>
 
@@ -86,4 +92,5 @@
   });
 </script>
 
+<script src="<?=ROOT?>/assets/map.js"></script>
 <?php $this->view('includes/footer') ?>

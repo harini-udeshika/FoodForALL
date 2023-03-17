@@ -92,7 +92,7 @@ for (let i = 0; i < buttons.length; i++) {
         }
 
         setTimeout(() => {
-          alert.className = 'hidden';
+          alert.className = 'hidden'; 
           alert.innerHTML = "";
         }, 1000);
         if (reload.includes("Shopping cart has been reset")) {
