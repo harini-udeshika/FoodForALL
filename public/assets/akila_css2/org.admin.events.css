@@ -39,3 +39,17 @@
     height: 450px;
     overflow: auto; 
 }
+
+/* #search_result{
+    display: none;
+} */
+
+#dropdown{
+    display: none;
+} 
+
+.result_row img {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    object-fit: cover;
+}

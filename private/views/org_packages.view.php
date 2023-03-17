@@ -5,7 +5,9 @@
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
-<div class="page_title_1" style="margin-bottom: 15px; margin-top:15px; padding-top:5px;">Packages</div>
+<div class="row justify-to-left ">
+    <div class="page_title_1" style="margin-bottom: 15px; margin-top:15px; padding-top:5px; float: left;">Packages</div>
+</div>
 
 <div class="row justify-to-center">
     <div class="package_1" style="width: 310px; height: 400px; margin:20px">

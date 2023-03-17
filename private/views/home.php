@@ -5,7 +5,7 @@
     $this->view('includes/submenu');
 }
 ?>
-
+ 
 
 <div class="container">
 
@@ -24,7 +24,7 @@
                 $path='signup';
                 }?>
 
-            <button class="donate"><a href="<?=$path?>">Donate/Volunteer</a> </button>
+            <a href="<?=$path?>"><button class="donate">Donate/Volunteer </button></a>
             
           
 
@@ -42,7 +42,7 @@
             giving to
             a worthy cause ...
         </p>
-        <button class="readmore">Read more...</button>
+        <a href="about"><button class="readmore">Read more...</button></a>
     </div>
     <div class="section">
         <p class="h">Why donate food?</p>
@@ -50,7 +50,7 @@
             stability
             and hope to those struggling to put food on the table ...
         </p>
-        <button class="readmore">Read more...</button>
+        <a href="about"><button class="readmore">Read more...</button></a>
     </div>
     <div class="section">
         <p class="h">How donation helps ?</p>
@@ -58,7 +58,7 @@
             flexibility to
             purchase exactly what is needed, such as wholesome and nutritious food ...
         </p>
-        <button class="readmore">Read more...</button>
+        <a href="about"><button class="readmore">Read more...</button></a>
     </div>
     <div class="section">
         <p class="h">Become a volunteer !</p>
@@ -69,7 +69,7 @@
             contributions ...
 
         </p>
-        <button class="readmore">Read more...</button>
+        <a href="about"><button class="readmore">Read more...</button></a>
     </div>
     
 </div>
