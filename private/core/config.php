@@ -8,7 +8,7 @@
 //define('ROOT','http://localhost/projectNew/FoodForAll/public');
 
 
-define('DBNAME', 'foodforall.0');
+define('DBNAME', 'foodforall.1');
 define('DBHOST', 'localhost');
 define('DBUSER', 'root');
 define('DBPASS', '');

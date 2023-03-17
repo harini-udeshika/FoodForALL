@@ -103,4 +103,12 @@ class Admin extends Controller
             'error' => $errors
         ]);
     }
+
+    public function org(){
+        $this->view('org_packages.view');
+    }
+
+    public function org2(){
+        $this->view('org_packages_2.view');
+    }
 }

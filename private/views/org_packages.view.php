@@ -94,6 +94,7 @@
         </div>
     </div>
 
+    <!-- add new package -->
     <div class="package_1" style="width: 310px; height: 400px; margin:30px 20px 30px 20px">
         <div class="row justify-to-center">
             <div class="package_name purpleText">Package one</div>
@@ -143,12 +144,13 @@
     <i class="fas fa-plus-square toggleButton" style="margin-bottom: 0px; margin-top:15px; margin-left:10px; padding-top:5px; font-size: 42px;" id="plusIcon"></i>
 </div>
 
+<!-- add package] -->
 <div class="package_1 addNewPackage" style="width: 344px;height: 440px; margin: 20px 0px 100px 360px;" id="addPackage">
     <form action="">
         <div class="row justify-space-between">
-            <div class="package_items_heading_2 purpleText" style="font-size: 16px;font-weight: 600;">Package name :
-            </div>
-            <div class="package_text_field purpleText" style="width: 152px;height: 32px;"></div>
+            <label class="package_items_heading_2 purpleText" style="font-size: 16px;font-weight: 600;">Package name :
+            </label>
+            <input class="package_text_field purpleText" style="width: 152px;height: 32px;"></input>
         </div>
 
         <div class="row justify-to-left">
@@ -159,20 +161,20 @@
             <div class="row justify-to-right" style="flex-direction: column;">
                 <div class="package_items_container card">
                     <div class="row justify-space-between" style="border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
-                        <div class="item_text grayText  ">Item 1</div>
-                        <div class="item_text grayText  ">890 LKR</div>
+                        <label class="item_text grayText  ">Item 1</label>
+                        <input class="lass="package_text_field purpleText" style="width: 152px;height: 32px;">
                     </div>
                     <div class="row justify-space-between" style="border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
-                        <div class="item_text grayText  ">Item 1</div>
-                        <div class="item_text grayText  ">2890 LKR</div>
+                        <label class="item_text grayText  ">Item 1</label>
+                        <input class="item_text grayText">
                     </div>
                     <div class="row justify-space-between" style="border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
-                        <div class="item_text grayText  ">Item 1</div>
-                        <div class="item_text grayText  ">89 LKR</div>
+                        <label class="item_text grayText  ">Item 1</label>
+                        <input class="item_text grayText  ">89 LKR</input>
                     </div>
                     <div class="row justify-space-between" style="border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
-                        <div class="item_text grayText  ">Item 1</div>
-                        <div class="item_text grayText  ">1890 LKR</div>
+                        <label class="item_text grayText  ">Item 1</label>
+                        <input class="item_text grayText  ">1890 LKR</input>
                     </div>
                 </div>
                 <div class="row justify-to-right" style="width: 240px;">
