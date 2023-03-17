@@ -1,4 +1,4 @@
-.container {
+.container_pd {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -23,7 +23,7 @@
 }
 
 .corner img {
-    height: 90%;
+    width: 9rem;
 }
 
 .middle {
@@ -40,7 +40,7 @@
 }
 
 .middle img {
-    height: 90%;
+    width: 27rem;
 }
 
 .corner_2 {
@@ -54,40 +54,89 @@
     /* border: 2px solid #7FB432; */
 
 }
-.name{
-    font-weight: bold;
-    font-size:1.4rem;
-
+.des{
+    margin-bottom: 2rem;
 }
-.buttons{
+.product{
+    margin-top: 0.5rem
+}
+.name {
+    font-weight: bold;
+    font-size: 1.4rem;
+    width: 23rem;
     display: flex;
     flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
+    justify-content: space-between;
+    align-items: center;
+}
+.name i{
+    background-color: #dfeccc;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #7FB432;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.name i:hover{
+    background-color: #ecf1e3;
+    color: #69af01;
+}
+.buttons_p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 22rem;
     margin-top: 2rem;
 }
-.green{
-    
-    color:#7FB432;
+
+.green {
+
+    color: #7FB432;
 }
-.cart{
+
+.cart {
     height: 2rem;
     width: 9rem;
     border: none;
     border-radius: 0.5rem;
-    background-color: #7FB432;
+    background-color: rgb(127, 180, 50);
     color: #fff;
     font-weight: bold;
     cursor: pointer;
 }
-.purple{
-    background-color:#7681BF;
+
+.purple {
+    background-color: rgb(118, 129, 191);
 }
 
-.cart:hover{
+.cart:hover {
     background-color: #90cb38;
 }
-.purple:hover{
+
+.purple:hover {
     background-color: #8390d7;
+}
+
+.alert {
+    position: fixed;
+    z-index: 1;
+    top: 12rem;
+    height: 2rem;
+    width: 19rem;
+    background-color: #d7eeb4;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #69af01;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    visibility: hidden;
+
+}
+
+.visible {
+    visibility: visible;
 }

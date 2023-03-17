@@ -1,9 +1,39 @@
-.chart-1{
-    margin-top: 5rem;
+.headings {
     display: flex;
-    flex-direction:row;
-    align-items:space-between;
+    flex-direction: row;
+    justify-content: center;
+    width: 55rem;
+    font-weight: bold;
+    color: #7681BF;
+
+}
+
+.charts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-evenly;
-    width:40%;
-    height:45rem;
+    width: 40rem;
+    height: 22rem;
+
+}
+
+.chart2 {
+    border-radius: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 1rem;
+    /* width: 150px; */
+    padding: 1rem;
+    /* background: #eeee; */
+    /* height:15rem; */
+}
+
+.chart1 {
+    border-radius: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 1rem;
+    padding: 1rem;
+
+    /* background-color: aqua; */
+    /* height:15rem; */
 }

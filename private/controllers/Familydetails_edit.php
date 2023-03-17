@@ -12,6 +12,8 @@ class Familydetails_edit extends Controller{
                 $arr['FullName']=$_POST['FullName'];
                 $arr['Iname']=$_POST['NameWithInitial'];
                 $arr['nic']=$_POST['FamilyID'];
+                $arr['familymembers']=$_POST['Familymembers'];
+                $arr['relationship']=$_POST['Relationship'];
                 $arr['profession']=$_POST['profession'];
                 $arr['netsalary']=$_POST['salary'];
                 $arr['contact1']=$_POST['Contact1'];
