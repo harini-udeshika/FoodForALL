@@ -383,3 +383,10 @@ img {
     color: white;
     font-weight: bold;
 }
+.map{
+    margin-left: 15%;
+    align-self: flex-start;
+    height:20rem;
+    width:50%;
+    background-color: #f6f9f0;
+}

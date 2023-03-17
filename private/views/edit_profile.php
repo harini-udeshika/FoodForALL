@@ -1,7 +1,11 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/profile.css">
 <?php $this->view('includes/navbar')?>
-
+<?php if (Auth::logged_in()) {
+    $this->view('includes/submenu');
+}
+?>
+ 
 <div class="heading">
         <p>Edit your profile</p>
     </div>
@@ -78,5 +82,5 @@
             </div>
         </div>
     </div>
-<script src=" navbar.js"></script>
+<!-- <script src=" navbar.js"></script> -->
 <?php $this->view('includes/footer')?>

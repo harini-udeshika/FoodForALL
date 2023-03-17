@@ -27,6 +27,36 @@ class Shop extends Controller
 
                 $prod_ids = array();
                 $org_id = $org_id[0];
+                if (isset($_SESSION['timeout'])) {
+                    if (isset($_SESSION['CART' . $org_id]) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $_SESSION['timeout']) {
+                        foreach ($_SESSION['CART' . $org_id] as $key => $product) {
+
+                            $items_in_cart = $_SESSION['CART' . $org_id][$key]['qty'];
+                            // print_r($_SESSION['CART']);
+                            // $current_stock = $_SESSION['CART'][$key]['s'];
+                            $current_stock = "SELECT stock from merchandise_item where item_no= :id";
+                            $arr = ['id' => $product['id']];
+                            $current_stock = $item->query($current_stock, $arr);
+                            $current_stock = $current_stock[0]->stock;
+
+                            $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
+                            $arr = ['s' => $current_stock + $items_in_cart,
+                                'id' => $product['id']];
+                            $updated_stock = $item->query($query, $arr);
+                            // unset($_SESSION['CART'][$key]);
+
+                        }
+
+                        echo ("<div class='redo'><i class='fa-solid fa-circle-exclamation'></i>&nbsp;&nbsp;Shopping cart has been reset due to inactivity</div>");
+
+                        $_SESSION['CART' . $org_id] = array();
+
+                        // $_SESSION['CART'] = array_values($_SESSION['CART']);
+                    }
+
+                    $_SESSION['LAST_ACTIVITY'] = time();
+                }
+
                 if (isset($_SESSION['CART' . $org_id])) {
 
                     $prod_ids = array_column($_SESSION['CART' . $org_id], 'id');
@@ -96,36 +126,36 @@ class Shop extends Controller
         // echo($org_id);
         if (isset($_GET['item'])) {
 
-            $timeout = 1 * 600;
+            $_SESSION['timeout'] = 1 * 10;
+            if (isset($_SESSION['timeout'])) {
+                if (isset($_SESSION['CART' . $org_id]) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $_SESSION['timeout']) {
+                    foreach ($_SESSION['CART' . $org_id] as $key => $product) {
 
-            if (isset($_SESSION['CART' . $org_id]) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout) {
-                foreach ($_SESSION['CART' . $org_id] as $key => $product) {
+                        $items_in_cart = $_SESSION['CART' . $org_id][$key]['qty'];
+                        // print_r($_SESSION['CART']);
+                        // $current_stock = $_SESSION['CART'][$key]['s'];
+                        $current_stock = "SELECT stock from merchandise_item where item_no= :id";
+                        $arr = ['id' => $product['id']];
+                        $current_stock = $item->query($current_stock, $arr);
+                        $current_stock = $current_stock[0]->stock;
 
-                    $items_in_cart = $_SESSION['CART' . $org_id][$key]['qty'];
-                    // print_r($_SESSION['CART']);
-                    // $current_stock = $_SESSION['CART'][$key]['s'];
-                    $current_stock = "SELECT stock from merchandise_item where item_no= :id";
-                    $arr = ['id' => $product['id']];
-                    $current_stock = $item->query($current_stock, $arr);
-                    $current_stock = $current_stock[0]->stock;
+                        $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
+                        $arr = ['s' => $current_stock + $items_in_cart,
+                            'id' => $product['id']];
+                        $updated_stock = $item->query($query, $arr);
+                        // unset($_SESSION['CART'][$key]);
 
-                    $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
-                    $arr = ['s' => $current_stock + $items_in_cart,
-                        'id' => $product['id']];
-                    $updated_stock = $item->query($query, $arr);
-                    // unset($_SESSION['CART'][$key]);
+                    }
 
+                    echo ("<i class='fa-solid fa-circle-exclamation'></i>&nbsp;&nbsp;Shopping cart has been reset due to inactivity:");
+
+                    $_SESSION['CART' . $org_id] = array();
+
+                    // $_SESSION['CART'] = array_values($_SESSION['CART']);
                 }
 
-                echo ("<i class='fa-solid fa-circle-exclamation'></i>&nbsp;&nbsp;Shopping cart has been reset due to inactivity:");
-
-                $_SESSION['CART' . $org_id] = array();
-
-                // $_SESSION['CART'] = array_values($_SESSION['CART']);
+                $_SESSION['LAST_ACTIVITY'] = time();
             }
-
-            $_SESSION['LAST_ACTIVITY'] = time();
-
             // if(date('H:i:s') - $start_time>='10:00')
             $data = $_GET['item'];
             $data = explode(' ', $data);
@@ -188,12 +218,12 @@ class Shop extends Controller
             $params = $_GET['cart'];
 
             $params = explode(' ', $params);
-          
+
             $org_id = explode('=', $params[0]);
-            $org_id=$org_id[1];
-            
+            $org_id = $org_id[1];
+
             $params = explode('=', $params[1]);
-           
+
             // print_r($params);
             $id = $params[0];
             // echo($id);
@@ -228,9 +258,9 @@ class Shop extends Controller
 
             $params = explode(' ', $params);
             $org_id = explode('=', $params[0]);
-            $org_id=$org_id[1];
+            $org_id = $org_id[1];
             $params = explode('=', $params[1]);
-            
+
             // print_r($params);
             $id = $params[0];
             $item_data = $product->where('item_no', $id);
@@ -274,9 +304,9 @@ class Shop extends Controller
             $params = $_GET['cart'];
             $params = explode(' ', $params);
             $org_id = explode('=', $params[0]);
-            $org_id=$org_id[1];
+            $org_id = $org_id[1];
             $params = explode('=', $params[1]);
-           
+
             // print_r($params);
             $id = $params[0];
             $item_data = $product->where('item_no', $id);
@@ -308,7 +338,7 @@ class Shop extends Controller
         $params = $_GET['cart'];
         $params = explode(' ', $params);
         $org_id = explode('=', $params[0]);
-        $org_id=$org_id[1];
+        $org_id = $org_id[1];
         //if stock's aren't available
         if ($quantity > $_SESSION['CART' . $org_id][$index]['s']) {
             $available = $_SESSION['CART' . $org_id][$index]['s'] + 1;

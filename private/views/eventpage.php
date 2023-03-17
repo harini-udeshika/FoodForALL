@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/event.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTET7frzRd7t4FvurRzw28rbqEE7_oWFU&callback=initMap&libraries=places"></script>
+<script src="http://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <?php
 $donor = new Donate();
 $donor = $donor->sum("amount", "event_id", $rows->event_id);
@@ -101,8 +102,12 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
             <p class="ii"><i class="fa-solid fa-heart"></i><span><?=ucfirst($org->name)?></span></p>
         </div>
     </div>
+  
     <img src="<?=$rows->thumbnail_pic?>" alt="">
 </div>
+<div class="map" id="map"></div>
+    <input type="text" value="<?=$rows->latitude?>" id="lat" hidden>
+    <input type="text" value="<?=$rows->longitude?>" id="lon" hidden>
 <?php
 $donor = new Donate();
 $donor = $donor->sum("amount", "event_id", $rows->event_id);
@@ -234,4 +239,5 @@ if (!$amount) {
 </div>
 <?php endif?>
 <?php endif?>
+<script src="<?=ROOT?>/assets/map_user.js"></script>
 <?php $this->view('includes/footer')?>

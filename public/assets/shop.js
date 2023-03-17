@@ -8,6 +8,7 @@ let rows = document.querySelectorAll(".table_row");
 let remove_btns = document.querySelectorAll(".remove");
 const alert = document.getElementById("alert");
 let trash=document.getElementById("trash");
+let redo=document.getElementById("redo");
 let trash_conf=document.getElementById("trash_conf");
 var data;
 var quantity, i;
@@ -135,7 +136,7 @@ for (let i = 0; i < cart_qty.length; i++) {
         for (let i = 0; i < total.length; i++) {
             updated_total += parseInt(total[i].innerText);
         }
-
+ 
 
         bill_total.innerHTML = "Rs." + updated_total + ".00";
         var cart = remove_btns[i].href.split('?')[1];
