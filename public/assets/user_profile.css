@@ -56,7 +56,7 @@
     color: #FFFFFF;
     background-color: #7681BF;
     border-radius: 2rem;
-    text-decoration: none; 
+    text-decoration: none;
     text-align: center;
     padding-top: 0.25rem;
     margin-top: 0.25rem;
@@ -93,61 +93,18 @@
 .certificate_section {
     display: flex;
     flex-direction: column;
-  
-    margin: 3rem 0 1rem 0;
+    margin: 2rem 0 5rem 0;
     min-height: 15rem;
     width: 60rem;
 }
-.cert_del{
-    
-    background-color: #e9f8d3;
-    height: 1rem;
-    width:1rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem
-}
-.cert_del_confirm{
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:space-evenly;
-    position: absolute;
-    height: 10rem;
-    width: 13rem;
-    background-color: #ffffff;
-    border: 0.01rem solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 0.5rem;
-    top:35rem;
-    visibility: visible;
-}
-.cert_del_confirm button{
-    width: 5rem;
-    background-color: #7FB432;
-    border: none;
-    height: 2rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    color: #fff;
-}
-.cert_del_confirm button:hover{
-    background-color: #95d03d;
-}
-.certificates i{
-color: #7FB432;
-height: 1rem;
-}
-.certificates i:hover{
-    color: #93db26;
-}
+
 .heading_certificates {
     margin-bottom: 2rem;
     color: #000;
     font-weight: 800;
     font-size: 1.5rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
@@ -161,10 +118,6 @@ height: 1rem;
     background-color: #7681BF;
     border: none;
     border-radius: 0.5rem;
-}
-.heading_certificates button{
-   align-self: flex-end;
-   margin-right: 3rem;
 }
 
 .change_pic {
@@ -256,23 +209,7 @@ height: 1rem;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     margin: 0.5rem;
 }
-.no_cert{
-    color: #787878;
-    font-size: medium;
-    font-weight: bold;
-    height: 6rem;
-    width: 60rem;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    border-radius: 1rem;
-}
-.no_cert i{
-    color: #787878;
-    margin-top: 1rem;
-}
+
 .certificates_row {
     display: flex;
     flex-direction: row;
@@ -305,7 +242,6 @@ height: 1rem;
 }
 .scroll {
     height: 20rem;
-    min-height: 10rem;
     overflow-y: scroll;
    border: 1px solid #ececec;
    border-radius:1rem;
@@ -333,7 +269,7 @@ table {
     display: flex;
     flex-direction: column;
     min-height: 20rem;
-    width: 59rem;
+    width: 60rem;
 }
 
 .table_headings {

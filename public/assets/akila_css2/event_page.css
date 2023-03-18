@@ -15,8 +15,8 @@ a {
 }
 
 .photo_holder {
-    height: 220px;
-    /* padding-bottom: 100%; */
+    height: 0px;
+    padding-bottom: 100%;
 
     border: 3px solid var(--projectPurple);
     border-radius: 10px;
@@ -26,10 +26,6 @@ a {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-}
-
-.photo_holder img {
-    z-index: 10000000;
 }
 
 .addmore_link_holder {
@@ -62,18 +58,4 @@ a {
 .right-side {
     width: 50%;
     float: right;
-}
-
-.volunteer_scroll{
-    /* background-color: red; */
-    height: auto;
-    max-height: 275px;
-    overflow: auto; 
-}
-
-.accepted_scroll{
-    /* background-color: red; */
-    height: auto;
-    max-height: 275px;
-    overflow: auto; 
 }

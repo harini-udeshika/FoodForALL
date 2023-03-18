@@ -187,9 +187,7 @@ if ($allevents) {
     $count = sizeof($allevents);
 
     while ($count > 0) {
-
-        $totamount = $totamount + $allevents[$num]->collected;
-        // $totamount = $totamount + 50000;
+        $totamount = $totamount + $allevents[$num]->total_amount;
 
         $count--;
         $num++;
@@ -206,9 +204,7 @@ if ($allevents) {
         </div>
         <div class="card col-lg-4 m-bottom-30 col-sm-12 height-170px grid-10">
             <div class="heading-2 col-10 " style="text-align: center;">Total Donations Acquired
-
-                <div class="heading-1 p-top-20 txt-purple" style="font-size: 3.5rem;"><?php echo $totamount ?>/=</div>
-
+                <div class="heading-1 p-top-20 txt-purple" style="font-size: 3.5rem;">Rs.<?php echo $totamount ?></div>
             </div>
         </div>
         <div class="blank col-lg-2 col-sm-12"></div>
@@ -234,12 +230,10 @@ if ($allevents) {
             <div class="grid-9">
 
                 <?php
-
-                $i = 0;
-                if ($ongoin) {
-                    $count = sizeof($ongoin);
-                    while ($count > 0 && $i < 3) { ?>
-
+$i = 0;
+if ($ongoin) {
+    $count = sizeof($ongoin);
+    while ($count > 0) {?>
                         <!-- EVENT-ONGOING -->
                         <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
 
@@ -259,12 +253,8 @@ if ($allevents) {
                                     </div>
                                 </div>
 
-                                <div class="progress-back width-100 height-4px m-top-2">
-                                    <div class="progress-fill width-<?php if ($ongoin[$i]->amount_percentage) {
-                                                                        echo $ongoin[$i]->amount_percentage;
-                                                                    } else {
-                                                                        echo 0;
-                                                                    } ?> height-4px" style="float: left;"></div>
+                                <div class="progress-back width-100">
+                                    <div class="progress-fill width-80 height-4px m-top-2" style="float: left;"></div>
                                 </div>
                             </div>
 
@@ -277,12 +267,8 @@ if ($allevents) {
                                     </div>
                                 </div>
 
-                                <div class="progress-back width-100 height-4px m-top-2">
-                                    <div class="progress-fill width-<?php if ($ongoin[$i]->vol_percentage) {
-                                                                        echo $ongoin[$i]->vol_percentage;
-                                                                    }else{
-                                                                        echo 0;
-                                                                    } ?> height-4px" style="float: left;"></div>
+                                <div class="progress-back width-100">
+                                    <div class="progress-fill width-50 height-4px m-top-2" style="float: left;"></div>
                                 </div>
                             </div>
 
@@ -321,12 +307,10 @@ if ($allevents) {
             <div class="grid-9">
 
                 <?php
-
-                $i = 0;
-                if ($past) {
-                    $count = sizeof($past);
-                    while ($count > 0 && $i < 3) { ?>
-
+$i = 0;
+if ($past) {
+    $count = sizeof($past);
+    while ($count > 0) {?>
                         <!-- EVENT-COMPLETED -->
                         <div class="card event-card-on col-lg-3 col-md-3 p-20 p-top-10 m-bottom-20">
 

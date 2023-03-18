@@ -18,9 +18,9 @@ class Home_org extends Controller
         // echo "pending";
         // print_r($pending);
 
-        // $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
-        // $arr = ['id'=>$org_reg];
-        $ongoing = $user->selectOngoing($org_reg);
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
+        $arr = ['id'=>$org_reg];
+        $ongoing = $event->query($query,$arr);
         // echo "<br>ongoing";
         // print_r($ongoing);
 
@@ -31,9 +31,9 @@ class Home_org extends Controller
         // print_r($past);
         // die;
 
-        // $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0";
-        // $arr = ['id'=>$org_reg];
-        $allevents = $user->selectAll($org_reg);
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0";
+        $arr = ['id'=>$org_reg];
+        $allevents = $event->query($query,$arr);
 
         $this->view('home_org.view',['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past , 'rows' => $data, 'allevents' => $allevents]);
     }

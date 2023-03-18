@@ -1,6 +1,6 @@
 .container{
     width:25rem;
-    min-height:23rem;
+    min-height:28rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
 .head{
     font-weight: bold;
     font-size:larger;
-    color: rgb(118, 129, 191);
+    color: #7681BF;
 }
 small{
     color: #7FB432;
@@ -55,7 +55,7 @@ small{
 }
 .open-popup{
     visibility: visible;
-    top:50%;
+    top:65%;
     transform: translate(-50%,-50%) scale(1);
 }
 .popup img{
@@ -64,8 +64,4 @@ small{
     border-radius:50%;
  
     /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
-}
-
-.container span{
-    color:#7FB432;
 }

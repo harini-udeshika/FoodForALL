@@ -31,29 +31,9 @@
             </div>
         </div>
     </div>
-    <?php $image_arr = explode(',', $org->images)?>
-    <section class="gallery">
-  <div class="gallery__item">
-    <input type="radio" id="img-1" checked name="gallery" class="gallery__selector"/>
-    <img class="gallery__img" src="uploads/<?=$image_arr[0]?>" alt=""/>
-    <label for="img-1" class="gallery__thumb"><img src="uploads/<?=$image_arr[0]?>" alt=""/></label>
-  </div>
-  <div class="gallery__item">
-    <input type="radio" id="img-2" name="gallery" class="gallery__selector"/>
-    <img class="gallery__img" src="uploads/<?=$image_arr[1]?>" alt=""/>
-    <label for="img-2" class="gallery__thumb"><img src="uploads/<?=$image_arr[1]?>" alt=""/></label>
-  </div>
-  <div class="gallery__item">
-    <input type="radio" id="img-3" name="gallery" class="gallery__selector"/>
-    <img class="gallery__img" src="uploads/<?=$image_arr[2]?>" alt=""/>
-    <label for="img-3" class="gallery__thumb"><img src="uploads/<?=$image_arr[2]?>" alt=""/></label>
-  </div>
-  <!-- <div class="gallery__item">
-    <input type="radio" id="img-4" name="gallery" class="gallery__selector"/>
-    <img class="gallery__img" src="https://picsum.photos/id/106/600/400.jpg" alt=""/>
-    <label for="img-4" class="gallery__thumb"><img src="https://picsum.photos/id/106/150/100.jpg" alt=""/></label>
-  </div> -->
-</section>
+    <div class="intro-3">
+        <img scr="">
+    </div>
 </div>
 <div class="ongoing">
     <p class="heading"><i class="fa-solid fa-calendar-days fa-xl"></i></i>&emsp;Ongoing Events</p>
@@ -64,14 +44,14 @@
                 <h4><i class="fa-solid fa-calendar-xmark fa-xl"></i>&nbsp;&nbsp;Sorry! No ongoing events<h4>
             <?php endif?>
             <?php if ($ongoing): ?>
-
+                
             <?php
 //print_r($rows);?>
             <?php foreach ($ongoing as $value): ?>
 
             <?php if ($i % 3 == 0 && $i != 0): ?>
         </div>
-        <div class="event-row">
+        <div class="event-row"> 
 
             <?php endif?>
             <?php
@@ -84,7 +64,7 @@ $total_amount = $ongoing[$i]->total_amount;
 if ($total_amount) {
     $donorp = round(($total_donated / $total_amount) * 100, 2);
 }
-if ($ongoing[$i]->volunteers) {
+if($ongoing[$i]->volunteers){
     $volunteers = $ongoing[$i]->volunteers;
 }
 $tot_volunteers = $ongoing[$i]->no_of_volunteers;
@@ -181,7 +161,6 @@ if ($tot_volunteers) {
                             <?php echo $completed[$i]->name ?>
                         </p>
                         <div class="event-image">
-                            <img src="<?=$completed[$i]->thumbnail_pic?>">
                         </div>
                         <p class="date">
                             <?php echo $completed[$i]->date ?>
@@ -294,7 +273,7 @@ if ($tot_volunteers) {
                     </select>
                 </div>
 
-
+                
             </div>
                 <div class="hide">
                     <i class="fa-solid fa-circle-exclamation"></i><small id="small">error message</small>
@@ -320,10 +299,10 @@ if ($tot_volunteers) {
             <p><?=$comment_data[$i]->first_name?></p>
             <div class="stars">
                 <?php for ($j = 0; $j < 5; $j++): ?>
-                <?php if ($j < $comment_data[$i]->star_rate): ?>
+                <?php if($j<$comment_data[$i]->star_rate):?>
                 <span class="bright">★</span>
                 <?php endif;?>
-                <?php if ($j >= $comment_data[$i]->star_rate): ?>
+                <?php if($j>=$comment_data[$i]->star_rate):?>
                 <span class="dull">★</span>
                 <?php endif;?>
                 <?php endfor?>
@@ -331,9 +310,7 @@ if ($tot_volunteers) {
         </div>
         <div class="review-right">
             <p><?=$comment_data[$i]->comment?></p>
-            <?php if ($comment_data[$i]->reply): ?>
-            <p class="admin">&nbsp;<i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;<?=$comment_data[$i]->reply?></p>
-            <?php endif?>
+            <p class="admin">&nbsp;<i class="fa-solid fa-comment-dots"></i><?=$comment_data[$i]->reply?></p>
             <p class='date-time'><?=substr($comment_data[$i]->date_time, 0, -8)?>
                 &emsp;<?=substr($comment_data[$i]->date_time, 10, 6)?></p>
             <div class="rating">
