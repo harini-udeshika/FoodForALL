@@ -20,8 +20,7 @@ class Add_event extends Controller
             $arr['description'] = $_POST['description'];
             $arr['location'] = $_POST['address'];
             $arr['org_gov_reg_no'] = $_SESSION['USER']->gov_reg_no;
-            $arr['latitude'] = $_POST['latitude'];
-            $arr['longitude'] = $_POST['longitude'];
+
             if ($image->pic_validate()) {
                 $filename = $image->pic_validate();
                 $arr['thumbnail_pic'] = $filename;

@@ -15,7 +15,6 @@ class Childrenhomedetails extends Controller{
                 $arr['contact1']=$_POST['Contact1'];
                 $arr['contact2']=$_POST['Contact2'];
                 $arr['address']=$_POST['address'];
-                $arr['children_num']=$_POST['Members'];
                 $arr['malnutritioned_children']=$_POST['Malnutrition_children'];
                 $arr['healthy_children']=$_POST['Healthy_children'];
                 $arr['areacoordinator_email']=$_POST['areacoordinator_email'];

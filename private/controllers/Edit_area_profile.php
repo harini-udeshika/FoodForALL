@@ -11,6 +11,7 @@ class Edit_area_profile extends Controller
         if($_POST){
             $email=Auth::getemail();
             $arr['name'] = $_POST["name"];
+            $arr['username'] = $_POST["username"];
             $arr['nic'] = $_POST["nic"];
             $arr['phone_no'] = $_POST["phone_no"];
             $user->update_U_email($email,$arr);

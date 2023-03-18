@@ -162,7 +162,6 @@ select {
     /* background-color: #e7e7e7; */
     text-align: center;
 }
-
 .event-details {
     display: flex;
     flex-direction: column;
@@ -338,15 +337,15 @@ h1 {
 
 
 
-    height: 13rem;
-    width: 13rem;
+    height: 12rem;
+    width: 12rem;
     border-radius: 8rem;
     border: 0.1rem solid #7681BF;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem; */
 }
 .org-logo img{
-    height: 13rem;
-    width: 13rem;
+    height: 12rem;
+    width: 12rem;
     border-radius: 8rem;
     border: 0.2rem solid #7681BF;
     margin-bottom: 2rem;
@@ -363,7 +362,6 @@ h1 {
     display: flex;
     flex-direction: column;
     width: 35%;
-    height: 35rem;
     align-items: center;
     justify-content: flex-start;
     text-align: justify;
@@ -372,77 +370,10 @@ h1 {
 .intro-3 {
 
     width: 35%;
-    height: 35rem;
-    /* background-color: #eae8e8; */
+    height: 20rem;
+    background-color: #eae8e8;
     border-radius: 2rem;
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
 
-}
-/* * {
-    box-sizing: border-box;
-  }
-   */
-  img {
-    max-width: 100%;
-    vertical-align: top;
-    border-radius: 0.5rem;
-    
-  }
-  
-  .gallery {
-    display: flex;
-    margin: 1rem ;
-    max-width: 400px;
-    position: relative;
-    padding-top: calc(400px / 600px * 100%);
-  }
-  
-  @media screen and (min-width: 600px) {
-    .gallery {
-      padding-top: 400px;
-    }
-  }
-  
-  .gallery__img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 1rem;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  }
-  
-  .gallery__thumb {
-    padding-top: 6px;
-    margin: 6px;
-    display: block;
-  }
-  
-  .gallery__selector {
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .gallery__selector:checked + .gallery__img {
-    opacity: 1;
-  }
-  
-  .gallery__selector:checked ~ .gallery__thumb > img {
-    box-shadow: 0 0 0 3px #7FB432;
-  }
-  
-  
-.intro-3 img{
-    /* width: 30rem; */
-    height: 22rem;
-    /* background-color: #eae8e8; */
-    border-radius: 1rem;
-    margin-left: 2.5rem;
-    
 }
 h4{
     color: #979797;
@@ -736,7 +667,7 @@ h4{
 }
 .stars{
     background-color: #7681BF;
-    width: 7rem;
+    width: 6rem;
     padding: 0.1rem;
     border-radius: 0.7rem;
 }

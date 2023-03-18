@@ -57,14 +57,14 @@
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact1">Land phone number*</label><br>
+                    <label for="contact1">Contact No1*</label><br>
                     <input type="text" name="Contact1" placeholder="Contact" class="in fillingbox" id="contact1">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact2">Mobile phone number</label><br>
+                    <label for="contact2">Contact No2</label><br>
                     <input type="text" name="Contact2" placeholder="Contact" class="in fillingbox" id="contact2">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
@@ -83,16 +83,7 @@
                 <div class="box1 filling ">
                     <table>
                         <hr>
-                        <div id="children" >   
-                        <tr class="tr1">
-                            <td class="childrenbox">
-                                <label for="members">Number of children</label><br>
-                                <input type="number" min='1' name="Members" class="in new fillingbox" id="mem">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i><br>
-                                <small>Erorr message</small>
-                            </td>
-                        </tr>   
+                        <div id="children" >     
                             <tr class="tr1 children" >
                                 <td>
                                     <label for="Healthy_children">Number of Healthy childern</label><br>

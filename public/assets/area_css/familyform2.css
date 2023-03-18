@@ -12,13 +12,11 @@
 .box1.success i.fa-check-circle{
     visibility: visible;
     color: #2ecc71;
-    padding-top: 5px;
 }
 
 .box1.error i.fa-exclamation-circle{
     visibility: visible;
     color: #e74c3c;
-    padding-top: 5px;
 }
 
 .box1.error small{
@@ -36,40 +34,10 @@
 }
 
 .box1{
-    padding-top: 15px;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
 /* .familyform{
     text-align: center;
 } */
-
-.childrenbox{
-    padding-right: 40px;
-    padding-top: 20px;
-}
-
-select{
-    font-size: 1rem;
-    font-family: inherit;
-    font-weight: bold;
-}
-
-
-div form {
-    list-style-type: none;
-    counter-reset: css-counter 0; /* initializes counter to 0; use -1 for zero-based numbering */
-  }
-  
-  div form label {
-    counter-increment: css-counter 1; /* Increase the counter by 1. */
-  }
-  
-  div form label:before {
-    content: counter(css-counter) ". "; /* Apply counter before children's content. */
-  }
-
-
-  td{
-    border-color: black;
-  }

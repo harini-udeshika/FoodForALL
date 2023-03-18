@@ -26,7 +26,7 @@ class Organizationpage extends Controller
         }
 
         if ($id) {
-            $query = "SELECT * FROM event WHERE date<CURRENT_DATE && org_gov_reg_no= :id && approved=1";
+            $query = "SELECT * FROM event WHERE date<CURRENT_DATE && org_gov_reg_no= :id";
             $arr = ['id' => $id];
             $completed = $event->query($query, $arr);
             //  print_r($completed);
@@ -56,7 +56,7 @@ class Organizationpage extends Controller
            FROM event
            INNER JOIN organization ON event.org_gov_reg_no=organization.gov_reg_no
            INNER JOIN donate ON donate.event_id=event.event_id
-           where donate.donor_id= :user_id && organization.gov_reg_no= :org_id && event.date>CURRENT_DATE ";
+           where donate.donor_id= :user_id && organization.gov_reg_no= :org_id && event.date>CURRENT_DATE";
             $arr = [
                 'user_id' => $user_id,
                 'org_id' => $id,
