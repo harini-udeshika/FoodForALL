@@ -94,8 +94,9 @@ class Admin_search_areacoords extends Controller
             if (isset($_POST)) {
                 if (count($_POST) > 0) {
                     unset($_POST['add']);
-                    $admin_model->update($id,$_POST);
-                    $this->redirect('Admin_search_areacoords');
+                    $admin_model->update($id, $_POST);
+                    // echo ("data updated successfully");
+                    $this->redirect('admin/update_successfully/Admin_search_areacoords');
                 }
             }
 
@@ -118,7 +119,7 @@ class Admin_search_areacoords extends Controller
 
                     // change table name
                     $admin_model->change_table("area_coodinator");
-                    
+
                     // validate inputs
                     if (!$admin_model->validate_Acoordinator($_POST)) {
                         $errors = $admin_model->errors;
@@ -138,7 +139,7 @@ class Admin_search_areacoords extends Controller
 
                     $user = new Admin_search_areacoords();
                     $user->redirect('Admin_search_areacoords');
-                }else{
+                } else {
                     $this->view('addareacoordinator');
                 }
             }

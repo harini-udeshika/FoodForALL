@@ -15,7 +15,7 @@ class Admin extends Controller
     public function home()
     {
         if (Auth::isuser('admin')) {
-            $name = "ballo maramu malli";
+            $name = "this is name";
             $result = "this is ressult";
 
             $user_controller = new Admin();
@@ -86,7 +86,7 @@ class Admin extends Controller
                 if ($result == NULL) {
                     $_SESSION['USER']->password_hash = $password_hash;
                     unset($_SESSION['USER']->change_password_session_id);
-                    $this->redirect('admin/current_password');
+                    $this->redirect('admin/password_success');
                 }
             } else {
                 $errors['error'] = 'Re-entered password does not match!';
@@ -102,5 +102,19 @@ class Admin extends Controller
             'rows' => $name_object,
             'error' => $errors
         ]);
+    }
+
+    public function update_successfully($link = '')
+    {
+        if (Auth::isuser('admin')) {
+            $this->view('update.success.view', ['link' => $link]);
+        }
+    }
+
+    public function password_success()
+    {
+        if (Auth::isuser('admin')) {
+            $this->view('password.change.success.view');
+        }
     }
 }
