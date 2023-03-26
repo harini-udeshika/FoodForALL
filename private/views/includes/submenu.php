@@ -56,7 +56,7 @@
         <p>Change Password</p>
         <span>></span>
     </a>
-    <a href="logout" class="sub-menu-link">
+    <a href="<?=ROOT?>/logout" class="sub-menu-link">
         <i class="fa-solid fa-right-from-bracket"></i>
         <p>Log out</p>
         <span>></span>

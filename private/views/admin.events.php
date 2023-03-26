@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="progress-back width-100">
-                                    <div class="progress-fill width-80 height-5px m-top-2"></div>
+                                    <div class="progress-fill width-<?= $event->donation_percentage?> height-5px m-top-2"></div>
                                 </div>
                             </div>
 
