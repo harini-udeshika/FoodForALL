@@ -45,6 +45,8 @@ class Login extends Controller
 
                     Auth::authenticate($row);
                              $this->redirect('admin/home');
+                }else{
+                    $errors['password']="wrong password";
                 }
 
             }
@@ -108,6 +110,7 @@ class Login extends Controller
         }
 
         $this->view('login', [
+            'errors'=>$errors,
             'is_verified' => $is_verified,
         ]);
     }
