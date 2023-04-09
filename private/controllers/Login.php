@@ -33,7 +33,6 @@ class Login extends Controller
 
                 }
                 else{
-                    // echo("wrong password");
                     $is_verified = false;
                 }
 
@@ -45,12 +44,7 @@ class Login extends Controller
                 if (password_verify($_POST['password'], $row->password_hash)) {
 
                     Auth::authenticate($row);
-                    
-                    
-                             $this->redirect('/home');
-                    
-                       
-                    
+                             $this->redirect('admin/home');
                 }
 
             }

@@ -36,13 +36,6 @@ class Childrenhome extends Model{
         return false;
     }
 
-    public function delete($id)
-    {
-        $query = "delete from $this->table where id = :id";
-        $data['id'] = $id;
-        return $this->query($query, $data);
-    }
-
   
 
 }

@@ -20,11 +20,11 @@ if (file_exists($rows->profile_pic)) {
     </div>
     <div class="details">
         <p class="pro-name">
-            <?=$rows->first_name?>
-            <?=$rows->last_name?>
+            <?=Auth::getfirst_name()?>
+            <?=Auth::getlast_name()?>
         </p>
         <p class="hometown">
-            <?=$rows->city?>
+            <?=Auth::getcity()?>
         </p>
         <a href="#certificates">Certificates</a>
         <a href="#activities">Volunteering</a>
@@ -38,160 +38,135 @@ if (file_exists($rows->profile_pic)) {
 <div class="certificate_section" id="certificates">
     <div class="heading_certificates">
         <p>Volunteering Certificates</p>
-        <?php if (Auth::getid() == $rows->id): ?>
         <button id="add">Add +</button>
 
     </div>
     <div class="change_pic visible" id="cert">
 
-        <p class="heading"><b>Upload Certificates to display</b></p>
+<p class="heading"><b>Upload Certificates to display</b></p>
 
-        <div class="visible">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <small>error message</small>
+<div class="visible">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <small>error message</small>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="file_form"  id="change_pic">
+
+    <label for="file" class="file_label" id="file_label">
+
+        <div class="file_h">
+            <i class="fa-regular fa-image"></i>
+            <p id="file_name" class="file_name">Certificate</p>
         </div>
+        <input type="file" name="file" id="file" class="file">
+    </label>
+    <br>
+<textarea name="description" placeholder="Write your thoughts" class="form_text"></textarea>
+    <button type="submit" class="save" >Submit</button>
 
-        <form method="post" enctype="multipart/form-data" class="file_form" id="change_pic">
+</form>
 
-            <label for="file" class="file_label" id="file_label">
-
-                <div class="file_h">
-                    <i class="fa-regular fa-image"></i>
-                    <p id="file_name" class="file_name">Certificate</p>
-                </div>
-                <input type="file" name="file" id="file" class="file">
-            </label>
-            <br>
-            <textarea name="description" placeholder="Write your thoughts" class="form_text"></textarea>
-            <button type="submit" class="save">Submit</button>
-
-        </form>
-
-    </div>
-    <?php endif?>
+</div>
     <div class="certificates">
 
         <div class="certificates_row">
-            <?php $i = 0;?>
-            <?php if ($cert): ?>
+        <?php $i = 0;?>
+        <?php if ($cert): ?>
 
             <?php
 //print_r($rows);?>
-            <?php foreach ($cert as $value): ?>
+        <?php foreach ($cert as $value): ?>
 
             <?php if ($i % 3 == 0 && $i != 0): ?>
-        </div>
-        <div class="certificates_row">
+                </div>
+                <div class="certificates_row">
             <?php endif?>
-            <div class="cert_del_confirm visible">
-                <span>Are you sure you want to delete?</span>
-                <a href="<?=ROOT?>/profile?delete=<?=$cert[$i]->id?>"><button>Delete</button></a>
-            </div>
-            <div><a class="cert_del"><i class="fa-solid fa-trash fa-xl"></a></i>
-                <div class="image"><img src="<?=$cert[$i]->file_name?>"></div>
-
-                <?php if ($cert[$i]->description): ?>
-                <p class="des"><?=$cert[$i]->description?></p>
-                <?php endif?>
+            <div class="image"><img src="<?=$cert[$i]->file_name?>">
+            <?php if ($cert[$i]->description): ?>
+            <p class="des"><?=$cert[$i]->description?></p>
+            <?php endif?>
             </div>
             <?php $i++;
 // echo ($i); ?>
 
-            <?php endforeach;?>
-            <?php endif?>
-            <?php if (!$cert && Auth::getid() == $rows->id): ?>
-            <div class="no_cert"><i class="fa-solid fa-file-lines fa-xl"></i>&nbsp;&nbsp;&nbsp;&nbsp;Display
-                volunteering certificates here!</div>
-            <?php endif?>
-            <?php if (!$cert && Auth::getid() != $rows->id): ?>
-            <div class="no_cert"><i class="fa-solid fa-file-lines fa-xl"></i>&nbsp;&nbsp;&nbsp;&nbsp;No certificates to
-                display.</div>
-            <?php endif?>
+        <?php endforeach;?>
+        <?php endif?>
+
         </div>
     </div>
-</div>
 </div>
 <div class="activities_section" id="activities">
     <div class="heading_activities">
         <p>Recent Activities</p>
     </div>
-    <?php if (!$event_data): ?>
-                <div class="no_cert"><i class="fa-solid fa-chart-line fa-xl"></i>&nbsp;&nbsp;&nbsp;<p>No activities yet!<p></div>
-            <?php endif;?>
-             <?php if ($event_data): ?>
     <div class="scroll">
-        <table>
-            <tr class="table_headings">
-                <th>Event</th>
-                <th>Organization</th>
-                <th>Role</th>
-                <th>Date</th>
-            </tr>
-            <?php
+    <table>
+        <tr class="table_headings">
+            <th>Event</th>
+            <th>Organization</th>
+            <th>Role</th>
+            <th>Date</th>
+        </tr>
+        <?php
 $i = 0;?>
 
+        <?php if ($event_data): ?>
 
 
 
+        <?php foreach ($event_data as $value): ?>
 
-            <?php foreach ($event_data as $value): ?>
+        <tr class="table_row ">
 
-            <tr class="table_row ">
-
-                <td><?=$event_data[$i]->name?></td>
-                <td><?=$org_name[$i]->name?></td>
-                <td><?=$event_data[$i]->volunteer_type?></td>
-                <td><?=$event_data[$i]->date?></td>
-            </tr>
-            <?php $i++;?>
-
+            <td><?=$event_data[$i]->name?></td>
+            <td><?=$org_name[$i]->name?></td>
+            <td><?=$event_data[$i]->volunteer_type?></td>
+            <td><?=$event_data[$i]->date?></td>
+        </tr>
+        <?php $i++;?>
 
 
-            <?php endforeach;?>
 
-            <?php endif?>
+        <?php endforeach;?>
 
-        </table>
+        <?php endif?>
+
+    </table>
     </div>
 </div>
 <div class="donation_section" id="donations">
     <div class="heading_activities">
         <p>Recent Donations</p>
     </div>
-    <?php if (!$donor_data): ?>
-                <div class="no_cert"><i class="fa-solid fa-sack-dollar fa-xl"></i><p>&nbsp;&nbsp;&nbsp;No donations yet<p></div>
-    <?php endif;?>
-
-    <?php if ($donor_data): ?>
     <div class="scroll">
-        <table>
-            <tr class="table_headings">
-                <th>Date</th>
-                <th>Organization</th>
-                <th>Event</th>
-                <th>Amount</th>
-            </tr>
-            <?php
+    <table>
+        <tr class="table_headings">
+            <th>Date</th>
+            <th>Organization</th>
+            <th>Event</th>
+            <th>Amount</th>
+        </tr>
+<?php
 $i = 0;?>
 
+        <?php if ($donor_data): ?>
 
+        <?php foreach ($donor_data as $value): ?>
+        <tr class="table_row">
 
-            <?php foreach ($donor_data as $value): ?>
-            <tr class="table_row">
+            <td><?=substr($donor_data[$i]->date_time, 0, -8)?></td>
+            <td><?=$d_org_name[$i]->name?></td>
+            <td><?=$d_org_name[$i]->e_name?></td>
+            <td><?=$donor_data[$i]->amount?></td>
 
-                <td><?=substr($donor_data[$i]->date_time, 0, -8)?></td>
-                <td><?=$d_org_name[$i]->name?></td>
-                <td><?=$d_org_name[$i]->e_name?></td>
-                <td><?=$donor_data[$i]->amount?></td>
-
-            </tr>
-            <?php $i++;
+        </tr>
+<?php $i++;
 //  echo ($i); ?>
 
-            <?php endforeach;?>
-    <?php endif?>
-        </table>
-    </div>
+        <?php endforeach;?>
+        <?php endif?>
+    </table>
+        </div>
 </div>
 
 <div class="end_section">
@@ -201,11 +176,11 @@ $i = 0;?>
         </div>
         <div class="amount">
             <?php if ($tot_amount[0]->total): ?>
-            <?=$tot_amount[0]->total?>
-            <?php endif?>
-            <?php if (!$tot_amount[0]->total): ?>
-            0
-            <?php endif?>
+         <?=$tot_amount[0]->total?>
+         <?php endif?>
+         <?php if (!$tot_amount[0]->total): ?>
+         0
+         <?php endif?>
 
         </div>
 
@@ -215,24 +190,15 @@ $i = 0;?>
             Total Volunteered Events
         </div>
         <div class="amount">
-            <?=$tot_events[0]->count?>
+       <?=$tot_events[0]->count?>
         </div>
     </div>
 
 </div>
-<?php if (Auth::getid() == $rows->id): ?>
 <div class="news">
     <p>Need more news? Subscribe to our news services right now!</p>
-    <?php if ($rows->newsletter_status == 0): ?>
-    <a href="http://localhost/food_for_all/public/profile?subscribe=1"><button>Subscribe</button></a>
-    <?php endif;?>
-
-    <?php if ($rows->newsletter_status == 1): ?>
-    <button disabled>Subscribed</button>
-    <?php endif;?>
-
+    <button>Subscribe</button>
 </div>
-<?php endif;?>
 <!-- <div><a href="logout.php">Log out</a></div> -->
 
 <!-- <p><a href="login.php">Log in</a>or <a href="../signup/signup.html">Signup</a></p> -->

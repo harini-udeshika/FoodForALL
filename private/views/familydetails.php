@@ -14,7 +14,7 @@
     <h1 >Family detail form</h1>
 </div> -->
 <div class="coor">
-    <h1>Family Detail Form</h1>
+    <h1>Family detail form</h1>
 </div>
 
 
@@ -22,9 +22,7 @@
     <div class="familydetailform">
     
         <form  method="POST" id="familyform" class="familyform" >
-        <div class="coor2">
-            <h1>Householder's Details</h1>
-        </div>
+        <h2>Fill the householder details</h2>
         <div>
         <?php if(count($errors)>0):?>
             <?php foreach($errors as $error):?>
@@ -34,14 +32,14 @@
         </div>
                <input type="hidden" name="email" placeholder="Full Name" value="<?=Auth::getemail()?>">
                 <div class="box1 filling">
-                    <label for="FullName" class="numbers">Full Name*</label><br>
+                    <label for="FullName">Full Name*</label><br>
                     <input type="text" name="FullName" placeholder="Full Name" class="in fillingbox" id="fullname">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling">
-                    <label for="initial" class="numbers">Name With Initial*</label><br>
+                    <label for="initial">Name With Initial*</label><br>
                     <input type="text" name="NameWithInitial" placeholder="Name With Initial"class="in fillingbox" id="iname">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
@@ -49,18 +47,10 @@
                 </div>
                 <div class="box1 filling ">
                     <label for="ID">NIC*</label><br>
-                    <input type="text" name="nic" placeholder="NIC" class="in fillingbox" id="nic">
+                    <input type="text" name="FamilyID" placeholder="NIC" class="in fillingbox" id="nic">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
-                </div>
-                <div class="box1 filling">
-                    <label for="relationship">Main Relationship with other members*</label>
-                    <select name="Relationship" class="label" id="re">
-                        <option value="father">Father</option>
-                        <option value="mother">Mother</option>
-                        <option value="other">Other</option>
-                    </select>
                 </div>
                 <div class="box1 filling ">
                     <label for="profession">Profession*</label><br>
@@ -70,21 +60,21 @@
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling">
-                    <label for="salary">Monthly family income*</label><br>
+                    <label for="salary">Net Salary(per month)*</label><br>
                     <input type="text" name="salary" placeholder="Net salary"class="in fillingbox" id="salary">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact1">Mobile phone number*</label><br>
+                    <label for="contact1">Contact No1*</label><br>
                     <input type="text" name="Contact1" placeholder="Contact" class="in fillingbox" id="contact1">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
                 <div class="box1 filling ">
-                    <label for="contact2">Land phone number</label><br>
+                    <label for="contact2">Contact No2</label><br>
                     <input type="text" name="Contact2" placeholder="Contact" class="in fillingbox" id="contact2">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
@@ -103,71 +93,17 @@
                 <div class="box1 filling ">
                     <table>
                         <hr>
-                        <div class="coor2">
-                            <h1>Family Details</h1>
-                        </div>
-                        <div class="filling">
-                    <table>
-                        <tr>
-                            <td >
-                            <label for="members">Number of Family members</label>
-                            <input type="number" min='1' name="Familymembers" class="in new fillingbox" id="fnum" >
-                            <i class="fas fa-check-circle"></i>
-                            <i class="fas fa-exclamation-circle"></i><br>
-                            <small>Erorr message</small>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                
-                        <!-- <tr>
-                            <td>
-                                <label for="reasons">Other reasons</label><br>
-                                <textarea name="cother" id="cother" cols="40" rows="10"></textarea>
-                            </td>
-                        </tr>
-                        <hr> -->
-                <div class="box1 filling ">
-                    <table>
-                        <tr class="tr1">
-                            <td class="childrenbox">
-                                <label for="Healthy_adults">Number of Healthy Adults</label><br>
-                                <input type="number" min='0' max="5" name="Healthy_adults" class="in new fillingbox" id="ha">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i><br>
-                                <small>Erorr message</small>
-                            </td>
-                            <td class="childrenbox">
-                                <label for="Diabetes_patients">Number of Diabetes Patients</label><br>
-                                <input type="number" min='0' max="5" name="Diabetes_patients" class="in new fillingbox" id="dp">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i><br>
-                                <small>Erorr message</small>
-                            </td>
-                            <td class="childrenbox">
-                                <label for="Cholesterol_patients">Number of Cholesterol Patients</label><br>
-                                <input type="number" min='0' max="5" name="Cholesterol_patients" class="in new fillingbox" id="cp">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i><br>
-                                <small>Erorr message</small>
-                            </td>
-                        </tr>
-                    </table> 
-                </div>
-
-                <div class="box1 filling ">
-                    <table>
                         <div id="children" >
                       
                         <tr class="tr1 children" >
-                            <td class="childrenbox">
+                            <td>
                                 <label for="Healthy_children">Number of Healthy childern</label><br>
                                 <input type="number" min='0' max="5" name="Healthy_children" class="in new fillingbox" id="hc">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
-                            <td class="childrenbox">
+                            <td>
                                 <label for="Malnutrition_children">Number of Malnutrition Children</label><br>
                                 <input type="number"min='0' max="5"name="Malnutrition_children" class="in new fillingbox" id="mc">
                                 <i class="fas fa-check-circle"></i>
@@ -177,7 +113,37 @@
                         </tr>
                               
                         </div>
-                    </table>
+                        <!-- <tr>
+                            <td>
+                                <label for="reasons">Other reasons</label><br>
+                                <textarea name="cother" id="cother" cols="40" rows="10"></textarea>
+                            </td>
+                        </tr>
+                        <hr> -->
+                        <tr class="tr1">
+                            <td>
+                                <label for="Healthy_adults">Number of Healthy Adults</label><br>
+                                <input type="number" min='0' max="5" name="Healthy_adults" class="in new fillingbox" id="ha">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                            <td>
+                                <label for="Diabetes_patients">Number of Diabetes Patients</label><br>
+                                <input type="number" min='0' max="5" name="Diabetes_patients" class="in new fillingbox" id="dp">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                            <td>
+                                <label for="Cholesterol_patients">Number of Cholesterol Patients</label><br>
+                                <input type="number" min='0' max="5" name="Cholesterol_patients" class="in new fillingbox" id="cp">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                        </tr>
+                    </table> 
                 </div>
                 <div class="box">
                     <p class="p1">*Children- under 16 years</p>

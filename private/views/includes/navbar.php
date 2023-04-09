@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="right">
-
+           
             <?php if (!Auth::logged_in()): ?>
                 <div class="nav-i">
                 <a href="homepage">Home</a>
@@ -27,7 +27,7 @@
             <div class="nav-i">
                 <a href="login">Login/Sign in</a>
             </div>
-            <?php endif?>
+            <?php endif ?>
             <?php if (Auth::getusertype() == 'reg_user'): ?>
             <div class="nav-i">
                 <a href="homepage">Home</a>
@@ -44,38 +44,15 @@
             <div class="nav-i">
                 <a href="about">About us</a>
             </div>
-            <div class="nav-i">
-            <a href="search"><span class="material-symbols-outlined">person_search</span></a>
-            </div>
-            
 
-             <?php
-$user = new User();
-$data = $user->where('id', Auth::getid());
-$data = $data[0];
 
-?>
-            <?php if ($data->newsletter_status == 0): ?>
-            <div class="nav-i">
-            <span class="material-symbols-outlined">
-notifications
-</span>
-            </div>
-            <?php endif;?>
-
-            <?php if ($data->newsletter_status == 1): ?>
-            <div class="nav-i">
-            <span class="material-symbols-outlined">
-notifications_active
-</span>
-            </div>
-            <?php endif;?>
 
             <div class="nav-i">
-                <a href="charts"><i class="fa-solid fa-chart-line"></i></a>
+                <i class="fa-solid fa-bell"></i>
             </div>
             <div class="nav-i">
                 <a href="leaderboard"><i class="fa-solid fa-crown"></i></a>
+
             </div>
         <?php endif?>
         <?php if (Auth::getusertype() == 'admin'): ?>
@@ -98,7 +75,7 @@ notifications_active
                 <a href="<?=ROOT?>/Admin_search_users">Users</a>
             </div>
         <?php endif?>
-
+        
 
         <?php if (Auth::getusertype() == 'organization'): ?>
             <div class="nav-i">
@@ -128,7 +105,7 @@ notifications_active
             <div class="nav-i">
                 <a href="./events">Events</a>
             </div>
-            <div class="nav-i">
+            <div class="nav-i">    
 
                 <div class="dropdown">
                 <a onclick="myFunction()" class="dropbtn">Add details</a>
@@ -139,7 +116,7 @@ notifications_active
                 </div>
                 </div>
             </div>
-
+            
             <div class="nav-i">
                 <a href="about">About us</a>
             </div>
@@ -150,7 +127,7 @@ notifications_active
                 <a href="./event_manager_home">Home</a>
             </div>
 
-            <div class="nav-i">
+            <div class="nav-i">    
                 <a href="./eventmanager_events">Events</a>
             </div>
             <div class="nav-i">
@@ -158,7 +135,7 @@ notifications_active
                 <a href="./eventmanager_myevents">My Events</a>
 
             </div>
-
+            
             <div class="nav-i">
                 <a href="about">About us</a>
             </div>
@@ -167,7 +144,7 @@ notifications_active
             <div class="nav-i">
             <?php
 
-$image = ROOT . '/images/user_icon.png';
+$image = ROOT.'/images/user_icon.png';
 if (Auth::getusertype() == 'reg_user') {
     $user = new User();
     $data = $user->where('id', Auth::getid());
@@ -205,7 +182,7 @@ if (Auth::getusertype() == 'area_coordinator') {
 }
 
 if (Auth::getusertype() == 'eventmanager') {
-    $eventmanager = new EventManager();
+    $eventmanager= new EventManager();
     $data = $eventmanager->where('email', Auth::getemail());
 
     $data = $data[0];
@@ -214,6 +191,8 @@ if (Auth::getusertype() == 'eventmanager') {
     }
 }
 
+
+
 ?>
                 <img src="<?=$image?>" alt="" class="nav-user-icon" id="nav-user-icon" onclick="toggleMenu()">
             </div>
@@ -221,5 +200,5 @@ if (Auth::getusertype() == 'eventmanager') {
         <!-- ----------------sub menu-------------- -->
 
 
-
+     
     </nav>

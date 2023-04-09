@@ -11,27 +11,16 @@
     <!-- Search bar -->
     <div class="blank col-lg-2"></div>
 
-    <form class="col-lg-8 row-flex jf-center" action="" method="post" id="">
-        <input class="search-field width-100" type="text" name="search" id="search" placeholder="Search here" autocomplete="off">
+    <form class="col-lg-8 row-flex jf-center m-bottom-15" action="" method="" id="search">
+        <input class="search-field width-100" type="text" name="search_term" id="" placeholder="Search here">
         <button type="submit" class="search_logo">
             <i class="fa-solid fa-magnifying-glass "></i>
         </button>
 
     </form>
 
-
     <div class="blank col-lg-2"></div>
     <!-- END : Search bar -->
-
-    <div class="col-12 grid-12 " id="search_result">
-        <div class="blank col-3"></div>
-        <div class="col-6 grid-12 card-simple" id="dropdown">
-            
-        </div>
-        <div class="blank col-3"></div>
-    </div>
-
-
 
     <!-- statrt of pending events section -->
     <!-- for spacing -->
@@ -60,7 +49,7 @@
                             <!-- <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div> -->
 
                             <div class="row-flex jf-btwn">
-                                <a href="<?= ROOT ?>/Org_admin_events/delete_pending?id=<?= $pending[$i]->event_id ?>">
+                                <a href="<?=ROOT?>/Org_admin_events/delete_pending?id=<?= $pending[$i]->event_id ?>">
                                     <button class="btn btn-gray btn-xsm m-top-30">Remove</button>
                                 </a>
                                 <a href="">
@@ -121,12 +110,8 @@
                                     </div>
                                 </div>
 
-                                <div class="progress-back width-100 height-4px m-top-2">
-                                    <div class="progress-fill width-<?php if ($ongoin[$i]->amount_percentage) {
-                                                                        echo $ongoin[$i]->amount_percentage;
-                                                                    } else {
-                                                                        echo 0;
-                                                                    } ?> height-4px"></div>
+                                <div class="progress-back width-100">
+                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
                                 </div>
                             </div>
 
@@ -139,17 +124,13 @@
                                     </div>
                                 </div>
 
-                                <div class="progress-back width-100 height-4px m-top-2">
-                                    <div class="progress-fill width-<?php if ($ongoin[$i]->vol_percentage) {
-                                                                        echo $ongoin[$i]->vol_percentage;
-                                                                    } else {
-                                                                        echo 0;
-                                                                    } ?> height-4px "></div>
+                                <div class="progress-back width-100">
+                                    <div class="progress-fill width-80 height-4px m-top-2"></div>
                                 </div>
                             </div>
 
                             <div class="row-flex jf-center">
-                                <a href="<?= ROOT ?>/event_org?id=<?= $ongoin[$i]->event_id ?>">
+                                <a href="<?=ROOT?>/event_org?id=<?=$ongoin[$i]->event_id?>">
                                     <button class="btn btn-green btn-xsm m-top-30">View Details</button>
                                 </a>
                             </div>
@@ -199,11 +180,11 @@
 
                             <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div>
 
-
+                            
                             <div class="row-flex jf-center">
-                                <a href="<?= ROOT ?>/event_org?id=<?= $past[$i]->event_id ?>">
-                                    <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
-                                </a>
+                            <a href="<?=ROOT?>/event_org?id=<?=$past[$i]->event_id?>">
+                                <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
+                            </a>
                             </div>
                         </div>
                         <!--end of EVENT-COMPLETED -->
@@ -216,7 +197,7 @@
                 <?php }
                 ?>
 
-
+                
             </div>
         </div>
 
@@ -226,6 +207,4 @@
 </div>
 
 <!-- statrt of copleted events section -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="<?= ROOT ?>/assets/script/event_search.js"></script>
 <?php $this->view('includes/footer') ?>

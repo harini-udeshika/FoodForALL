@@ -9,49 +9,30 @@ html {
 }
 
 .no1{
-    width: 1%;
+    width: 2%;
     height: auto;
 }
 
 td{
     text-align: center;
     padding-top: 20px;
-    
 }
 
 .no2{
-    width: 1%;
-    padding: 5px;
+    width: 5%;
 }
 
-.add {
-    padding: 10px;
-    background-color: #7FB432;
-    border-color: #7FB432;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-/* .add{
+.add{
     width: 30%;
     float: right;
-    background-color: #7FB432;
-    border-color: #7FB432;
-} */
+}
 
 .add1{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 30px;
-    padding-right: 0;
-    /* margin-right: -70%; */
-    /* width: 20%;
+    width: 20%;
     margin-right: 0%;
     float: right;
     position: relative;
     margin-left: 70%;
-    padding-bottom: 10px; */
     
 }
 /* .add2{
@@ -60,35 +41,26 @@ td{
 
 .tr2{
     /* background-color: rgba(154, 194, 65, 0.2); */
-    border: 1px solid rgb(135, 136, 135);
-    background-color: #e4f2cf;
+    border: 1px solid rgb(136, 135, 135);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     
 }
 .td1{
     padding-bottom: 20px;
-    border-radius: 4px;
-
 }
-/* .add2{
+
+.add{
+    background-color: #7FB432;
+    border-color: #7FB432;
+    
+}
+.add2{
     color: #fff;
-} */
-.add2 {
-    color: #fff;
-    text-decoration: none;
-  }
+}
 
 .add:hover{
     background-color: #6e8849;
-    color: #fff;
 }
-
-@media only screen and (max-width: 768px) {
-    .add1 {
-      display: block;
-      text-align: right;
-    }
-  }
 
 .coor{
     /* padding-bottom: 10px; */
@@ -102,54 +74,3 @@ td{
 a.add2{
     color: #fff;
 }
-
-
-.subject{
-    background-color: #7FB432;
-    padding: 10px;
-}
-
-
- table {
-    list-style-type: none;
-    counter-reset: css-counter 0; /* initializes counter to 0; use -1 for zero-based numbering */
-  }
-  
- table .tr3{
-    counter-increment: css-counter 1; /* Increase the counter by 1. */
-    padding: 10px;
-  }
-  
-  table .tr3:before {
-    content: counter(css-counter) ". "; /* Apply counter before children's content. */
-  }
-
-  .add3{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    float: left;
-    
-  }
-
-  .add3 i{
-    position: absolute; /* set position of button to absolute */
-    top: 50%; /* set the button to be centered vertically */
-    left: 7%; /* align the button to the left side of the container */
-    transform: translateY(-250%); 
-  }
-
-  .add4{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    float: left;
-    
-  }
-
-  .add4 i{
-    position: absolute; /* set position of button to absolute */
-    top: 50%; /* set the button to be centered vertically */
-    left: 10%; /* align the button to the left side of the container */
-    transform: translateY(-250%); 
-  }
-
-  
