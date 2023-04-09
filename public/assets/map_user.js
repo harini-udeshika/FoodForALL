@@ -23,12 +23,13 @@ function initAutocomplete() {
 
     var autocomplete = new google.maps.places.Autocomplete(input);
     var marker=new google.maps.Marker({
-      draggable:true,
+      draggable:false,
   
       map:map
     });
     marker.setPosition(srilanka);
     marker.setVisible(true);
+  
     autocomplete.bindTo("bounds", map);
     autocomplete.setFields(['address_components','geometry','name'])
     autocomplete.addListener('place_changed', function () {

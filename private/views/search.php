@@ -8,6 +8,7 @@
 <div class="container">
     <p><span>Food</span>For<span>ALL</span></p>
     <div class="sub"><span>Donate</span>&nbsp;&#x2022;&nbsp;Spread Love&nbsp;&#x2022;<span>Volunteer</span></div>
+    <h2>User search</h2>
 <div class="search">
 <form>
     <input type="text" placeholder="Search and see what others upto..." class="search_input"></input>

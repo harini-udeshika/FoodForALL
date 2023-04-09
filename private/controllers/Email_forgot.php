@@ -49,7 +49,7 @@ class Email_forgot extends Controller
         // $data = $data[0];
         // $email = $data->email;
         else if (isset($_POST['code'])) {
-            echo ("hiii");
+          
             $code = $_POST['code'];
             $email = $_SESSION['email'];
             $data = $change_pwd->verify($code, $email);

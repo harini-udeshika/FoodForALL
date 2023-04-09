@@ -215,18 +215,61 @@ if (!$amount) {
         <p>Select Category</p>
         <form action="" class="select_type">
             <div class="small-cards">
+            <?php if($volunteer_types):?>
                 <div class="button">
-                    <input type="radio" name="type" value="Mild <?=$rows->event_id?>" />
+                    <?php if(isset($volunteer_types['mild'])):?>
+                    <input type="radio" name="type" value="Mild <?=$rows->event_id?>" disabled/>
                     <label class="btn one" for="a25">Mild <br><small>LEVEL 1</small></label>
+                    <?php endif;?>
+                    <?php if(!isset($volunteer_types['mild'])):?>
+                    <input type="radio" name="type" value="Mild <?=$rows->event_id?>"/>
+                    <label class="btn one" for="a25">Mild <br><small>LEVEL 1</small></label>
+                    <?php endif;?>
                 </div>
                 <div class="button">
+                
+                <?php if(!isset($volunteer_types['moderate'])):?>
                     <input type="radio" name="type" value="Moderate <?=$rows->event_id?>" />
                     <label class="btn two" for="a50">Moderate <br><small>LEVEL 2</small></label>
+                    <?php endif;?>
+                    <?php if(isset($volunteer_types['moderate'])):?>
+                    <input type="radio" name="type" value="Moderate <?=$rows->event_id?>" disabled/>
+                    <label class="btn two" for="a50">Moderate <br><small>LEVEL 2</small></label>
+                    <?php endif;?>
                 </div>
                 <div class="button">
+                    <?php if(isset($volunteer_types['heavy'])):?>
+                    <input type="radio" name="type" value="Heavy <?=$rows->event_id?>" disabled/>
+                    <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
+                    <?php endif;?>
+                    <?php if(!isset($volunteer_types['heavy'])):?>
                     <input type="radio" name="type" value="Heavy <?=$rows->event_id?>" />
                     <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
+                    <?php endif;?>
                 </div>
+                <?php endif;?>
+                <?php if($volunteer_types==0):?>
+                <div class="button">
+                    
+                    <input type="radio" name="type" value="Mild <?=$rows->event_id?>"/>
+                    <label class="btn one" for="a25">Mild <br><small>LEVEL 1</small></label>
+                  
+                </div>
+                <div class="button">
+                
+              
+                    <input type="radio" name="type" value="Moderate <?=$rows->event_id?>" />
+                    <label class="btn two" for="a50">Moderate <br><small>LEVEL 2</small></label>
+                    
+                 
+                </div>
+                <div class="button">
+                
+                    <input type="radio" name="type" value="Heavy <?=$rows->event_id?>" />
+                    <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
+              
+                </div>
+                <?php endif;?>
             </div>
 
             <!-- <p>OR</p> -->

@@ -2,7 +2,20 @@
 class Event extends Model
 {
     protected $table = "event";
-
+    public function sent_requests($req_data){
+        for($i=0;$i<sizeof($req_data);$i++) {
+            if($req_data[$i]->volunteer_type=='Moderate'){
+                $volunteer_types['moderate']=1;
+            }
+            if($req_data[$i]->volunteer_type=='Mild'){
+                $volunteer_types['mild']=1;
+            }
+            if($req_data[$i]->volunteer_type=='Heavy'){
+                $volunteer_types['heavy']=1;
+            }
+        }
+        return $volunteer_types;
+    }
     public function update_event($id, $data)
     {
 

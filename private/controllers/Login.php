@@ -33,7 +33,7 @@ class Login extends Controller
 
                 }
                 else{
-                    echo("wrong password");
+                    // echo("wrong password");
                     $is_verified = false;
                 }
 

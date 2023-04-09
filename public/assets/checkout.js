@@ -6,10 +6,10 @@ let form = document.getElementById("form");
 
 var valid = true;
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     inputChecker();
     if (valid === true) {
-        form.submit();
+        // form.submit();
     }
 })
 
