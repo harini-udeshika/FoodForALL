@@ -5,8 +5,8 @@ class Admin_events_model extends Model
 
     public function selectOngoing()
     {
-        // $ongoing_date = date('y-m-d');
-        $ongoing_date = '23-01-01';
+        $ongoing_date = date('y-m-d');
+        // $ongoing_date = '23-01-01';
         // echo($ongoing_date);
         $query = "SELECT * FROM event WHERE date >= '$ongoing_date'";
         $data = $this->query($query);
@@ -29,6 +29,28 @@ class Admin_events_model extends Model
                     $event->vol_percentage = (int)$event->vol_count * 100 / $event->no_of_volunteers;
                 } else {
                     $event->vol_percentage = 0;
+                }
+
+                // select amount of donations for each event
+                $query = "SELECT * FROM donate WHERE event_id=$event->event_id";
+
+                $donate_data = $this->query($query);
+                if ($donate_data == NULL) {
+                    $donate_data = array();
+                }
+
+                $total_donated = 0;
+                foreach ($donate_data as $donation) {
+                    $total_donated += $donation->amount;
+                }
+
+                $event->total_donated = $total_donated;
+
+                // calc progress bar percentage of donations
+                if ($event->total_amount != 0) {
+                    $event->donation_percentage = (int)$event->total_donated * 100 / $event->total_amount;
+                } else {
+                    $event->donation_percentage = 0;
                 }
             }
         }

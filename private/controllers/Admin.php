@@ -18,10 +18,13 @@ class Admin extends Controller
             $name = "this is name";
             $result = "this is ressult";
 
-            $user_controller = new Admin();
-            $user_controller->view('admin.home.view', [
+            $admin_model = new Admins();
+            $site_data = $admin_model->homepage_data();
+
+            $this->view('admin.home.view', [
                 'name' => $name,
                 'result' => $result,
+                'site_data' => $site_data,
             ]);
         } else {
             $this->redirect('login');
@@ -116,5 +119,13 @@ class Admin extends Controller
         if (Auth::isuser('admin')) {
             $this->view('password.change.success.view');
         }
+    }
+
+    public function temp(){
+        $admin = new Admins();
+
+        $data = $admin->homepage_data();
+
+        $this->view('temp',['data'=>$data]);
     }
 }
