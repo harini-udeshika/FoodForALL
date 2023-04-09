@@ -42,16 +42,7 @@ class Eventpage extends Controller
 
             $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0], 'types' => $types, 'closing_date' => $closing_date[0]->cd,'volunteer_types'=>$volunteer_types]);
 
-        } else if (isset($_GET['type'])) {
-            $type = $_GET['type'];
-            $data = explode(" ", $type);
-            $v_type = (lcfirst($data[0]));
-            $id = ($data[1]);
-            $query = "select " . $v_type . "_description as description from event where event_id=:id";
-            $arr = ['id' => $id];
-            $des = $event->query($query, $arr); 
-            $des = $des[0]->description;
-
+        }
         else if (isset($_GET['type'])) {
             $type = $_GET['type'];
             $data = explode(" ",$type);
@@ -78,4 +69,4 @@ class Eventpage extends Controller
 
     }
 }
-}
+

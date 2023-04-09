@@ -120,8 +120,7 @@ class Shop extends Controller
                 } else {
 
                     $arr = array();
-                    $arr['id'] = $ite
-                    m_data->item_no;
+                    $arr['id'] = $item_data->item_no;
                     $query = 'UPDATE merchandise_item stock set stock= :s where item_no= :id';
                     $arr = ['s' => $item_data->stock - $qty,
                         'id' => $item_data->item_no];
