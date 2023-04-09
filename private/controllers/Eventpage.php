@@ -6,9 +6,28 @@ class Eventpage extends Controller
     {
         $event = new Event();
         $org = new Organization();
+        $requests=new Volunteer_request();
+        
 
         if (isset($_GET['id'])) {
+           
             $id = $_GET['id'];
+
+            $user_id=Auth::getid();
+            $query="SELECT volunteer_type from volunteer_request where id =:id && event_id=:event_id";
+            $arr=['id'=>$user_id,'event_id'=>$id];
+            $req_data=$requests->query($query,$arr);
+            
+            if($req_data){
+                 $volunteer_types=$event->sent_requests($req_data);
+            }
+            else{
+                  $volunteer_types=0;
+            }
+       
+           
+            // print_r($volunteer_types);
+
             $data = $event->where("event_id", $id);
             $query = "SELECT DATE(date-2) as cd from event where event_id =:id";
             $arr = ['id' => $id];
@@ -21,12 +40,9 @@ class Eventpage extends Controller
             $types = $v_req->query($query, $arr);
            // print_r ($types);
 
-
-            $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0],'types'=>$types,'closing_date'=>$closing_date[0]->cd]);
-
+            $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0], 'types' => $types, 'closing_date' => $closing_date[0]->cd,'volunteer_types'=>$volunteer_types]);
 
         }
-
         else if (isset($_GET['type'])) {
             $type = $_GET['type'];
             $data = explode(" ",$type);
@@ -41,8 +57,10 @@ class Eventpage extends Controller
                 $arr['volunteer_type'] = $data[0];
                 $arr['status']=false;
                 // print_r($arr);
-                $data=$request->insert($arr);
+                $data = $request->insert($arr);
+                // $this->view('eventpage?id='.$data[1]);
             }
+          
         }
         // $data=$event->findAll();
         else {
@@ -51,3 +69,4 @@ class Eventpage extends Controller
 
     }
 }
+

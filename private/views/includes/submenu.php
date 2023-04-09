@@ -19,17 +19,23 @@
         <hr>
         <a href="profile" class="sub-menu-link">
             <i class="fa-solid fa-user"></i>
-            <p>View profile</p>
+            <p>View profile </p>
+            <span>></span>
+        </a>
+        <a href="requests" class="sub-menu-link">
+        <i class="fa-solid fa-handshake-angle"></i>
+            <p>My requests</p>
             <span>></span>
         </a>
         <a href="edit_profile" class="sub-menu-link">
             <i class="fa-solid fa-pen-to-square"></i>
-            <p>Edit profile</p>
+            <p>Edit profile </p>
             <span>></span>
         </a>
+       
         <a href="logout" class="sub-menu-link">
             <i class="fa-solid fa-right-from-bracket"></i>
-            <p>Log out</p>
+            <p>Log out </p>
             <span>></span>
         </a>
     <?php endif ?>

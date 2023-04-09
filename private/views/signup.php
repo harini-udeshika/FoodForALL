@@ -9,7 +9,7 @@ print_r($errors);
         <div class="signup-image">
             <img src="./images/logo.png" alt="" class="image-signup">
         </div>
-        
+
         <div class="">
             <form action="" method="POST" id="form" class="signup-form">
                 <div class="name">
@@ -34,11 +34,11 @@ print_r($errors);
                         <small>error message</small>
                     </div>
                     <div class="f">
-                        <!-- <?php $user = new User(); ?>
-                        <?php if($user->where('email',get_var('email'))): ?>
-                        <?php $error="Email already exists!";?>
+                        <!-- <?php $user = new User();?>
+                        <?php if ($user->where('email', get_var('email'))): ?>
+                        <?php $error = "Email already exists!";?>
                         <?php endif;
-                        ?> -->
+?> -->
                         <input type="text" placeholder="Email address" class="small" name="email" id="email" value="<?=get_var('email')?>" class="signup-input">
                         <i class="fa-solid fa-circle-check"></i>
                         <i class="fa-solid fa-circle-exclamation"></i>
@@ -47,6 +47,9 @@ print_r($errors);
                 </div>
                 <div class="f">
                     <input type="text" placeholder="Address" name="address_1" id="address_1"  value="<?=get_var('address_1')?>" class="signup-input">
+                    <i class="fa-solid fa-circle-check"></i>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <small>error message</small>
                 </div>
                 <!-- <div class="f6">
                     <input type="text" placeholder="Address line 2" name="address_2">
@@ -54,9 +57,15 @@ print_r($errors);
                 <div class="city">
                     <div class="f">
                         <input type="text" placeholder="City" class="small" name="city" id="city" value="<?=get_var('city')?>" class="signup-input">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <small>error message</small>
                     </div>
                     <div class="f">
-                        <input type="text" placeholder="Postal code" class="small" name="postal_code"  value="<?=get_var('postal_code')?>"id="postal_code" class="signup-input">
+                        <input type="text" placeholder="Postal code" class="small" name="postal_code" id="postal_code" value="<?=get_var('postal_code')?>"id="postal_code" class="signup-input">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <small>error message</small>
                     </div>
                 </div>
 
@@ -83,7 +92,7 @@ print_r($errors);
                         <input type="checkbox" class="check" name="check" id="check">
                     <!-- </div> -->
                     <!-- <p class="tc"> -->
-                       <p>Agree to terms and conditions</p> 
+                       <p>Agree to terms and conditions</p>
                     <!-- </p> -->
                     <i class="fa-solid fa-circle-check"></i>
                         <i class="fa-solid fa-circle-exclamation"></i>

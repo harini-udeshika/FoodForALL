@@ -97,7 +97,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 90%;
+    width: 83%;
 }
 
 .donations {
@@ -316,4 +316,11 @@
     border: 1px solid #7FB432;
     color: white;
     font-weight: bold;
+}
+.map{
+    margin-left: 15%;
+    align-self: flex-start;
+    height:20rem;
+    width:45%;
+    background-color: #f6f9f0;
 }
