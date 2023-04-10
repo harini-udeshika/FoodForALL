@@ -15,16 +15,13 @@ class Admin extends Controller
     public function home()
     {
         if (Auth::isuser('admin')) {
-            $name = "this is name";
+            $name = "ballo maramu malli";
             $result = "this is ressult";
 
-            $admin_model = new Admins();
-            $site_data = $admin_model->homepage_data();
-
-            $this->view('admin.home.view', [
+            $user_controller = new Admin();
+            $user_controller->view('admin.home.view', [
                 'name' => $name,
                 'result' => $result,
-                'site_data' => $site_data,
             ]);
         } else {
             $this->redirect('login');
@@ -89,7 +86,7 @@ class Admin extends Controller
                 if ($result == NULL) {
                     $_SESSION['USER']->password_hash = $password_hash;
                     unset($_SESSION['USER']->change_password_session_id);
-                    $this->redirect('admin/password_success');
+                    $this->redirect('admin/current_password');
                 }
             } else {
                 $errors['error'] = 'Re-entered password does not match!';
@@ -105,27 +102,5 @@ class Admin extends Controller
             'rows' => $name_object,
             'error' => $errors
         ]);
-    }
-
-    public function update_successfully($link = '')
-    {
-        if (Auth::isuser('admin')) {
-            $this->view('update.success.view', ['link' => $link]);
-        }
-    }
-
-    public function password_success()
-    {
-        if (Auth::isuser('admin')) {
-            $this->view('password.change.success.view');
-        }
-    }
-
-    public function temp(){
-        $admin = new Admins();
-
-        $data = $admin->homepage_data();
-
-        $this->view('temp',['data'=>$data]);
     }
 }
