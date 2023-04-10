@@ -145,7 +145,7 @@ if (file_exists($rows->profile_pic)) {
 </div>
 
 <div class="center-box-border" style="
-    text-align: center; width: 1000px; height: 400px; margin-top: 50px; background-color:white; padding: 20px;">
+    text-align: center; width: 1000px; height: 300px; margin-top: 50px; background-color:white; padding: 20px;">
 
     <div class="card-simple col-lg-12 height-auto width-90" style="border: none;">
         <div class="row height-auto width-960px" style="background-color:white;">
@@ -227,7 +227,7 @@ if ($allevents) {
                 height: 3px;
                 background: black;">
 
-<div class="center-box-border" style="height: 540px; width: 1100px; padding-top:20px;">
+<div class="center-box-border" style="min-height: 100px; max-height: 540px; width: 1100px; padding-top:20px;">
     <center>
         <div class="event-container">
 
@@ -315,7 +315,7 @@ if ($allevents) {
                 background: black;">
 
 
-<div class="center-box-border" style="height: 520px; width: 1100px; padding-top:20px;">
+<div class="center-box-border" style="min-height: 100px; max-height: 500px; width: 1100px; padding-top:20px;">
     <center>
         <div class="event-container">
             <div class="grid-9">

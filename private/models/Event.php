@@ -141,4 +141,62 @@ class Event extends Model
         imagejpeg($new_cropped_image, $cropped_file_name, 90);
         imagedestroy($new_cropped_image);
     }
+
+    public function get_details($event_id)
+    {
+        $events = new Event();
+        $query = "SELECT * FROM event WHERE event_id= :id";
+        $arr = ['id' => $event_id];
+        $upcoming = $events->query($query, $arr);
+
+        if ($upcoming) {
+            foreach ($upcoming as $event) {
+                // select count of volunteer for each event
+                $query = "SELECT amount FROM donate WHERE event_id=$event->event_id";
+                $donation = $this->query($query);
+
+                $total = 0;
+                $i = 0;
+
+                if ($donation) {
+                    $count = count($donation);
+                    while ($count > 0) {
+                        $total = $total + $donation[$i]->amount;
+                        $count--;
+                        $i++;
+                    }
+                    // echo $total;
+                    // die;
+                }
+
+                $vol_tot = 0;
+                $query = "SELECT user_id FROM volunteer WHERE event_id=$event->event_id";
+                $vol_data = $this->query($query);
+                if ($vol_data) {
+                    $vol_tot = count($vol_data);
+                }
+
+                // volunteer percentage
+                $event->vol_count = $vol_tot;
+                if ($event->no_of_volunteers && $event->no_of_volunteers > 0) {
+                    $event->vol_percentage = (int)($vol_tot * 100 / $event->no_of_volunteers);
+                } else {
+                    $event->vol_percentage = 0;
+                }
+
+                // donation percentage
+                $event->collected = $total;
+                if ($event->total_amount && $event->total_amount > 0) {
+                    $event->amount_percentage = (int)($total * 100 / $event->total_amount);
+                } else {
+                    $event->amount_percentage = 0;
+                }
+            }
+        }
+        // echo "<pre>";
+        // print_r($ongoing);
+        // die;
+
+        return $upcoming;
+    }
 }
