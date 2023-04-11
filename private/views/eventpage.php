@@ -154,7 +154,7 @@ if (!$amount) {
     <div class="card">
         <h2><b>Donate</b></h2>
         <p>Amount</p>
-        <form>
+        <form method="POST">
             <div class="small-cards">
                 <div class="button">
                     <input type="radio" name="packet" value="300" />
@@ -169,10 +169,10 @@ if (!$amount) {
                     <label class="btn three" for="a75">5 packets Rs.1500</label>
                 </div>
             </div>
-        </form>
+        <!-- </form> -->
         <p>OR</p>
-        <form action="">
-            <input type="text" placeholder="Other Amount">
+        <!-- <form method="post"> -->
+            <input type="text" placeholder="Other Amount" name="amount">
             <button class="continue">Continue</button>
         </form>
 

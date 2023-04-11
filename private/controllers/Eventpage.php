@@ -7,7 +7,7 @@ class Eventpage extends Controller
         $event = new Event();
         $org = new Organization();
         $requests=new Volunteer_request();
-        
+        $donate=new Donate();
 
         if (isset($_GET['id'])) {
            
@@ -68,6 +68,20 @@ class Eventpage extends Controller
             }
           
         }
+        if(isset($_POST['amount'])||isset($_POST['packet'])){
+            // print_r($_POST);
+            if(!isset($_POST['packet'])){
+                $_POST['packet']=0;
+            }
+            $arr['amount']=intval($_POST['amount'])+intval($_POST['packet']);
+            $arr['donor_id']=Auth::getid();
+            $arr['event_id']=str_replace("/","",$_GET['id']);
+
+            // $donate->insert($arr);
+            donate_checkout($arr);
+            // print_r($arr);       
+        }
+
         // $data=$event->findAll();
         else {
             $this->view('404');
