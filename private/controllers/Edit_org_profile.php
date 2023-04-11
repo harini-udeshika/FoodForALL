@@ -54,6 +54,10 @@ class Edit_org_profile extends Controller
         // die;
 
         $org_images = $user->get_images(Auth::getid());
+        // echo "<pre>";
+        // echo "hello";
+        // print_r($org_images);
+        // die;
 
         $this->view('edit_org_profile.view', ['rows' => $data, 'lastmonth' => $lastmonth, 'lables' => $lables, 'event_ids' => $event_ids, 'org_images' => $org_images]);
     }

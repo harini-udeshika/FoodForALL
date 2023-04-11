@@ -24,9 +24,12 @@ class Event_org extends Controller
 
             // $volunteer_req = $requests->where('event_id', $id);
             // echo "<pre>";
-
             // print_r($event_details);
+            $event_details = $event->get_details($id);
             $event_details = $event_details[0];
+            
+            
+            
 
             $em_details = $em->where('email', $event_details->event_manager_email);
             $em_details = $em_details[0];

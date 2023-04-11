@@ -59,10 +59,87 @@
             </div>
             <button class="btn btn-sm btn-green float-right m-top-30 m-bottom-30 m-right-20" type="submit">Edit info</button>
         </div>
-        <div class="card col-lg-5 height-auto">
+        <div class="card col-lg-5 height-auto grid-10">
+            <div class="blank col-lg-2 col-md-2"></div>
+            <div class="card-simple m-8 profile-pic-div col-lg-6 col-md-6 p-10 ">
+                <div class="heading-3 p-top-0">Thumbnail Picture</div>
+
+                <?php
+                $image = "./images/logo.png";
+                if (file_exists($event_details->thumbnail_pic)) {
+                    $image = $event_details->thumbnail_pic;
+                    // echo $user["profile_pic"];
+                }
+
+                ?>
+
+                <div style="display: flex; justify-content: center;">
+                    <img src="<?php echo $image ?>" alt="" class="" style="width: 65%; border-radius: 10px; ">
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <a href="changepic" class="txt-12 underline m-10">change</a>
+                    <a href="" class="txt-12  underline m-10">remove</a>
+                </div>
+            </div>
+            <div class="blank col-lg-2 col-md-2"></div>
+
+            <div class="heading-2 col-10 p-bottom-1 p-top-5">Event Progress</div>
+            <div class="card m-8 profile-pic-div col-lg-10 col-md-10 p-left-10 p-right-10 height-80px">
+                <div class="m-top-10">
+                    <div class="row-flex jf-btwn">
+                        <div class="txt-16 w-semibold txt-purple arrow-icon">Donations</div>
+
+                        <div class="row-flex">
+                            <img class="width-25px height-25px" src="<?= ROOT ?>/images/Icons/ArrowLog.png" alt="" srcset="">
+                            <div class="txt-15 w-semibold txt-purple arrow-icon">Rs.<?php echo $event_details->total_amount ?></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-back width-100 height-10px">
+                        <div class="progress-fill width-<?php if ($event_details->amount_percentage) {
+                                                            echo $event_details->amount_percentage;
+                                                        } else {
+                                                            echo 0;
+                                                        } ?> height-10px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card m-8 profile-pic-div col-lg-10 col-md-10 p-left-10 p-right-10 height-80px">
+                <div class="m-top-10">
+                    <div class="row-flex jf-btwn">
+                        <div class="txt-16 w-semibold txt-purple arrow-icon">Volunteers</div>
+
+                        <div class="row-flex">
+                            <img class="width-25px height-25px" src="<?= ROOT ?>/images/Icons/ArrowLog.png" alt="" srcset="">
+                            <div class="txt-15 w-semibold txt-purple arrow-icon"><?php echo $event_details->no_of_volunteers ?></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-back width-100 height-10px">
+                        <div class="progress-fill width-<?php if ($event_details->vol_percentage) {
+                                                            echo $event_details->vol_percentage;
+                                                        } else {
+                                                            echo 0;
+                                                        } ?> height-10px"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="blank col-lg-1"></div>
+    </div>
+
+    <!-- Adding images section -->
+    <div class="container">
+        <div class="blank col-lg-1"></div>
+        <div class="heading-2 col-lg-11 m-top-20">Add Event Images</div>
+        <div class="blank col-lg-1"></div>
+        <div class="card col-lg-10 height-auto">
             <div class="row">
                 <!-- each image -->
-                <div class="added_image_holder col-lg-6 col-md-6 col-sm-6 m-10">
+                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
                     <div class="photo_holder">
                         <img src="<?= ROOT ?>/uploads/<?php if ($event_images[0]) {
                                                             echo $event_images[0];
@@ -74,7 +151,7 @@
                 </div>
 
                 <!-- each image -->
-                <div class="added_image_holder col-lg-6 col-md-6 col-sm-6 m-10">
+                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
                     <div class="photo_holder">
                         <img src="<?= ROOT ?>/uploads/<?php if ($event_images[1]) {
                                                             echo $event_images[1];
@@ -86,7 +163,7 @@
                 </div>
 
                 <!-- each image -->
-                <div class="added_image_holder col-lg-6 col-md-6 col-sm-6 m-10">
+                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
                     <div class="photo_holder">
                         <img src="<?= ROOT ?>/uploads/<?php if ($event_images[2]) {
                                                             echo $event_images[2];
@@ -97,7 +174,7 @@
                     </div>
                 </div>
 
-                <div class=" col-lg-3 col-md-6 col-sm-6 m-10">
+                <div class=" col-lg-3 col-md-3 col-sm-3 m-10">
                     <form method="POST" action="event_org/add_images?id=<?php echo $event_details->event_id ?>" enctype="multipart/form-data">
                         <div class="added_image_holder addmore_link_holder" style="width:245px;">
                             <div>
@@ -122,9 +199,9 @@
                 </form>
 
             </div>
-
         </div>
         <div class="blank col-lg-1"></div>
+
     </div>
 
 
@@ -178,10 +255,10 @@
                                 <br>
                                 <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
                                 <input class="input-field input-field-sm m-top-6" name="tot-moderate" type="number" value="<?php
-                                                                                                                        if (isset($event_details->moderate_vol_total)) {
-                                                                                                                            echo $event_details->moderate_vol_total;
-                                                                                                                        }
-                                                                                                                        ?>" min="0">
+                                                                                                                            if (isset($event_details->moderate_vol_total)) {
+                                                                                                                                echo $event_details->moderate_vol_total;
+                                                                                                                            }
+                                                                                                                            ?>" min="0">
                             </div>
                         </div>
                         <div class="card card-back1 col-lg-3 height-300px m-25">
