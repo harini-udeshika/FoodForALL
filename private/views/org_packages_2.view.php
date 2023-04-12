@@ -5,12 +5,34 @@
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
+<style>
+    .package_hold_div {
+        height: fit-content;
+    }
+
+    .budget_total_num {
+        border: 1px solid var(--projectPurple);
+        align-items: center;
+        border-radius: 15px;
+    }
+
+    .add_package_div {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 0px 40px 30px 40px;
+    }
+
+    .package_name_input {
+        border: none;
+        text-align: center;
+    }
+</style>
+
 <div class="container">
     <div class="heading-1 col-12">Packages</div>
 
     <div class="col-lg-7 grid-12 p-20">
         <!-- package item start -->
-        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center" style="height:fit-content;">
+        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
             <div class="txt-11 w-semibold">Package one</div>
 
             <div class="txt-purple txt-10 txt-al-left p-top-20 p-bottom-15">Package items</div>
@@ -30,8 +52,8 @@
             </div>
 
             <div class="row txt-al-center p-top-20">
-                <div class="package_items_heading_2 purpleText col-6" style="padding:8px 0 8px 0;">Total</div>
-                <div class="package_text_field purpleText col-6" style=" padding:8px 0 8px 0; border:1px solid var(--projectPurple); align-items:center; border-radius:15px;">Price</div>
+                <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Total</div>
+                <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num">Price</div>
             </div>
 
             <div class="row p-top-20">
@@ -42,7 +64,7 @@
         <!-- package item end -->
 
         <!-- package item start -->
-        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center" style="height:fit-content;">
+        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
             <div class="txt-11 w-semibold">Package one</div>
 
             <div class="txt-purple txt-10 txt-al-left p-top-20 p-bottom-15">Package items</div>
@@ -62,8 +84,8 @@
             </div>
 
             <div class="row txt-al-center p-top-20">
-                <div class="package_items_heading_2 purpleText col-6" style="padding:8px 0 8px 0;">Total</div>
-                <div class="package_text_field purpleText col-6" style=" padding:8px 0 8px 0; border:1px solid var(--projectPurple); align-items:center; border-radius:15px;">Price</div>
+                <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Total</div>
+                <div class="package_text_field purpleText col-6 budget_total_num p-top-8 p-bottom-8">Price</div>
             </div>
 
             <div class="row p-top-20">
@@ -74,22 +96,24 @@
         <!-- package item end -->
     </div>
 
-    <div class="blank col-5 m-20" style="border:1px solid rgba(0,0,0,0.2); padding: 0px 40px 30px 40px;">
-        <h2>Add package</h2>
-        <!-- package item start -->
-        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center">
-            <div class="txt-11 w-semibold">Package name</div>
+    <div class="blank col-5 m-20 add_package_div">
 
-            <div class="flex al-center p-10 p-top-28 p-bottom-15" style="justify-content:space-between;">
+        <h2>Add package</h2>
+
+        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center">
+            <input class="txt-11 w-semibold package_name_input" type="text" value="Package name">
+
+            <div class="flex al-center jf-btwn p-10 p-top-28 p-bottom-15">
                 <div class="txt-purple txt-10 txt-al-left ">Package items</div>
                 <i id="add_package_items" class="fa-sharp fa-solid fa-square-plus txt-20" onclick="addInputField()" style="cursor:pointer;"></i>
             </div>
 
             <div id="field_holder" class="card-simple p-3 m-lr-auto">
-                <div class="m-lr-auto grid-10 p-8 p-bottom-2" >
-                    <div class="txt-09 col-3 txt-black w-medium" >Item</div>
-                    <div class="txt-09 col-3 txt-black w-medium" >Quantity</div>
-                    <div class="txt-09 col-3 txt-black w-medium" >Unit price</div>
+                <!-- items topics -->
+                <div class="m-lr-auto grid-10 p-8 p-bottom-2">
+                    <div class="txt-09 col-3 txt-black w-medium">Item</div>
+                    <div class="txt-09 col-3 txt-black w-medium">Quantity</div>
+                    <div class="txt-09 col-3 txt-black w-medium">Unit price</div>
                     <i class="fa-solid fa-circle-xmark col-1 txt-14" style="cursor:pointer; visibility:hidden;"></i>
                 </div>
                 <!-- input field -->
@@ -100,8 +124,6 @@
                         <i class="fa-solid fa-circle-xmark col-1 txt-14" style="cursor:pointer;""></i>
                 </div> -->
                 <!-- end input field -->
-
-               
             </div>
 
 
