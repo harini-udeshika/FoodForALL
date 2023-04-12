@@ -128,4 +128,11 @@ class Admin extends Controller
 
         $this->view('temp',['data'=>$data]);
     }
+
+    public function temp2(){
+        $admin = new Admins();
+
+
+        $this->view('org_packages_2.view');
+    }
 }
