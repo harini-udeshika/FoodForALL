@@ -123,7 +123,7 @@ class Admin extends Controller
 
         $data = $admin->homepage_data();
 
-        $this->view('temp',['data'=>$data]);
+        $this->view('temp');
     }
 
     public function temp2(){
