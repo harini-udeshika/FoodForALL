@@ -15,13 +15,16 @@ class Admin extends Controller
     public function home()
     {
         if (Auth::isuser('admin')) {
-            $name = "ballo maramu malli";
+            $name = "this is name";
             $result = "this is ressult";
 
-            $user_controller = new Admin();
-            $user_controller->view('admin.home.view', [
+            $admin_model = new Admins();
+            $site_data = $admin_model->homepage_data();
+
+            $this->view('admin.home.view', [
                 'name' => $name,
                 'result' => $result,
+                'site_data' => $site_data,
             ]);
         } else {
             $this->redirect('login');
