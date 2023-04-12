@@ -103,7 +103,6 @@ class Admin extends Controller
             'error' => $errors
         ]);
     }
-<<<<<<< HEAD
 
     public function update_successfully($link = '')
     {
@@ -133,6 +132,4 @@ class Admin extends Controller
 
         $this->view('org_packages_2.view');
     }
-=======
->>>>>>> 79c63b788c0f5496a3bef9c35d2bb5e887d09f79
 }
