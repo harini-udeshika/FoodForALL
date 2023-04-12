@@ -1,0 +1,59 @@
+.container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    height: 77vh;
+    width: 70rem;
+    margin: 1rem;
+   
+}
+h1{
+    
+    color: #7FB432;
+}
+.p{
+    color: #7681BF;
+}
+h3{
+    color: #646464;
+}
+.sub{
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-evenly;
+   
+    height: 100%;
+    width: 100%;
+}
+.sub button{
+    border: none;
+    height:3rem;
+    width:8rem;
+    border-radius:1rem;
+    font-size: large;
+    margin-bottom: 1rem;
+    color:white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.org button{
+    background-color: #7681BF;
+}
+.user button{
+    background-color: #7FB432;
+}
+
+.user, .org{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+    height: 100%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    margin: 0.5rem;
+    border-radius: 1rem;
+}
+.sub img{
+    height:18rem;
+}

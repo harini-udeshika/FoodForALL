@@ -15,13 +15,14 @@ class Elderhomedetails extends Controller{
                 $arr['contact1']=$_POST['Contact1'];
                 $arr['contact2']=$_POST['Contact2'];
                 $arr['address']=$_POST['address'];
+                $arr['members']=$_POST['Members'];
                 $arr['cholesterol_patients']=$_POST['Cholesterol_patients'];
                 $arr['healthy_adults']=$_POST['Healthy_adults'];
                 $arr['diabetes_patients']=$_POST['Diabetes_patients'];
                 $arr['areacoordinator_email']=$_POST['areacoordinator_email'];
                 
                 $ehome->insert($arr);
-                $this->redirect('donee_details');
+                $this->redirect('eldertable');
             }else{
             //error
             $errors=$ehome->errors;

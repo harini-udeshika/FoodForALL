@@ -3,11 +3,16 @@ const firstName = document.getElementById("first_name");
 const lastName = document.getElementById("last_name");
 const nic = document.getElementById("nic");
 const email = document.getElementById("email");
-const telephone = document.getElementById("telephone");
+const telephone = document.getElementById("telephone"); 
 const password = document.getElementById("password");
 const rePassword = document.getElementById("re_enter_password");
 const check = document.getElementById("check");
+const address=document.getElementById("address_1");
+const city=document.getElementById("city");
+const postalCode=document.getElementById("postal_code");
+
 var valid=true;
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     inputChecker();
@@ -24,6 +29,9 @@ async function inputChecker() {
     const telVal = telephone.value.trim();
     const passwordVal = password.value.trim();
     const rePasswordVal = rePassword.value.trim();
+    const addressVal = address.value.trim();
+    const cityVal = city.value.trim();
+    const postalCodeVal = postalCode.value.trim();
     // const error=
 
     if (firstNameVal === "") {
@@ -33,6 +41,38 @@ async function inputChecker() {
     } else {
         //display success tick
         displaySuccess(firstName);
+    }
+
+    if (cityVal === "") {
+        //error message
+        displayError(city, "City can't be empty");
+        
+    } else {
+        //display success tick
+        displaySuccess(city);
+    }
+    if (postalCodeVal === "") {
+        //error message
+        displayError(postalCode, "Postal code can't be empty");
+        
+    }
+    else if (postalCodeVal.length != 5 ) {
+        //error message
+        displayError(postalCode, "Enter a valid postal code");
+        
+    }
+    else {
+        //display success tick
+        displaySuccess(postalCode);
+    }
+    
+    if (addressVal === "") {
+        //error message
+        displayError(address, "Address can't be empty");
+        
+    } else {
+        //display success tick
+        displaySuccess(address);
     }
     if (lastNameVal === "") {
         displayError(lastName, "Last name can't be empty");
@@ -75,7 +115,7 @@ async function inputChecker() {
         displaySuccess(rePassword);
     }
     if (!check.checked) {
-        displayError(check, "This can't be empty")
+        displayError(check, "Accept terms and conditions");
     }
     else {
         displaySuccess(check);

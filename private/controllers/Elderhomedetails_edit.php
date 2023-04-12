@@ -18,6 +18,7 @@ class Elderhomedetails_edit extends Controller{
                 $arr['contact1']=$_POST['Contact1'];
                 $arr['contact2']=$_POST['Contact2'];
                 $arr['address']=$_POST['address'];
+                $arr['members']=$_POST['Members'];
                 $arr['cholesterol_patients']=$_POST['Cholesterol_patients'];
                 $arr['healthy_adults']=$_POST['Healthy_adults'];
                 $arr['diabetes_patients']=$_POST['Diabetes_patients'];
