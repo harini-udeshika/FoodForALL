@@ -103,4 +103,36 @@ class Admin extends Controller
             'error' => $errors
         ]);
     }
+<<<<<<< HEAD
+
+    public function update_successfully($link = '')
+    {
+        if (Auth::isuser('admin')) {
+            $this->view('update.success.view', ['link' => $link]);
+        }
+    }
+
+    public function password_success()
+    {
+        if (Auth::isuser('admin')) {
+            $this->view('password.change.success.view');
+        }
+    }
+
+    public function temp(){
+        $admin = new Admins();
+
+        $data = $admin->homepage_data();
+
+        $this->view('temp',['data'=>$data]);
+    }
+
+    public function temp2(){
+        $admin = new Admins();
+
+
+        $this->view('org_packages_2.view');
+    }
+=======
+>>>>>>> 79c63b788c0f5496a3bef9c35d2bb5e887d09f79
 }
