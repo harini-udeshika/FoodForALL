@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
+<?php $this->view('includes/go_to_top') ?>
 
 
 <div class="container">
