@@ -38,7 +38,7 @@ if (file_exists($rows->profile_pic)) {
 <div class="certificate_section" id="certificates">
     <div class="heading_certificates">
         <p>Volunteering Certificates</p>
-        <?php if (Auth::getid() == $rows->id): ?>
+    <?php if (Auth::getid() == $rows->id): ?>
         <button id="add">Add +</button>
 
     </div>
@@ -62,6 +62,20 @@ if (file_exists($rows->profile_pic)) {
                 <input type="file" name="file" id="file" class="file">
             </label>
             <br>
+            <div class="select">
+            <!-- <label for="event">Select the event:</label> -->
+           
+            <select name="event" id="event">
+                <option value="select">Select the event</option>
+                <?php $i = 0;?>
+                <?php if ($select): ?>
+                <?php foreach ($select as $data): ?>
+                    <option value="<?=$select[$i]->event_id?>"><?=$select[$i]->name?></option>
+                <?php $i++?>
+                <?php endforeach?>
+                <?php endif ?>
+            </select>
+            </div>
             <textarea name="description" placeholder="Write your thoughts" class="form_text"></textarea>
             <button type="submit" class="save">Submit</button>
 
@@ -90,9 +104,14 @@ if (file_exists($rows->profile_pic)) {
             <div><a class="cert_del"><i class="fa-solid fa-trash fa-xl"></a></i>
                 <div class="image"><img src="<?=$cert[$i]->file_name?>"></div>
 
+                
+            <p class="des"><b><?=$cert[$i]->name?></b> &nbsp;held on &nbsp;<?=$cert[$i]->date?><br>
                 <?php if ($cert[$i]->description): ?>
-                <p class="des"><?=$cert[$i]->description?></p>
+                    <i><?=$cert[$i]->description?></i>
                 <?php endif?>
+            </p>
+               
+             
             </div>
             <?php $i++;
 // echo ($i); ?>

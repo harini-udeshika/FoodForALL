@@ -11,6 +11,7 @@ const address=document.getElementById("address_1");
 const city=document.getElementById("city");
 const postalCode=document.getElementById("postal_code");
 
+
 var valid=true;
 
 form.addEventListener("submit", (e) => {
@@ -33,7 +34,8 @@ async function inputChecker() {
     const cityVal = city.value.trim();
     const postalCodeVal = postalCode.value.trim();
     // const error=
-
+    emailcheck();
+    niccheck()
     if (firstNameVal === "") {
         //error message
         displayError(firstName, "First name can't be empty");
@@ -118,7 +120,7 @@ async function inputChecker() {
         displayError(check, "Accept terms and conditions");
     }
     else {
-        displaySuccess(check);
+        displaySuccess(check); 
     }
 }
 function displayError(input, message) {
@@ -147,4 +149,49 @@ function displaySuccess(input) {
 }
 function checkEmail(email) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
+function emailcheck(){
+    const emailVal = email.value.trim();
+    var ajax = new XMLHttpRequest();
+    ajax.open('GET', 'http://localhost/food_for_all/public/signup/duplicate', true);
+
+
+
+    ajax.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            let emails=JSON.parse(ajax.response);
+            // console.log(emails[0].email);
+            for(i in emails) {
+                // console.log(emails[i].email);
+                if(emails[i].email ==emailVal){
+                    displayError(email, "Email already exists");
+                }
+            }
+           
+        }
+    };
+    ajax.send();
+}
+function niccheck(){
+    const nicVal = nic.value.trim();
+    var ajax = new XMLHttpRequest();
+    ajax.open('GET', 'http://localhost/food_for_all/public/signup/nic', true);
+
+
+
+    ajax.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            let nics=JSON.parse(ajax.response);
+            // console.log(emails[0].email);
+            for(i in nics) {
+                // console.log(nics[i].nic);
+                if(nics[i].nic ==nicVal){
+                    displayError(nic, "NIC already exists");
+                }
+            }
+           
+        }
+    };
+    ajax.send();
 }

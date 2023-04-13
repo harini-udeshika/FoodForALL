@@ -5,7 +5,7 @@ let tot_data = new Array(2).fill(0);
 let donate = 0;
 let volunteer = 0;
 
-var ajax = new XMLHttpRequest();
+var ajax = new XMLHttpRequest(); 
 ajax.open('GET', 'http://localhost/food_for_all/public/charts/get_stats', true);
 ajax.send();
 
