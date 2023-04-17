@@ -56,7 +56,7 @@
     color: #FFFFFF;
     background-color: #7681BF;
     border-radius: 2rem;
-    text-decoration: none; 
+    text-decoration: none;
     text-align: center;
     padding-top: 0.25rem;
     margin-top: 0.25rem;
@@ -90,28 +90,46 @@
 
 }
 
+.select select {
+    border: none;
+    background-color: #dfe8cc;
+    border-radius: 0.5rem;
+    height: 1.5rem;
+    padding: 0.5rem;
+    color: #7FB432;
+    height: 2.5rem;
+    width: 10rem;
+
+}
+
+.select select:focus {
+    border: 2px solid #7FB432;
+}
+
 .certificate_section {
     display: flex;
     flex-direction: column;
-  
+
     margin: 3rem 0 1rem 0;
     min-height: 15rem;
     width: 60rem;
 }
-.cert_del{
-    
+
+.cert_del {
+
     background-color: #e9f8d3;
     height: 1rem;
-    width:1rem;
+    width: 1rem;
     padding: 0.5rem;
     border-radius: 0.5rem
 }
-.cert_del_confirm{
+
+.cert_del_confirm {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     position: absolute;
     height: 10rem;
     width: 13rem;
@@ -119,10 +137,11 @@
     border: 0.01rem solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0.5rem;
-    top:35rem;
+    top: 35rem;
     visibility: visible;
 }
-.cert_del_confirm button{
+
+.cert_del_confirm button {
     width: 5rem;
     background-color: #7FB432;
     border: none;
@@ -131,16 +150,20 @@
     font-weight: bold;
     color: #fff;
 }
-.cert_del_confirm button:hover{
+
+.cert_del_confirm button:hover {
     background-color: #95d03d;
 }
-.certificates i{
-color: #7FB432;
-height: 1rem;
+
+.certificates i {
+    color: #7FB432;
+    height: 1rem;
 }
-.certificates i:hover{
+
+.certificates i:hover {
     color: #93db26;
 }
+
 .heading_certificates {
     margin-bottom: 2rem;
     color: #000;
@@ -162,9 +185,10 @@ height: 1rem;
     border: none;
     border-radius: 0.5rem;
 }
-.heading_certificates button{
-   align-self: flex-end;
-   margin-right: 3rem;
+
+.heading_certificates button {
+    align-self: flex-end;
+    margin-right: 3rem;
 }
 
 .change_pic {
@@ -214,7 +238,7 @@ height: 1rem;
     justify-content: space-evenly;
     align-items: center;
     font-size: 0.9rem;
-    height: 13rem;
+    height: 15rem;
 }
 
 .file_name {
@@ -256,7 +280,8 @@ height: 1rem;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     margin: 0.5rem;
 }
-.no_cert{
+
+.no_cert {
     color: #787878;
     font-size: medium;
     font-weight: bold;
@@ -265,14 +290,16 @@ height: 1rem;
     background-color: #f4f4f4;
     display: flex;
     flex-direction: row;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     border-radius: 1rem;
 }
-.no_cert i{
+
+.no_cert i {
     color: #787878;
     margin-top: 1rem;
 }
+
 .certificates_row {
     display: flex;
     flex-direction: row;
@@ -303,13 +330,14 @@ height: 1rem;
     width: 17rem;
     background-color: #ececec;
 }
+
 .scroll {
     height: 20rem;
     min-height: 10rem;
     overflow-y: scroll;
-   border: 1px solid #ececec;
-   border-radius:1rem;
-    
+    border: 1px solid #ececec;
+    border-radius: 1rem;
+
 }
 
 .scroll::-webkit-scrollbar {
@@ -328,6 +356,7 @@ height: 1rem;
     background-clip: content-box;
     background-color: #7FB432;
 }
+
 .activities_section.donation_section,
 table {
     display: flex;

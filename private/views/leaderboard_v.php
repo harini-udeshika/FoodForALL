@@ -19,6 +19,7 @@
 </div>
 
 <div class="top">
+<?php if(isset($data[1])):?>
     <div class="container">
 
         <?php $place = "2nd Place"?>
@@ -49,8 +50,8 @@ if ($data[1]->profile_pic) {
             <span class="four"><b><?=$data[1]->heavy_v?></b></span>
         </div>
     </div>
-
-
+<?php endif; ?>
+    <?php if(isset($data[0])):?>
     <div class="container">
         <p>1st Place</p>
         <div class="first">
@@ -76,7 +77,8 @@ if ($data[0]->profile_pic) {
 
     </div>
 
-
+<?php endif; ?>
+<?php if(isset($data[2])):?>
     <div class="container">
         <?php $place = "3rd Place"?>
         <?php if ($data[2]->place == 2) {
@@ -106,7 +108,7 @@ if ($data[2]->profile_pic) {
             <span class="four"><b><?=$data[2]->heavy_v?></b></span>
         </div>
     </div>
-
+<?php endif; ?>
 </div>
 
 <?php $i = 0;?>

@@ -11,6 +11,7 @@
 </div>
 
 <div class="top">
+<?php if(isset($data[1])):?>
     <div class="container">
 
         <?php $place = "2nd Place"?>
@@ -34,10 +35,11 @@ if ($data[1]->profile_pic) {
         <span><i class="fa-solid fa-location-dot"></i>&nbsp;<?=$data[1]->city?></span>
 
     </div>
-
-
+<?php endif; ?>
+    <?php if(isset($data[0])):?>
     <div class="container">
         <p>1st Place</p>
+      
         <div class="first">
 
             <?php $pic = "./images/user_icon.png";
@@ -54,8 +56,9 @@ if ($data[0]->profile_pic) {
         <span><i class="fa-solid fa-location-dot"></i>&nbsp;<?=$data[0]->city?></span>
 
     </div>
+    <?php endif; ?>
 
-
+    <?php if(isset($data[2])):?>
     <div class="container">
     <?php $place = "3rd Place"?>
     <?php if ($data[2]->place == 2) {
@@ -76,8 +79,9 @@ if ($data[2]->profile_pic) {
         </div><span><?=$data[2]->first_name?></span>
         <span><i class="fa-solid fa-location-dot"></i>&nbsp;<?=$data[2]->city?></span>
     </div>
-
+    <?php endif; ?>
 </div>
+
 
 <?php $i = 0;?>
 

@@ -5,6 +5,8 @@ const fileLabel = document.getElementById("file_label");
 const changePic= document.getElementById("change_pic");
 const small=document.querySelector("small");
 const visible=document.getElementsByClassName("visible");
+const select=document.getElementById("event");
+
 fileLabel.addEventListener("change",()=>{
     if(file.files.length!=0){
         fileName.innerText=file.files[0].name;}
@@ -27,7 +29,11 @@ function isValidFile(image) {
     }else if(image.files[0].size>1024*1024*8){
         small.innerHTML="File exceeds maximum of 8MB";
         small.parentElement.className=" error";
-    }else{
+    }else if(select.value=="select"){
+        small.innerHTML="Please select the event";
+        small.parentElement.className=" error";
+    }
+    else{
         small.parentElement.className=" visible";
         changePic.submit();
     }

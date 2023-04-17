@@ -6,7 +6,7 @@
 <h1>Organizations</h1>
 <div class="search">
         <form action="">
-             <input type="text" name="find" placeholder="Search event by name " class="search-bar">
+             <input type="text" name="find" placeholder="Search organization by name " class="search-bar">
          <button><i class="fa-solid fa-magnifying-glass fa-l"></i></button>
         </form>
 

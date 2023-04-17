@@ -10,7 +10,7 @@ class Signup extends Controller
 
                 $arr['first_name'] = $_POST["first_name"];
                 $arr['last_name'] = $_POST["last_name"];
-                $arr['nic'] = $_POST["nic"];
+                $arr['nic'] = $_POST["nic"]; 
                 $arr['email'] = $_POST["email"];
                 $arr['address_1'] = $_POST["address_1"];
                 $arr['city'] = $_POST["city"];
@@ -38,5 +38,17 @@ class Signup extends Controller
         // print_r($_POST); 
         // echo "</pre>";  
         $this->view('signup',['errors'=>$errors]);
+    }
+    function duplicate(){
+        $user = new User();
+        $query="select email from user";
+        $emails=$user->query($query);
+        print_r(json_encode($emails));
+    }
+    function nic(){
+        $user = new User();
+        $query="select nic from user";
+        $nics=$user->query($query);
+        print_r(json_encode($nics));
     }
 }
