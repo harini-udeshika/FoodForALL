@@ -30,6 +30,19 @@ class Admin_events_model extends Model
                 } else {
                     $event->vol_percentage = 0;
                 }
+
+                // select count of donations for each event
+                $query = "SELECT amount FROM donate WHERE event_id=$event->event_id";
+                $donations = $this->query($query);
+
+
+                $event->donation_percentage = 0;
+                if ($donations != null) {
+                    $collected_donations = 0;
+                    foreach ($donations as $donation) {
+                        $collected_donations += $donation->amount;
+                    }
+                }
             }
         }
         return $data;
