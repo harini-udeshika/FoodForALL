@@ -4,7 +4,6 @@
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
-
 <div class="container">
     <div class="heading-1 col-12">Dashboard</div>
 

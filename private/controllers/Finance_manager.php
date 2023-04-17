@@ -1,5 +1,5 @@
 <?php
-class Admin extends Controller
+class Finance_manager extends Controller
 {
     function index()
     {
@@ -7,9 +7,9 @@ class Admin extends Controller
         // $data = $user->findAll();
         $admin = new Admins();
 
-        $data = $admin->where('email', Auth::getemail());
-        $data = $data[0];
-        $this->view('admin', ['rows' => $data]);
+        // $data = $admin->where('email', Auth::getemail());
+        $data = array();
+        $this->view('finance_manager.home.view', ['rows' => $data]);
     }
 
     public function home()
