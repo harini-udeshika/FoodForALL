@@ -3,8 +3,6 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
-<?php $this->view('includes/go_to_top') ?>
-
 
 <div class="container">
     <div class="heading-1 col-12">Dashboard</div>
@@ -17,23 +15,23 @@
     <div class="col-lg-10 grid-8">
         <div class="status-card card col-lg-2">
             <div class="head-1">Ongoing Events</div>
-            <div class="head-2">Month</div>
-            <div class="status-text">22</div>
+            <div class="head-2"><?= $site_data['month'] ?></div>
+            <div class="status-text"><?= $site_data['ongoing_events'] ?></div>
         </div>
         <div class="status-card card col-lg-2">
             <div class="head-1">Completed Events</div>
-            <div class="head-2">Month</div>
-            <div class="status-text">22</div>
+            <div class="head-2"><?= $site_data['month'] ?></div>
+            <div class="status-text"><?= $site_data['completed_events'] ?></div>
         </div>
         <div class="status-card card col-lg-2">
-            <div class="head-1">Registered Organizarions</div>
+            <div class="head-1">Reg. Organizations</div>
             <div class="head-2 hidden">Month</div>
-            <div class="status-text">22</div>
+            <div class="status-text"><?= $site_data['organizations'] ?></div>
         </div>
         <div class="status-card card col-lg-2">
             <div class="head-1">Registered Users</div>
             <div class="head-2 hidden">Month</div>
-            <div class="status-text">22</div>
+            <div class="status-text"><?= $site_data['users'] ?></div>
         </div>
     </div>
     <div class="blank col-lg-1"></div>
@@ -42,15 +40,15 @@
     <div class="blank col-lg-1"></div>
     <div class="card col-lg-4 m-top-40" style="overflow: hidden;">
         <div class="head-donate head-1 m-bottom-20 txt-black">Donations</div>
-        <div class="txt-10 w-semibold txt-al-center p-top-10">November - 2023</div>
+        <div class="txt-10 w-semibold txt-al-center p-top-10"><?= $site_data['month'] ?> - <?= $site_data['year'] ?></div>
         <div class="donate-icon">
             <i class="fa-solid fa-hand-holding-dollar"></i>
         </div>
-        <div class="w-black txt-al-center m-top-60 txt-20">250,000 LKR</div>
-        <div class="w-semibold txt-al-center m-top-40 m-bottom-20 txt-08">*Last update - 2020/10/11</div>
+        <div class="w-black txt-al-center m-top-60 txt-20"><?= $site_data['donations'] ?> LKR</div>
+        <div class="w-semibold txt-al-center m-top-40 m-bottom-20 txt-08">*Last update - <?= $site_data['update_time'] ?></div>
     </div>
     <div class="card col-lg-6 p-20 m-top-40">
-        <div class="head-chart1 head-1 p-bottom-10 txt-black">Most donated sites - November 2023</div>
+        <div class="head-chart1 head-1 p-bottom-10 txt-black">Most donated sites - <?= $site_data['month'] ?> <?= $site_data['year'] ?></div>
         <canvas id="myChart" class="m-top-10" style="max-height: 300px;"></canvas>
     </div>
 
@@ -74,9 +72,17 @@
     new Chart(ctx1, {
         type: 'doughnut',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            labels: [
+                <?php foreach ($site_data['chart_1'] as $org) : ?>
+                    <?= "'" . $org->name . "'," ?>
+                <?php endforeach; ?>
+            ],
             datasets: [{
-                data: [12, 19, 3, 5, 2, 3, 5, 7, 3, 9, 7, 4],
+                data: [
+                    <?php foreach ($site_data['chart_1'] as $org) : ?>
+                        <?= $org->total_donations . "," ?>
+                    <?php endforeach; ?>
+                ],
                 borderWidth: 1
             }]
         },
@@ -96,10 +102,18 @@
     new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            labels: [
+                <?php foreach ($site_data['chart_2'] as $month => $amount) : ?>
+                    <?= "'" . $month . "'," ?>
+                <?php endforeach; ?>
+            ],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [
+                    <?php foreach ($site_data['chart_2'] as $month => $amount) : ?>
+                        <?= $amount . "," ?>
+                    <?php endforeach; ?>
+                ],
                 borderWidth: 1
             }]
         },
