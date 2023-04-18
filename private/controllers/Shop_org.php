@@ -50,7 +50,20 @@ class Shop_org extends Controller
         // echo $code;
         // die;
         $item_del = new Merchandise_item();
-        $item_del->delete_item($code);
+        $reg_no = Auth::gov_reg_no();
+        if($item_del->where('item_no', $code)){
+            $item_data = $item_del->where('item_no', $code);
+            // print_r($item_data);
+            if($item_data[0]->org_gov_reg_no == $reg_no){
+                $item_del->delete_item($code);
+                $this->redirect('shop_org');
+            }else{
+                $this->redirect('shop_org');
+            }
+            die;
+        }else{
+            $this->redirect('shop_org');
+        }
 
         $this->redirect('shop_org');
     }
