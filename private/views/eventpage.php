@@ -21,9 +21,12 @@ $volunteer_count = $volunteer->count("user_id", "event_id", $rows->event_id);
 $volunteer_count = ($volunteer_count[0]->count);
 $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
 ?>
+<div class="main">
 <p class="event-name">
-    <?=$rows->name?><small> by <?=$org->name?></small>
+    <?=$rows->name?><small> by <?=$org->name?></small> 
 </p>
+<a href="shop?id=<?=$org->gov_reg_no?>"><button>Explore the shop&nbsp;&nbsp;<i class="fa-solid fa-cart-shopping"></i></button></a>
+</div>
 <?php if ($rows->date < date("Y-m-d")): ?>
 <?php $image_arr = explode(',', $rows->photographs)?>
 <div class="whole">

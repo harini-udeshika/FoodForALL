@@ -8,7 +8,7 @@
 
 <div class="left_c">
 
-<form method="POST" id="form"> 
+<form method="POST" id="form">
 <h3>Enter Your Shipping Details</h3>
     <div>
         <input type="text" placeholder="Receipient's name" name="name" id='name'></input>
@@ -16,13 +16,24 @@
         <i class="fa-solid fa-circle-check"></i>
         <small>error message</small>
     </div>
-    <div> 
+    <div>
         <input type="text" placeholder="Address" id='address' name='address'></input>
         <i class="fa-solid fa-circle-exclamation"></i>
         <i class="fa-solid fa-circle-check"></i>
         <small>error message</small>
     </div>
-    <div> 
+    <div>
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <i class="fa-solid fa-circle-check"></i>
+        <small>error message</small>
+    </div>
+    <div>
         <input type="text" placeholder="City"  name="city" id='city'></input>
         <i class="fa-solid fa-circle-exclamation"></i>
         <i class="fa-solid fa-circle-check"></i>
@@ -70,13 +81,13 @@
     <div class="row" >Bill Total <span id="bill_total">Rs. <?php if (isset($total)) {echo ($total);} else {echo "0";}?>.00<span></div>
     <div class="row">Delivery Charges<span>Rs.<span></div>
     <div class="row">Total Amount<span>Rs.<span></div>
-  
+
 </div>
 
 </div>
 </div>
 
-  
+
 <?php $this->view('includes/footer')?>
 <script src="<?=ROOT?>/assets/checkout.js"></script>
 <script src="<?=ROOT?>/assets/shop.js"></script>
