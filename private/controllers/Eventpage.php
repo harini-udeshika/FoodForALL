@@ -83,9 +83,9 @@ class Eventpage extends Controller
         }
 
         // $data=$event->findAll();
-        else {
-            $this->view('404');
-        }
+        // else {
+        //     $this->view('404');
+        // }
 
     }
     // public function map()

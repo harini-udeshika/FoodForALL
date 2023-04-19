@@ -29,6 +29,7 @@
             </div>
             <?php endif?>
             <?php if (Auth::getusertype() == 'reg_user'): ?>
+                <div class="up">
             <div class="nav-i">
                 <a href="homepage">Home</a>
             </div>
@@ -44,6 +45,8 @@
             <div class="nav-i">
                 <a href="about">About us</a>
             </div>
+            </div>
+            <div class="down">
             <div class="nav-i">
             <a href="search"><span class="material-symbols-outlined">person_search</span></a>
             </div>
@@ -68,15 +71,16 @@ notifications
             <span class="material-symbols-outlined">
 notifications_active
 </span>
-            </div>
+            
             <?php endif;?>
-
+            </div>
             <div class="nav-i">
                 <a href="charts"><i class="fa-solid fa-chart-line"></i></a>
             </div>
             <div class="nav-i">
                 <a href="leaderboard"><i class="fa-solid fa-crown"></i></a>
             </div>
+            
         <?php endif?>
         <?php if (Auth::getusertype() == 'admin'): ?>
             <div class="nav-i">
@@ -217,6 +221,7 @@ if (Auth::getusertype() == 'eventmanager') {
 ?>
                 <img src="<?=$image?>" alt="" class="nav-user-icon" id="nav-user-icon" onclick="toggleMenu()">
             </div>
+        </div>
         </div>
         <!-- ----------------sub menu-------------- -->
 

@@ -49,11 +49,11 @@ class Events extends Controller
                 $this->view('events', ['rows' => $search_data]);
             } else if ($date) {
                 $query = "SELECT event.event_id ,event.name, event.date,event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) as volunteers, SUM(donate.amount) as total_donated
-        FROM event
-        LEFT JOIN donate ON event.event_id = donate.event_id
-        LEFT JOIN volunteer ON event.event_id = volunteer.event_id
-        WHERE event.date= :date && event.date>CURRENT_DATE && event.approved=1
-        GROUP BY event.event_id";
+                        FROM event
+                        LEFT JOIN donate ON event.event_id = donate.event_id
+                        LEFT JOIN volunteer ON event.event_id = volunteer.event_id
+                        WHERE event.date= :date && event.date>CURRENT_DATE && event.approved=1
+                        GROUP BY event.event_id";
                 $arr = ['date' => $date];
                 $filter_data = $event->query($query, $arr);
                 //$filter_data = $event->filter($date, $location, 'date', 'location');
@@ -99,19 +99,5 @@ class Events extends Controller
         }
 
     }
-    // function index(){
-
-    //     $event=load_model('events');
-
-    //     // $data = $event->where('id',Auth::getid());
-
-    //     // if(!Auth::logged_in()){
-    //     //     $this->redirect('home');
-    //     // }
-
-    //     // $data = $data[0];
-    //     $data=$event->find_all();
-    //     print_r($data);
-    //     $this->view('events');
-    // }
+   
 }

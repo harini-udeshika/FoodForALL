@@ -1,11 +1,10 @@
 <?php $this->view('includes/header')?>
-<link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 <?php $this->view('includes/navbar')?>
 <?php if (Auth::logged_in()) {
     $this->view('includes/submenu');
 }
 ?>
- 
+ <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 
 <div class="container">
 

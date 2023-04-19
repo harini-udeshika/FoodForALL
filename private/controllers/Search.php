@@ -13,7 +13,9 @@ class Search extends Controller
         if (count($_POST) > 0) {
 
             $text = $_POST['text'];
-            $query = "SELECT * FROM user where first_name like '$text%' OR last_name like '$text%' OR concat(first_name+' '+last_name) like '$text%'";
+            $query = "SELECT * FROM user WHERE LOWER(first_name) LIKE LOWER('$text%') OR 
+            LOWER(last_name) LIKE LOWER('$text%') OR 
+            CONCAT(LOWER(first_name), ' ', LOWER(last_name)) LIKE LOWER('$text%')";
             $data = $user->query($query);
             echo (json_encode($data));
         }
