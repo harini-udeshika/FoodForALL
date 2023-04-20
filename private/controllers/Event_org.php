@@ -114,7 +114,7 @@ class Event_org extends Controller
             $event->volunteer_email($event_id);
 
             // echo $event_id;
-            // die;
+            // die; 
             $this->redirect('event_org?id=' . $event_id);
         } else {
             $this->redirect('home');
@@ -184,5 +184,15 @@ class Event_org extends Controller
         } else {
             $this->redirect('home');
         }
+    }
+
+    public function certificate(){
+        $cert = new Mail_cert();
+        $subject = "0";
+        $message = "hello";
+        $recipient = "akiladharmadasa1.1@gmail.com";
+        $mail_eg = new Mail();
+        // $mail_eg->send_mail($recipient,$subject,$message);
+        $cert->email_cert();
     }
 }

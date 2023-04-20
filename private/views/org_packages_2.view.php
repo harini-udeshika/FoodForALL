@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="row p-top-20">
-                        <!-- <button class="btn btn-sm btn-gray col-6">edit</button> -->
+                        <button class="btn btn-sm btn-gray col-6">edit</button>
                         <a href="<?= ROOT ?>/Org_packages/delete_package?id=<?= $package_data[$i]->package_id ?>">
                             <button class="btn btn-sm btn-purple col-6">remove</button>
                         </a>
