@@ -20,4 +20,8 @@ class Fetch extends Controller
         $organizations = json_encode($organizations);
         echo($organizations);
     }
+
+    function temp1($str){
+        echo($str);
+    }
 }
