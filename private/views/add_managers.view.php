@@ -119,7 +119,6 @@
 </style>
 <center>
     <!-- popup div -->
-    <button onclick="open_popup()">fucking button</button>
     <div class="popup-div" id="popup-div">
         <div class="popup-contain">
             <div class="card popup-card">
@@ -251,6 +250,8 @@
         popup_div.style.display = 'none'
     }
 
+    close_popup();
+
     // function fetchData() {
     //     return fetch("http://localhost/food_for_all/public/add_managers/before_dele/sam@123").then(response => response.text()).then(data => {
     //         return data
@@ -304,7 +305,6 @@
         popup_hero_btn.classList="fa-sharp fa-solid fa-circle-check i-green"
     }
     
-    popup_div.style.display="block"
     function updateFeed() {
         const table_body = document.getElementById('table_body')
         table_body.innerHTML = ''
