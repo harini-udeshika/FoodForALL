@@ -4,8 +4,11 @@ class Familydetails extends Controller{
     {
         //code..
         $errors=array();
+        if(!Auth::logged_in()){
+            $this->redirect('home');
+        }
         if(count($_POST)>0){
-            $family=new family();
+            $family=new Family();
             if($family->validate($_POST)){
                 $arr['FullName']=$_POST['FullName'];
                 $arr['Iname']=$_POST['NameWithInitial'];
@@ -19,10 +22,11 @@ class Familydetails extends Controller{
                 $arr['cholesterol_patients']=$_POST['Cholesterol_patients'];
                 $arr['healthy_adults']=$_POST['Healthy_adults'];
                 $arr['diabetes_patients']=$_POST['Diabetes_patients'];
-                $arr['malnutritioned_children']=$_POST['Malnutrition_children'];
-                $arr['healthy_children']=$_POST['Healthy_children'];
+                $arr['both_patients']=$_POST['Both_patients'];
+                $arr['less_one_children']=$_POST['Less_one_children'];
+                $arr['less_five_children']=$_POST['Less_five_children'];
+                $arr['higher_five_children']=$_POST['Higher_five_children'];
                 $arr['familymembers']=$_POST['Familymembers'];
-                $arr['relationship']=$_POST['Relationship'];
                 $arr['area_coodinator_email']=$_POST['email'];
                 
                 $family->insert($arr);
