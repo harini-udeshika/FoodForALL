@@ -11,14 +11,19 @@ class Familytable extends Controller
 
         if(isset($_GET['find1'],$_GET['find2'])){
             // $find1=trim($_GET['find1']," ");
-            if(!$_GET['find1']){
-                if(!$_GET['find2']){
+            $find1 = $_GET['find1'];
+            $find2 = $_GET['find2'];
+            $find1 = str_replace("'", "''", $find1);
+            $find2 = str_replace("'", "''", $find2);
+            if(!$find1){
+                if(!$find2){
+
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
                     $this->view('familytable',['row'=>$data]);
                 }else{
-                    $new2=$_GET["find2"];
+                    $new2=$find2;
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND address LIKE '%$new2%' ORDER BY id ASC";
                     // print($new2);
                     $data = $user->query($query);
@@ -27,14 +32,14 @@ class Familytable extends Controller
                 }
                 
             }else{
-                $new=$_GET['find1'];
-                if(!$_GET['find2']){
+                $new=$find1;
+                if(!$find2){
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND CONCAT(FullName,Iname) LIKE '%$new%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
                     $this->view('familytable',['row'=>$data]);
                 }else{
-                    $new2=$_GET["find2"];
+                    $new2=$find2;
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND CONCAT(FullName,Iname) LIKE '%$new%' AND address LIKE '%$new2%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
@@ -42,393 +47,2525 @@ class Familytable extends Controller
                 }
             } 
         }
-        elseif(isset($_GET['familymemberMin'],$_GET['familymemberMax'],$_GET['healthychildrenMin'],$_GET['healthychildrenMax'],$_GET['malchildrenMin'],$_GET['malchildrenMax'],$_GET['healthyadultsMin'],$_GET['healthyadultsMax'],$_GET['diabetesMin'],$_GET['diabetesMax'],$_GET['cholesterolMin'],$_GET['cholesterolMax'])){
+        elseif(isset($_GET['familymemberMin'],$_GET['familymemberMax'],$_GET['less_one_childrenMin'],$_GET['less_one_childrenMax'],$_GET['less_five_childrenMin'],$_GET['less_five_childrenMax'],$_GET['higher_five_childrenMin'],$_GET['higher_five_childrenMax'],$_GET['healthyadultsMin'],$_GET['healthyadultsMax'],$_GET['diabetesMin'],$_GET['diabetesMax'],$_GET['cholesterolMin'],$_GET['cholesterolMax'])){
             $familymemberMin=(int)($_GET['familymemberMin']);
             $familymemberMax=(int)($_GET['familymemberMax']);
-            $healthychildrenMin=(int)($_GET['healthychildrenMin']);
-            $healthychildrenMax=(int)($_GET['healthychildrenMax']);
-            $malchildrenMin=(int)($_GET['malchildrenMin']);
-            $malchildrenMax=(int)($_GET['malchildrenMax']);
+            $less_one_childrenMin=(int)($_GET['less_one_childrenMin']);
+            $less_one_childrenMax=(int)($_GET['less_one_childrenMax']);
+            $less_five_childrenMin=(int)($_GET['less_five_childrenMin']);
+            $less_five_childrenMax=(int)($_GET['less_five_childrenMax']);
+            $higher_five_childrenMin=(int)($_GET['higher_five_childrenMin']);
+            $higher_five_childrenMax=(int)($_GET['higher_five_childrenMax']);
             $healthyadultsMin=(int)($_GET['healthyadultsMin']);
             $healthyadultsMax=(int)($_GET['healthyadultsMax']);
             $diabetesMin= (int)($_GET['diabetesMin']);
             $diabetesMax=(int)($_GET['diabetesMax']);
             $cholesterolMin=(int)($_GET['cholesterolMin']);
             $cholesterolMax= (int)($_GET['cholesterolMax']);
-            // print($_GET['healthychildrenMin']);
-            // print($_GET['healthychildrenMax']);
+            $bothMin=(int)($_GET['bothMin']);
+            $bothMax= (int)($_GET['bothMax']);
 
-            if(($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)>0 ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
-                (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
-                (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND
-                (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ))  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+        if($bothMax && $bothMin>0){
+            if($familymemberMax && $familymemberMin>0){
+                if($less_one_childrenMax && $less_one_childrenMin >0){
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            /////
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin &&  $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin  )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            /////
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin)>0) && (($cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $cholesterolMax && $cholesterolMin)>0) && (($diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ////
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin)>0) && (( $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin)>0) && (($healthyadultsMax && $healthyadultsMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin &&$cholesterolMax && $cholesterolMin)>0) && (($healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)  ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                }else{
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ////
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin &&  $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin)>0) && (($familymemberMax && $familymemberMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin &&  $healthyadultsMax && $healthyadultsMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin  && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            ////
-            elseif((($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin  )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND  (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ///
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin)>0) && (($healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin)>0) && (($malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (both_patients BETWEEN $bothMin AND $bothMax) AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $diabetesMax && $diabetesMin )>0) && (($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND ((diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+            }else{
+                if($less_one_childrenMax && $less_one_childrenMin >0){
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $cholesterolMax && $cholesterolMin )>0) && (($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ///
-            elseif((($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin)>0) && (($healthychildrenMax && $healthychildrenMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin)>0) && (($healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)  
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin && $cholesterolMax && $cholesterolMin)>0) && (($healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin &&$diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-            elseif((($familymemberMax && $familymemberMin && $healthyadultsMax && $healthyadultsMin  && $diabetesMax && $diabetesMin)>0) && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                }else{
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthyadultsMax && $healthyadultsMin  &&  $cholesterolMax && $cholesterolMin)>0) && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ///
-            elseif((($familymemberMax && $familymemberMin &&$diabetesMax && $diabetesMin && $cholesterolMax && $cholesterolMin)>0) && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin  && $healthyadultsMax && $healthyadultsMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin &&  $healthyadultsMax && $healthyadultsMin)>0) && (($familymemberMax && $familymemberMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin )>0) && (($familymemberMax && $familymemberMin && $healthyadultsMax && $healthyadultsMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (both_patients BETWEEN $bothMin AND $bothMax)  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
+        } 
+        
+        
+        
+        
+        else{
+            if($familymemberMax && $familymemberMin>0){
+                if($less_one_childrenMax && $less_one_childrenMin >0){
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $cholesterolMax && $cholesterolMin )>0) && (($familymemberMax && $familymemberMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ///
-            elseif((( $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin)>0) && (($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND ((diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((( $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            ///
-            elseif((( $healthychildrenMax && $healthychildrenMin && $diabetesMax && $diabetesMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin  && $healthyadultsMax && $healthyadultsMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-            ///
-            elseif((($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND  (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                }else{
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND  (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            ///
-            elseif((($malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            ///
-            elseif((($healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin && $cholesterolMax && $cholesterolMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            //
-            elseif((($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin)>0) && (($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin)>0) && (($healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin && $healthyadultsMax && $healthyadultsMin)>0) && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin  && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($familymemberMax && $familymemberMin &&$diabetesMax && $diabetesMin)>0) && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin  && $healthyadultsMax && $healthyadultsMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
-            elseif((($familymemberMax && $familymemberMin && $cholesterolMax && $cholesterolMin)>0) && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin  && $healthyadultsMax && $healthyadultsMin  && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+            }else{
+                if($less_one_childrenMax && $less_one_childrenMin >0){
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((( $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin)>0) && (($familymemberMax && $familymemberMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif((( $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin)>0) && (($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin  && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif((( $healthychildrenMax && $healthychildrenMin && $diabetesMax && $diabetesMin)>0) && (($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin  && $healthyadultsMax && $healthyadultsMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif((( $healthychildrenMax && $healthychildrenMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $malchildrenMax&&$malchildrenMin  && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND  (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($malchildrenMax&&$malchildrenMin && $diabetesMax && $diabetesMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)  
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($malchildrenMax&&$malchildrenMin && $cholesterolMax && $cholesterolMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $healthyadultsMax && $healthyadultsMin  &&$diabetesMax && $diabetesMin )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND 
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-            ///
-            elseif((($healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin )>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin &&$cholesterolMax && $cholesterolMin )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                }else{
+                    if($less_five_childrenMax && $less_five_childrenMin>0){
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif((($healthyadultsMax && $healthyadultsMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin  &&$diabetesMax && $diabetesMin )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            //
-            elseif((($diabetesMax && $diabetesMin && $cholesterolMax && $cholesterolMin)>0) && (($familymemberMax && $familymemberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin )==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            ////
-            
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax)AND
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if($higher_five_childrenMax &&  $higher_five_childrenMin >0){
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
 
-            elseif(($familymemberMax && $familymemberMin)>0 && (($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax))  ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }else{
+                            if($healthyadultsMax && $healthyadultsMin>0){
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+
+                            }else{
+                                if($diabetesMax && $diabetesMin>0){
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND 
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
+                                        )  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }else{
+                                    if($cholesterolMax && $cholesterolMin>0){
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
+                                        (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }else{
+                                        $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}'  ORDER BY id ASC";
+                                        $data = $user->query($query);
+                                        // print($query);
+                                        $this->view('familytable',['row'=>$data]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            elseif(($healthychildrenMax && $healthychildrenMin)>0 && (( $familymemberMax && $familymemberMin&& $malchildrenMax&&$malchildrenMin && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax)  ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif(($malchildrenMax&&$malchildrenMin)>0 && (( $familymemberMax && $familymemberMin&&$healthychildrenMax && $healthychildrenMin  && $healthyadultsMax && $healthyadultsMin && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}'  AND  (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax)  ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif(($healthyadultsMax && $healthyadultsMin)>0 && (( $familymemberMax && $familymemberMin&&$healthychildrenMax && $healthychildrenMin  &&$malchildrenMax&&$malchildrenMin  && $diabetesMax && $diabetesMin &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)  ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif(($diabetesMax && $diabetesMin)>0 && (( $familymemberMax && $familymemberMin&&$healthychildrenMax && $healthychildrenMin  &&$malchildrenMax&&$malchildrenMin  &&$healthyadultsMax && $healthyadultsMin  &&$cholesterolMax && $cholesterolMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            elseif(($cholesterolMax && $cholesterolMin)>0 && (( $familymemberMax && $familymemberMin&&$healthychildrenMax && $healthychildrenMin  &&$malchildrenMax&&$malchildrenMin  &&$healthyadultsMax && $healthyadultsMin  &&$diabetesMax && $diabetesMin)==0) ){
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
-            else{
-                $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('familytable',['row'=>$data]);
-            }
+        }              
             
             
         }
