@@ -50,11 +50,13 @@
         <thead>
             <tr>
                 <th colspan="2" class="filteri2 n1">No of family members</th>
-                <th colspan="2" class="filteri2 n2">No of Healthy children</th>
-                <th colspan="2" class="filteri2 n1">No of Malnutrition children</th>
-                <th colspan="2" class="filteri2 n2">No of Healthy adults</th>
-                <th colspan="2" class="filteri2 n1">No of Diabetes patients</th>
-                <th colspan="2" class="filteri2 n2">No of Cholesterol patients</th>
+                <th colspan="2" class="filteri2 n2">No of children age < 1 </th>
+                <th colspan="2" class="filteri2 n1">No of children age < 5</th>
+                <th colspan="2" class="filteri2 n2">No of children age > 5</th>
+                <th colspan="2" class="filteri2 n1">No of Adults without diabetes or cholesterol</th>
+                <th colspan="2" class="filteri2 n2">No of Adults with diabetes </th>
+                <th colspan="2" class="filteri2 n1">No of Adults with cholesterol patients</th>
+                <th colspan="2" class="filteri2 n2">No of Adults with diabetes and cholesterol</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -71,23 +73,31 @@
                 <td class="filteri2 max">Max</td>
                 <td class="filteri2 min">Min</td>
                 <td class="filteri2 max">Max</td>
+                <td class="filteri2 min">Min</td>
+                <td class="filteri2 max">Max</td>
+                <td class="filteri2 min">Min</td>
+                <td class="filteri2 max">Max</td>
             </tr>
             <tr>
                 <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="familymemberMin"></td>
                 <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="familymemberMax"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="healthychildrenMin"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="healthychildrenMax"></td>
-                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="malchildrenMin"></td>
-                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="malchildrenMax"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="healthyadultsMin"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="healthyadultsMax"></td>
-                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="diabetesMin"></td>
-                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="diabetesMax"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="cholesterolMin"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="cholesterolMax"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="less_one_childrenMin"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="less_one_childrenMax"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="less_five_childrenMin"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="less_five_childrenMax"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="higher_five_childrenMin"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="higher_five_childrenMax"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="healthyadultsMin"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="healthyadultsMax"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="diabetesMin"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="diabetesMax"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="cholesterolMin"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="cholesterolMax"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="bothMin"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="bothMax"></td>
             </tr>
             <tr>
-            <td colspan="10"></td>
+            <td colspan="14"></td>
             <td><button type="submit" id="set">Set</button></td>
             <td><button type="button" class="clear-filter" onclick="clearParameters()">Reset</button></td>
             </tr>
@@ -118,11 +128,13 @@
             <th >Mobile Phone Number</th>
             <th >Address</th>
             <th >Family Members</th>
-            <th >Healthy children</th>
-            <th >Malnutrition children</th>
-            <th >Healthy adults</th>
-            <th >Diabetes patients</th>
-            <th >Cholesterol patients</th>
+            <th >Age of the children <br> < 1</th>
+            <th >Age of the children <br> < 5</th>
+            <th >Age of the children <br> > 5</th>
+            <th >Adults without diabetes or cholesterol</th>
+            <th >Adults with diabetes</th>
+            <th >Adults with cholesterol</th>
+            <th >Adults with diabetes and cholesterol</th>
             <th >Action</th>
         </tr>
         </thead>
@@ -134,7 +146,7 @@
             while($count>0){?>
             <tr >
                 <td class="tr3"></td>
-                <td ><?=$row[$i]->FullName?>(<?=$row[$i]->relationship?>)</td>
+                <td ><?=$row[$i]->FullName?></td>
                 <td ><?=$row[$i]->Iname?></td>
                 <td ><?=$row[$i]->nic?></td>
                 <td ><?=$row[$i]->profession?></td>
@@ -143,11 +155,13 @@
                 <td ><?=$row[$i]->contact2?></td>
                 <td ><?=$row[$i]->address?></td>
                 <td ><?=$row[$i]->familymembers?></td>
-                <td ><?=$row[$i]->healthy_children?></td>
-                <td ><?=$row[$i]->malnutritioned_children?></td>
+                <td ><?=$row[$i]->less_one_children?></td>
+                <td ><?=$row[$i]->less_five_children?></td>
+                <td ><?=$row[$i]->higher_five_children?></td>
                 <td c><?=$row[$i]->healthy_adults?></td>
                 <td ><?=$row[$i]->diabetes_patients?></td>
                 <td ><?=$row[$i]->cholesterol_patients?></td>
+                <td ><?=$row[$i]->both_patients?></td>
                 <td ><a href="<?=ROOT?>/familydetails_edit?updateid=<?=$row[$i]->id?>" class="Edit" title="update"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
                 <a href="<?=ROOT?>/familytable/delete?deleteid=<?=$row[$i]->id?>" title="Delete"><i class="fa-solid fa-trash-can"></i></a></td>
             </tr>
