@@ -140,7 +140,7 @@ class Admin extends Controller
         $admin = new Admins();
 
 
-        $this->view('add_managers.view');
+        $this->view('tmpindex');
     }
 
     public function temp4(){
@@ -148,5 +148,12 @@ class Admin extends Controller
 
 
         $this->view('add_managers.view');
+    }
+
+    public function temp5(){
+        $admin = new Admins();
+
+
+        $this->view('section');
     }
 }
