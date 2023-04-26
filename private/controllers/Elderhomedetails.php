@@ -5,6 +5,9 @@ class Elderhomedetails extends Controller{
     {
         //code..
         $errors=array();
+        if(!Auth::logged_in()){
+            $this->redirect('home');
+        }
         if(count($_POST)>0){
             $ehome=new Elderhome();
             if($ehome->validate($_POST)){
@@ -17,8 +20,9 @@ class Elderhomedetails extends Controller{
                 $arr['address']=$_POST['address'];
                 $arr['members']=$_POST['Members'];
                 $arr['cholesterol_patients']=$_POST['Cholesterol_patients'];
-                $arr['healthy_adults']=$_POST['Healthy_adults'];
-                $arr['diabetes_patients']=$_POST['Diabetes_patients'];
+                $arr['Healthy_adults']=$_POST['Healthy_adults'];
+                $arr['Diabetes_patients']=$_POST['Diabetes_patients'];
+                $arr['both_patients']=$_POST['Both_patients'];
                 $arr['areacoordinator_email']=$_POST['areacoordinator_email'];
                 
                 $ehome->insert($arr);

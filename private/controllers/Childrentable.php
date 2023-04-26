@@ -9,14 +9,18 @@ class Childrentable extends Controller
         $user=new Childrenhome();
         if(isset($_GET['find1'],$_GET['find2'])){
             // $find1=trim($_GET['find1']," ");
-            if(!$_GET['find1']){
-                if(!$_GET['find2']){
+            $find1 = $_GET['find1'];
+            $find2 = $_GET['find2'];
+            $find1 = str_replace("'", "''", $find1);
+            $find2 = str_replace("'", "''", $find2);
+            if(!$find1){
+                if(!$find2){
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
                     $this->view('childrentable',['row'=>$data]);
                 }else{
-                    $new2=$_GET["find2"];
+                    $new2=$find2;
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND address LIKE '%$new2%' ORDER BY id ASC";
                     // print($new2);
                     $data = $user->query($query);
@@ -25,14 +29,14 @@ class Childrentable extends Controller
                 }
                 
             }else{
-                $new=$_GET['find1'];
-                if(!$_GET['find2']){
+                $new=$find1;
+                if(!$find2){
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND CONCAT(Name,OwnerName) LIKE '%$new%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
                     $this->view('childrentable',['row'=>$data]);
                 }else{
-                    $new2=$_GET["find2"];
+                    $new2=$find2;
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND CONCAT(Name,OwnerName) LIKE '%$new%' AND address LIKE '%$new2%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
@@ -40,74 +44,146 @@ class Childrentable extends Controller
                 }
             } 
         }
-        elseif(isset($_GET['memberMin'],$_GET['memberMax'],$_GET['healthychildrenMin'],$_GET['healthychildrenMax'],$_GET['malchildrenMin'],$_GET['malchildrenMax'])){
+        elseif(isset($_GET['memberMin'],$_GET['memberMax'],$_GET['less_one_childrenMin'],$_GET['less_one_childrenMax'],$_GET['less_five_childrenMin'],$_GET['less_five_childrenMax'],$_GET['higher_five_childrenMin'],$_GET['higher_five_childrenMax'])){
             $memberMin=(int)($_GET['memberMin']);
             $memberMax=(int)($_GET['memberMax']);
-            $healthychildrenMin=(int)($_GET['healthychildrenMin']);
-            $healthychildrenMax=(int)($_GET['healthychildrenMax']);
-            $malchildrenMin=(int)($_GET['malchildrenMin']);
-            $malchildrenMax=(int)($_GET['malchildrenMax']);
+            $less_one_childrenMin=(int)($_GET['less_one_childrenMin']);
+            $less_one_childrenMax=(int)($_GET['less_one_childrenMax']);
+            $less_five_childrenMin=(int)($_GET['less_five_childrenMin']);
+            $less_five_childrenMax=(int)($_GET['less_five_childrenMax']);
+            $higher_five_childrenMin=(int)($_GET['higher_five_childrenMin']);
+            $higher_five_childrenMax=(int)($_GET['higher_five_childrenMax']);
 
-            if(($memberMax && $memberMin && $healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin)>0 ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
-                (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND 
-                (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ))  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            elseif(($memberMax && $memberMin && $healthychildrenMax && $healthychildrenMin  )>0 && ($malchildrenMax&&$malchildrenMin)==0 ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax)  AND 
-                (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ))  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            elseif((($memberMax && $memberMin &&  $malchildrenMax&&$malchildrenMin)>0) && ($healthychildrenMax && $healthychildrenMin)==0 ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
-                (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax )  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            elseif((($healthychildrenMax && $healthychildrenMin && $malchildrenMax&&$malchildrenMin)>0) && ($memberMax && $memberMin)==0  ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
-                (malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) AND 
-                (healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ))  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            elseif(($memberMax && $memberMin  )>0 && ($malchildrenMax&&$malchildrenMin && $healthychildrenMax && $healthychildrenMin )==0 ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) )  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            elseif(( $healthychildrenMax && $healthychildrenMin  )>0 && ($memberMax && $memberMin &&$malchildrenMax&&$malchildrenMin)==0 ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((healthy_children BETWEEN $healthychildrenMin AND $healthychildrenMax ))  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            elseif((( $malchildrenMax&&$malchildrenMin)>0) && ($healthychildrenMax && $healthychildrenMin &&$memberMax && $memberMin)==0  ){
-                $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((malnutritioned_children BETWEEN $malchildrenMin AND $malchildrenMax ) )  ORDER BY id ASC";
-                // or healthy_children=$healthychildrenMax && $healthychildrenMin OR malnutritioned_children=$malchildrenMax&&$malchildrenMin OR healthy_adults=$helthyadults OR diabetes_patients=$diabetesMax && $diabetesMin OR cholesterol_patients=$cholesterolMax && $cholesterolMin
-                $data = $user->query($query);
-                print($query);
-                $this->view('childrentable',['row'=>$data]);
-            }
-            else{
-                $query = "SELECT * FROM childrenhome  WHERE areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
-                $data = $user->query($query);
-                // print($query);
-                $this->view('childrentable',['row'=>$data]);
+            if($memberMax && $memberMin >0){
+                if($less_one_childrenMax && $less_one_childrenMin >0){
+                    if($less_five_childrenMax && $less_five_childrenMin >0){
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }else{
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND 
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) )  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }
+            
+                }else{
+                    if($less_five_childrenMax && $less_five_childrenMin >0){
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }else{
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }
+                }
+            }else{
+                if($less_one_childrenMax && $less_one_childrenMin >0){
+                    if($less_five_childrenMax && $less_five_childrenMin >0){
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }else{
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND 
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) )  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }
+            
+                }else{
+                    if($less_five_childrenMax && $less_five_childrenMin >0){
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }else{
+                        if($higher_five_childrenMax && $higher_five_childrenMin>0){
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
+                            (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }else{
+                            $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}'  ORDER BY id ASC";
+                            $data = $user->query($query);
+                            // print($query);
+                            $this->view('childrentable',['row'=>$data]);
+                        }
+                    }
+                }
             }
             
         }
