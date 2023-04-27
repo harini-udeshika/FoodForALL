@@ -9,16 +9,16 @@
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');?>
 
-<!-- <div class="center">
-    <h1 >Family detail form</h1>
-</div> -->
 <div class="coor">
     <h1>Children's home detail form</h1>
 </div>
 <div class="containor2">
-    <div class="familydetailform">
+    <div>
     
-        <form  method="POST" id="childrenform" class="familyform" >
+        <form  method="POST" id="childrenform" class="form_background form_background2" >
+        <div class="coor2">
+            <h1>Owner's Details</h1>
+        </div>
         <div>
         <?php if(count($errors)>0):?>
             <?php foreach($errors as $error):?>
@@ -83,34 +83,55 @@
                 <div class="box1 filling ">
                     <table>
                         <hr>
-                        <div id="children" >   
-                        <tr class="tr1">
-                            <td class="childrenbox">
-                                <label for="members">Number of children</label><br>
-                                <input type="number" min='1' name="Members" class="in new fillingbox" id="mem">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i><br>
-                                <small>Erorr message</small>
-                            </td>
-                        </tr>   
-                            <tr class="tr1 children" >
-                                <td>
-                                    <label for="Healthy_children">Number of Healthy childern</label><br>
-                                    <input type="number" min='0' name="Healthy_children" class="in new fillingbox" id="hc">
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i><br>
-                                    <small>Erorr message</small>
-                                </td>
-                                <td>
-                                    <label for="Malnutrition_children">Number of Malnutrition Children</label><br>
-                                    <input type="number"min='0' name="Malnutrition_children" class="in new fillingbox" id="mc">
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i><br>
-                                    <small>Erorr message</small>
-                                </td>
-                            </tr>  
-                    </table> 
-                </div>
+                        <div class="coor2">
+                            <h1>Children Details</h1>
+                        </div>
+                        <div class="filling">
+                            <table>   
+                                 <tr>
+                                    <td>
+                                        <div class="box1">
+                                        <label for="members">Number of children*</label><br>
+                                        <input type="number" min='1' name="Members" class="in new fillingbox" id="mem">
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i><br>
+                                        <small>Erorr message</small>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                </table>
+                            </div>  
+
+                            <div class="box1 filling ">
+                            <table>
+                                <tr class="tr1">
+                                    <td class="childrenbox">
+                                        <label for="Less_one_children">Age of the children < 1</label><br>
+                                        <input type="number" min='0'  name="Less_one_children" class="in new fillingbox" id="lo"> 
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i><br>
+                                        <small>Erorr message</small>
+                                    </td>
+                                    <td class="childrenbox">
+                                        <label for="Less_five_children">Age of the children < 5</label><br>
+                                        <input type="number"min='0' name="Less_five_children" class="in new fillingbox" id="lf">
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i><br>
+                                        <small>Erorr message</small>
+                                    </td>
+                                    <td class="childrenbox">
+                                        <label for="Higher_five_children">Age of the children > 5</label><br>
+                                        <input type="number"min='0' name="Higher_five_children" class="in new fillingbox" id="hf">
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i><br>
+                                        <small>Erorr message</small>
+                                    </td>
+                                </tr>  
+                            </table> 
+                        </div>
+                        <div class="box">
+                            <p class="p1">*Children- under 16 years</p>
+                        </div>
                  
                 <div class="box box1">
                     <button type="submit" name="Enter">Submit</button>
