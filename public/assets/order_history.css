@@ -1,0 +1,50 @@
+h2 {
+    color: rgb(83, 83, 83);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    min-height: 58vh;
+}
+
+.order {
+    width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+.order_no {
+    width: 48rem;
+    font-size: larger;
+    border-bottom: 0.25rem solid #7FB432;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    margin: none;
+    border-radius: 0.25rem;
+    background-color: #f0f0f0;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    width: 30rem;
+}
+.delivery {
+    color: grey;
+    font-weight: bold;
+}
+
+.order_left {
+    margin-left: 1rem;
+    color: #424242;
+}

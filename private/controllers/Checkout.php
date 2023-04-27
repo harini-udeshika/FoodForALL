@@ -55,8 +55,15 @@ class Checkout extends Controller
             $arr['city'] = $_POST['city'];
             $arr['telephone'] = $_POST['telephone'];
             $arr['user_id'] = Auth::getid();
-            $arr['subtotal'] = $total;
+
+            if ($_POST['district'] == "Colombo") {
+                $arr['subtotal'] = $total + 200;
+            } else {
+                $arr['subtotal'] = $total + 400;
+            }
+            
             $arr['date'] = date('Y-m-d H:i:s');
+            $arr['district'] = $_POST['district'];
             $purchase->insert($arr);
 
             $query = "select order_id from merchandise_purchase where user_id=:id && date=:date";
@@ -78,7 +85,7 @@ class Checkout extends Controller
 
                 $order_details->insert($arr3);
             }
-            $arr['org_id']=$org_id;
+            $arr['org_id'] = $org_id;
             stripe_checkout($arr);
             // webhook();
         }

@@ -108,24 +108,26 @@ function donate_checkout($data)
             'price_data' => [
                 'currency' => 'lkr',
                 'product_data' => [
-                    'name' => 'Donation#' . $data['_id'],
-                    'description' => 'Delivered to: ' . $data['name'] . ',' . $data['address'],
+                    'name' => 'Donation#' .'1',
+                    'description' => 'Donated to: '.$data['name'],
                 ],
-                'unit_amount' => $data['subtotal'] * 100,
+                'unit_amount' => $data['amount'] * 100,
             ],
             'quantity' => 1,
         ]],
         'mode' => 'payment',
         'metadata' => [
-            'user_id' => $data['user_id'],
-            'date' => $data['date'],
+            'user_id' => $data['donor_id'],
+            'date' => date('Y-m-d'),
         ],
 
-        'success_url' => 'http://localhost/food_for_all/public/thanks',
+        'success_url' => 'http://localhost/food_for_all/public/thanks?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url' => 'http://localhost/food_for_all/public/cancel',
     ]);
 
     header("HTTP/1.1 303 See Other");
+
     header("Location: " . $checkout_session->url);
+
 
 }

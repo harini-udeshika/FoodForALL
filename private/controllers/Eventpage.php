@@ -6,26 +6,24 @@ class Eventpage extends Controller
     {
         $event = new Event();
         $org = new Organization();
-        $requests=new Volunteer_request();
-        $donate=new Donate();
+        $requests = new Volunteer_request();
+        $donate = new Donate();
 
         if (isset($_GET['id'])) {
-           
+
             $id = $_GET['id'];
 
-            $user_id=Auth::getid();
-            $query="SELECT volunteer_type from volunteer_request where id =:id && event_id=:event_id";
-            $arr=['id'=>$user_id,'event_id'=>$id];
-            $req_data=$requests->query($query,$arr);
-            
-            if($req_data){
-                 $volunteer_types=$event->sent_requests($req_data);
+            $user_id = Auth::getid();
+            $query = "SELECT volunteer_type from volunteer_request where id =:id && event_id=:event_id";
+            $arr = ['id' => $user_id, 'event_id' => $id];
+            $req_data = $requests->query($query, $arr);
+
+            if ($req_data) {
+                $volunteer_types = $event->sent_requests($req_data);
+            } else {
+                $volunteer_types = 0;
             }
-            else{
-                  $volunteer_types=0;
-            }
-       
-           
+
             // print_r($volunteer_types);
 
             $data = $event->where("event_id", $id);
@@ -40,7 +38,7 @@ class Eventpage extends Controller
             $types = $v_req->query($query, $arr);
             // print_r ($types);
 
-            $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0], 'types' => $types, 'closing_date' => $closing_date[0]->cd,'volunteer_types'=>$volunteer_types]);
+            $this->view('eventpage', ['rows' => $data[0], 'org' => $org_data[0], 'types' => $types, 'closing_date' => $closing_date[0]->cd, 'volunteer_types' => $volunteer_types]);
 
         } else if (isset($_GET['type'])) {
             $type = $_GET['type'];
@@ -49,7 +47,7 @@ class Eventpage extends Controller
             $id = ($data[1]);
             $query = "select " . $v_type . "_description as description from event where event_id=:id";
             $arr = ['id' => $id];
-            $des = $event->query($query, $arr); 
+            $des = $event->query($query, $arr);
             $des = $des[0]->description;
 
             $this->view('volunteer_confirmation', ['data' => $data, 'des' => $des]);
@@ -66,20 +64,22 @@ class Eventpage extends Controller
                 $data = $request->insert($arr);
                 // $this->view('eventpage?id='.$data[1]);
             }
-          
-        }
-        if(isset($_POST['amount'])||isset($_POST['packet'])){
-            // print_r($_POST);
-            if(!isset($_POST['packet'])){
-                $_POST['packet']=0;
-            }
-            $arr['amount']=intval($_POST['amount'])+intval($_POST['packet']);
-            $arr['donor_id']=Auth::getid();
-            $arr['event_id']=str_replace("/","",$_GET['id']);
 
-            // $donate->insert($arr);
-            donate_checkout($arr);
-            // print_r($arr);       
+        }
+        if (isset($_POST['amount']) || isset($_POST['packet'])) {
+            // print_r($_POST);
+            if (!isset($_POST['packet'])) {
+                $_POST['packet'] = 0;
+            }
+            $arr1['amount'] = intval($_POST['amount']) + intval($_POST['packet']);
+            $arr1['donor_id'] = Auth::getid();
+            $arr1['event_id'] = str_replace("/", "", $_GET['id']);
+            $query = "select * from event where event_id= :id";
+            $data=$event->query($query,['id'=>str_replace("/","",$_GET['id'])]);
+           print_r($arr1);
+            $donate->insert($arr1);
+            $arr1['name']=$data[0]->name;
+            donate_checkout($arr1);            
         }
 
         // $data=$event->findAll();
