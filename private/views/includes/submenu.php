@@ -27,6 +27,11 @@ if ($data->profile_pic) {
             <p>My requests</p>
             <span>></span>
         </a>
+        <a href="order_history" class="sub-menu-link">
+        <i class="fa-sharp fa-solid fa-bag-shopping"></i>
+            <p>My Orders</p>
+            <span>></span>
+        </a>
         <a href="edit_profile" class="sub-menu-link">
             <i class="fa-solid fa-pen-to-square"></i>
             <p>Edit profile </p>
