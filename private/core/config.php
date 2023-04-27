@@ -1,7 +1,7 @@
 <?php
 
  define('ROOT','http://localhost/food_for_all/public');
-
+define('STRIPE_WEBHOOK_SECRET','whsec_4d6ca688ccae769c8955a94058e0e22bce9846630926dc3332548ce8859806a3');
 
 // define('ROOT','http://localhost/FoodForAll/public');
 
