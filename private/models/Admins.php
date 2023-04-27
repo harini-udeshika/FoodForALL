@@ -112,7 +112,7 @@ class Admins extends Model
 
     public function select_areacoords_bydate()
     {
-        $query = "SELECT * FROM area_coodinator  ORDER BY id DESC LIMIT 4";
+        $query = "SELECT * FROM area_coodinator LIMIT 4";
         $data = $this->query($query);
         return $data;
     }

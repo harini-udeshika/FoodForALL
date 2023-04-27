@@ -15,9 +15,12 @@
     <h1>Elders' home detail form</h1>
 </div>
 <div class="containor2">
-    <div class="familydetailform">
+    <div>
     
-        <form  method="POST" id="elderform" class="familyform" >
+        <form  method="POST" id="elderform" class="form_background form_background2" >
+        <div class="coor2">
+            <h1>Owner's Details</h1>
+        </div>
         <div>
         <?php if(count($errors)>0):?>
             <?php foreach($errors as $error):?>
@@ -25,9 +28,7 @@
             <?php endforeach;?>
         <?php endif;?>
         </div>
-        <div class="coor2">
-            <h1>Owner's Details</h1>
-        </div>
+                                                    
               <input type="hidden" name="areacoordinator_email" value=<?=Auth::getemail()?>>
                 <div class="box1 filling">
                     <label for="FullName"> Name of the elsers' home*</label><br>
@@ -82,12 +83,7 @@
                 <!-- <div class="box1 filling para">
                     Is there children in this family?<input type="submit" class="checklist" onclick="checkedOnClick1()" value="Yes" id="id1">
                 </div> -->
-                <div class="box1 filling ">
-                    <table>
-                        <hr>
-                        <div class="coor2">
-                            <h1>Members' Details</h1>
-                        </div>
+                
                         
                         <!-- <tr>
                             <td>
@@ -96,33 +92,54 @@
                             </td>
                         </tr>
                         <hr> -->
-                        <tr class="tr1">
-                            <td class="childrenbox">
+                        <div class="box1 filling ">
+                        <table>
+                            <hr>
+                            <div class="coor2">
+                                <h1>Members Details</h1>
+                            </div>
+                            <div class="filling">
+                        <table>
+                        <tr>
+                            <td>
+                                <div class="box1">
                                 <label for="members">Number of members</label><br>
                                 <input type="number" min='1' name="Members" class="in new fillingbox" id="mem">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
+                                </div>
                             </td>
                         </tr>
+                        </table>
+                </div>
+                <div class="box1 filling ">
+                    <table>
                         <tr class="tr1">
                             <td class="childrenbox">
-                                <label for="Healthy_adults">Number of Healthy Adults</label><br>
-                                <input type="number" min='0' name="Healthy_adults" class="in new fillingbox" id="ha">
+                                <label for="Healthy_adults">Adults without diabetes or cholesterol</label><br>
+                                <input type="number" min='0'  name="Healthy_adults" class="in new fillingbox" id="ha">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                             <td class="childrenbox">
-                                <label for="Diabetes_patients">Number of Diabetes Patients</label><br>
-                                <input type="number" min='0' name="Diabetes_patients" class="in new fillingbox" id="dp">
+                                <label for="Diabetes_patients">Adults with diabetes</label><br>
+                                <input type="number" min='0'  name="Diabetes_patients" class="in new fillingbox" id="dp">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                             <td class="childrenbox">
-                                <label for="Cholesterol_patients">Number of Cholesterol Patients</label><br>
-                                <input type="number" min='0' name="Cholesterol_patients" class="in new fillingbox" id="cp">
+                                <label for="Cholesterol_patients">Adults with cholesterol</label><br>
+                                <input type="number" min='0'  name="Cholesterol_patients" class="in new fillingbox" id="cp">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                            <td class="childrenbox">
+                                <label for="both">Adults with cholesterol and diabetes</label><br>
+                                <input type="number" min='0'  name="Both_patients" class="in new fillingbox" id="bp">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>

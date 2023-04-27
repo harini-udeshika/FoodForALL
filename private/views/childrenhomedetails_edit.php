@@ -1,6 +1,7 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/familyform1.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/familyform2.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/extra.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <?php if(!Auth::logged_in()){
     $this->view('home');
@@ -16,11 +17,18 @@
     <h1>Children's home detail form</h1>
 </div>
 <div class="containor2">
-    <div class="familydetailform">
+    <div>
     
-        <form  method="POST" id="childrenform" class="familyform" >
+        <form  method="POST" id="childrenform" class="form_background form_background2" >
             <div class="coor2">
                 <h1>Owner's Details</h1>
+            </div>
+            <div>
+            <?php if(count($errors)>0):?>
+                <?php foreach($errors as $error):?>
+                    <br><p><i class="fas fa-exclamation-circle"></i>  <?=$error?><br></p>
+                <?php endforeach;?>
+            <?php endif;?>
             </div>
 
               <input type="hidden" name="areacoordinator_email" value="<?php echo $rows->areacoordinator_email?>">
@@ -38,7 +46,7 @@
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
-                <div class="box1 filling ">
+                <div class="box1 filling">
                     <label for="ID">NIC*</label><br>
                     <input type="text" name="nic" placeholder="NIC" class="in fillingbox" id="nic" value="<?php echo $rows->nic?>">
                     <i class="fas fa-check-circle"></i>
@@ -48,26 +56,26 @@
                
                 <div class="box1 filling">
                     <label for="salary">Regstration Number*</label><br>
-                    <input type="text" name="regNo" placeholder="Registration number"class="in fillingbox" id="regno" value="<?php echo $rows->regNo?>">
+                    <input type="text" name="childrenid" placeholder="Registration number"class="in fillingbox" id="regno" value="<?php echo $rows->regNo?>">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
-                <div class="box1 filling ">
+                <div class="box1 filling">
                     <label for="contact1">Land phone number*</label><br>
                     <input type="text" name="Contact1" placeholder="Contact" class="in fillingbox" id="contact1" value="<?php echo $rows->contact1?>">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
-                <div class="box1 filling ">
+                <div class="box1 filling">
                     <label for="contact2">Mobile phone number</label><br>
                     <input type="text" name="Contact2" placeholder="Contact" class="in fillingbox" id="contact2" value="<?php echo $rows->contact2?>">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
                 </div>
-                <div class="box1 filling ">
+                <div class="box1 filling">
                     <label for="address">Address*</label><br>
                     <input type="text" name="address" placeholder="Address" class="in fillingbox" id="address" value="<?php echo $rows->address?>">
                     <i class="fas fa-check-circle"></i>
@@ -77,40 +85,60 @@
                 <!-- <div class="box1 filling para">
                     Is there children in this family?<input type="submit" class="checklist" onclick="checkedOnClick1()" value="Yes" id="id1">
                 </div> -->
-                <div class="box1 filling ">
-                <hr>
+                <div class="box1 filling">
+                <table>
+                    <hr>
                     <div class="coor2">
                         <h1>Children Details</h1>
                     </div>
+                    <div class="filling">
                     <table>
-                        <hr>
-                        <div id="children" >  
-                        <tr class="tr1">
-                            <td class="childrenbox">
-                                <label for="members">Number of children</label><br>
+                        <div class="box1 filling">
+                        <table>
+                        <tr>
+                            <td>
+                                <div class="box1">
+                                <label for="members">Number of children *</label><br>
                                 <input type="number" min='1' name="Members" class="in new fillingbox" id="mem" value="<?php echo $rows->children_num?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
+                                </div>
                             </td>
                         </tr>   
+                        </table> 
+                </div>
+                <div class="box1 filling">
+                    <table>
+                        <div id="children" >
                             <tr class="tr1 children" >
-                                <td class="childrenbox">
-                                    <label for="Healthy_children">Number of Healthy childern</label><br>
-                                    <input type="number" min='0' name="Healthy_children" class="in new fillingbox" id="hc" value="<?php echo $rows->healthy_children?>">
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i><br>
-                                    <small>Erorr message</small>
-                                </td>
-                                <td class="childrenbox">
-                                    <label for="Malnutrition_children">Number of Malnutrition Children</label><br>
-                                    <input type="number"min='0' name="Malnutrition_children" class="in new fillingbox" id="mc" value="<?php echo $rows->malnutritioned_children?>">
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i><br>
-                                    <small>Erorr message</small>
-                                </td>
+                            <td class="childrenbox">
+                                <label for="Less_one_children">Age of the children < 1</label><br>
+                                <input type="number" min='0'  name="Less_one_children" class="in new fillingbox" id="lo" value="<?php echo $rows->less_one_children?>">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                            <td class="childrenbox">
+                                <label for="Less_five_children">Age of the children < 5</label><br>
+                                <input type="number"min='0' name="Less_five_children" class="in new fillingbox" id="lf" value="<?php echo $rows->less_five_children?>">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                            <td class="childrenbox">
+                                <label for="Higher_five_children">Age of the children > 5</label><br>
+                                <input type="number"min='0' name="Higher_five_children" class="in new fillingbox" id="hf" value="<?php echo $rows->higher_five_children?>">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
                             </tr>  
+                            </div>
                     </table> 
+                </div>
+                <div class="box">
+                    <p class="p1">*Children- under 16 years</p>
                 </div>
                  
                 <div class="box box1">

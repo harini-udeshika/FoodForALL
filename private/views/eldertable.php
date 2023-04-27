@@ -45,10 +45,11 @@
         <table>
         <thead>
             <tr>
-                <th colspan="2" class="filteri2 n1">No of Elders</th>
-                <th colspan="2" class="filteri2 n2">No of Healthy adults</th>
-                <th colspan="2" class="filteri2 n1">No of Diabetes patients</th>
-                <th colspan="2" class="filteri2 n2">No of Cholesterol patients</th>
+                <th colspan="2" class="filteri2 n1">No of Elders in elderhome</th>
+                <th colspan="2" class="filteri2 n2">No of Adults without diabetes or cholesterol</th>
+                <th colspan="2" class="filteri2 n1">No of Adults with diabetes </th>
+                <th colspan="2" class="filteri2 n2">No of Adults with cholesterol </th>
+                <th colspan="2" class="filteri2 n1">No of Adults with diabetes and cholesterol</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -61,19 +62,23 @@
                 <td class="filteri2 max">Max</td>
                 <td class="filteri2 min">Min</td>
                 <td class="filteri2 max">Max</td>
+                <td class="filteri2 min">Min</td>
+                <td class="filteri2 max">Max</td>
             </tr>
             <tr>
                 <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="memberMin"></td>
                 <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="memberMax"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="healthyadultsMin"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="healthyadultsMax"></td>
-                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="diabetesMin"></td>
-                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="diabetesMax"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="cholesterolMin"></td>
-                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="cholesterolMax"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="healthyadultsMin"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="healthyadultsMax"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="diabetesMin"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="diabetesMax"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="cholesterolMin"></td>
+                <td class="filteri2 n2"><input type="number" min=1 class="filterinput" name="cholesterolMax"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="bothMin"></td>
+                <td class="filteri2 n1"><input type="number" min=1 class="filterinput" name="bothMax"></td>
             </tr>
             <tr>
-            <td colspan="6"></td>
+            <td colspan="8"></td>
             <td><button type="submit" id="set">Set</button></td>
             <td><button type="button" class="clear-filter" onclick="clearParameters()">Reset</button></td>
             </tr>
@@ -102,9 +107,10 @@
             <th>Mobile Phone Number</th>
             <th>Address</th>
             <th>Number of members</th>
-            <th>Healthy adults</th>
-            <th>Cholesterol patients</th>
-            <th>Diabetes patients</th>
+            <th >Adults without diabetes or cholesterol</th>
+            <th >Adults with diabetes</th>
+            <th >Adults with cholesterol</th>
+            <th >Adults with diabetes and cholesterol</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -127,6 +133,7 @@
             <td><?=$row[$i]->Healthy_adults?></td>
             <td><?=$row[$i]->cholesterol_patients?></td>
             <td><?=$row[$i]->Diabetes_patients?></td>
+            <td ><?=$row[$i]->both_patients?></td>
             <td><a href="<?=ROOT?>/elderhomedetails_edit?updateid=<?=$row[$i]->id?>" class="Edit" title="update"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
             <a href="<?=ROOT?>/eldertable/delete?deleteid=<?=$row[$i]->id?>" title="Delete"><i class="fa-solid fa-trash-can"></i></a></td>
         </tr>

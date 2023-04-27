@@ -16,12 +16,13 @@ class Childrenhomedetails extends Controller{
                 $arr['contact2']=$_POST['Contact2'];
                 $arr['address']=$_POST['address'];
                 $arr['children_num']=$_POST['Members'];
-                $arr['malnutritioned_children']=$_POST['Malnutrition_children'];
-                $arr['healthy_children']=$_POST['Healthy_children'];
+                $arr['less_one_children']=$_POST['Less_one_children'];
+                $arr['less_five_children']=$_POST['Less_five_children'];
+                $arr['higher_five_children']=$_POST['Higher_five_children'];
                 $arr['areacoordinator_email']=$_POST['areacoordinator_email'];
                 
                 $chome->insert($arr);
-                $this->redirect('home');
+                $this->redirect('childrentable');
             }else{
             //error
             $errors=$chome->errors;

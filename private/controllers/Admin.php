@@ -135,4 +135,25 @@ class Admin extends Controller
 
         $this->view('temp_fetch');
     }
+
+    public function temp3(){
+        $admin = new Admins();
+
+
+        $this->view('tmpindex');
+    }
+
+    public function temp4(){
+        $admin = new Admins();
+
+
+        $this->view('add_managers.view');
+    }
+
+    public function temp5(){
+        $admin = new Admins();
+
+
+        $this->view('section');
+    }
 }

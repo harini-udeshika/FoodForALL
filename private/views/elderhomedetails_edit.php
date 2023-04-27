@@ -15,12 +15,19 @@
     <h1>Elders' home detail form</h1>
 </div>
 <div class="containor2">
-    <div class="familydetailform">
+    <div>
     
-        <form  method="POST" id="elderform" class="familyform" >
+        <form  method="POST" id="elderform" class="form_background form_background2"  >
 
         <div class="coor2">
             <h1>Owner's Details</h1>
+        </div>
+        <div>
+        <?php if(count($errors)>0):?>
+            <?php foreach($errors as $error):?>
+                <br><p> <i class="fas fa-exclamation-circle"></i><?=$error?> <br></p>
+            <?php endforeach;?>
+        <?php endif;?>
         </div>
        
               <input type="hidden" name="areacoordinator_email" value="<?php echo $rows->areacoordinator_email?>">
@@ -48,7 +55,7 @@
                
                 <div class="box1 filling">
                     <label for="salary">Regstration Number*</label><br>
-                    <input type="text" name="regNo" placeholder="Registration number"class="in fillingbox" id="regno"  value="<?php echo $rows->regNo?>">
+                    <input type="text" name="elderid" placeholder="Registration number"class="in fillingbox" id="regno"  value="<?php echo $rows->regNo?>">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i><br>
                     <small>Erorr message</small>
@@ -83,14 +90,12 @@
                         <div class="coor2">
                             <h1>Members' Details</h1>
                         </div>
-                        <!-- <tr>
-                            <td>
-                                <label for="reasons">Other reasons</label><br>
-                                <textarea name="cother" id="cother" cols="40" rows="10"></textarea>
-                            </td>
-                        </tr>
-                        <hr> -->
-                        <tr class="tr1">
+                        <div class="filling">
+
+                        <table>
+                        
+                        <tr class="tr1 children">
+                            <div class="box1">
                             <td class="childrenbox">
                                 <label for="members">Number of members</label><br>
                                 <input type="number" min='1' name="Members" class="in new fillingbox" id="mem" value="<?php echo $rows->members?>">
@@ -98,30 +103,43 @@
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
+                            </div>
                         </tr>
+                        </table>
+                </div>
+                <div class="box1 filling ">
+                    <table>
                         <tr class="tr1">
-                            <td class="childrenbox">
-                                <label for="Healthy_adults">Number of Healthy Adults</label><br>
-                                <input type="number" min='0' name="Healthy_adults" class="in new fillingbox" id="ha"  value="<?php echo $rows->Healthy_adults?>">
+                        <td class="childrenbox">
+                                <label for="Healthy_adults">Adults without diabetes or cholesterol</label><br>
+                                <input type="number" min='0' name="Healthy_adults" class="in new fillingbox" id="ha" value="<?php echo $rows->Healthy_adults?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                             <td class="childrenbox">
-                                <label for="Diabetes_patients">Number of Diabetes Patients</label><br>
-                                <input type="number" min='0' name="Diabetes_patients" class="in new fillingbox" id="dp"  value="<?php echo $rows->Diabetes_patients?>">
+                                <label for="Diabetes_patients">Adults with diabetes</label><br>
+                                <input type="number" min='0'  name="Diabetes_patients" class="in new fillingbox" id="dp" value="<?php echo $rows->Diabetes_patients?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                             <td class="childrenbox">
-                                <label for="Cholesterol_patients">Number of Cholesterol Patients</label><br>
-                                <input type="number" min='0' name="Cholesterol_patients" class="in new fillingbox" id="cp"  value="<?php echo $rows->cholesterol_patients?>">
+                                <label for="Cholesterol_patients">Adults with cholesterol</label><br>
+                                <input type="number" min='0'  name="Cholesterol_patients" class="in new fillingbox" id="cp" value="<?php echo $rows->cholesterol_patients?>">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i><br>
+                                <small>Erorr message</small>
+                            </td>
+                            <td class="childrenbox">
+                                <label for="both">Adults with cholesterol and diabetes</label><br>
+                                <input type="number" min='0' name="Both_patients" class="in new fillingbox" id="bp" value="<?php echo $rows->both_patients?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                         </tr>
+                        </div>
                     </table> 
                 </div>
                  
