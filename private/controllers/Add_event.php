@@ -18,7 +18,7 @@ class Add_event extends Controller
             $arr['name'] = $_POST['name'];
             $arr['date'] = $_POST['date'];
             $arr['description'] = $_POST['description'];
-            $arr['location'] = $_POST['address'];
+            $arr['location'] = $_POST['location'];
             $arr['org_gov_reg_no'] = $_SESSION['USER']->gov_reg_no;
             $arr['latitude'] = $_POST['latitude'];
             $arr['longitude'] = $_POST['longitude'];
