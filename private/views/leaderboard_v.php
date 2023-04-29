@@ -17,7 +17,7 @@
     <a href="leaderboard" class="volunteer">Donor</a>
     <a href="leaderboard_v" class="donor">Volunteer</a>
 </div>
-
+<?php if($data):?>
 <div class="top">
 <?php if(isset($data[1])):?>
     <div class="container">
@@ -144,6 +144,11 @@ if ($data_sliced[$i]->profile_pic) {
 <?php $i++;?>
 <?php endforeach;?>
 <?php endif?>
-
+<?php endif?>
+<?php if(!$data):?>
+    <div class="empty"><h3 ><i class="fa-solid fa-chart-simple"></i> &nbsp;No data to show</h3></div>
+    <?php endif ?>
 <?php $this->view('includes/footer')?>
+
+
 <!-- <script src="<?=ROOT?>/assets/organizationpage.js"></script> -->

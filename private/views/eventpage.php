@@ -4,23 +4,8 @@
 <?php $this->view('includes/submenu')?>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTET7frzRd7t4FvurRzw28rbqEE7_oWFU&callback=initMap&libraries=places"></script>
 <script src="http://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<?php
-$donor = new Donate();
-$donor = $donor->sum("amount", "event_id", $rows->event_id);
-$amount = ($donor[0]->total);
-$donorp = ($amount / $rows->total_amount) * 100;
 
-if (!$amount) {
-    $amount = 0;
-}
-// echo ($rows->total_amount);
-?>
-<?php
-$volunteer = new Volunteer();
-$volunteer_count = $volunteer->count("user_id", "event_id", $rows->event_id);
-$volunteer_count = ($volunteer_count[0]->count);
-$volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
-?>
+
 <div class="main">
 <p class="event-name">
     <?=$rows->name?><small> by <?=$org->name?></small> 
@@ -33,12 +18,12 @@ $volunteerp = ($volunteer_count / $rows->no_of_volunteers) * 100;
     <div class="stats">
     <div class="donations">
         <p class="goal">Donations collected <span><?=$rows->total_amount?> LKR</span></p>
-        <div class="progress">
+        <div class="progress"> 
             <div class="progress-bar">
                 <div style="width:<?=$donorp?>%"></div>
             </div>
 
-        </div>
+        </div>  
         <p class="goal">Volunteers joined<span><?=$rows->no_of_volunteers?> people</span></p>
         <div class="progress">
             <div class="progress-bar">
@@ -172,9 +157,9 @@ if (!$amount) {
                     <label class="btn three" for="a75">5 packets Rs.1500</label>
                 </div>
             </div>
-        <!-- </form> -->
-        <p>OR</p>
-        <!-- <form method="post"> -->
+       
+            <p>OR</p>
+       
             <input type="text" placeholder="Other Amount" name="amount">
             <button class="continue">Continue</button>
         </form>

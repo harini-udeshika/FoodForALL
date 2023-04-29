@@ -17,9 +17,9 @@
             <span class="row"><span class="product"><?=$data[$i]->name?>: Rs.<?=$data[$i]->price?>.00</span> <span class="qty"> <?=$data[$i]->qty?> </span></span>
             <?php else: ?>
                 <b><p class="order_no">Order#: <?=$data[$i]->order_id?></p></b>
-                <p class="delivery">Deliverey address: <?=$data[$i]->address.','.$data[$i]->city.','.$data[$i]->district?></p>
-                <p class="delivery">Order placed on: <?=$data[$i]->date?></p>
-                <b><p class="total">Sub total: <?=$data[$i]->subtotal?></p></b>
+                <p class="delivery"><i class="fa-solid fa-envelope"></i> &nbsp;Delivery address: <?=$data[$i]->address.','.$data[$i]->city.','.$data[$i]->district?></p>
+                <p class="delivery"><i class="fa-solid fa-calendar"></i> &nbsp;Order placed on: <?=$data[$i]->date?></p>
+                <b><p class="total"><i class="fa-sharp fa-solid fa-dollar-sign"></i></i> &nbsp;Sub total: <?=$data[$i]->subtotal?></p></b>
                 <span class="row"><span class="product"><?=$data[$i]->name?>: Rs.<?=$data[$i]->price?>.00</span> <span class="qty"><?=$data[$i]->qty?> </span></span>
             <?php endif; ?>
             
