@@ -36,7 +36,7 @@
 
 
             <div class="create-new-button">
-                <button class="new"> <a href="signup" class="create_new"> Create new account</a></button>
+                <button class="new"> <a href="select" class="create_new"> Create new account</a></button>
             </div>
         </form>
     </div>

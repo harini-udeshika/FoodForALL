@@ -8,6 +8,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+  
 }
 
 .begining {
@@ -262,4 +263,15 @@
 .volunteer:hover {
     height: 2.5rem;
 
+}
+.empty{
+    background-color: #ececec;
+    height: 10rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    border-radius: 1rem;
+    margin-bottom: 5.5rem;
 }
