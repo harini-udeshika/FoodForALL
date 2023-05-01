@@ -25,7 +25,7 @@
 
     <div class="col-12 grid-12 " id="search_result">
         <div class="blank col-3"></div>
-        <div class="col-6 grid-12 card-simple" id="dropdown">
+        <div class="col-6 grid-12 card-simple" style="max-height: 270px; overflow: auto;" id="dropdown">
             
         </div>
         <div class="blank col-3"></div>

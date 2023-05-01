@@ -238,36 +238,51 @@
             <!-- each image -->
             <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                 <div class="photo_holder">
+                <?php if (isset($org_images[0])) { ?>
                     <img src="<?= ROOT ?>/uploads/<?php if ($org_images[0]) {
                                                         echo $org_images[0];
                                                     } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                                        <?php 
+                                        } ?>
                 </div>
                 <div class="row-flex jf-center">
+                <a href="edit_org_profile/delete_images?index=0">
                     <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                </a>
                 </div>
             </div>
 
             <!-- each image -->
             <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                 <div class="photo_holder">
+                <?php if (isset($org_images[1])) { ?>
                     <img src="<?= ROOT ?>/uploads/<?php if ($org_images[1]) {
                                                         echo $org_images[1];
                                                     } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                                        <?php 
+                                        } ?>
                 </div>
                 <div class="row-flex jf-center">
+                <a href="edit_org_profile/delete_images?index=1">
                     <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                </a>
                 </div>
             </div>
 
             <!-- each image -->
             <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                 <div class="photo_holder">
+                <?php if (isset($org_images[2])) { ?>
                     <img src="<?= ROOT ?>/uploads/<?php if ($org_images[2]) {
                                                         echo $org_images[2];
                                                     } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                                        <?php 
+                                        } ?>
                 </div>
                 <div class="row-flex jf-center">
+                <a href="edit_org_profile/delete_images?index=2">
                     <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                </a>
                 </div>
             </div>
 
