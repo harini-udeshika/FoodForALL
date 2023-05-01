@@ -14,11 +14,11 @@ class Event_org extends Controller
 
             $event_details = $event->where('event_id', $id);
 
-            $query = "SELECT * FROM volunteer_request WHERE event_id = :id && status = 0";
+            $query = "SELECT * FROM volunteer_request WHERE event_id = :id && message = 'pending'";
             $arr = ['id' => $id];
             $volunteer_req = $requests->query($query, $arr);
 
-            $query = "SELECT * FROM volunteer_request WHERE event_id = :id && status != 0";
+            $query = "SELECT * FROM volunteer_request WHERE event_id = :id && message = 'accepted'";
             $arr = ['id' => $id];
             $volunteer_accepted = $requests->query($query, $arr);
 
@@ -80,11 +80,11 @@ class Event_org extends Controller
         $arr_data['volunteer_type'] = $request->volunteer_type;
         $arr_data['event_id'] = $event_id;
 
-        $query = "UPDATE volunteer_request SET status = 1 WHERE event_id = :id && id = :uid";
+        $query = "UPDATE volunteer_request SET message = 'accepted' WHERE event_id = :id && id = :uid";
         $arr = ['id' => $event_id, 'uid' => $uid];
         // $update_req = $vol_request->query($query, $arr);
 
-        $volunteer->insert($arr_data);
+        // $volunteer->insert($arr_data);
         $update_req = $vol_request->query($query, $arr);
         // $vol_request->delete_request($uid,$event_id);
 
