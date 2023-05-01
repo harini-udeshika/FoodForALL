@@ -1,6 +1,7 @@
 <?php $this->view('includes/header_2') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/autoload.css">
 <!-- <link rel="stylesheet" href="<?= ROOT ?>/assets/org_packages.css"> -->
+<!-- <link rel="stylesheet" href="<?= ROOT ?>/assets/org_packages.css"> -->
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
