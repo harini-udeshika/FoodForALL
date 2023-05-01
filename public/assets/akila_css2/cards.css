@@ -29,6 +29,14 @@
     background-size: cover;
 }
 
+.card-back2 {
+    background-image: url(background_2.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: cover;
+}
+
+
 .card-green {
     border: 2px solid var(--projectGreen);
     border-radius: 5px;
