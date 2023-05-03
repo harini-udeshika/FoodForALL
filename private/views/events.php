@@ -2,7 +2,34 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/events.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
-
+<?php
+$districts = array(
+    'Ampara',
+    'Anuradhapura',
+    'Badulla',
+    'Batticaloa',
+    'Colombo',
+    'Galle',
+    'Gampaha',
+    'Hambantota',
+    'Jaffna',
+    'Kalutara',
+    'Kandy',
+    'Kegalle',
+    'Kilinochchi',
+    'Kurunegala',
+    'Mannar',
+    'Matale',
+    'Matara',
+    'Monaragala',
+    'Mullaitivu',
+    'Nuwara Eliya',
+    'Polonnaruwa',
+    'Puttalam',
+    'Ratnapura',
+    'Trincomalee',
+    'Vavuniya',
+);?>
 
 <div class="heading">Upcoming Events</div>
     <div class="search">
@@ -21,26 +48,18 @@
             <label for="location">Location</label>
             <select name="location" id="location" >
                 <option value="default" ><?=isset($_GET['location']) ? $_GET['location'] : 'Select'?></option>
-                <option value="Kalutara" >Kalutara</option>
-                <option value="Colombo">Colombo</option>
-                <option value="Gampaha">Gampaha</option>
-                <option value="Kandy" >Kandy</option>
-                <option value="Matale">Matale</option>
-                <option value="Nuwara Eliya">Nuwara Eliya</option>
-                <option value="Galle">Galle</option>
-                <option value="Matara">Matara</option>
-                <option value="Hambantota">Hambantota</option>
-                <option value="Jaffna">Jaffna</option>
-                <option value="Matara">Matara</option>
-                <option value="erlang">Matara</option>
-                <option value="erlang">Matara</option>
+                <?php $i = 0;?>
+        <?php foreach ($districts as $dist): ?>
+            <option value="<?=$districts[$i]?>"><?=$districts[$i]?></option>
+            <?php $i++;?>
+        <?php endforeach;?>
             </select>
             <button class="search-btn">Search</button>
             </form>
         </div>
     </div>
     <div class="event-container">
-        <div class="event-row"> 
+        <div class="event-row">
 
 
         <?php $i = 0;?>
@@ -69,7 +88,7 @@ $tot_volunteers = $rows[$i]->no_of_volunteers;
 if ($tot_volunteers) {
     $volunteers = 0;
 
-    if ($rows[$i]->volunteers) { 
+    if ($rows[$i]->volunteers) {
         $volunteers = $rows[$i]->volunteers;
     }
     $volunteerp = round(($volunteers / $tot_volunteers) * 100, 2);
@@ -86,7 +105,7 @@ if ($tot_volunteers) {
                         <img src="<?=$rows[$i]->thumbnail_pic?>">
                     </div>
                     <p class="date"><?php echo $rows[$i]->date ?></p>
-                    <small>Interested <i class="fa-regular fa-star fa-sm"></i></i></small>
+                  
                     <!-- //<i class="fa-solid fa-star fa-sm"> -->
                 </div>
 

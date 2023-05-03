@@ -3,8 +3,10 @@
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
 
-
+<?php $month =date('F', strtotime("last month"))?>
 <h2>Donor Leaderboard</h2>
+
+<span><b>- <?=$month?> -</b></span>
 <div class="change">
 <a href="leaderboard" class="donor">Donor</a>
 <a href="leaderboard_v" class="volunteer">Volunteer</a>

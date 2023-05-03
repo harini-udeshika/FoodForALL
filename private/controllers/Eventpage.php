@@ -101,7 +101,7 @@ class Eventpage extends Controller
                 $data = explode(" ", $type);
                 $arr['event_id'] = $data[1];
                 $arr['volunteer_type'] = $data[0];
-                $arr['status'] = false;
+                // $arr['status'] = false;
                 // print_r($arr);
                 $data = $request->insert($arr);
                 // $this->view('eventpage?id='.$data[1]);

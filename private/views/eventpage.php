@@ -97,14 +97,7 @@
     <input type="text" value="<?=$rows->latitude?>" id="lat" hidden>
     <input type="text" value="<?=$rows->longitude?>" id="lon" hidden>
 <?php
-$donor = new Donate();
-$donor = $donor->sum("amount", "event_id", $rows->event_id);
-$amount = ($donor[0]->total);
-$donorp = ($amount / $rows->total_amount) * 100;
 
-if (!$amount) {
-    $amount = 0;
-}
 // echo ($rows->total_amount);
 ?>
 
