@@ -19,12 +19,12 @@ public function send_mail($recipient,$subject,$message)
   $mail->Port       = 587;
   $mail->Host       = "smtp.gmail.com";
   //$mail->Host       = "smtp.mail.yahoo.com";
-  $mail->Username   = "foodforall.g47@gmail.com";
-  $mail->Password   = "mbanxxjypfgiiaxq";
+  $mail->Username   = "foodforallgrp47@gmail.com";
+  $mail->Password   = "darbfhbdjdmvlxfe";
 
   $mail->IsHTML(true);
   $mail->AddAddress($recipient, "User");
-  $mail->SetFrom("foodforall.g47@gmail.com", "FoodForALL");
+  $mail->SetFrom("foodforallgrp47@gmail.com", "FoodForALL");
   //$mail->AddReplyTo("reply-to-email", "reply-to-name");
   //$mail->AddCC("cc-recipient-email", "cc-recipient-name");
   $mail->Subject = $subject;
