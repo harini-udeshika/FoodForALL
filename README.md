@@ -23,4 +23,4 @@ the selected charity event.
 1. Harini Samaliarachchi
 2. Akila Dharmadasa
 3. Idusha Amandi
-4. Kavishka anjuna
+4. Kavishka Anjuna
