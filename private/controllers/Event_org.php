@@ -194,6 +194,7 @@ class Event_org extends Controller
         $id = $_GET['id'];
         if (Auth::getusertype() == 'organization' || 'eventmanager') {
             $event = new Event();
+            $tot_volunteers = 0;
             if ($_POST) {
                 if ($_POST['mild-des'] > 0) {
                     $arr['mild_description'] = $_POST['mild-des'];
@@ -206,14 +207,17 @@ class Event_org extends Controller
                 }
                 if ($_POST['tot-moderate'] > 0) {
                     $arr['moderate_vol_total'] = $_POST['tot-moderate'];
+                    $tot_volunteers = $tot_volunteers + $_POST['tot-moderate'];
                 }
                 if ($_POST['tot-mild'] > 0) {
                     $arr['mild_vol_total'] = $_POST['tot-mild'];
+                    $tot_volunteers = $tot_volunteers + $_POST['tot-mild'];
                 }
                 if ($_POST['tot-heavy'] > 0) {
                     $arr['heavy_vol_total'] = $_POST['tot-heavy'];
+                    $tot_volunteers = $tot_volunteers + $_POST['tot-heavy'];
                 }
-
+                $arr['no_of_volunteers'] = $tot_volunteers;
                 if (isset($arr)) {
                     $event->update_event($id, $arr);
                 }
@@ -251,8 +255,6 @@ class Event_org extends Controller
         $arr = ['id' => $event_id];
         $vol_data = $volunteer->query($query, $arr);
 
-        
-
         // Sending emails
         if ($vol_data) {
             $user = new User();
@@ -275,20 +277,21 @@ class Event_org extends Controller
                 // echo "<br>";
                 // echo $recipient;
                 // echo "<br>";
-                $cert->send_certificate_2($user_name, $event_name, $org_name);
-                die;
+                // $cert->send_certificate_2($user_name, $event_name, $org_name);
+                // die;
                 $cert->email_cert($recipient,  $user_name, $event_name, $org_name);
 
             }
         }
-        die;
+        // die;
 
         $subject = "0";
         $message = "hello";
         // $recipient = "akiladharmadasa1.1@gmail.com";
         // $mail_eg = new Mail();
         // $mail_eg->send_mail($recipient,$subject,$message);
+        print_r($vol_data);
         die;
-       
+        $this->redirect('event_org?id=' . $event_id);
     }
 }
