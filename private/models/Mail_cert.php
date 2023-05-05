@@ -1,58 +1,9 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer-master/src/Exception.php';
-require 'PHPMailer-master/src/PHPMailer.php';
-require 'PHPMailer-master/src/SMTP.php';
-
 require_once('tcpdf/tcpdf.php');
 class Mail_cert extends model
 {
-    public function email_cert($recipient,$user_name,$event,$org)
-    {
-
-        $mail = new PHPMailer();
-        $mail->IsSMTP();
-
-        $subject = "0";
-        $message = "hello";
-        $mail->SMTPDebug  = 0;
-        $mail->SMTPAuth   = TRUE;
-        $mail->SMTPSecure = "tls";
-        $mail->Port       = 587;
-        $mail->Host       = "smtp.gmail.com";
-        //$mail->Host       = "smtp.mail.yahoo.com";
-        $mail->Username   = "foodforall.g47@gmail.com";
-        $mail->Password   = "mbanxxjypfgiiaxq";
-
-        $pdf_attachment = $this->send_certificate($user_name,$event,$org);
-        // echo $pdf_attachment;
-        // die;
-
-        $mail->IsHTML(true);
-        // $mail->AddAddress('akiladharmadasa1.1@gmail.com',"User");
-        $mail->AddAddress($recipient, "User");
-        $mail->SetFrom("foodforall.g47@gmail.com", "FoodForALL");
-        //$mail->AddReplyTo("reply-to-email", "reply-to-name");
-        //$mail->AddCC("cc-recipient-email", "cc-recipient-name");
-        $mail->Subject = $subject;
-        $content = $message;
-
-        $mail->MsgHTML($content);
-        $mail->addStringAttachment($pdf_attachment,"Certificate.pdf");
-        if (!$mail->Send()) {
-            // echo "Error while sending Email.";
-            // echo "<pre>";
-            // var_dump($mail);
-            return false;
-        } else {
-            // echo "Email sent successfully";
-            return true;
-        }
-    }
-
+    
     public function send_certificate($u_name,$event,$org)
     {
         //============================================================+
@@ -211,7 +162,7 @@ class Mail_cert extends model
                 <div class="subtitle">
                     to appreciate their contribution to the community by volunturaly participating in the event: 
                 </div>
-                <div class="recipient">Food Charity
+                <div class="recipient">
                 
         EOF;
                 
@@ -220,19 +171,19 @@ class Mail_cert extends model
                 <div class="subtitle">
                     Organized by the Organization : 
                 </div>
-                <div class="recipient">Feed the Poor</div>
-                <div class="signature">
+                <div class="recipient">
                     
         EOF;
 
         $html4 = <<<EOF
-                    
+                </div>
+                <div class="signature">
                 </div>
             </div>
         </body>
         </html>
         EOF;
-        $html = $html1 . $vol_name . $html2 . $event . $html3 . $org .$html4;
+        $html = $html1 . $vol_name . $html2 . $event . $html3 . $org . $html4;
 
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');

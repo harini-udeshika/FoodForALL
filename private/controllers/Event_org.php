@@ -247,7 +247,7 @@ class Event_org extends Controller
         $org_data = $org_data[0];
         $org_name = $org_data->name;
 
-        $cert = new Mail_cert();
+        // $cert = new Mail_cert();
         $volunteer = new Volunteer();
         
         // volunteer details 
@@ -264,8 +264,10 @@ class Event_org extends Controller
                 $user_name = $user_data->first_name . " " . $user_data->last_name;
                 $recipient = $user_data->email;
                 
+                $mail = new Mail;
                 // $subject = "Event Reminder FoodForALL";
-                // $mail->send_mail($receipient, $subject, $message);
+                // $message = "hello";
+                // $mail->send_mail($recipient, $subject, $message);
                 // print_r($user_data);
                 // echo "<br>";
                 // echo "<br>";
@@ -279,14 +281,14 @@ class Event_org extends Controller
                 // echo "<br>";
                 // $cert->send_certificate_2($user_name, $event_name, $org_name);
                 // die;
-                $cert->email_cert($recipient,  $user_name, $event_name, $org_name);
+                $mail->email_cert($recipient,  $user_name, $event_name, $org_name);
+
+                // $cert->email_cert($recipient,  $user_name, $event_name, $org_name);
 
             }
         }
         // die;
 
-        $subject = "0";
-        $message = "hello";
         // $recipient = "akiladharmadasa1.1@gmail.com";
         // $mail_eg = new Mail();
         // $mail_eg->send_mail($recipient,$subject,$message);
