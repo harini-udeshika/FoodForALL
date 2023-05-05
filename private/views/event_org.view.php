@@ -7,16 +7,18 @@
 <div class="body-container">
     <div class="heading-1">Event Name : <?php echo $event_details->name ?></div>
     <div class="container">
-        <div class="heading-2 col-lg-2 p-left-25 p-top-7">Event Status : </div>
-        <div class="card col-lg-2 heading-3 height-30px" style="text-align: center; color:red;">
-            <?php
-            if ($event_details->date < date("Y-m-d")) {
-                echo "Completed";
-            } else {
-                echo "Upcoming";
-            }
-            ?></div>
-        <div class="blank col-lg-8"></div>
+        <div class="col-12 grid-10">
+            <div class="heading-2 col-lg-2 col-sm-5 p-left-25 p-top-7">Event Status : </div>
+            <div class="card col-lg-2 col-sm-5 heading-3 height-30px" style="text-align: center; color:red;">
+                <?php
+                if ($event_details->date < date("Y-m-d")) {
+                    echo "Completed";
+                } else {
+                    echo "Upcoming";
+                }
+                ?></div>
+            <div class="blank col-lg-6"></div>
+        </div>
         <!-- <div class="heading-2 col-lg-2 p-left-25 p-top-7" style="border: 1px solid red;"></div> -->
     </div>
 
@@ -416,7 +418,9 @@
                                 <div class="col-lg-2" style="display: flex; justify-content: center;">
                                     <img src="<?php echo $image ?>" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
                                 </div>
-                                <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?><br>
+                                <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><a href="profile?id=<?php echo $user_volunteer->id ?>">
+                                        <?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?>
+                                    </a><br>
                                     <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;"><?php echo $accepted_vol[$i]->volunteer_type; ?></div>
                                 </div>
 
