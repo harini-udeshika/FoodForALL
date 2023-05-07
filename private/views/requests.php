@@ -4,6 +4,12 @@
 <?php $this->view('includes/submenu')?>
 <div class="container">
     <h3>Volunteer Requests</h3>
+    <?php if(!$data):?>
+        <div class="no_req">
+            <p><i class="fa-solid fa-message"></i> No requests sent</p>
+        </div>
+    <?php endif?>
+    <?php if($data):?>
     <?php $i = 0?>
 <?php foreach ($data as $d): ?>
 <div class="row"><p><?=$data[$i]->name?></p><p><?=$data[$i]->volunteer_type?></p>
@@ -20,6 +26,7 @@
 </div>
 <?php $i++?>
 <?php endforeach?>
+<?php endif?>
 </div>
 <script src=" navbar.js"></script>
 <?php $this->view('includes/footer')?>

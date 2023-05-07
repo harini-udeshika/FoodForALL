@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/about.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
-
+<div class="outer">
 <h1><span class="p">Food</span><span class="g">For</span><span class="p">ALL</span></h1>
 <div class="big-card">
 <p class="main">FoodForALL is a web platform that is making a difference in the lives of the less fortunate in Sri Lanka.
@@ -13,7 +13,9 @@
     looking to make a difference in the world, consider supporting FoodForALL in their mission to end hunger in Sri
     Lanka.</p>
     <img src="./images/image.png">
-</div>    
+</div>  
+</div>  
+
 <div class="cards1">
     <div class="card1">
         <h2>Become a Donor</h2>

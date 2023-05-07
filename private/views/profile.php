@@ -101,7 +101,10 @@ if (file_exists($rows->profile_pic)) {
                 <span>Are you sure you want to delete?</span>
                 <a href="<?=ROOT?>/profile?delete=<?=$cert[$i]->id?>"><button>Delete</button></a>
             </div>
-            <div><a class="cert_del"><i class="fa-solid fa-trash fa-xl"></a></i>
+            <div>
+            <?php if (Auth::getid() == $rows->id): ?>
+                <a class="cert_del"><i class="fa-solid fa-trash fa-xl"></i></a>
+            <?php endif; ?>
                 <div class="image"><img src="<?=$cert[$i]->file_name?>"></div>
 
                 

@@ -13,7 +13,11 @@ class Profile extends Controller
         if (isset($_GET['id']) && $_GET['id'] != Auth::getid()) {
 
             $id = $_GET['id'];
-            $certificate = $certificate->where('user_id', $id);
+            $query="select certificates.* ,event.name ,event.date 
+            from event inner join certificates 
+            on event.event_id=certificates.event_id 
+            where certificates.user_id=:id";
+            $certificate=$certificate->query($query,['id'=>$id]);
             $data = $user->where('id', $id);
 
             $data = $data[0];

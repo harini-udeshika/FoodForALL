@@ -199,8 +199,9 @@
             <?php if($volunteer_types):?>
                 <div class="button">
                     <?php if(isset($volunteer_types['mild'])):?>
-                    <input type="radio" name="type" value="Mild <?=$rows->event_id?>" disabled/>
-                    <label class="btn one" for="a25">Mild <br><small>LEVEL 1</small></label>
+                    <input type="radio" name="type" value="Mild <?=$rows->event_id?>" disabled />
+                    
+                    <label class="btn one" for="a25">Request <br>sent</label>
                     <?php endif;?>
                     <?php if(!isset($volunteer_types['mild'])):?>
                     <input type="radio" name="type" value="Mild <?=$rows->event_id?>"/>
@@ -215,13 +216,13 @@
                     <?php endif;?>
                     <?php if(isset($volunteer_types['moderate'])):?>
                     <input type="radio" name="type" value="Moderate <?=$rows->event_id?>" disabled/>
-                    <label class="btn two" for="a50">Moderate <br><small>LEVEL 2</small></label>
+                    <label class="btn two" for="a50">Request <br>sent</label>
                     <?php endif;?>
                 </div>
                 <div class="button">
                     <?php if(isset($volunteer_types['heavy'])):?>
                     <input type="radio" name="type" value="Heavy <?=$rows->event_id?>" disabled/>
-                    <label class="btn three" for="a75">Heavy <br><small>LEVEL 3</small></label>
+                    <label class="btn three" for="a75">Request <br>sent</label>
                     <?php endif;?>
                     <?php if(!isset($volunteer_types['heavy'])):?>
                     <input type="radio" name="type" value="Heavy <?=$rows->event_id?>" />

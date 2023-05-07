@@ -33,9 +33,6 @@
         <div class="nav-i">
             <a href="homepage">Home</a>
         </div>
-        <!-- <div class="nav-i">
-                <a href="">Donate/Volunteer</a>
-            </div> -->
         <div class="nav-i">
             <a href="./search_org">Organizations</a>
         </div>
@@ -45,8 +42,6 @@
         <div class="nav-i">
             <a href="about">About us</a>
         </div>
-
-
         <div class="nav-i">
             <a href="search"><span class="material-symbols-outlined">person_search</span></a>
         </div>
@@ -64,6 +59,7 @@ $data = $data[0];
                 notifications
             </span>
         </div>
+       
         <?php endif;?>
 
         <?php if ($data->newsletter_status == 1): ?>
@@ -71,16 +67,16 @@ $data = $data[0];
             <span class="material-symbols-outlined">
                 notifications_active
             </span>
-
-            <?php endif;?>
         </div>
+            <?php endif;?>
+        
         <div class="nav-i">
             <a href="charts"><i class="fa-solid fa-chart-line"></i></a>
         </div>
         <div class="nav-i">
             <a href="leaderboard"><i class="fa-solid fa-crown"></i></a>
         </div>
-     
+
         <?php endif?>
         <?php if (Auth::getusertype() == 'admin'): ?>
         <div class="nav-i">
@@ -221,9 +217,8 @@ if (Auth::getusertype() == 'eventmanager') {
 ?>
             <img src="<?=$image?>" alt="" class="nav-user-icon" id="nav-user-icon" onclick="toggleMenu()">
         </div>
-        </div>
     </div>
-    </div>
+    
     <!-- ----------------sub menu-------------- -->
 
 
