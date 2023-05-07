@@ -17,7 +17,7 @@
             <img src="./images/check.png" alt="">
             <h2>Request sent</h2>
             <p>You'll receive a notification once approved!</p>
-            <button class="proceed" id="ok">OK</button>
+            <a href="eventpage?type=<?=$data[0]?>+<?=$data[1]?>&req=true"><button class="proceed" id="ok">OK</button></a>
         </div>
 </div>
 <script src="<?=ROOT?>/assets/popup.js"></script>

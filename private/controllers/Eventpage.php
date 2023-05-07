@@ -83,7 +83,7 @@ class Eventpage extends Controller
                 'volunteerp' => $volunteerp]);
 
         } else if (isset($_GET['type'])) {
-            $type = $_GET['type'];
+            $type = $_GET['type']; 
             $data = explode(" ", $type);
             $v_type = (lcfirst($data[0]));
             $id = ($data[1]);
@@ -93,27 +93,30 @@ class Eventpage extends Controller
             $des = $des[0]->description;
 
             $this->view('volunteer_confirmation', ['data' => $data, 'des' => $des]);
-            if ($_POST > 0) {
-
-                $request = new Volunteer_request();
-                $arr['id'] = Auth::getid();
-                $type = $_GET['type'];
-                $data = explode(" ", $type);
-                $arr['event_id'] = $data[1];
-                $arr['volunteer_type'] = $data[0];
-                // $arr['status'] = false;
-                // print_r($arr);
-                $data = $request->insert($arr);
-                // $this->view('eventpage?id='.$data[1]);
-            }
+           
 
         }
 
-        // $data=$event->findAll();
-        // else {
-        //     $this->view('404');
-        // }
+        else if ( isset($_GET['req']) =='true' ) {
 
+            $request = new Volunteer_request();
+            $arr['id'] = Auth::getid();
+            $type = $_GET['type'];
+            $data = explode(" ", $type);
+            $arr['event_id'] = $data[1];
+            $arr['volunteer_type'] = $data[0];
+            // $arr['status'] = false;
+            // print_r($arr);
+            $data = $request->insert($arr);
+            $this->redirect('events');
+            // $this->view('eventpage?id='.$data[1]);
+        }
+        else {
+            $this->view('404');
+        }
+
+        
+      
     }
 
 }

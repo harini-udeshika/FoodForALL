@@ -8,5 +8,5 @@
 <form method="post" class="form">
 <input type="text" placeholder="Email address" name="email">
 <button>Next</button>
-</form>
+</form> 
 </div>

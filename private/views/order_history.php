@@ -7,6 +7,12 @@
 ?>
 <h2>Order History</h2>
 <div class="container">
+<?php if(!$data):?>
+    <div class="no_req">
+            <p><i class="fa-solid fa-store"></i> No orders made yet!</p>
+        </div>
+    <?php endif ?>
+    <?php if($data):?>
     <?php $i=0?>
     <?php foreach ($data as $d):?>
     
@@ -27,5 +33,6 @@
     </div>
     <?php $i++?>
     <?php endforeach ?>
+    <?php endif; ?>
 </div>
 <?php $this->view('includes/footer')?>
