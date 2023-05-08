@@ -1,5 +1,7 @@
 <?php
 
+use Stripe\Subscription;
+
 function get_var($key)
 {
 
@@ -127,8 +129,48 @@ function donate_checkout($data)
     $array = explode("pay", $checkout_session->url);
     $session_id = $array[1];
     $session_id = explode("#", $array[1])[0];
-    $query = "update donate set session_id=:s_id where donation_id=:id";
+    $query = "update donate set session_id=:s_id where donation_id=:id"; 
     $donate->query($query, ['s_id' => $session_id, 'id' => $data['id']]);
+    header("HTTP/1.1 303 See Other");
+
+    header("Location: " . $checkout_session->url);
+
+}
+
+function subscription_checkout($data)
+{
+   
+    $sub = new Subscribe();
+    require '../private/models/stripe-php-master/init.php';
+   
+    $stripe = new \Stripe\StripeClient ('sk_test_51Mkpm2KZpyK8KvAZPZUbc2YT3M7NSnfuXhjrZI5QpKCMeHDwY7p97hGQN4EItsLfdNS5JB4v4xHuskzONTsRv4cf004Mpw8QQV');
+   
+    $checkout_session = $stripe->checkout->sessions->create([
+        'line_items' => [[
+            'price_data' => [
+                'currency' => 'lkr',
+                'product_data' => [
+                    'name' => 'Subscription#' . $data['id'],
+                    'description' => 'Subscription for month of : ' . date('F'),
+                ],
+                'unit_amount' => $data['amount'] * 100,
+            ],
+            'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'metadata' => [
+            'user_id' => $data['org_gov_reg_no'],
+            'date' => date('Y-m-d'),
+        ],
+
+        'success_url' => 'http://localhost/food_for_all/public/subscription_paid?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url' => 'http://localhost/food_for_all/public/cancel',
+    ]);
+    $array = explode("pay", $checkout_session->url);
+    $session_id = $array[1];
+    $session_id = explode("#", $array[1])[0];
+    $query = "update subscription set session_id=:s_id where id=:id"; 
+    $sub->query($query, ['s_id' => $session_id, 'id' => $data['id']]);
     header("HTTP/1.1 303 See Other");
 
     header("Location: " . $checkout_session->url);
