@@ -131,7 +131,7 @@ class Admin extends Controller
 
         $data = $admin->homepage_data();
 
-        $this->view('temp');
+        $this->view('finance_manager.home.view');
     }
 
     public function temp2()
@@ -190,7 +190,6 @@ class Admin extends Controller
     public function events($page_name = "")
     {
         $this->autherize_admin();
-        // echo ($page_name);
 
         $page_name = strtolower($page_name);
         $event_model = new Admin_events_model();
@@ -198,11 +197,11 @@ class Admin extends Controller
         $html = "";
 
         if($page_name == ""){
-            $this->view('section');
+            $this->view('admin.events');
+            die;
         }
 
         if ($page_name == "upcoming") {
-            // echo("called");
             $ongoing_events = $event_model->selectOngoing();
             if ($ongoing_events == NULL) {
                 $ongoing_events = array();
@@ -221,5 +220,30 @@ class Admin extends Controller
         }
 
         echo (json_encode($html));
+    }
+    // search event
+    function searchEvent($keyword = "")
+    {
+        if (Auth::isuser('admin')) {
+            $data = array();
+
+            if ($keyword != "") {
+                $admin_model = new Admins();
+                $keyword = addslashes($keyword);
+
+                $query = "SELECT * FROM event WHERE event_id LIKE '%$keyword%' OR name LIKE '%$keyword%' OR location LIKE '%$keyword%'";
+
+                $data = $admin_model->query($query);
+
+                if ($data == null) {
+                    $data = array();
+                }
+            }
+        } else {
+            $data = "redirect";
+        }
+
+        $data = json_encode($data);
+        echo $data;
     }
 }

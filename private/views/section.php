@@ -97,39 +97,35 @@
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
         border-radius: 50px;
-        margin-top: 5px;
         border-radius: 10px;
-        padding: 10px 10px;
-        /* padding: 20px; */
+        padding: 10px 0px;
         height: fit-content;
+        min-height: 50px;
         max-height: 300px;
         overflow-x: hidden;
         overflow-y: auto;
-        /* display: none; */
+        visibility: hidden;
     }
 
-    #search_input_div:focus {
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-
-        /* background-color: red; */
+    #search_input_div:focus~ #result_div {
+        visibility: visible;
     }
 
     .search_result {
-
         display: grid;
         grid-template-columns: repeat(12, 1fr);
 
         padding: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
         width: 100%;
         height: 110px;
         transition: 0.4s;
     }
 
     .search_result:hover {
-        border: 1px solid rgba(0, 0, 0, 0.1);
         cursor: pointer;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        background-color: #f1f1f1;
+        /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1); */
     }
 
     .no_search_result {
@@ -201,17 +197,7 @@
                 <input class="search-field width-100" type="text" name="search_term" id="search_input_div" placeholder="Search here">
 
                 <div class="" id="result_div">
-                    <div class="search_result" style="position: relative;">
-                        <!-- <div class="text-r-1">the result</div> -->
-
-                        <div class="col-12 w-semibold txt-12" style="position: absolute;
-                        top:10px;left:10px">Event name</div>
-                        <div class="h-line"></div>
-                        <div class="col-12 w-medium txt-09" style="position: absolute;
-                        top:48px;left:20px">Organization name</div>
-                        <div class="col-12 w-medium txt-09" style="position: absolute;
-                        top:68px;left:20px">Event date - 2012/12/12</div>
-                    </div>
+                    
                 </div>
             </div>
 
