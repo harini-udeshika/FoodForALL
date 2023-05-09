@@ -51,22 +51,23 @@ class Add_event extends Controller
         // echo $events_30_days[0]->row_count;
         $event_count = $events_30_days[0]->row_count;
 
-        $org = new Organization();
-        $data = $org->where('gov_reg_no', Auth::gov_reg_no());
-    
-        $date = new DateTime();
-        $today = $date->format('Y-m-d');
-        // echo $today;
-        $paid_date = DateTime::createFromFormat('Y-m-d', $data[0]->sub_fee_paid_date);
-        $today = DateTime::createFromFormat('Y-m-d', $today);
+        $org = new Subscribe();
+        $data = $org->where('org_gov_reg_no', Auth::gov_reg_no());
 
-        $interval = $paid_date->diff($today);
-        $days = $interval->days;
+        if ($data) {
+            $paid_date = new DateTime($data[0]->date);
+            $today = new DateTime(); // create a new DateTime object for today's date
+            $interval = $paid_date->diff($today);
+            $days = $interval->days;
+            // echo $days;
 
-        if($event_count <= 3 && $days <= 30){
-            echo "true";
+            if ($days <= 30 && $event_count < 3) {
+                echo "TRUE";
+            } else {
+                echo "FALSE";
+            }
         } else {
-            echo "false";
+            echo "FALSE";
         }
         
     }
