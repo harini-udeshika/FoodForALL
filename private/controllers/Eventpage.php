@@ -26,7 +26,7 @@ class Eventpage extends Controller
             $order_id = $order_id[0]->donation_id;
             $arr1['name'] = $data[0]->name;
             $arr1['id'] = $order_id;
-            donate_checkout($arr1);
+            donate_checkout($arr1);  
         }
         if (isset($_GET['id'])) {
 
