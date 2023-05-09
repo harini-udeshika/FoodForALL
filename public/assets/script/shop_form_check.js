@@ -3,25 +3,44 @@ const name_item = document.getElementById('name-item');
 const stock_item = document.getElementById('stock-item');
 const price_item = document.getElementById('price-item');
 const code_item = document.getElementById('code-item');
-// console.log("helloooo");
 var num = 0;
-// const btn_em = document.getElementById('form-btn');
+
 
 form_shop.addEventListener('submit', (e) => {
-    // console.log("helloooo");
-
-    validateInputs(e);
+    // validateInputs(e);
+    validateSubscription(e);
     // e.preventDefault();
 });
 
-const setError = (event,element,message) => {
-    const inputControl = element.parentElement;
-    const errorDisplay = inputControl.querySelector('.client-error');
-    const txt1 = '&emsp;&emsp;&emsp;';
+// popup info
+const popup_div = document.getElementById('popup-div')
+const popup_close_btn = document.getElementById('popup-close-btn')
 
-    errorDisplay.innerHTML = txt1.concat("",message);
-    inputControl.classList.add('error');
-    inputControl.classList.remove('success');
+popup_close_btn.addEventListener("click", close_popup)
+
+function open_popup() {
+    popup_div.style.display = 'block'
+    // var update_form = document.getElementById("formUpdatePack");
+    // getPackData(package_id)
+}
+
+function close_popup() {
+    popup_div.style.display = 'none'
+    // counter_edit = 0
+}
+
+
+const setError = (event,element,message) => {
+    if(element.parentElement){
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector('.client-error');
+        const txt1 = '&emsp;&emsp;&emsp;';
+
+        errorDisplay.innerHTML = txt1.concat("",message);
+        inputControl.classList.add('error');
+        inputControl.classList.remove('success');
+    }
+    
     event.preventDefault();
 };
 
@@ -35,10 +54,10 @@ const setSuccess = element => {
     num = num +1;
 };
 
-// const isValidEmail = email => {
-//     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     return re.test(String(email).toLowerCase());
-// }
+function setErrorPopup(event,element) {
+    setError(event,element,'')
+    open_popup();
+}
 
 const validateInputs = (event) => {
     const name_itemValue = name_item.value.trim();
@@ -76,10 +95,20 @@ const validateInputs = (event) => {
         setSuccess(stock_item);
     }
 
-    // if(num > 3){
-    //     // alert(num);
-    //     num = 0;
-    //     location.replace('./addManager.php');
-    // }
+}
 
-};
+const validateSubscription = (event) => {
+
+    fetch("http://localhost/FoodForAll/public/shop_org/isSubscribed/")
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data)
+                    
+                    if(data === "FALSE"){
+                        event.preventDefault();
+                        setErrorPopup(event,0);
+                    }
+                })
+                .catch(error => console.log(error))
+
+}
