@@ -1,6 +1,7 @@
 <?php $this->view('includes/header_2') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/edit_packs.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/form_validations.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/org_packages.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
@@ -24,6 +25,18 @@
     .package_name_input {
         border: none;
         text-align: center;
+    }
+
+    .package_name_input.error {
+        outline: 1.5;
+        border: 2px solid #f0f0f0;
+        border-color: #ff3860;
+    }
+
+    .package_name_input.success {
+        outline: 1.5;
+        border: 2px solid #f0f0f0;
+        border-color: #09c372;
     }
 
     .package_hold_div_edit {
@@ -60,8 +73,11 @@
                     <!-- editing form -->
                     <div class="" style="display:flex;justify-content:center;">
                         <form id="formUpdatePack" action="" method="post">
-                            <input class="txt-11 w-semibold package_name_input_edit" id="pack_name" name="pack_name" type="text" style="border: solid gray 1px;" placeholder="Package name">
-
+                            
+                            <div class="inputControl">
+                            <input class="txt-11 w-semibold package_name_input_edit" id="pack_name" name="pack_name_update" type="text" style="border: solid gray 1px;" placeholder="Package name">
+                                <div class="client-error"></div>
+                            </div>
 
                             <div class="flex al-center jf-btwn p-10 m-top-40 m-bottom-15">
                                 <div class="txt-purple txt-10 txt-al-left">Package items</div>
@@ -87,6 +103,7 @@
                                 </div> -->
                                 <!-- end input field -->
                             </div>
+                            <div class="client-error-feild-edit"></div>
                             <div class=" row m-top-40">
                                 <button type="submit" id="popup_delete_btn" class="btn btn-sm btn-green col-12">Edit package</button>
                             </div>
@@ -111,7 +128,7 @@
             while ($count > 0) {
         ?>
                 <!-- package item start -->
-                <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
+                <div class="card col-lg-6 col-md-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
                     <div class="txt-11 w-semibold"><?php echo $package_data[$i]->package_name ?></div>
 
                     <div class="txt-purple txt-10 txt-al-left p-top-20 p-bottom-15">Package items</div>
@@ -207,9 +224,12 @@
 
         <h2>Add package</h2>
 
-        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center">
-            <form action="" method="post">
-                <input class="txt-11 w-semibold package_name_input" name="pack_name" type="text" style="border: solid gray 1px;" placeholder="Package name">
+        <div class="card col-lg-6 col-md-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center">
+            <form action="" method="post" id="pack-form">
+                <div class="inputControl">
+                    <input class="txt-11 w-semibold package_name_input" id="pack-name" name="pack_name" type="text" style="border: solid gray 1px; width:auto;" placeholder="Package name">
+                    <div class="client-error"></div>
+                </div>
 
 
                 <div class="flex al-center jf-btwn p-10 p-top-28 p-bottom-15">
@@ -237,8 +257,9 @@
                     <!-- end input field -->
                 </div>
 
-
+                <div class="client-error-feild"></div>
                 <div class=" row p-top-20">
+
                     <button type="submit" class="btn btn-sm btn-green col-12">Add package</button>
                 </div>
             </form>
@@ -271,12 +292,12 @@
                 elementdiv.setAttribute("id", "input_field")
 
                 const input_item = document.createElement("input");
-                input_item.name = "item_name[]" + counter;
+                input_item.name = "item_name[]";
                 input_item.id = "item_" + counter;
                 input_item.setAttribute("class", "txt-09 col-3 txt-gray")
 
                 const input_quantity = document.createElement("input");
-                input_quantity.name = "quantity[]" + counter;
+                input_quantity.name = "quantity[]";
                 input_quantity.id = "quantity_" + counter;
                 input_quantity.setAttribute("class", "txt-09 col-3 txt-gray")
                 input_quantity.setAttribute("value", "1")
@@ -285,7 +306,7 @@
 
 
                 const input_unitPrice = document.createElement("input");
-                input_unitPrice.name = "price[]" + counter;
+                input_unitPrice.name = "price[]";
                 input_unitPrice.id = "unitPrice_" + counter;
                 input_unitPrice.setAttribute("class", "txt-09 col-3 txt-gray")
                 input_unitPrice.setAttribute("placeholder", "Unit price")
@@ -373,13 +394,13 @@
                 elementdiv_edit.setAttribute("id", "input_field")
 
                 const input_item = document.createElement("input");
-                input_item.name = "item_name[]" + counter_edit;
+                input_item.name = "item_name_update[]";
                 input_item.id = "item_" + counter_edit;
                 input_item.setAttribute("value", old_item_names[i])
                 input_item.setAttribute("class", "txt-09 col-3 txt-gray")
 
                 const input_quantity = document.createElement("input");
-                input_quantity.name = "quantity[]" + counter_edit;
+                input_quantity.name = "quantity_update[]";
                 input_quantity.id = "quantity_" + counter_edit;
                 input_quantity.setAttribute("class", "txt-09 col-3 txt-gray")
                 input_quantity.setAttribute("value", old_item_quantity[i])
@@ -388,7 +409,7 @@
 
 
                 const input_unitPrice = document.createElement("input");
-                input_unitPrice.name = "price[]" + counter_edit;
+                input_unitPrice.name = "price_update[]";
                 input_unitPrice.id = "unitPrice_" + counter_edit;
                 input_unitPrice.setAttribute("class", "txt-09 col-3 txt-gray")
                 input_unitPrice.setAttribute("value", old_item_price[i])
@@ -424,12 +445,12 @@
                 elementdiv_edit.setAttribute("id", "input_field")
 
                 const input_item = document.createElement("input");
-                input_item.name = "item_name[]" + counter_edit;
+                input_item.name = "item_name_update[]";
                 input_item.id = "item_" + counter_edit;
                 input_item.setAttribute("class", "txt-09 col-3 txt-gray")
 
                 const input_quantity = document.createElement("input");
-                input_quantity.name = "quantity[]" + counter_edit;
+                input_quantity.name = "quantity_update[]";
                 input_quantity.id = "quantity_" + counter_edit;
                 input_quantity.setAttribute("class", "txt-09 col-3 txt-gray")
                 input_quantity.setAttribute("value", "1")
@@ -438,7 +459,7 @@
 
 
                 const input_unitPrice = document.createElement("input");
-                input_unitPrice.name = "price[]" + counter_edit;
+                input_unitPrice.name = "price_update[]";
                 input_unitPrice.id = "unitPrice_" + counter_edit;
                 input_unitPrice.setAttribute("class", "txt-09 col-3 txt-gray")
                 input_unitPrice.setAttribute("placeholder", "Unit price")
@@ -466,8 +487,9 @@
         <div class="page_title_2" style="margin-bottom: 0px; margin-top:15px; padding-top:5px;">Add Packages</div>
         <i class="fas fa-plus-square toggleButton" style="margin-bottom: 0px; margin-top:15px; margin-left:10px; padding-top:5px; font-size: 42px;" id="plusIcon"></i>
     </div>
-</div>
+    
 
 <script src="<?= ROOT ?>/assets/Event_item.js"></script> -->
-
-    <?php $this->view('includes/footer'); ?>
+</div>
+<script src="<?= ROOT ?>/assets/script/package_form_check.js"></script>
+<?php $this->view('includes/footer'); ?>

@@ -50,17 +50,21 @@ class Organization extends Model
         return $arr;
     }
 
-    public function add_images($id)
+    public function add_images($id,$count)
     {
-        $org_images = [];
+        if($count != 0){
+            $org_images = $this->get_images($id);
+        } else {
+            $org_images = [];
+        }
         $imageCount = count($_FILES['images']['name']);
-        for ($i = 0; $i < $imageCount; $i++) {
-            $image_name = $_FILES['images']['name'][$i];
+        for ($i = $count,$j = 0; $i <= 3 && $j < $imageCount; $i++,$j++) {
+            $image_name = $_FILES['images']['name'][$j];
             $img_extention = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
-            $new_imgName = "image-" . $id . '-' . $i . '.' . $image_name;
+            $new_imgName = "image-" . $id . '-' . $i+$j . '.' . $image_name;
             // $new_imgName = "image-" . $id . '-' . $i . '.' . $img_extention;
             $img_upload_path = 'uploads/' . $new_imgName;
-            move_uploaded_file($_FILES['images']['tmp_name'][$i], $img_upload_path);
+            move_uploaded_file($_FILES['images']['tmp_name'][$j], $img_upload_path);
 
             $image = new Image();
             $this->crop_org_image($img_upload_path, $img_upload_path, 800, 800);
@@ -82,12 +86,10 @@ class Organization extends Model
         $data = $this->query($query, $arr);
         $org_data = $data[0];
         // print_r($org_data);
-        if ($org_data->images) {
-            $imagesList = $org_data->images;
-            $img_arr = explode(',', $imagesList);
-            return $img_arr;
-        }
 
+        $imagesList = $org_data->images;
+        $img_arr = explode(',', $imagesList);
+        return $img_arr;
     }
 
     public function crop_org_image($original_file_name, $cropped_file_name, $max_width, $max_height)

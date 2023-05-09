@@ -151,8 +151,18 @@ class Mail_cert extends model
             <br>
             <br>
             <br>
-                <div class="title">Volunteering Certificate</div>
-                <div class="subtitle">This certificate is awarded to:</div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
+                <div class="title"></div>
+                <div class="subtitle"></div>
                 <div class="recipient">
                 
         EOF;
@@ -160,8 +170,12 @@ class Mail_cert extends model
         $html2 = <<<EOF
                 </div>
                 <div class="subtitle">
-                    to appreciate their contribution to the community by volunturaly participating in the event: 
+                   
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
                 <div class="recipient">
                 
         EOF;
@@ -169,8 +183,10 @@ class Mail_cert extends model
         $html3 = <<<EOF
                 </div>
                 <div class="subtitle">
-                    Organized by the Organization : 
+                     
                 </div>
+                <br>
+                <br>
                 <div class="recipient">
                     
         EOF;
@@ -226,7 +242,8 @@ class MYPDF extends TCPDF
         $this->SetAutoPageBreak(false, 0);
         // set bacground image
         // $img_file = K_PATH_IMAGES.'image_demo.jpg';
-        $img_file = K_PATH_IMAGES . 'background3.png';
+        // $img_file = K_PATH_IMAGES . 'background3.png';
+        $img_file = K_PATH_IMAGES . 'foodforall_certificate.png';
         $this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
         // restore auto-page-break status
         $this->SetAutoPageBreak($auto_page_break, $bMargin);

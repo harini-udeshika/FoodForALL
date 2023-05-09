@@ -238,7 +238,7 @@
             <!-- each image -->
             <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                 <div class="photo_holder">
-                <?php if (isset($org_images[0])) { ?>
+                <?php if ($org_images[0]) { ?>
                     <img src="<?= ROOT ?>/uploads/<?php if ($org_images[0]) {
                                                         echo $org_images[0];
                                                     } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">

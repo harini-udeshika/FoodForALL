@@ -72,16 +72,24 @@ class Edit_org_profile extends Controller
 
             if ($_FILES['images']['name'][0]) {
                 // echo count($_FILES['images']);
+                $input_img_count = count($_FILES['images']['name']);
+                $img_arr = $org->get_images(Auth::getid());
+                $stored_img_count = 0;
+                if($img_arr[0]){
+                    $stored_img_count = sizeof($img_arr);
+                }
 
-                $org_images = $org->add_images(Auth::getid());
+                if (count($_FILES['images']) > 0 && $input_img_count+$stored_img_count <= 3){
+                    $org_images = $org->add_images(Auth::getid(),$stored_img_count);
 
-                // echo "<pre>";
-                // echo "hello";
-                // print_r($org_images);
-                // die;
-
-                $arr['images'] = $org_images;
-                $org->update(Auth::getid(), $arr);
+                    // echo "<pre>";
+                    // echo "hello";
+                    // print_r($org_images);
+                    // die;
+    
+                    $arr['images'] = $org_images;
+                    $org->update(Auth::getid(), $arr);
+                }
             }
             $this->redirect('edit_org_profile');
         } else {
