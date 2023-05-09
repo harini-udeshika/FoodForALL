@@ -50,8 +50,8 @@ class Admin_events_model extends Model
 
     public function selectCompleted()
     {
-        // $ongoing_date = date('y-m-d');
-        $today_date = '23-01-01';
+        $today_date = date('y-m-d');
+        // $today_date = '23-01-01';
         // echo($ongoing_date);
         $query = "SELECT * FROM event WHERE date < '$today_date'";
         $data = $this->query($query);
