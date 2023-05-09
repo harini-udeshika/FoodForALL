@@ -81,12 +81,12 @@ class Org_packages extends Controller
 
             if ($_POST) {
 
-                if ($_POST['pack_name'] && isset($_POST['item_name'])) {
+                if ($_POST['pack_name_update'] && isset($_POST['item_name_update'])) {
                     $pack = new Food_pack();
-                    $pack_name = $_POST['pack_name'];
-                    $i_name = $_POST['item_name'];
-                    $price = $_POST['price'];
-                    $quantity = $_POST['quantity'];
+                    $pack_name = $_POST['pack_name_update'];
+                    $i_name = $_POST['item_name_update'];
+                    $price = $_POST['price_update'];
+                    $quantity = $_POST['quantity_update'];
                     // echo "<pre>";
                     // print_r($i_name);
                     // print_r($price);
@@ -98,7 +98,7 @@ class Org_packages extends Controller
                     $data_price = implode(',', $price);
                     $data_quantity = implode(',', $quantity);
 
-                    $arr['package_name'] = $_POST['pack_name'];
+                    $arr['package_name'] = $pack_name;
                     $arr['item_price'] = $data_price;
                     $arr['item_name'] = $data_item;
                     $arr['quantity'] = $data_quantity;

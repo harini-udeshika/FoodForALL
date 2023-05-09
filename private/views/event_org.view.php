@@ -141,7 +141,7 @@
         <div class="card col-lg-10 height-auto">
             <div class="row">
                 <!-- each image -->
-                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                     <div class="photo_holder">
                         <?php if ($event_images[0]) { ?>
                             <img src="<?= ROOT ?>/uploads/<?php if ($event_images[0]) {
@@ -158,7 +158,7 @@
                 </div>
 
                 <!-- each image -->
-                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                     <div class="photo_holder">
                         <?php if (isset($event_images[1])) { ?>
                             <img src="<?= ROOT ?>/uploads/<?php if ($event_images[1]) {
@@ -175,7 +175,7 @@
                 </div>
 
                 <!-- each image -->
-                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                     <div class="photo_holder">
                         <?php if (isset($event_images[2])) { ?>
                             <img src="<?= ROOT ?>/uploads/<?php if (isset($event_images[2])) {
@@ -191,12 +191,12 @@
                     </div>
                 </div>
 
-                <div class=" col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class=" col-lg-3 col-md-6 col-sm-6 m-10">
                     <form method="POST" action="event_org/add_images?id=<?php echo $event_details->event_id ?>" enctype="multipart/form-data">
-                        <div class="added_image_holder addmore_link_holder" style="width:245px;">
+                        <div class="added_image_holder addmore_link_holder" style="width:auto;">
                             <div>
                                 <div class="link_holder row-flex">
-                                    <label class="p-10 width-100 txt-al-center m-lr-auto sp-1" style="cursor:pointer;" for="inputTag">
+                                    <label class="p-10 txt-al-center m-lr-auto sp-1" style="cursor:pointer;" for="inputTag">
                                         <input id="inputTag" name="images[]" type="file" multiple="multiple" style="display:none;">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 80%; fill:var(--projectPurple);">
                                             <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" />
