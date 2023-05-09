@@ -109,7 +109,7 @@ class Login extends Controller
             }
             $errors['email'] = "Incorrect email or password";
         }
-
+        // echo($_SESSION['email']);
         $this->view('login', [
             'errors'=>$errors,
             'is_verified' => $is_verified,

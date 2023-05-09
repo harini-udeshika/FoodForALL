@@ -44,6 +44,7 @@ a {
     right: 2rem;
     border: none;
     background-color: #fff;
+    
 }
 
 .filter {
@@ -62,6 +63,7 @@ a {
     height: 2.5rem;
     border-radius: 0.8rem;
     border: 0.15rem solid #dfe1da;
+    padding: 0 1rem 0 1rem;
 }
 
 .search-btn {

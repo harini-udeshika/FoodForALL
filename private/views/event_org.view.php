@@ -7,16 +7,18 @@
 <div class="body-container">
     <div class="heading-1">Event Name : <?php echo $event_details->name ?></div>
     <div class="container">
-        <div class="heading-2 col-lg-2 p-left-25 p-top-7">Event Status : </div>
-        <div class="card col-lg-2 heading-3 height-30px" style="text-align: center; color:red;">
-            <?php
-            if ($event_details->date < date("Y-m-d")) {
-                echo "Completed";
-            } else {
-                echo "Upcoming";
-            }
-            ?></div>
-        <div class="blank col-lg-8"></div>
+        <div class="col-12 grid-10">
+            <div class="heading-2 col-lg-2 col-sm-5 p-left-25 p-top-7">Event Status : </div>
+            <div class="card col-lg-2 col-sm-5 heading-3 height-30px" style="text-align: center; color:red;">
+                <?php
+                if ($event_details->date < date("Y-m-d")) {
+                    echo "Completed";
+                } else {
+                    echo "Upcoming";
+                }
+                ?></div>
+            <div class="blank col-lg-6"></div>
+        </div>
         <!-- <div class="heading-2 col-lg-2 p-left-25 p-top-7" style="border: 1px solid red;"></div> -->
     </div>
 
@@ -139,47 +141,62 @@
         <div class="card col-lg-10 height-auto">
             <div class="row">
                 <!-- each image -->
-                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                     <div class="photo_holder">
-                        <img src="<?= ROOT ?>/uploads/<?php if ($event_images[0]) {
-                                                            echo $event_images[0];
-                                                        } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                        <?php if ($event_images[0]) { ?>
+                            <img src="<?= ROOT ?>/uploads/<?php if ($event_images[0]) {
+                                                                echo $event_images[0];
+                                                            } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                        <?php
+                        } ?>
                     </div>
                     <div class="row-flex jf-center">
-                        <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                        <a href="event_org/delete_images?id=<?php echo $event_details->event_id ?>&index=0">
+                            <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                        </a>
                     </div>
                 </div>
 
                 <!-- each image -->
-                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                     <div class="photo_holder">
-                        <img src="<?= ROOT ?>/uploads/<?php if ($event_images[1]) {
-                                                            echo $event_images[1];
-                                                        } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                        <?php if (isset($event_images[1])) { ?>
+                            <img src="<?= ROOT ?>/uploads/<?php if ($event_images[1]) {
+                                                                echo $event_images[1];
+                                                            } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                        <?php
+                        } ?>
                     </div>
                     <div class="row-flex jf-center">
-                        <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                        <a href="event_org/delete_images?id=<?php echo $event_details->event_id ?>&index=1">
+                            <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                        </a>
                     </div>
                 </div>
 
                 <!-- each image -->
-                <div class="added_image_holder col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class="added_image_holder col-lg-3 col-md-6 col-sm-6 m-10">
                     <div class="photo_holder">
-                        <img src="<?= ROOT ?>/uploads/<?php if ($event_images[2]) {
-                                                            echo $event_images[2];
-                                                        } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                        <?php if (isset($event_images[2])) { ?>
+                            <img src="<?= ROOT ?>/uploads/<?php if (isset($event_images[2])) {
+                                                                echo $event_images[2];
+                                                            } ?>" alt="" class="" style="width: 100%; height: 100%; border-radius:10px;">
+                        <?php
+                        } ?>
                     </div>
                     <div class="row-flex jf-center">
-                        <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                        <a href="event_org/delete_images?id=<?php echo $event_details->event_id ?>&index=2">
+                            <button class="btn btn-sm btn-gray remove_button">Remove</button>
+                        </a>
                     </div>
                 </div>
 
-                <div class=" col-lg-3 col-md-3 col-sm-3 m-10">
+                <div class=" col-lg-3 col-md-6 col-sm-6 m-10">
                     <form method="POST" action="event_org/add_images?id=<?php echo $event_details->event_id ?>" enctype="multipart/form-data">
-                        <div class="added_image_holder addmore_link_holder" style="width:245px;">
+                        <div class="added_image_holder addmore_link_holder" style="width:auto;">
                             <div>
                                 <div class="link_holder row-flex">
-                                    <label class="p-10 width-100 txt-al-center m-lr-auto sp-1" style="cursor:pointer;" for="inputTag">
+                                    <label class="p-10 txt-al-center m-lr-auto sp-1" style="cursor:pointer;" for="inputTag">
                                         <input id="inputTag" name="images[]" type="file" multiple="multiple" style="display:none;">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 80%; fill:var(--projectPurple);">
                                             <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" />
@@ -401,7 +418,9 @@
                                 <div class="col-lg-2" style="display: flex; justify-content: center;">
                                     <img src="<?php echo $image ?>" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
                                 </div>
-                                <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?><br>
+                                <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><a href="profile?id=<?php echo $user_volunteer->id ?>">
+                                        <?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?>
+                                    </a><br>
                                     <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;"><?php echo $accepted_vol[$i]->volunteer_type; ?></div>
                                 </div>
 

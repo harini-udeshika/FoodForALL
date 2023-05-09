@@ -10,6 +10,9 @@ echo $rows->first_name;?>!</h3>
 <small>A verification code has been sent to your account <?php echo $rows->email?></small>
 <form action="" method="post" class="form">
     <div><input type="text" placeholder="Enter verification code" name="code"></div>
+    <?php if($error):?>
+    <small style="color: #f25070;"><i class="fa-solid fa-circle-exclamation" style="color: #f25070;"></i> <?=$error['msg']?></small>
+    <?php endif;?>
     <div> <button>Verify</button></div>       
 </form>
 <div> 

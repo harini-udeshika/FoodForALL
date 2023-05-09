@@ -1,0 +1,1 @@
+<h1>Subscription paid</h1>

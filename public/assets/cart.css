@@ -221,5 +221,12 @@ td button {
     border: none;
     background-color: #7FB432;
     color: #fff;
-    margin: 2rem 1rem 1rem 53rem;
+   justify-self: flex-end;
+   position: relative;
+   margin-top:1rem;
+   left: 29.5rem;
+   cursor: pointer;
+}
+.checkout-button a{
+    width: 8rem;
 }

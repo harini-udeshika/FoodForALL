@@ -22,7 +22,7 @@
             <th>Total</th>
         </tr>
         <?php if ($cart_data): ?>
-        <?php $i = 0?> 
+        <?php $i = 0?>
         <?php $total = 0?>
         <?php foreach ($cart_data as $rows): ?>
         <tr class="table_row">
@@ -45,8 +45,15 @@
     <!-- <div class="row">Delivery Charges<span>Rs.<span></div>
     <div class="row">Total Amount<span>Rs.<span></div> -->
 </div>
+<div class="checkout-button">
+<?php if (($_SESSION['CART'.$data->gov_reg_no])!=array()): ?>
 <a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout">Checkout</button></a>
+<?php endif;?>
 
+<?php if (($_SESSION['CART'.$data->gov_reg_no])==array()): ?>
+<a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout" disabled>Checkout</button></a>
+<?php endif;?>
+</div>
 <?php $this->view('includes/footer')?>
 
 <script src="<?=ROOT?>/assets/shop.js"></script>

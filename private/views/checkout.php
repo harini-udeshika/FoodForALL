@@ -2,6 +2,37 @@
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu');?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/checkout.css">
+<?php
+
+$districts = array(
+    'Ampara',
+    'Anuradhapura',
+    'Badulla',
+    'Batticaloa',
+    'Colombo',
+    'Galle',
+    'Gampaha',
+    'Hambantota',
+    'Jaffna',
+    'Kalutara',
+    'Kandy',
+    'Kegalle',
+    'Kilinochchi',
+    'Kurunegala',
+    'Mannar',
+    'Matale',
+    'Matara',
+    'Monaragala',
+    'Mullaitivu',
+    'Nuwara Eliya',
+    'Polonnaruwa',
+    'Puttalam',
+    'Ratnapura',
+    'Trincomalee',
+    'Vavuniya'
+);
+
+?>
 
 <h1>Checkout</h1>
 <div class="outer-box">
@@ -22,19 +53,22 @@
         <i class="fa-solid fa-circle-check"></i>
         <small>error message</small>
     </div>
+  
     <div>
-        <select name="cars" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
+        <input type="text" placeholder="City"  name="city" id='city'></input>
         <i class="fa-solid fa-circle-exclamation"></i>
         <i class="fa-solid fa-circle-check"></i>
         <small>error message</small>
     </div>
     <div>
-        <input type="text" placeholder="City"  name="city" id='city'></input>
+        <select name="district" id="district" class="district">
+            <option value="select">Select your district</option>
+            <?php $i = 0;?>
+        <?php foreach ($districts as $dist): ?>
+            <option value="<?=$districts[$i]?>"><?=$districts[$i]?></option>
+            <?php $i++;?>
+        <?php endforeach;?>
+        </select>
         <i class="fa-solid fa-circle-exclamation"></i>
         <i class="fa-solid fa-circle-check"></i>
         <small>error message</small>
@@ -78,9 +112,9 @@
     </table>
 </div>
 <div class="down">
-    <div class="row" >Bill Total <span id="bill_total">Rs. <?php if (isset($total)) {echo ($total);} else {echo "0";}?>.00<span></div>
-    <div class="row">Delivery Charges<span>Rs.<span></div>
-    <div class="row">Total Amount<span>Rs.<span></div>
+    <div class="row">Bill Total (Rs.)<span id="bill_total"> <?php if (isset($total)) {echo ($total);} else {echo "0";}?>.00<span></div>
+    <div class="row" >Delivery Charges  (Rs.)<span id="delivery"><span></div>
+    <div class="row" >Total Amount  (Rs.)<span id ="total"><span></div>
 
 </div>
 
@@ -90,4 +124,4 @@
 
 <?php $this->view('includes/footer')?>
 <script src="<?=ROOT?>/assets/checkout.js"></script>
-<script src="<?=ROOT?>/assets/shop.js"></script>
+<!-- <script src="<?=ROOT?>/assets/shop.js"></script> -->

@@ -54,7 +54,7 @@ form small{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
-.left_c form input {
+.left_c form input,.district {
     width: 28rem;
     height: 2rem;
     border: 1px solid #686868;
@@ -69,7 +69,10 @@ form small{
     align-items: center;
     margin-right: 2rem;
 }
-
+.district{
+    height: 2.5rem;
+    width: 28.5rem;
+}
 h3 {
     color: #686868;
 }
@@ -193,7 +196,7 @@ td img {
 }
 
 .row {
-    width: 17rem;
+    width: 20rem;
     font-size: large;
     font-weight: bold;
     height: 2rem;

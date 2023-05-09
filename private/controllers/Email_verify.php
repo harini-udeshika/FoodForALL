@@ -1,9 +1,10 @@
 <?php
+
 class Email_verify extends Controller
 {
     public function index()
     {
-
+        $error=array();
         if (Auth::getusertype() == 'organization'){
             $user = new Organization();
         }
@@ -20,7 +21,7 @@ class Email_verify extends Controller
             $verify->insert($arr);
             $receipient = $arr['email'];
             $subject = "Account Verification FoodForALL";
-            $message = "Hello User!\r\nPlease verify your account.\r\n". $arr['code'];
+            $message = strtr(file_get_contents('http://localhost/food_for_all/private/views/confirm_mail.html'),array('%code%' => $arr['code']));
 
             $mail->send_mail($receipient, $subject, $message);
         }
@@ -47,10 +48,10 @@ class Email_verify extends Controller
                         die;
 
                     } else {
-                        echo "Code expired!";
+                        $error['msg']="Code expired!";
                     }
                 } else {
-                    echo "Wrong code!";
+                    $error['msg']="Wrong code!";
                 }
 
             } else {
@@ -66,6 +67,6 @@ class Email_verify extends Controller
         $data = $user->where('id', Auth::getid());
         $data = $data[0];
 
-        $this->view('email_verify', ['rows' => $data]);
+        $this->view('email_verify', ['rows' => $data,'error'=>$error]);
     }
 }

@@ -92,7 +92,7 @@ print_r($errors);
                         <input type="checkbox" class="check" name="check" id="check">
                     <!-- </div> -->
                     <!-- <p class="tc"> -->
-                       <p>Agree to terms and conditions</p>
+                       <a href="terms"><p>Agree to terms and conditions</p></a>
                     <!-- </p> -->
                     <i class="fa-solid fa-circle-check"></i>
                         <i class="fa-solid fa-circle-exclamation"></i>

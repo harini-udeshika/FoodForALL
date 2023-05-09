@@ -56,7 +56,7 @@ class Org_admin_events extends Controller
             $event = new Event();
             $org_reg = $_SESSION['USER']->gov_reg_no;
 
-            $query = "SELECT * FROM event WHERE name LIKE '%" . $_POST['name'] . "%' AND org_gov_reg_no = $org_reg LIMIT 5";
+            $query = "SELECT * FROM event WHERE name LIKE '%" . $_POST['name'] . "%' AND org_gov_reg_no = $org_reg ";
             $event_list = $event->query($query);
             if ($_POST['name']) {
                 if ($event_list) {

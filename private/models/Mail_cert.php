@@ -1,61 +1,10 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 require_once('tcpdf/tcpdf.php');
-
-require 'PHPMailer-master/src/Exception.php';
-require 'PHPMailer-master/src/PHPMailer.php';
-require 'PHPMailer-master/src/SMTP.php';
 class Mail_cert extends model
 {
-    public function email_cert()
-    {
-
-        $mail = new PHPMailer();
-        $mail->IsSMTP();
-
-        $subject = "0";
-        $message = "hello";
-        $recipient = "akiladharmadasa1.1@gmail.com";
-
-        $mail->SMTPDebug  = 0;
-        $mail->SMTPAuth   = TRUE;
-        $mail->SMTPSecure = "tls";
-        $mail->Port       = 587;
-        $mail->Host       = "smtp.gmail.com";
-        //$mail->Host       = "smtp.mail.yahoo.com";
-        $mail->Username   = "foodforall.g47@gmail.com";
-        $mail->Password   = "mbanxxjypfgiiaxq";
-
-        $pdf_attachment = $this->send_certificate();
-        // echo $pdf_attachment;
-        // die;
-
-        $mail->IsHTML(true);
-        // $mail->AddAddress('akiladharmadasa1.1@gmail.com',"User");
-        $mail->AddAddress($recipient, "User");
-        $mail->SetFrom("foodforall.g47@gmail.com", "FoodForALL");
-        //$mail->AddReplyTo("reply-to-email", "reply-to-name");
-        //$mail->AddCC("cc-recipient-email", "cc-recipient-name");
-        $mail->Subject = $subject;
-        $content = $message;
-
-        $mail->MsgHTML($content);
-        $mail->addStringAttachment($pdf_attachment,"certificate.pdf");
-        if (!$mail->Send()) {
-            // echo "Error while sending Email.";
-            // echo "<pre>";
-            // var_dump($mail);
-            return false;
-        } else {
-            // echo "Email sent successfully";
-            return true;
-        }
-    }
-
-    public function send_certificate()
+    
+    public function send_certificate($u_name,$event,$org)
     {
         //============================================================+
         // File name   : example_006.php
@@ -144,7 +93,7 @@ class Mail_cert extends model
         // create some HTML content
         // background-color: #e4df8d;
         // background-color: rgb(216, 216, 215,0.9);
-        $vol_name = "Jhon Doe";
+        $vol_name = $u_name;
         $html1 = <<<EOF
         
         <!DOCTYPE html>
@@ -195,12 +144,25 @@ class Mail_cert extends model
         </head>
         <body>
             <div class="container">
-                <img class="logo" src="tcpdf/examples/images/logo.png" height="120px" alt="Logo">
-                <br>
-                <br>
-                <br>
-                <div class="title">Volunteering Certificate</div>
-                <div class="subtitle">This certificate is awarded to:</div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
+                <div class="title"></div>
+                <div class="subtitle"></div>
                 <div class="recipient">
                 
         EOF;
@@ -208,22 +170,36 @@ class Mail_cert extends model
         $html2 = <<<EOF
                 </div>
                 <div class="subtitle">
-                    to appreciate their contribution to the community by volunturaly participating in the event: 
+                   
                 </div>
-                <div class="recipient">Food Charity</div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="recipient">
+                
+        EOF;
+                
+        $html3 = <<<EOF
+                </div>
                 <div class="subtitle">
-                    Organized by the Organization : 
+                     
                 </div>
-                <div class="recipient">Feed the Poor</div>
+                <br>
+                <br>
+                <div class="recipient">
+                    
+        EOF;
+
+        $html4 = <<<EOF
+                </div>
                 <div class="signature">
-                    <img src="https://example.com/signature.png" alt="Signature"><br>
-                    Food for all
                 </div>
             </div>
         </body>
         </html>
         EOF;
-        $html = $html1 . $vol_name . $html2;
+        $html = $html1 . $vol_name . $html2 . $event . $html3 . $org . $html4;
 
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -236,14 +212,16 @@ class Mail_cert extends model
         // ---------------------------------------------------------
 
         //Close and output PDF document
-        // $pdf->Output('helloworld_999.pdf', 'I');
-        $email_pdf = $pdf->Output('helloworld_999.pdf', 'S');
+        // $pdf->Output('certificate.pdf', 'I');
+        // die;
+        $email_pdf = $pdf->Output('certificate.pdf', 'S');
 
         //============================================================+
         // END OF FILE
         //============================================================+
         return $email_pdf;
     }
+
 }
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -264,7 +242,8 @@ class MYPDF extends TCPDF
         $this->SetAutoPageBreak(false, 0);
         // set bacground image
         // $img_file = K_PATH_IMAGES.'image_demo.jpg';
-        $img_file = K_PATH_IMAGES . 'background1.png';
+        // $img_file = K_PATH_IMAGES . 'background3.png';
+        $img_file = K_PATH_IMAGES . 'foodforall_certificate.png';
         $this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
         // restore auto-page-break status
         $this->SetAutoPageBreak($auto_page_break, $bMargin);

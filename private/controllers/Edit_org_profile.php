@@ -70,19 +70,60 @@ class Edit_org_profile extends Controller
             // die;
             $org = new Organization();
 
-            if (count($_FILES['images']) > 0) {
+            if ($_FILES['images']['name'][0]) {
                 // echo count($_FILES['images']);
+                $input_img_count = count($_FILES['images']['name']);
+                $img_arr = $org->get_images(Auth::getid());
+                $stored_img_count = 0;
+                if($img_arr[0]){
+                    $stored_img_count = sizeof($img_arr);
+                }
 
-                $org_images = $org->add_images(Auth::getid());
+                if (count($_FILES['images']) > 0 && $input_img_count+$stored_img_count <= 3){
+                    $org_images = $org->add_images(Auth::getid(),$stored_img_count);
 
-                // echo "<pre>";
-                // echo "hello";
-                // print_r($org_images);
-                // die;
-
-                $arr['images'] = $org_images;
-                $org->update(Auth::getid(), $arr);
+                    // echo "<pre>";
+                    // echo "hello";
+                    // print_r($org_images);
+                    // die;
+    
+                    $arr['images'] = $org_images;
+                    $org->update(Auth::getid(), $arr);
+                }
             }
+            $this->redirect('edit_org_profile');
+        } else {
+            $this->redirect('home');
+        }
+    }
+
+    function delete_images()
+    {
+        if (Auth::getusertype() == 'organization') {
+            // echo "hello 2";
+            // die;
+            $index = $_GET['index'];
+            $org = new Organization();
+
+
+            $org_images = $org->get_images(Auth::getid());
+
+            // echo "<pre>";
+            // print_r($org_images);
+            // die;
+
+            if (isset($org_images[$index])) {
+                unset($org_images[$index]);
+            }
+            // print_r($org_images);
+            $images = implode(',', $org_images);
+
+            $arr['images'] = $images;
+            $org->update(Auth::getid(), $arr);
+            // echo $images;
+            // print_r($org_images);
+            // die;
+
             $this->redirect('edit_org_profile');
         } else {
             $this->redirect('home');

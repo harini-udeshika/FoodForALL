@@ -4,7 +4,8 @@ class Donate extends Model{
     public function ranking($arr){
         $place=1;
         $flag=0;
-        for($i=0;$i<sizeof($arr)-1;$i++){
+        if($arr!=0){
+             for($i=0;$i<sizeof($arr)-1;$i++){
 
             if($arr[$i]->tot_amount!=$arr[$i+1]->tot_amount){
                 $arr[$i]->place=$place;
@@ -22,6 +23,10 @@ class Donate extends Model{
             }
         }
         return $arr;
+        }
+       else{
+        return 0;
+       }
     }
   
 
