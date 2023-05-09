@@ -12,27 +12,33 @@ class Admin extends Controller
         $this->view('admin', ['rows' => $data]);
     }
 
-    public function home()
+    public function autherize_admin()
     {
-        if (Auth::isuser('admin')) {
-            $name = "this is name";
-            $result = "this is ressult";
-
-            $admin_model = new Admins();
-            $site_data = $admin_model->homepage_data();
-
-            $this->view('admin.home.view', [
-                'name' => $name,
-                'result' => $result,
-                'site_data' => $site_data,
-            ]);
-        } else {
+        if (!Auth::isuser('admin')) {
             $this->redirect('login');
         }
     }
 
+    public function home()
+    {
+        $this->autherize_admin();
+
+        $name = "this is name";
+        $result = "this is ressult";
+
+        $admin_model = new Admins();
+        $site_data = $admin_model->homepage_data();
+
+        $this->view('admin.home.view', [
+            'name' => $name,
+            'result' => $result,
+            'site_data' => $site_data,
+        ]);
+    }
+
     public function current_password()
     {
+        $this->autherize_admin();
         $errors = array();
 
         if ($_POST) {
@@ -60,9 +66,7 @@ class Admin extends Controller
 
     public function change_password($session_id = '')
     {
-        if (!Auth::isuser('admin')) {
-            $this->redirect('login');
-        }
+        $this->autherize_admin();
 
         if (!isset($_SESSION['USER']->change_password_session_id)) {
             $this->redirect('admin/current_password');
@@ -109,51 +113,137 @@ class Admin extends Controller
 
     public function update_successfully($link = '')
     {
-        if (Auth::isuser('admin')) {
-            $this->view('update.success.view', ['link' => $link]);
-        }
+        $this->autherize_admin();
+
+        $this->view('update.success.view', ['link' => $link]);
     }
 
     public function password_success()
     {
-        if (Auth::isuser('admin')) {
-            $this->view('password.change.success.view');
-        }
+        $this->autherize_admin();
+
+        $this->view('password.change.success.view');
     }
 
-    public function temp(){
+    public function temp()
+    {
         $admin = new Admins();
 
         $data = $admin->homepage_data();
 
-        $this->view('temp');
+        $this->view('finance_manager.home.view');
     }
 
-    public function temp2(){
+    public function temp2()
+    {
         $admin = new Admins();
 
 
-        $this->view('temp_fetch');
+        $today_date = date('y-m-d');
+        // $today_date = '23-01-01';
+        // echo($ongoing_date);
+        $query = "SELECT * FROM event WHERE date < '$today_date'";
+        $data = $admin->query($query);
+
+        print_r($data);
     }
 
-    public function temp3(){
+    public function temp3()
+    {
         $admin = new Admins();
 
 
         $this->view('tmpindex');
     }
 
-    public function temp4(){
+    public function temp6()
+    {
+        $admin = new Admins();
+
+
+        $this->view('eventpage');
+    }
+
+    public function temp4()
+    {
+        $this->autherize_admin();
         $admin = new Admins();
 
 
         $this->view('add_managers.view');
     }
 
-    public function temp5(){
+    public function temp5()
+    {
+        $this->autherize_admin();
         $admin = new Admins();
 
-
         $this->view('section');
+    }
+
+    public function temp8($param)
+    {
+        echo ($param);
+    }
+
+    // event page
+    public function events($page_name = "")
+    {
+        $this->autherize_admin();
+
+        $page_name = strtolower($page_name);
+        $event_model = new Admin_events_model();
+        $path = "../private/views/admin.events.$page_name.php";
+        $html = "";
+
+        if($page_name == ""){
+            $this->view('admin.events');
+            die;
+        }
+
+        if ($page_name == "upcoming") {
+            $ongoing_events = $event_model->selectOngoing();
+            if ($ongoing_events == NULL) {
+                $ongoing_events = array();
+            }
+            ob_start();
+            include $path;
+            $html = ob_get_clean();
+        } elseif ($page_name == "completed") {
+            $completed_events = $event_model->selectCompleted();
+            if ($completed_events == NULL) {
+                $completed_events = array();
+            }
+            ob_start();
+            include $path;
+            $html = ob_get_clean();
+        }
+
+        echo (json_encode($html));
+    }
+    // search event
+    function searchEvent($keyword = "")
+    {
+        if (Auth::isuser('admin')) {
+            $data = array();
+
+            if ($keyword != "") {
+                $admin_model = new Admins();
+                $keyword = addslashes($keyword);
+
+                $query = "SELECT * FROM event WHERE event_id LIKE '%$keyword%' OR name LIKE '%$keyword%' OR location LIKE '%$keyword%'";
+
+                $data = $admin_model->query($query);
+
+                if ($data == null) {
+                    $data = array();
+                }
+            }
+        } else {
+            $data = "redirect";
+        }
+
+        $data = json_encode($data);
+        echo $data;
     }
 }
