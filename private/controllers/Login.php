@@ -13,6 +13,7 @@ class Login extends Controller
             $org = new Organization();
             $area_coordinator=new AreaCoordinator();
             $eventmanager=new EventManager();
+            $finance_manager = new Finance_manager();
             // $p=password_hash("admin@123",PASSWORD_DEFAULT);
             // echo ($p);
             if ($row = $user->where('email', $_POST['email'])) {
@@ -102,6 +103,17 @@ class Login extends Controller
                     
                        
                     
+                }
+                else{
+                    echo ("wrong password");
+                }
+            }
+            else if ($row = $finance_manager->where('email', $_POST['email'])) {
+                $row = $row[0];
+                if (password_verify($_POST['password'], $row->password)) {
+                    print_r($row);
+                    Auth::authenticate($row);
+                    $this->redirect('/Event_manager_home');   
                 }
                 else{
                     echo ("wrong password");

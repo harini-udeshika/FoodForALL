@@ -358,7 +358,7 @@
 
         function getPackData(package_id) {
             console.log(package_id)
-            fetch("http://localhost/FoodForAll/public/org_packages/before_update/" + package_id)
+            fetch("<?=ROOT?>/org_packages/before_update/" + package_id)
                 .then(response => response.json())
                 .then(data => {
                     // console.log(data)
