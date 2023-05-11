@@ -126,6 +126,7 @@ class Admins extends Model
         return $data;
     }
 
+    // homepage data
     public function homepage_data()
     {
         $data = array();
@@ -223,8 +224,7 @@ class Admins extends Model
         }
 
 
-        // calculate data for chart 2
-
+        // calculate data for homepage chart 2
         $donations_by_month = array();
 
         for ($x = 1; $x <= 12; $x++) {

@@ -125,10 +125,6 @@
         transition: 0.4s;
     }
 
-    .search_result:first-of-type{
-        /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
-    }
-
     .search_result:hover {
         cursor: pointer;
         background-color: #f1f1f1;

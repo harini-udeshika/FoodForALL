@@ -161,7 +161,7 @@ class Admin extends Controller
         $admin = new Admins();
 
 
-        $this->view('eventpage');
+        $this->view('shop_org.view');
     }
 
     public function temp4()
