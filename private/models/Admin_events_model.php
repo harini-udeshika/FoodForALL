@@ -26,7 +26,7 @@ class Admin_events_model extends Model
 
                 // calc volunteer progress bar percentage
                 if ($event->no_of_volunteers != 0) {
-                    $event->vol_percentage = (int)$event->vol_count * 100 / $event->no_of_volunteers;
+                    $event->vol_percentage = (int)($event->vol_count * 100 / $event->no_of_volunteers);
                 } else {
                     $event->vol_percentage = 0;
                 }
@@ -37,12 +37,16 @@ class Admin_events_model extends Model
 
 
                 $event->donation_percentage = 0;
+                $collected_donations = 0;
+
                 if ($donations != null) {
-                    $collected_donations = 0;
                     foreach ($donations as $donation) {
                         $collected_donations += $donation->amount;
                     }
+                    // calculate donation percentage
+                    $event->donation_percentage = (int)($collected_donations * 100 / $event->total_amount);
                 }
+                $event->collected_donations = $collected_donations;
             }
         }
         return $data;
@@ -50,8 +54,8 @@ class Admin_events_model extends Model
 
     public function selectCompleted()
     {
-        // $ongoing_date = date('y-m-d');
-        $today_date = '23-01-01';
+        $today_date = date('y-m-d');
+        // $today_date = '23-01-01';
         // echo($ongoing_date);
         $query = "SELECT * FROM event WHERE date < '$today_date'";
         $data = $this->query($query);

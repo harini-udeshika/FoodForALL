@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* background-image: url('../images/bgnew.png'); */
 }
 
 .remove {
@@ -58,6 +59,7 @@ body {
    min-height:30rem ;
     width: 60rem;
     /* border: 0.09rem solid #7681BF; */
+    background-color: #fff;
     display: flex;
     margin-top: 2rem;
     flex-direction: column;
@@ -221,7 +223,7 @@ color: #98C03C;
 display:flex;
 flex-direction:row;
 align-items: center;
-justify-content:space-evenly;
+justify-content:space-evenly; 
 margin-right: 0.3rem;
 }
 .file_form{

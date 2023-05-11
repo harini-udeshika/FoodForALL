@@ -40,4 +40,35 @@ class Add_event extends Controller
         $data = $manager->where('org_gov_reg_no', $_SESSION['USER']->gov_reg_no);
         $this->view('add_event.view', ['allmanagers' => $data]);
     }
+
+    public function isSubscribed(){
+        $event = new Event();
+        $query = "SELECT COUNT(*) AS row_count
+            FROM event
+            WHERE org_gov_reg_no= :id && event_added_date >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+        $arr_1 = ['id' => Auth::gov_reg_no()];
+        $events_30_days = $event->query($query, $arr_1);
+        // echo $events_30_days[0]->row_count;
+        $event_count = $events_30_days[0]->row_count;
+
+        $org = new Subscribe();
+        $data = $org->where('org_gov_reg_no', Auth::gov_reg_no());
+
+        if ($data) {
+            $paid_date = new DateTime($data[0]->date);
+            $today = new DateTime(); // create a new DateTime object for today's date
+            $interval = $paid_date->diff($today);
+            $days = $interval->days;
+            // echo $days;
+
+            if ($days <= 30 && $event_count < 3) {
+                echo "TRUE";
+            } else {
+                echo "FALSE";
+            }
+        } else {
+            echo "FALSE";
+        }
+        
+    }
 }

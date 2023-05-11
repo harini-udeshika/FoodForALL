@@ -6,7 +6,7 @@
 <?php $this->view('includes/submenu') ?>
 
 <div class="body-container">
-    <div class="heading-1">Subscribtion</div>
+    <div class="heading-1">Subscription</div>
     <div class="container">
         <div class="blank col-lg-3 col-sm-12"></div>
         <div class="card card-back2 col-lg-6 col-sm-12 height-770px p-15">
@@ -27,7 +27,7 @@
             </div>
             <div class="txt-center">
                 <div class="heading-1 p-bottom-20">Pay subscription Here</div>
-                <button class="btn btn-lg btn-black"><i class="fa-sharp fa-light fa-circle-dollar"></i> 1000.00 LKR</button>
+                <a href="org_subscribe?pay=true"><button class="btn btn-lg btn-black"><i class="fa-sharp fa-light fa-circle-dollar"></i> 1000.00 LKR</button></a>
 
             </div>
         </div>

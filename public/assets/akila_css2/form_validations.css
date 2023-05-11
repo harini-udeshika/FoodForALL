@@ -1,0 +1,45 @@
+.inputControl.success input{
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #09c372;
+}
+
+.inputControl.error input{
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #ff3860;
+    
+}
+
+.inputControl .client-error{
+    color: #ff3860;
+    font-size: 13px;
+    height: 13px;
+    text-align: left;
+}
+
+.package_name_input.error {
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #ff3860;
+}
+
+.package_name_input.success {
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #09c372;
+}
+
+.client-error-feild{
+    color: #ff3860;
+    font-size: 13px;
+    height: 13px;
+    text-align: left;
+}
+
+.client-error-feild-edit{
+    color: #ff3860;
+    font-size: 13px;
+    height: 13px;
+    text-align: left;
+}

@@ -131,21 +131,34 @@ class Event_org extends Controller
             $event = new Event();
             $event_id = $_GET['id'];
 
-            if($_FILES['images']['name'][0]){
+            if ($_FILES['images']['name'][0]) {
+                $input_img_count = count($_FILES['images']['name']);
+                $img_arr = $event->get_images($event_id);
+                $stored_img_count = 0;
+                if($img_arr[0]){
+                    $stored_img_count = sizeof($img_arr);
+                }
+                
+
                 // echo "<pre>";
-                // echo count($_FILES['images']);
                 // print_r($_FILES['images']);
+                // echo count($_FILES['images']['name']) . "<br>";    
+                // print_r($img_arr);
+                // echo sizeof($img_arr) . "<br>";
                 // die;
-                if (count($_FILES['images']) > 0) {
+
+                
+
+                if (count($_FILES['images']) > 0 && $input_img_count+$stored_img_count <= 3) {
                     // echo count($_FILES['images']);
-    
-                    $event_images = $event->add_images($event_id);
-    
+
+                    $event_images = $event->add_images($event_id,$stored_img_count);
+
                     // echo "<pre>";
                     // echo "hello";
                     // print_r($event_images);
                     // die;
-    
+
                     $arr['photographs'] = $event_images;
                     $event->update_event($event_id, $arr);
                 }
@@ -156,7 +169,8 @@ class Event_org extends Controller
         }
     }
 
-    function delete_images(){
+    function delete_images()
+    {
         if (Auth::getusertype() == 'organization') {
             // echo "hello 2";
             // die;
@@ -164,22 +178,22 @@ class Event_org extends Controller
             $event_id = $_GET['id'];
             $index = $_GET['index'];
 
-            $event_data = $event->where('event_id',$event_id);
+            $event_data = $event->where('event_id', $event_id);
             $event_data = $event_data[0];
             // echo "<pre>";
             // print_r($event_data);
-            
+
             $img_arr = $event->get_images($event_id);
             // print_r($img_arr);
-            
-            
-            if(isset($img_arr[$index])){
+
+
+            if (isset($img_arr[$index])) {
                 unset($img_arr[$index]);
             }
             // print_r($img_arr);
             $images = implode(',', $img_arr);
             // echo $images;
-            
+
             $arr['photographs'] = $images;
             $event->update_event($event_id, $arr);
             // die;
@@ -249,7 +263,7 @@ class Event_org extends Controller
 
         // $cert = new Mail_cert();
         $volunteer = new Volunteer();
-        
+
         // volunteer details 
         $query = "SELECT * FROM volunteer WHERE event_id = :id && attendance = 1";
         $arr = ['id' => $event_id];
@@ -263,7 +277,7 @@ class Event_org extends Controller
                 $user_data = $user_data['0'];
                 $user_name = $user_data->first_name . " " . $user_data->last_name;
                 $recipient = $user_data->email;
-                
+
                 $mail = new Mail;
                 // $subject = "Event Reminder FoodForALL";
                 // $message = "hello";

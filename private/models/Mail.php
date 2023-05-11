@@ -57,8 +57,8 @@ public function email_cert($recipient,$user_name,$event,$org)
       //$mail->Host       = "smtp.mail.yahoo.com";
       $mail->Username   = "foodforallgrp47@gmail.com";
       $mail->Password   = "darbfhbdjdmvlxfe";
-      $subject = "testing";
-      $message = "testing msg";
+      $subject = "Volunteering Certificate - FoodForAll";
+      $message = "We appreciate your contribution";
 
       $pdf = new Mail_cert();
       $pdf_attachment = $pdf->send_certificate($user_name,$event,$org);

@@ -7,7 +7,7 @@
 ?>
  
 <div class="heading">
-        <p>Edit your profile</p>
+        <p>Edit your profile</p> 
     </div>
 
     <div class="profile">

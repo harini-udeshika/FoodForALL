@@ -29,4 +29,41 @@
     <?php $i++?>
     <?php endforeach ?>
 </div>
+<div class="pagination">
+    <div class="this-page">Page 1 of <?php echo $tot_pages; ?></div>
+    <div class="page-number">
+                <a href="?pg_num=1">First</a>
+                <?php 
+                    if(isset($_GET['pg_num']) && $_GET['pg_num']>1){ ?>
+                            <a href="?pg_num=<?php echo $_GET['pg_num'] - 1; ?>">Prev</a>
+                        <?php
+                    }else{ ?>
+                            <a href="?pg_num=1">Prev</a>
+                        <?php
+                    }
+                ?>
+
+                <?php
+                    for($counter=1;$counter<=$tot_pages;$counter){
+                        for($i=$counter;$i<=5 && $i<=$tot_pages;$i++){ ?>
+                            <a href=""><?php echo $i ?></a>
+                        <?php
+                        
+                        }
+                        $counter = $counter + 5;
+                    }  
+                ?>
+
+                <?php 
+                    if(isset($_GET['pg_num']) && $_GET['pg_num'] < $tot_pages){ ?>
+                            <a href="?pg_num=<?php echo $_GET['pg_num'] + 1; ?>">Next</a>
+                        <?php
+                    }else{ ?>
+                            <a href="?pg_num=<?php echo $tot_pages?>">Next</a>
+                        <?php
+                    }
+                ?>
+                <a href="?pg_num=<?php echo $tot_pages; ?>">Last</a>
+    </div>
+</div>
 <?php $this->view('includes/footer')?>
