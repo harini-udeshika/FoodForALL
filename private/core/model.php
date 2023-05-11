@@ -149,4 +149,21 @@ class Model extends Database
         $data['id'] = $id;
         return $this->query($query, $data);
     }
+    
+    public function update_event($event_id, $data)
+    {
+
+        $str = "";
+        foreach ($data as $key => $value) {
+            $str .= $key . "=:" . $key . ",";
+        }
+        $str = trim($str, ",");
+        $data['event_id'] = $event_id;
+
+        $query = "update $this->table set $str where event_id=:event_id";
+        // $query="insert into $this->table($columns) values(:$values)";
+        return $this->query($query, $data);
+    }
+
+
 }

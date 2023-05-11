@@ -158,21 +158,21 @@
                         
                         <tr class="tr1 children" >
                         <td class="childrenbox">
-                                <label for="Less_one_children">Age of the children < 1</label><br>
+                                <label for="Less_one_children">Age of the children <br> below 1</label><br>
                                 <input type="number" min='0' max="5" name="Less_one_children" class="in new fillingbox" id="lo" value="<?php echo $rows->less_one_children?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                             <td class="childrenbox">
-                                <label for="Less_five_children">Age of the children < 5</label><br>
+                                <label for="Less_five_children">Age of the children <br> above 1 and below 5</label><br>
                                 <input type="number"min='0' max="5"name="Less_five_children" class="in new fillingbox" id="lf" value="<?php echo $rows->less_five_children?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>
                                 <small>Erorr message</small>
                             </td>
                             <td class="childrenbox">
-                                <label for="Higher_five_children">Age of the children > 5</label><br>
+                                <label for="Higher_five_children">Age of the children <br> above 5</label><br>
                                 <input type="number"min='0' max="5"name="Higher_five_children" class="in new fillingbox" id="hf" value="<?php echo $rows->higher_five_children?>">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i><br>

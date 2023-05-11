@@ -5,7 +5,9 @@ class Edit_area_profile extends Controller
         
         $user =new AreaCoordinator();
         
-        if(!Auth::logged_in()){
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'area_coordinator')) {
             $this->redirect('home');
         }
         if($_POST){

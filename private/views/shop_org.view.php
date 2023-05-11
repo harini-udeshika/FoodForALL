@@ -1,9 +1,35 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css/styles_org.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/autoload.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/edit_packs.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/shop_item.css">
+
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
+
+
+<div class="body-container">
+    <div class="popup-div" id="popup-div">
+        <div class="popup-contain">
+            <div class="card popup-card">
+                <div class="popup-header">
+                    <div class="popup-heading" id="popup-head">Edit Package</div>
+                    <i class="fa-solid fa-circle-xmark popup-close" id="popup-close-btn"></i>
+                </div>
+                <div class="popup-body">
+                    <!-- <i class="fa-solid fa-circle-exclamation" id="popup-hero-btn"></i> -->
+                    <div class="popup-message" id="popup-message">
+                        <!-- editing form -->
+                        <div class="" style="display:flex;justify-content:center;">
+                                You have not paid for our subscripion
+                        </div>
+                        <!--end editing form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 //  echo "<pre>";

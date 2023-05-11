@@ -70,17 +70,28 @@ class Event extends Model
 
 
 
-    public function add_images($id)
+    public function add_images($id,$count)
     {
-        $event_images = [];
+        if($count != 0){
+            $event_images = $this->get_images($id);
+        } else {
+            $event_images = [];
+        }
+        
+        // print_r($event_images);
+        // echo $count;
+
         $imageCount = count($_FILES['images']['name']);
-        for ($i = 0; $i < $imageCount; $i++) {
-            $image_name = $_FILES['images']['name'][$i];
+        // echo $imageCount;
+        // die;
+        for ($i = $count,$j = 0; $i <= 3 && $j < $imageCount; $i++,$j++) {
+            // echo $j;
+            $image_name = $_FILES['images']['name'][$j];
             $img_extention = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
-            $new_imgName = "event-image-" . $id . '-' . $i . '.' . $image_name;
+            $new_imgName = "event-image-" . $id . '-' . $i+$j . '.' . $image_name;
             // $new_imgName = "image-" . $id . '-' . $i . '.' . $img_extention;
             $img_upload_path = 'uploads/' . $new_imgName;
-            move_uploaded_file($_FILES['images']['tmp_name'][$i], $img_upload_path);
+            move_uploaded_file($_FILES['images']['tmp_name'][$j], $img_upload_path);
 
             $image = new Image();
             $this->crop_org_image($img_upload_path, $img_upload_path, 800, 800);
@@ -89,6 +100,10 @@ class Event extends Model
 
             array_push($event_images, $new_imgName);
         }
+        // echo "<pre>";
+        // print_r($event_images);
+        // echo $imageCount;
+        // die;
 
         $imagesURL = implode(',', $event_images);
         return $imagesURL;

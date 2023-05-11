@@ -28,13 +28,13 @@
 </style>
 
 <body>
-    <input type="text" id="input_div" style="width:300px;height:60px;margin:200px; margin-bottom:0px; padding:20px; font-size:1.5rem; border:none;background-color:rgba(0,0,0,0.4);" placeholder="enter value">
-    <div id="result_div"></div>
-    <!-- <button onclick="dynamic_search('input_div')">none</button> -->
+    <input type="text" id="search_input_div" style="width:300px;height:60px;margin:200px; margin-bottom:0px; padding:20px; font-size:1.5rem; border:none;background-color:rgba(0,0,0,0.4);" placeholder="enter value">
+    <div id="result_div" style="height:50px;"></div>
+    <!-- <button onclick="dynamic_search('search_input_div')">none</button> -->
 </body>
 
 <script>
-    const search_input = document.getElementById("input_div")
+    const search_input = document.getElementById("search_input_div")
     const result_div = document.getElementById("result_div")
 
     search_input.addEventListener("input", () => {
@@ -51,7 +51,7 @@
     function handleInput(keyword) {
         clearTimeout(timerId)
         timerId = setTimeout(() => {
-            dynamic_search(keyword, "http://localhost/food_for_all/public/fetch/searchUser")
+            dynamic_search(keyword, "<?=ROOT?>/fetch/searchUser")
         }, delay);
     }
 
@@ -77,7 +77,7 @@
                     result_div.appendChild(res_div)
                 }
             } else {
-                window.location.href = "http://localhost/food_for_all/public/login"
+                window.location.href = "<?=ROOT?>/login"
             }
         } catch (error) {
             console.error(error);

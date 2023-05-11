@@ -4,10 +4,6 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/table.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/add.css">
-<?php if(!Auth::logged_in()){
-    $this->view('home');
-}
-?>
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');?>
 
@@ -90,7 +86,7 @@
 </div>
 </section>
 <div class="add1"> 
-  <button class="add"><a href="./elderhomedetails" class="add2">Add +</a></button>
+  <button class="add add2"><a href="./elderhomedetails" >Add +</a></button>
 </div>
 
 

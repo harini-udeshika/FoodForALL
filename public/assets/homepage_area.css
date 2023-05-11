@@ -423,13 +423,13 @@ input:hover {
 }
 
 .sub1 {
-    color: #2E3561;
+    /* color: #2E3561; */
     font-weight: bold;
     font-size: 3rem;
 }
 
 .sub2 {
-    color: #2E3561;
+    /* color: #2E3561; */
     font-weight: bold;
     font-size: 30px;
 }

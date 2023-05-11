@@ -4,10 +4,6 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/table.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/add.css">
-<?php if(!Auth::logged_in()){
-    $this->view('home');
-}
-?>
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');?>
 
@@ -50,9 +46,9 @@
         <thead>
             <tr>
                 <th colspan="2" class="filteri2 n1">No of family members</th>
-                <th colspan="2" class="filteri2 n2">No of children age < 1 </th>
-                <th colspan="2" class="filteri2 n1">No of children age < 5</th>
-                <th colspan="2" class="filteri2 n2">No of children age > 5</th>
+                <th colspan="2" class="filteri2 n2">No of children age below 1 <br>(age<1)</th>
+                <th colspan="2" class="filteri2 n1">No of children age above 1 and below 5 <br> (1< age< 5) </th>
+                <th colspan="2" class="filteri2 n2">No of children age above 5 <br>(age>5)</th>
                 <th colspan="2" class="filteri2 n1">No of Adults without diabetes or cholesterol</th>
                 <th colspan="2" class="filteri2 n2">No of Adults with diabetes </th>
                 <th colspan="2" class="filteri2 n1">No of Adults with cholesterol patients</th>
@@ -128,9 +124,9 @@
             <th >Mobile Phone Number</th>
             <th >Address</th>
             <th >Family Members</th>
-            <th >Age of the children <br> < 1</th>
-            <th >Age of the children <br> < 5</th>
-            <th >Age of the children <br> > 5</th>
+            <th >Age of the children below 1 <br>(age<1)</th>
+            <th >Age of the children above 1 and below 5 <br> (1 < age < 5 )</th>
+            <th >Age of the children above 5 <br>(age>5)</th>
             <th >Adults without diabetes or cholesterol</th>
             <th >Adults with diabetes</th>
             <th >Adults with cholesterol</th>
@@ -188,7 +184,3 @@
 
 
         
-            
-        
-
-    
