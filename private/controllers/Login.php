@@ -13,7 +13,7 @@ class Login extends Controller
             $org = new Organization();
             $area_coordinator=new AreaCoordinator();
             $eventmanager=new EventManager();
-            $finance_manager = new Finance_manager();
+            $finance_manager = new Finance_managers();
             // $p=password_hash("admin@123",PASSWORD_DEFAULT);
             // echo ($p);
             if ($row = $user->where('email', $_POST['email'])) {
