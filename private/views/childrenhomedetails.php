@@ -2,10 +2,6 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/familyform1.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/familyform2.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
-<?php if(!Auth::logged_in()){
-    $this->view('home');
-}
-?>
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');?>
 
@@ -106,21 +102,21 @@
                             <table>
                                 <tr class="tr1">
                                     <td class="childrenbox">
-                                        <label for="Less_one_children">Age of the children < 1</label><br>
+                                        <label for="Less_one_children">Age of the children <br> below 1</label><br>
                                         <input type="number" min='0'  name="Less_one_children" class="in new fillingbox" id="lo"> 
                                         <i class="fas fa-check-circle"></i>
                                         <i class="fas fa-exclamation-circle"></i><br>
                                         <small>Erorr message</small>
                                     </td>
                                     <td class="childrenbox">
-                                        <label for="Less_five_children">Age of the children < 5</label><br>
+                                        <label for="Less_five_children">Age of the children <br> above 1 and below 5</label><br>
                                         <input type="number"min='0' name="Less_five_children" class="in new fillingbox" id="lf">
                                         <i class="fas fa-check-circle"></i>
                                         <i class="fas fa-exclamation-circle"></i><br>
                                         <small>Erorr message</small>
                                     </td>
                                     <td class="childrenbox">
-                                        <label for="Higher_five_children">Age of the children > 5</label><br>
+                                        <label for="Higher_five_children">Age of the children <br> above 5</label><br>
                                         <input type="number"min='0' name="Higher_five_children" class="in new fillingbox" id="hf">
                                         <i class="fas fa-check-circle"></i>
                                         <i class="fas fa-exclamation-circle"></i><br>

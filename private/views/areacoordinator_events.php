@@ -4,7 +4,7 @@
 <?php $this->view('includes/submenu')?>
 
 
-<div class="heading">We are participating Events</div>
+<h1>We are participating Events</h1>
     <div class="search">
         <form action="">
              <input type="text" name="find" placeholder="Search event by name " class="search-bar">
@@ -23,54 +23,53 @@
         </div>
     </div>
     <div class="event-container">
-    <?php
-    $i=0;
-    if($row1){
-      $count=count($row1);
-      while($count>0){?>
-    <div class="event-row">
+        <?php
+        $i=0;
+        if($row1){
+        $count=count($row1);
+        while($count>0){?>
+        <div class="event-row">   
+                <a href="<?=ROOT?>/event_area?id=<?=$row1[$i]->event_id?>">
+                    <div class="event">
 
+                        <div class="event-top">
+                            <p><?=$row1[$i]->name?></p>
+                            <div class="event-image">
+                                <img src="<?=$row1[$i]->thumbnail_pic?>">
+                            </div>
+                            <p class="date"><?=$row1[$i]->date?></p>
+                        </div>
 
-            
-            
-        <a href="<?=ROOT?>/eventpage?id=<?=$row1[$i]->event_id?>">
-            <div class="event">
+                        <div class="event-details">
+                            <div class="donations">
+                                <p>Selected Familes</p>
+                                <p><?=$row1[$i]->fcount?></p>
+                            </div>
 
-                <div class="event-top">
-                    <p><?=$row1[$i]->name?></p>
-                    <div class="event-image">
-                        <img src="<?=$row1[$i]->thumbnail_pic?>">
+                            <div class="donations">
+                                <p>Selected children Homes</p>
+                                <p><?=$row1[$i]->ccount?></p>
+                            </div>
+                            <div class="donations">
+                                <p>Selected Elder Homes</p>
+                                <p><?=$row1[$i]->ecount?></p>
+                            </div>
+                            
+                        </div>
+
                     </div>
-                    <p class="date"><?=$row1[$i]->date?></p>
-                </div>
-
-                <div class="event-details">
-                    <div class="donations">
-                        <p>Selected Familes</p>
-                        <p><?=$row1[$i]->fcount?></p>
-                    </div>
-
-                    <div class="donations">
-                        <p>Selected children Homes</p>
-                        <p><?=$row1[$i]->ccount?></p>
-                    </div>
-                    <div class="donations">
-                        <p>Selected Elder Homes</p>
-                        <p><?=$row1[$i]->ecount?></p>
-                    </div>
-                    
-                </div>
-
-            </div>
-        </a>
-        <?php $count--;
-                $i++;
-        }
-    } else { ?>
-        <div class="No_detail col-12">No Event Details Available</div>
-    <?php }
-    ?>
+                </a>
+                <?php $count--;
+                        $i++;
+                }
+            } else { ?>
+                <div class="No_detail col-12">No Event Details Available</div>
+            <?php }
+            ?>
+        </div>
+        
     </div>
     </div>
-</div>
+    </div>
+    </div>
 <?php $this->view('includes/footer')?>  

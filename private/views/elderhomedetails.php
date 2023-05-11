@@ -2,10 +2,6 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/familyform1.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/familyform2.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
-<?php if(!Auth::logged_in()){
-    $this->view('home');
-}
-?>
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');?>
 <!-- <div class="center">

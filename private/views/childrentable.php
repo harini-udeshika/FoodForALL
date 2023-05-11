@@ -4,10 +4,6 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/table.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/add.css">
-<?php if(!Auth::logged_in()){
-    $this->view('home');
-}
-?>
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');?>
 
@@ -47,9 +43,9 @@
         <thead>
             <tr>
                 <th colspan="2" class="filteri2 n1">No of Children</th>
-                <th colspan="2" class="filteri2 n2">No of children <br> age  < 1</th>
-                <th colspan="2" class="filteri2 n1">No of children <br> age  < 5</th>
-                <th colspan="2" class="filteri2 n2">No of children <br> age  > 5</th>
+                <th colspan="2" class="filteri2 n2">No of children age below 1 <br>(age<1)</th>
+                <th colspan="2" class="filteri2 n1">No of children age above 1 and below 5 <br> (1< age< 5) </th>
+                <th colspan="2" class="filteri2 n2">No of children age above 5 <br>(age>5)</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -104,9 +100,9 @@
             <th>Mobile phone number</th>
             <th>Address</th>
             <th>Number of children</th>
-            <th >less_one_children</th>
-            <th >less_five_children</th>
-            <th >higher_five_children</th>
+            <th >Age of the children below 1 <br>(age<1)</th>
+            <th >Age of the children above 1 and below 5 <br> (1 < age < 5 )</th>
+            <th >Age of the children above 5 <br>(age>5)</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -146,7 +142,6 @@
 
     </table>
     </div>
-    
 
 </div>
 <script src="<?=ROOT?>/assets/hide.js"></script>

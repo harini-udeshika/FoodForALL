@@ -4,6 +4,11 @@ class Childrenhomedetails extends Controller{
     function index()
     {
         //code..
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'area_coordinator')) {
+            $this->redirect('home');
+        }
         $errors=array();
         if(count($_POST)>0){
             $chome=new Childrenhome();

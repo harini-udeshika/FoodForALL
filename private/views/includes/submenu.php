@@ -122,17 +122,17 @@ if ($data->profile_pic) {
                         </div>
                     <hr>
                     <a href="edit_area_profile" class="sub-menu-link">
-                        <i class="fa-solid fa-user"></i>
+                        <i class="fa-solid fa-user" style="color:#7681BF"></i>
                         <p>View profile</p>
                         <span>></span>
                     </a>
-                    <a href="edit_area_profile" class="sub-menu-link">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <p>Edit profile</p>
+                    <a href="edit_area_password" class="sub-menu-link">
+                    <i class="fa-solid fa-key" style="color:#7681BF"></i>
+                        <p>Change password</p>
                         <span>></span>
                     </a>
                     <a href="logout" class="sub-menu-link">
-                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <i class="fa-solid fa-right-from-bracket" style="color:#7681BF"></i>
                         <p>Log out</p>
                         <span>></span>
                     </a>

@@ -28,9 +28,9 @@ body{
 .attendenceTitle{
 
     font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
+    font-size: 2rem;
     color: #000000;
+    text-align: center;
     /* padding-left: 2%; */
     padding-bottom: 3%;
     /* float: left; */
@@ -110,4 +110,23 @@ body{
 
 .lastbutton{
     margin-bottom: 5%;
+}
+
+.add-card{
+    margin:  0 auto;
+    width: 700px;
+    min-width: 100px;
+}
+
+.scan{
+    width: 600px;
+    margin: 0 auto;
+    /* max-width: 800px; */
+}
+
+.attcard{
+    background-image: url("../images/bg2.png");
+    background-size: cover;
+    margin: auto;
+    
 }

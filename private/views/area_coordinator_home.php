@@ -1,20 +1,20 @@
 <?php $this->view('includes/header')?>
 <?php $this->view('includes/navbar')?>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<link rel="stylesheet" href="<?=ROOT?>/assets/homepage_area_blocks.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_area.css">
-
-<?php if(Auth::logged_in()){
-   
-    $this->view('includes/submenu');
-}
+<?php $this->view('includes/submenu');
+$name = array_column($rows1, 'name')[0];
+$email = array_column($rows1, 'email')[0];
+$district = array_column($rows1, 'district')[0];
+$area = array_column($rows1, 'area')[0];
 ?>
 
-    <div class="container-main manin1">
+<div class="container-main manin1">
         <div class="description">
             <div class="content">
                 <p class="main">Good <?=Auth::time()?></p>
-                <p class="sub1">Welcome <br><?=Auth::area_user()?><br> Back !!</p>
+                <p class="sub1">Welcome Area Coordinator<br><?php echo $name; ?><br> Back !!</p>
                 <div>
                 </div>
             </div>
@@ -22,137 +22,120 @@
         <div class="image_section">
             <img src="images/image.png" alt="" class="main-image">
         </div>
-    </div>
-    <div>
-    
-        <p class="sub1">MY AREA</p>
-       
-    </div>
+</div>
 
+<div class="areatitals">
     
-        
-    
-    <div class="sub_section">
-        <div class="sec2">
-        <p class="sub3">30</p>
-        <hr>
-        <p class="sub2">Number of individual Families</p>
-            
-        </div>
-        <div class="sec2">
-            <p class="sub3">26</p>
-            <hr>
-            <p class="sub2">Number  of Children's Homes</p>
-        </div>
-        <div class="sec2">
-        <p class="sub3">48</p>
-        <hr>
-        <p class="sub2">Number  of Elder homes</p>
-        </div>
-    </div>
-    <div class="map">
-        <p class="sub1">Area map</p>
-    <iframe width="100%"height="500" src="https://maps.google.com/maps?q=<?=Auth::area_area()?>&output=embed" ></iframe>
-    </div>
+    <h1>MY AREA</h1>
+   
+</div>
 
-    
-    <!-- <div class="about_us">
-        <hr>
-        <p class="sub">About us</p>
-        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi molestiae maiores non et neque
-            nesciunt aut minus quidem tenetur. Quia velit nam corrupti nobis minus. Ipsum amet quasi placeat libero.</p>
-        <img src="./images/charity.jpg" alt="" class="charity_image">
-        <p class="caption">A small text about the image</p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem necessitatibus repellat quidem modi non
-            corporis vel cum,
-            ullam provident ut laborum error laudantium assumenda tempora suscipit architecto aliquam cupiditate
-            inventore?Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Voluptatem necessitatibus repellat quidem modi non corporis vel cum,
-            ullam provident
-            ut laborum error laudantium assumenda tempora suscipit architecto aliquam cupiditate inventore?
-        </p>
+<div class="card-container">
+		<div class="card">
+			<img src="images/family.png" alt="Card 1 Image">
+			<?php foreach($rows1 as $row1):?>
+            <p class="sub2"><?=$row1->fnum?></p>
+            <?php endforeach;?>
+			<h2 class="sub5">Number of<br> individual Families</h2> 
+			<div class="card-info">Additional information for Card 1.</div>
+		</div>
+		<div class="card">
+			<img src="images/children.png" alt="Card 2 Image">
+			<?php foreach($rows3 as $row3):?>
+            <p class="sub2"><?=$row3->cnum?></p>
+            <?php endforeach;?>
+			<h2 class="sub5">Number of Children's <br> Homes</h2>
+			<div class="card-info">Additional information for Card 2.</div>
+		</div>
+		<div class="card">
+			<img src="images/elders.png" alt="Card 3 Image">
+			<?php foreach($rows2 as $row2):?>
+            <p class="sub2"><?=$row2->enum?></p>
+            <?php endforeach;?>
+			<h2 class="sub5">Number of Elders' homes</h2>
+			<div class="card-info">Additional information for Card 3.</div>
+		</div>
+		
+	</div>
+
+<div>
+    <div id="section1">
+        <div class="areatitals">
+            <h1>MAP</h1>
+        </div>
+        <iframe width="100%"height="500" src="https://maps.google.com/maps?q=<?=Auth::area_area()?>&output=embed" ></iframe>
     </div>
-    <div class="events">
-        <div class="event1">
-            <div class="section">
-                <p class="sub">Event Name</p>
-                <img src="donation1.jpeg" alt="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque laborum perferendis deleniti quibusdam,
-                hic dolores accusantium tempore, inventore asperiores voluptatibus dicta mollitia odio qui iusto quis
-                ratione veritatis, quisquam minus!
-                <button class="readmore">More details</button>
-            </div>
-            <div class="section">
-                <p class="sub">Event Name</p>
-                <img src="donation2.jpg" alt="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque laborum perferendis deleniti quibusdam,
-                hic dolores accusantium tempore, inventore asperiores voluptatibus dicta mollitia odio qui iusto quis
-                ratione veritatis, quisquam minus!
-                <button class="readmore">More details</button>
-            </div>
+    <div id="section2">
+        <div class="areatitals">
+            <h1>MY AREA DETAILS</h1>
+        </div>
+        <ul class="my-list">
+           
+            <li class=des_list><i class="fa-solid fa-signature"></i><h3>Area Coordinator's- <Name-span class="btn-green"><?php echo $name; ?></Name-span></h3></li>
+            <li><i class="fa-solid fa-paper-plane"></i><h3>Email Address-<Name-span class="btn-green"><?php echo $email; ?></Name-span></h3></li>
+            <li><i class="fa-solid fa-building-circle-arrow-right"></i><h3>Name of the District-<Name-span class="btn-green"><?php echo $district; ?></Name-span></h3></li>
+            <li><i class="fa-solid fa-chart-area"></i><h3>Name of the Area-<Name-span class="btn-green"><?php echo $area; ?></Name-span></h3></li>
+        </ul>
+        <div class="gallery">
+        <img src="images/areacoordinator.png" alt="Card 1 Image">
+        <!-- <img src="image2.jpg" alt="Image 2">
+        <img src="image3.jpg" alt="Image 3"> -->
         </div>
         
-        <div class="event2">
-            <div class="section">
-                <p class="sub">Event Name</p>
-                <img src="donation3.jpeg" alt="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque laborum perferendis deleniti quibusdam,
-                hic dolores accusantium tempore, inventore asperiores voluptatibus dicta mollitia odio qui iusto quis
-                ratione veritatis, quisquam minus!
-                <button class="readmore">More details</button>
-            </div>
-            <div class="section">
-                <p class="sub">Event Name</p>
-                <img src="donation4.jpg" alt="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque laborum perferendis deleniti quibusdam,
-                hic dolores accusantium tempore, inventore asperiores voluptatibus dicta mollitia odio qui iusto quis
-                ratione veritatis, quisquam minus!
-                <button class="readmore">More details</button>
-            </div>
+    </div>
+</div>
+
+
+<div class="containor">
+    <h1>Frequently asked questions?</h1>
+    <div class="tab">
+        <input type="radio" name="acc" id="acc1">
+        <label for="acc1">
+            <h2>01</h2>
+            <h3>How do we apply?</h3>
+        </label>
+        <div class="content1">
+            <p>Yes. We're always interested in improving this generator 
+                and one of the best ways to do that is to add new and interesting 
+                paragraphs to the generator. If you'd
+                like to contribute some random paragraphs, please contact us.</p>
+                <p>Yes. We're always interested in improving this generator 
+                and one of the best ways to do that is to add new and interesting 
+                paragraphs to the generator. If you'd
+                like to contribute some random paragraphs, please contact us.</p>
         </div>
     </div>
-    <div class="content">
-        <hr>
-        <p class="sub1">My area</p>
-        <hr>
-        <div>
+    <div class="tab">
+        <input type="radio" name="acc" id="acc2">
+        <label for="acc2">
+            <h2>02</h2>
+            <h3>How do we apply?</h3>
+        </label>
+        <div class="content1">
+            <p>Yes. We're always interested in improving this generator 
+                and one of the best ways to do that is to add new and interesting 
+                paragraphs to the generator. If you'd
+                like to contribute some random paragraphs, please contact us.</p>
         </div>
-    </div> -->
-
-
-    
-    <div>
-    <p class="sub1">All records</p>
     </div>
-
-    <div class="mychart" >
-    
-        <canvas id="myChart"></canvas>
+    <div class="tab">
+        <input type="radio" name="acc" id="acc3">
+        <label for="acc3">
+            <h2>03</h2>
+            <h3>How do we apply?</h3>
+        </label>
+        <div class="content1">
+            <p>Yes. We're always interested in improving this generator 
+                and one of the best ways to do that is to add new and interesting 
+                paragraphs to the generator. If you'd
+                like to contribute some random paragraphs, please contact us.</p>
+        </div>
     </div>
-    <script>
-        let myChart=document.getElementById("myChart").getContext('2d');
-        let massPopChart= new Chart(myChart, {
-            type:'bar',
-            data:{
-                labels:['Family','Children House','Elder House'],
-                datasets:[{
-                    label:"Numbers",
-                    data:[
-                    30,26,48],
-                    backgroundColor:['#658864','#B7B78A','#DDDDDD']
-                }]
-            },
-            options: {
-            scales: {
-            y: {
-                suggestedMin: 0,
-                suggestedMax: 30
-            }
-        }
-    }
-        });
-    </script>
+</div>
+
+
 
     
-<?php $this->view('includes/footer')?>
+    <?php $this->view('includes/footer')?>  
+    
+

@@ -1,11 +1,12 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/profile.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/area_css/table.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
 
-<div class="heading">
-        <p>My Profile</p>
-    </div>
+<div class="coor">My Profile
+    
+</div><br>
 
     <div class="profile">
         <div class="details">
@@ -22,10 +23,9 @@
                 <img src="<?php echo $image?>" alt="" class="des-user-icon" >
                 <div class="remove">
                     <a href="changepic">Upload new |</a>
-                    <form method="post" action="./delete_pic.php" class="remove_form"><button type="submit"
+                    <form method="post" action="./delete_pic" class="remove_form"><button type="submit"
                             class="remove_button">Remove</button> </form>
-                </div>
-                <a href="current_password"><button class="change-pwd">Change Password</button></a>
+            </div>
             </div>
 
             <div class="profile-details">

@@ -4,9 +4,12 @@ class Familydetails_edit extends Controller{
         $errors=array();
         $family =new Family();
         $id=$_GET['updateid'];
-        if(!Auth::logged_in()){
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'area_coordinator')) {
             $this->redirect('home');
         }
+        
         if(count($_POST)>0){
             if($family->validate($_POST)){
                     $arr['FullName']=$_POST['FullName'];
