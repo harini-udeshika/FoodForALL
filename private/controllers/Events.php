@@ -10,9 +10,7 @@ class Events extends Controller
 
         $data = $user->where('id', Auth::getid());
 
-        if (!Auth::logged_in()) {
-            $this->redirect('home');
-        }
+       
 
         if (isset($_GET['find'])) {
 
