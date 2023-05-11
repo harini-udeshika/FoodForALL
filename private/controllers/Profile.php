@@ -10,13 +10,19 @@ class Profile extends Controller
 
         $certificate = new Certificate();
         $image = new Image();
-        if (isset($_GET['id']) && $_GET['id'] != Auth::getid()) {
+        if(isset($_GET["cert_id"])){
+            $id=$_GET["cert_id"];
+            $data=$certificate->where('id',$id);
+            $data=$data[0];
+            $this->view('credential',['data'=>$data]);
+        }
+        else if (isset($_GET['id']) && $_GET['id'] != Auth::getid()) {
 
             $id = $_GET['id'];
-            $query="select certificates.* ,event.name ,event.date 
+            $query="SELECT certificates.* ,event.name ,event.date ,organization.name as org_name,organization.profile_pic
             from event inner join certificates 
-            on event.event_id=certificates.event_id 
-            where certificates.user_id=:id";
+            on event.event_id=certificates.event_id inner join organization on event.org_gov_reg_no = organization.gov_reg_no
+            where certificates.user_id= :id && certificates.status=1";
             $certificate=$certificate->query($query,['id'=>$id]);
             $data = $user->where('id', $id);
 
@@ -66,9 +72,9 @@ class Profile extends Controller
             $this->view('profile', ['rows' => $data, 'event_data' => $event_data, 'donor_data' => $donor_data, 'tot_amount' => $tot_amount, 'tot_events' => $tot_events, 'org_name' => $org_name, 'd_org_name' => $d_org_name, 'cert' => $certificate]);
         } else {
             if ($_POST > 0) {
-                if ($image->pic_validate()) {
+                if ($image->pdf_validate()) {
 
-                    $filename = $image->pic_validate();
+                    $filename = $image->pdf_validate();
                     $arr['file_name'] = $filename;
                     $arr['user_id'] = Auth::getid();
                     $arr['description'] = $_POST['description'];
@@ -90,10 +96,10 @@ class Profile extends Controller
             }
             // $certificate = $certificate->where('user_id', Auth::getid());
             $data = $user->where('id', Auth::getid());
-            $query="select certificates.* ,event.name ,event.date 
+           $query="SELECT certificates.* ,event.name ,event.date ,organization.name as org_name,organization.profile_pic
             from event inner join certificates 
-            on event.event_id=certificates.event_id 
-            where certificates.user_id=:id";
+            on event.event_id=certificates.event_id inner join organization on event.org_gov_reg_no = organization.gov_reg_no
+            where certificates.user_id= :id && certificates.status=1";
             $certificate=$certificate->query($query,['id'=>Auth::getid()]);
             if (!Auth::logged_in()) {
                 $this->redirect('home');

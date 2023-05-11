@@ -38,7 +38,7 @@ if (file_exists($rows->profile_pic)) {
 <div class="certificate_section" id="certificates">
     <div class="heading_certificates">
         <p>Volunteering Certificates</p>
-    <?php if (Auth::getid() == $rows->id): ?>
+        <?php if (Auth::getid() == $rows->id): ?>
         <button id="add">Add +</button>
 
     </div>
@@ -63,18 +63,18 @@ if (file_exists($rows->profile_pic)) {
             </label>
             <br>
             <div class="select">
-            <!-- <label for="event">Select the event:</label> -->
-           
-            <select name="event" id="event">
-                <option value="select">Select the event</option>
-                <?php $i = 0;?>
-                <?php if ($select): ?>
-                <?php foreach ($select as $data): ?>
+                <!-- <label for="event">Select the event:</label> -->
+
+                <select name="event" id="event">
+                    <option value="select">Select the event</option>
+                    <?php $i = 0;?>
+                    <?php if ($select): ?>
+                    <?php foreach ($select as $data): ?>
                     <option value="<?=$select[$i]->event_id?>"><?=$select[$i]->name?></option>
-                <?php $i++?>
-                <?php endforeach?>
-                <?php endif ?>
-            </select>
+                    <?php $i++?>
+                    <?php endforeach?>
+                    <?php endif ?>
+                </select>
             </div>
             <textarea name="description" placeholder="Write your thoughts" class="form_text"></textarea>
             <button type="submit" class="save">Submit</button>
@@ -93,28 +93,34 @@ if (file_exists($rows->profile_pic)) {
 //print_r($rows);?>
             <?php foreach ($cert as $value): ?>
 
-            <?php if ($i % 3 == 0 && $i != 0): ?>
+            <?php if ($i % 2 == 0 && $i != 0): ?>
         </div>
         <div class="certificates_row">
             <?php endif?>
+           
+            <div>
             <div class="cert_del_confirm visible">
                 <span>Are you sure you want to delete?</span>
                 <a href="<?=ROOT?>/profile?delete=<?=$cert[$i]->id?>"><button>Delete</button></a>
             </div>
-            <div>
-            <?php if (Auth::getid() == $rows->id): ?>
+                <?php if (Auth::getid() == $rows->id): ?>
                 <a class="cert_del"><i class="fa-solid fa-trash fa-xl"></i></a>
-            <?php endif; ?>
-                <div class="image"><img src="<?=$cert[$i]->file_name?>"></div>
+                <?php endif; ?>
 
-                
-            <p class="des"><b><?=$cert[$i]->name?></b> &nbsp;held on &nbsp;<?=$cert[$i]->date?><br>
+                <div class="des">
+                    <img src="<?=$cert[$i]->profile_pic?>">
+                    <div class="cert_details">
+                    <span class="main"><?=$cert[$i]->name?> organized by <?=$cert[$i]->org_name?></span>
+                    <br><span>held on <?=$cert[$i]->date?></span>
                 <?php if ($cert[$i]->description): ?>
-                    <i><?=$cert[$i]->description?></i>
-                <?php endif?>
-            </p>
-               
-             
+                        <span><?=$cert[$i]->description?></span>
+                        
+                    <?php endif?>
+                    <br>
+                    <a href="profile?cert_id=<?=$cert[$i]->id?>">Show credential &nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                       
+                </div>
             </div>
             <?php $i++;
 // echo ($i); ?>
@@ -138,9 +144,11 @@ if (file_exists($rows->profile_pic)) {
         <p>Recent Activities</p>
     </div>
     <?php if (!$event_data): ?>
-                <div class="no_cert"><i class="fa-solid fa-chart-line fa-xl"></i>&nbsp;&nbsp;&nbsp;<p>No activities yet!<p></div>
-            <?php endif;?>
-             <?php if ($event_data): ?>
+    <div class="no_cert"><i class="fa-solid fa-chart-line fa-xl"></i>&nbsp;&nbsp;&nbsp;<p>No activities yet!
+        <p>
+    </div>
+    <?php endif;?>
+    <?php if ($event_data): ?>
     <div class="scroll">
         <table>
             <tr class="table_headings">
@@ -181,7 +189,10 @@ $i = 0;?>
         <p>Recent Donations</p>
     </div>
     <?php if (!$donor_data): ?>
-                <div class="no_cert"><i class="fa-solid fa-sack-dollar fa-xl"></i><p>&nbsp;&nbsp;&nbsp;No donations yet<p></div>
+    <div class="no_cert"><i class="fa-solid fa-sack-dollar fa-xl"></i>
+        <p>&nbsp;&nbsp;&nbsp;No donations yet
+        <p>
+    </div>
     <?php endif;?>
 
     <?php if ($donor_data): ?>
@@ -211,7 +222,7 @@ $i = 0;?>
 //  echo ($i); ?>
 
             <?php endforeach;?>
-    <?php endif?>
+            <?php endif?>
         </table>
     </div>
 </div>

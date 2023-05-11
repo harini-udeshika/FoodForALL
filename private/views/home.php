@@ -187,7 +187,7 @@
 
 </div>
 
-
+<?php if(!Auth::logged_in()):?>
 <div class="final">
     <hr>
     <img src="./images/logo.png">
@@ -195,4 +195,16 @@
     <a href="signup"><button class="readmore">Sign in</button></a>
 
 </div>
+<?php endif; ?>
+
+<?php if(Auth::logged_in()):?>
+<div class="final">
+    <hr>
+    <img src="./images/logo.png">
+    <p class="sub">Join with us!</p>
+    <a href="events"><button class="readmore">View Events</button></a>
+
+</div>
+<?php endif; ?>
+
 <?php $this->view('includes/footer')?>
