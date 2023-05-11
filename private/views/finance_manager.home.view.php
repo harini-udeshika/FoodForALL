@@ -187,7 +187,7 @@
     <div class="main-cont">
         <div class="sidebar">
             <div class="sidebar_item" data-param="upcoming" data-page_name="Budget Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Budget Requests</div>
-            <div class="sidebar_item" data-param="completed" data-page_name="Completed Events" data-search_url="<?= ROOT ?>" id="sidebar_item-2">Subscription Mails</div>
+            <div class="sidebar_item" data-param="completed" data-page_name="Subscription Mails" data-search_url="<?= ROOT ?>" id="sidebar_item-2">Subscription Mails</div>
             <div class="sidebar_item" data-param="Search" data-page_name="Search" id="sidebar_item-3">Search</div>
         </div>
 
@@ -371,10 +371,7 @@
     const result_div = document.getElementById("result_div")
     const page_home = document.querySelector("#sidebar_item-1")
 
-    // // define global varibales
-    // let timerId;
-    // const delay = 700
-    // let search_func_url = ""
+    // define global varibales
 
     // // onload function
     // document.addEventListener("DOMContentLoaded", function() {
@@ -410,91 +407,94 @@
     }
     // <-------------------------sidebar - END------------------------->
 
-    // // <-------------------------search------------------------->
+    // <-------------------------search------------------------->
 
-    // // add event listner for search bar
-    // search_input.addEventListener("input", () => {
-    //     if (search_input.value == " " || search_input.value == "") {
-    //         search_input.value = ""
-    //         result_div.innerHTML = ""
-    //     } else {
-    //         handleInput(search_input.value)
-    //     }
-    // })
+    let timerId;
+    const delay = 700
 
-    // function handleInput(keyword) {
-    //     clearTimeout(timerId)
-    //     timerId = setTimeout(() => {
-    //         dynamic_search(keyword, "<?= ROOT ?>/admin/searchEvent")
-    //     }, delay);
-    // }
+    // add event listner for search bar
+    search_input.addEventListener("input", () => {
+        if (search_input.value == " " || search_input.value == "") {
+            search_input.value = ""
+            result_div.innerHTML = ""
+        } else {
+            handleInput(search_input.value)
+        }
+    })
 
-    // async function dynamic_search(keyword, search_func_url) {
-    //     try {
-    //         const response = await fetch(search_func_url + "/" + keyword);
-    //         const data = await response.json();
+    function handleInput(keyword) {
+        clearTimeout(timerId)
+        timerId = setTimeout(() => {
+            dynamic_search(keyword, "<?= ROOT ?>/admin/searchEvent")
+        }, delay);
+    }
 
-    //         if (data != 'redirect') {
-    //             result_div.innerHTML = ""
+    async function dynamic_search(keyword, search_func_url) {
+        try {
+            const response = await fetch(search_func_url + "/" + keyword);
+            const data = await response.json();
 
-    //             if (data.length > 0) {
-    //                 data.forEach(element => {
-    //                     create_result_holder(element.name, element.location, element.date)
-    //                     console.log(element)
-    //                 });
-    //             } else {
-    //                 const res_div = document.createElement('div')
-    //                 res_div.classList = "text-r-1"
-    //                 res_div.innerHTML = "no result"
-    //                 result_div.appendChild(res_div)
-    //             }
-    //         } else {
-    //             window.location.href = "<?= ROOT ?>/login"
-    //         }
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-    // // <-------------------------search : END------------------------->
+            if (data != 'redirect') {
+                result_div.innerHTML = ""
 
-    // // <-------------------------search-result functions------------------------->
-    // function create_result_holder(eventName, orgName, eventDate) {
-    //     // create CustomElements 
-    //     var search_result_div = document.createElement("div")
-    //     var event_name = document.createElement("div")
-    //     var hr_line = document.createElement("div")
-    //     var org_name = document.createElement("div")
-    //     var event_date = document.createElement("div")
+                if (data.length > 0) {
+                    data.forEach(element => {
+                        create_result_holder(element.name, element.location, element.date)
+                        console.log(element)
+                    });
+                } else {
+                    const res_div = document.createElement('div')
+                    res_div.classList = "text-r-1"
+                    res_div.innerHTML = "no result"
+                    result_div.appendChild(res_div)
+                }
+            } else {
+                window.location.href = "<?= ROOT ?>/login"
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    // <-------------------------search : END------------------------->
 
-    //     // add classes
-    //     search_result_div.classList.add("search_result")
-    //     event_name.classList.add("col-12", "w-semibold", "txt-12")
-    //     event_name.classList.add("col-12", "w-semibold", "txt-12")
-    //     hr_line.classList.add("h-line")
-    //     org_name.classList.add("col-12", "w-medium", "txt-09")
-    //     event_date.classList.add("col-12", "w-medium", "txt-09")
+    // <-------------------------search-result functions------------------------->
+    function create_result_holder(eventName, orgName, eventDate) {
+        // create CustomElements 
+        var search_result_div = document.createElement("div")
+        var event_name = document.createElement("div")
+        var hr_line = document.createElement("div")
+        var org_name = document.createElement("div")
+        var event_date = document.createElement("div")
 
-    //     // set attributes
-    //     search_result_div.setAttribute("style", "position: relative;")
-    //     event_name.setAttribute("style", "position: absolute;top:10px;left:15px")
-    //     org_name.setAttribute("style", "position: absolute;top:48px;left:25px;")
-    //     event_date.setAttribute("style", "position: absolute;top:68px;left:25px;")
+        // add classes
+        search_result_div.classList.add("search_result")
+        event_name.classList.add("col-12", "w-semibold", "txt-12")
+        event_name.classList.add("col-12", "w-semibold", "txt-12")
+        hr_line.classList.add("h-line","txt-gray")
+        org_name.classList.add("col-12", "w-medium", "txt-09","txt-gray")
+        event_date.classList.add("col-12", "w-medium", "txt-09","txt-gray")
 
-    //     // add values
-    //     event_name.innerHTML = eventName
-    //     org_name.innerHTML = "Location : " + orgName
-    //     event_date.innerHTML = "Event date : " + eventDate
+        // set attributes
+        search_result_div.setAttribute("style", "position: relative;")
+        event_name.setAttribute("style", "position: absolute;top:10px;left:15px")
+        org_name.setAttribute("style", "position: absolute;top:48px;left:25px;")
+        event_date.setAttribute("style", "position: absolute;top:68px;left:25px;")
 
-    //     // assemble
-    //     result_div.appendChild(search_result_div)
-    //     search_result_div.appendChild(event_name)
-    //     search_result_div.appendChild(hr_line)
-    //     search_result_div.appendChild(org_name)
-    //     search_result_div.appendChild(event_date)
+        // add values
+        event_name.innerHTML = eventName
+        org_name.innerHTML = "Location : " + orgName
+        event_date.innerHTML = "Event date : " + eventDate
 
-    //     // result_div.appendChild(search_result_div)
-    // }
-    // create_result_holder("eventName", "OrgName", "eventDate")
+        // assemble
+        result_div.appendChild(search_result_div)
+        search_result_div.appendChild(event_name)
+        search_result_div.appendChild(hr_line)
+        search_result_div.appendChild(org_name)
+        search_result_div.appendChild(event_date)
+
+        // result_div.appendChild(search_result_div)
+    }
+    create_result_holder("eventName", "OrgName", "eventDate")
     // <-------------------------search-result functions : End------------------------->
 </script>
 
