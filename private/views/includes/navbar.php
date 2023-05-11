@@ -126,7 +126,7 @@ $data = $data[0];
             <a href="./area_coordinator_home">Home</a>
         </div>
         <div class="nav-i">
-            <a href="./events">Events</a>
+        <a href="./areacoordinator_events">Events</a>
         </div>
         <div class="nav-i">
 

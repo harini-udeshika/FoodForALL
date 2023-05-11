@@ -2,8 +2,10 @@
 class Childrentable extends Controller
 {
     function index(){
-        if(!Auth::logged_in()){
-            $this->redirect('login');
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'area_coordinator')) {
+            $this->redirect('home');
         }
 
         $user=new Childrenhome();

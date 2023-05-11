@@ -7,7 +7,7 @@ class Profile_areacoordinator extends Controller
         
         $data = $user->where('email',Auth::getemail());   
         
-        if(!Auth::logged_in()){
+        if(!Auth::getusertype() == 'areacoordinator'){
             $this->redirect('home');
         }
         

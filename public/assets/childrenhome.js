@@ -6,8 +6,11 @@ const regNo =document.getElementById('regno');
 const contact1 =document.getElementById('contact1');
 const contact2 =document.getElementById('contact2');
 const address =document.getElementById('address');
-const hc =document.getElementById('hc');
-const mc =document.getElementById('mc');
+const lo =document.getElementById('lo');
+const lf =document.getElementById('lf');
+const hf =document.getElementById('hf');
+const mem =document.getElementById('mem');
+
 
 var valid=true;
 form.addEventListener('submit',(e)=>{
@@ -43,6 +46,7 @@ function inputChecker(){
    const contact1Value=contact1.value.trim();
    const contact2Value=contact2.value.trim();
    const addressValue=address.value.trim();
+   const memberValue=mem.value.trim();
     //get the values from the inputs
     
         if(NameValue===''){
@@ -54,6 +58,17 @@ function inputChecker(){
             setSuccessFor(Name);
             
         }
+
+        if(!memberValue){
+            // show error
+            setErrorFor(mem, 'Number of the members cannot be blank');
+            
+        }else{
+            //success
+            setSuccessFor(mem);
+            
+        }
+
         if(OwnerNameValue===''){
             // show error
             setErrorFor(OwnerName, 'Owner name cannot be blank');

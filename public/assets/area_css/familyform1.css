@@ -7,10 +7,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 50px;
     
+        
+}
+.form_background{
+    background-image: url('backgroundform.png');
+    background-size: cover;
+    background-position: center;
 }
 
-.familydetailform{
+
+
+/* .familydetailform{
     width: 900px;;
     height: auto;
     margin: 10px;
@@ -28,7 +37,7 @@
     margin-bottom:200px;
     box-shadow: rgba(50, 50, 93, 0.25) -40px -30px 60px -12px, rgba(0, 0, 0, 0.3) 40px 18px 36px -18px;
     
-}
+} */
 
 label{
     font-weight:bold;
@@ -66,7 +75,11 @@ label{
 } */
 
 .coor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-top: 30px;
+    padding-bottom: 20px;
     font-size: 20px;
     font-weight: 800;
 }
