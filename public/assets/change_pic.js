@@ -23,7 +23,7 @@ function isValidFile(image) {
     if(image.files.length==0){
         small.innerHTML="File can't be empty";
         small.parentElement.className=" error";
-    }else if(image.files[0].type!="image/jpeg"){
+    }else if(image.files[0].type!="application/pdf"){
         small.innerHTML="File type is not valid";
         small.parentElement.className=" error";
     }else if(image.files[0].size>1024*1024*8){
