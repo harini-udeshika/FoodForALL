@@ -6,13 +6,16 @@
 
 <style>
     /* .main-cont {} */
+    :root {
+        --sidebarWidth_left: 250px;
+        --sidebarWidth_right: 300px;
+        --titlebar_height: 88px;
+    }
 
     .sidebar {
         position: fixed;
-        /* top: 100; */
-        width: 250px;
+        width: var(--sidebarWidth_left);
         min-height: 100vh;
-        /* background-color: #f1f1f1; */
         border-right: 1px solid rgba(0, 0, 0, 0.2);
         transition: left 0.2s;
         padding: 15px;
@@ -23,34 +26,78 @@
     .s-right {
         background-color: white;
         border-left: 1px solid rgba(0, 0, 0, 0.2);
-        width: 350px;
+        width: var(--sidebarWidth_right);
         right: 0;
     }
 
     .title_bar {
         width: 100%;
-        font-size: 1.4rem;
+        height: var(--titlebar_height);
         font-weight: 600;
-        padding: 30px;
-        /* height: 50px; */
+        /* padding: 30px; */
+    }
+
+    .title_bar #page_heading {
+        height: 40px;
+        font-size: 1.4rem;
+        padding: 12px 0px 0px 20px;
+    }
+
+    #sub_pages {
+        height: calc(var(--titlebar_height) - 40px);
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .sub_page_item {
+        flex: 1;
+        height: calc(var(--titlebar_height) - 40px);
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        font-weight: 400;
+
+        color: var(--projectGray);
+        padding-bottom: 8px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .sub_page_item.active {
+        font-weight: 600;
+        color: black;
+        border-bottom: 3px solid var(--projectGreen);
+    }
+
+    .sub_page_item_dead {
+        flex: 1;
+        height: calc(var(--titlebar_height) - 40px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        font-weight: 400;
+
+        color: var(--projectGray);
+        padding-bottom: 8px;
+    }
+
+    .sub_page_item:hover {
+        cursor: pointer;
     }
 
     .content {
         position: fixed;
-        width: calc(100vw - 600px);
-        margin-left: 250px;
-        /* padding: 20px; */
-        /* padding-top: 30px; */
+        width: calc(100vw - var(--sidebarWidth_left) - var(--sidebarWidth_right));
+        margin-left: var(--sidebarWidth_left);
     }
 
     .content_data {
-        /* overflow: scroll; */
+        height: calc(100vh - var(--titlebar_height) - 4.5rem);
         background-color: #f1f1f1;
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto;
-        height: 80vh;
     }
 
     .sidebar_item {
@@ -169,8 +216,8 @@
 
         .content {
             position: fixed;
-            width: calc(100vw - 250px);
-            margin-left: 250px;
+            width: calc(100vw - var(--sidebarWidth_left));
+            margin-left: var(--sidebarWidth_left);
             /* padding: 20px; */
             /* padding-top: 30px; */
         }
@@ -181,13 +228,26 @@
 <body>
     <div class="main-cont">
         <div class="sidebar">
-            <div class="sidebar_item" data-param="upcoming" data-page_name="Ongoing Events" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Upcoming Events</div>
-            <div class="sidebar_item" data-param="completed" data-page_name="Completed Events" data-search_url="<?= ROOT ?>" id="sidebar_item-2">Completed Events</div>
-            <div class="sidebar_item" data-param="Search" data-page_name="Search" id="sidebar_item-3">Search</div>
+            <div class="sidebar_item" data-param="upcoming, completed" data-subpages="Upcoming Events, Completed Events" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Events</div>
+
+            <div class="sidebar_item" data-param="Search" data-subpages="none" id="sidebar_item-3">Search</div>
         </div>
 
         <div class="content" id="content_div">
-            <div class="title_bar"><span class="w-bold">Events</span> - <span class="w-regular" id="title_span">page name</span></div>
+            <div class="page_loader">
+                <div class="loader"></div>
+            </div>
+
+            <!-- page title -->
+            <div class="title_bar">
+                <div id="page_heading">
+                    <span class="w-bold" id="title_span"></span>
+                </div>
+                <div id="sub_pages">
+                    <!-- <div class="sub_page_item subpage_active">item 1</div> -->
+                    <!-- <div class="sub_page_item">item 2</div> -->
+                </div>
+            </div>
 
             <div class="content_data grid-12" id="content_data"></div>
         </div>
@@ -208,8 +268,42 @@
             <!-- END : Search bar -->
         </div>
     </div>
+    <style>
+        .loader {
+            top: 50%;
+            left: calc(50% - 25px);
+            border: 5px solid #ddd;
+            border-top: 5px solid var(--projectGreen);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
 
-    </div>
+            position: absolute;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .page_loader {
+            margin-top: var(--titlebar_height);
+            z-index: 1005;
+            width: calc(100vw - var(--sidebarWidth_left) - var(--sidebarWidth_right));
+            height: calc(100vh - var(--titlebar_height) - 4.5rem);
+            background-color: rgba(255, 255, 255, 0.6);
+            position: fixed;
+            display: flex;
+
+            visibility: hidden;
+        }
+    </style>
 </body>
 
 <script>
@@ -217,10 +311,18 @@
     const sidebar_item = document.querySelectorAll('.sidebar_item');
     const content = document.querySelector('.content');
     const content_div = document.querySelector('#content_data');
+
     const title_span = document.querySelector('#title_span')
+
     const search_input = document.getElementById("search_input_div")
     const result_div = document.getElementById("result_div")
+
     const page_home = document.querySelector("#sidebar_item-1")
+
+    const load_page_animation = document.querySelector(".page_loader")
+
+    const subpage_holder = document.querySelector("#sub_pages")
+    var subpages = document.querySelectorAll(".sub_page_item")
 
     // define global varibales
     let timerId;
@@ -233,31 +335,107 @@
         page_home.dispatchEvent(clickEvent);
     });
 
+    // add event listner
     sidebar_item.forEach(element => {
         element.addEventListener("click", () => active_sidebar_item(element))
     });
 
-    // <-------------------------sidebar------------------------->
+    // <-------------------------subpages------------------------->
+    function create_subpage_item(name, param) {
+        const subpage = document.createElement("div")
+
+        if (name == "dead") {
+            subpage.setAttribute("class", "sub_page_item_dead")
+            subpage.innerHTML = ""
+        } else {
+            subpage.setAttribute("class", "sub_page_item")
+            subpage.innerHTML = name
+        }
+
+        subpage.setAttribute("data-param", param)
+
+        subpage_holder.appendChild(subpage)
+
+        subpage.addEventListener("click", () => {
+            deactivate_all_subpages()
+            active_subpage(subpage)
+        })
+    }
+
+    function active_subpage(element) {
+        element.classList.add('active')
+        start_load() //enable load div
+        // title_span.innerHTML = element.dataset.page_name
+        search_func_url = element.dataset.search_url
+        load_page(element.dataset.param)
+    }
+
+    function deactivate_all_subpages() {
+        console.log(subpages)
+        subpages.forEach(subpage => {
+            subpage.classList.remove('active')
+        })
+    }
+
+    // <-------------------------subpages:END------------------------->
+
+    // <-------------------------loading animation------------------------->
+    function start_load() {
+        load_page_animation.style.visibility = "visible"
+    }
+
+    function end_load() {
+        load_page_animation.style.visibility = "hidden"
+    }
+    // <-------------------------loading animation:End------------------------->
+
     function active_sidebar_item(element) {
         sidebar_item.forEach(newelement => {
             newelement.classList.remove('active')
         });
         element.classList.add('active')
-        load_page(element.dataset.param)
-        title_span.innerHTML = element.dataset.page_name
+
+        var params = element.getAttribute("data-param").split(", ")
+        var pages = element.getAttribute("data-subpages").split(", ")
+
+        title_span.innerHTML = element.innerHTML
+        subpage_holder.innerHTML = ""
+
+        if (pages.length == 1) {
+            create_subpage_item("dead", params[0])
+        } else {
+            for (var x = 0; x < pages.length; x++) {
+                create_subpage_item(pages[x], params[x])
+            }
+        }
+        subpages = document.querySelectorAll(".sub_page_item")
+        start_load()
         search_func_url = element.dataset.search_url
+
+        if (pages.length == 1) {
+            load_page(params[0])
+        } else {
+            const clickEvent = new Event("click")
+            subpages[0].dispatchEvent(clickEvent);
+        }
     }
 
     async function load_page(page_name) {
         try {
+            // await delayss(2000)
             const response = await fetch("<?= ROOT ?>/admin/events/" + page_name)
             const data = await response.json()
             // console.log(data)
             content_div.innerHTML = data
+            end_load()
 
         } catch (error) {
             console.log(error);
         }
+    }
+
+    function delayss(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
     // <-------------------------sidebar - END------------------------->
 
@@ -349,6 +527,6 @@
     // <-------------------------search-result functions : End------------------------->
 </script>
 
-<script src=" <?=ROOT?>/assets/navbar.js"></script>
-<script src=" <?=ROOT?>/assets/submenu.js"></script>
-<script src=" <?=ROOT?>/assets/dropdown.js"></script>
+<script src=" <?= ROOT ?>/assets/navbar.js"></script>
+<script src=" <?= ROOT ?>/assets/submenu.js"></script>
+<script src=" <?= ROOT ?>/assets/dropdown.js"></script>

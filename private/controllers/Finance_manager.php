@@ -129,6 +129,11 @@ class Finance_manager extends Controller
         $this->view('temp');
     }
 
+    public function temp5(){
+        $f_manager = new Finance_managers();
+        $f_manager->budget_details();
+    }
+
     public function temp2(){
         $admin = new Admins();
 
