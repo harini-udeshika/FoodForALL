@@ -49,7 +49,13 @@
                 <div class="buttons">
                 <a href="<?=ROOT?>/shop?product_id=<?=$rows[$i]->item_no?>"><button class="view">View details</button></a>
                 <?php if ($rows[$i]->stock > 0): ?>
+                    <?php if (Auth::logged_in()):?>
                     <a href="<?=ROOT?>/shop/add_to_cart?item=<?=$rows[$i]->item_no?>+<?=$org_data->gov_reg_no?>" class="cart"><button class="cart1">Add to cart</button></a>
+                    <?php endif; ?>
+                    
+                    <!-- <?php if (!Auth::logged_in()):?>
+                    <a href="login" class="cart"><button class="cart1">Add to cart</button></a>
+                    <?php endif; ?> -->
                 <?php endif;?>
 
                 </div>

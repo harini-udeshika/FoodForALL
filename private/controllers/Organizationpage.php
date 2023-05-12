@@ -3,7 +3,7 @@ class Organizationpage extends Controller
 {
     public function index()
     {
-        if(Auth::logged_in()){
+       
             $id = $_GET['id'];
             $user_id = Auth::getid();
             $org = new Organization();
@@ -87,10 +87,8 @@ class Organizationpage extends Controller
                 $this->view('404');
             }
 
-        }
-        else{
-            $this->redirect('home');
-        }
+        
+        
        
 
 
