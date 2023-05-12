@@ -57,3 +57,7 @@
 <?php else : ?>
     <div class="col-12 w-semibold txt-al-center txt-12 txt-gray">No ongoing events</div>
 <?php endif; ?>
+<script>
+    if (typeof myVariable === "undefined"){
+    window.location.href = "<?= ROOT ?>/admin"}
+</script>
