@@ -43,9 +43,10 @@ class Event_budget extends Controller
             ON food_pack_new_eventmanager.eid = food_pack_new_eventmanager.eid
             where food_pack_new_eventmanager.eid='$eventid'";//event managers new food packages
 
-            $query5= "SELECT food_pack.package_id,food_pack.photograph,food_pack.package_name,food_pack.item_price,food_pack.item_name,food_pack.org_gov_reg_no,food_pack.quantity,selected_pakage_org.quantity AS selected_package_org_quantity FROM  food_pack 
-            Left JOIN eventmanager ON food_pack.org_gov_reg_no =eventmanager.org_gov_reg_no
-            INNER JOIN selected_pakage_org ON selected_pakage_org.eid='$eventid' "; //organization food packages
+            $query5= "SELECT food_pack.package_id,food_pack.photograph,food_pack.package_name,food_pack.item_price,food_pack.item_name,food_pack.org_gov_reg_no,food_pack.quantity,COALESCE(selected_pakage_org.quantity, 0) AS selected_package_org_quantity FROM  food_pack 
+            INNER JOIN eventmanager ON food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no
+            LEFT JOIN selected_pakage_org ON selected_pakage_org.eid='$eventid' WHERE 
+            food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no"; //organization food packages 
 
             
 
@@ -105,7 +106,7 @@ class Event_budget extends Controller
                     // print_r($query_1);
                     $data_1=$budget_org_pack->query($query_1);
                 }elseif(isset($_POST['eventmanager_packges'])){
-                    print_r($_POST);
+                    // print_r($_POST);
                     $quantity_new2 = $_POST['package_quantity'];
                     $pack_id_new2 = $_POST['package_id'];
                 
