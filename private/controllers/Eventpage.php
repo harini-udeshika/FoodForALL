@@ -8,19 +8,26 @@ class Eventpage extends Controller
         $org = new Organization();
         $requests = new Volunteer_request();
         $donate = new Donate();
-
+        
+        // donating process
         if (isset($_POST['amount']) || isset($_POST['packet'])) {
             // print_r($_POST);
+
+            // if packets are not selected
             if (!isset($_POST['packet'])) {
                 $_POST['packet'] = 0;
             }
+            // getting total amount to donate
             $arr1['amount'] = intval($_POST['amount']) + intval($_POST['packet']);
             $arr1['donor_id'] = Auth::getid();
             $arr1['event_id'] = str_replace("/", "", $_GET['id']);
+
+            // getting event data
             $query = "select * from event where event_id= :id";
             $data = $event->query($query, ['id' => str_replace("/", "", $_GET['id'])]);
-            //    print_r($arr1);
             $donate->insert($arr1);
+
+            //getting donation id to proceed to chekout
             $query = "SELECT * from donate WHERE donor_id= :id ORDER by date_time DESC LIMIT 1";
             $order_id = $donate->query($query, ['id' => Auth::getid()]);
             $order_id = $order_id[0]->donation_id;
@@ -93,24 +100,25 @@ class Eventpage extends Controller
             $des = $des[0]->description;
 
             $this->view('volunteer_confirmation', ['data' => $data, 'des' => $des]);
-           
+            if ( isset($_GET['req']) =='true' ) {
 
-        }
+                $request = new Volunteer_request();
+                $arr['id'] = Auth::getid();
+                $type = $_GET['type'];
+                $data = explode(" ", $type);
+                $arr['event_id'] = $data[1];
+                $arr['volunteer_type'] = $data[0];
+                // $arr['status'] = false;
+                // print_r($arr);
+               $request->insert($arr);
 
-        else if ( isset($_GET['req']) =='true' ) {
-
-            $request = new Volunteer_request();
-            $arr['id'] = Auth::getid();
-            $type = $_GET['type'];
-            $data = explode(" ", $type);
-            $arr['event_id'] = $data[1];
-            $arr['volunteer_type'] = $data[0];
-            // $arr['status'] = false;
-            // print_r($arr);
-            $data = $request->insert($arr);
+              
+                // $this->view('eventpage?id='.$data[1]);
+            }
             $this->redirect('events');
-            // $this->view('eventpage?id='.$data[1]);
         }
+
+        
         else {
             $this->view('404');
         }

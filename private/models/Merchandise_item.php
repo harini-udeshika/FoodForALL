@@ -21,5 +21,7 @@ class Merchandise_item extends Model{
         // $query="insert into $this->table($columns) values(:$values)";
         return $this->query($query, $data);
     }
+
+   
 }
 ?>

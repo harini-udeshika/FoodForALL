@@ -25,11 +25,25 @@ add_btn.addEventListener("click", () => {
   })
 
   input_btn.addEventListener('input', () => {
-   
     if (parseInt(input_btn.value) > parseInt(remaning_btn.innerHTML.split(' ')[0])) {
      
-        input_btn.value = parseInt(remaning_btn.innerHTML.split(' ')[0]);
+      input_btn.value = parseInt(remaning_btn.innerHTML.split(' ')[0]);
+  }
+   
+      if (input_btn.value == 'NaN' || input_btn.value == '') {
+  
+        input_btn.value = 0;
+        
     }
+    // make input get only digits
+    input_btn.value = input_btn.value.replace(/[^0-9]/g, '');
+          data = {
+              quantity: input_btn.value,
+              index: i
+          };
+   
+ 
+
   })
 
 add_to_cart_btn.addEventListener("click", (event) => {
@@ -41,8 +55,13 @@ add_to_cart_btn.addEventListener("click", (event) => {
     // var urlParams = new URLSearchParams(queryString);
     // console.log(urlParams);
 
+    // make item adding to cart not 0 but 1
+    if(parseInt(input_btn.value)==0){
+        input_btn.value=1;
+    }
     var item = add_to_cart_btn.href.split('?')[1] + '+' + input_btn.value;
-
+  var total=remaning_btn.innerHTML.split(' ')[0];
+  remaning_btn.innerHTML=parseInt(total)-parseInt(input_btn.value)+" remaining";
     console.log(item);
 
     var ajax = new XMLHttpRequest();

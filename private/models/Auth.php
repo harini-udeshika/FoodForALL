@@ -94,5 +94,19 @@ class Auth{
         }
         return false;
     }
+//     public static function reset_cart(){
+
+//         $org=new Organization();
+//         $orgs=$org->findAll();
+
+//         foreach($orgs as $org){
+//             if(isset($_SESSION['timeout'.$org->gov_reg_no])){
+//         $item =new Merchandise_item();
+//         $org_id=$org->gov_reg_no;
+      
+//     }
+// }
+//     }
 }
+
 

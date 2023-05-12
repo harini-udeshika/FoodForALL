@@ -12,12 +12,12 @@ const city=document.getElementById("city");
 const postalCode=document.getElementById("postal_code");
 
 
-var valid=true;
+let valid=true;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     inputChecker();
-    if(valid===true) {
+    if(valid==true) {
         form.submit();
     }
 })
@@ -138,6 +138,7 @@ function displayError(input, message) {
 }
 
 function displaySuccess(input) {
+    valid=true;
     const f = input.parentElement;
     if(input===check){
         f.className = "f12 success";
@@ -153,7 +154,7 @@ function checkEmail(email) {
 
 function emailcheck(){
     const emailVal = email.value.trim();
-    var ajax = new XMLHttpRequest();
+     ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/duplicate', true);
 
 
@@ -175,7 +176,7 @@ function emailcheck(){
 }
 function niccheck(){
     const nicVal = nic.value.trim();
-    var ajax = new XMLHttpRequest();
+     ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/nic', true);
 
 

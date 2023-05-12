@@ -2,7 +2,7 @@
 class Profile extends Controller
 {
     public function index()
-    {
+    { 
         $user = new User();
         $donor = new Donate();
         $volunteer = new Volunteer();
@@ -39,7 +39,7 @@ class Profile extends Controller
             //echo($event_data[1]->name);
             $query = "SELECT donate.amount,donate.date_time,event.name
         FROM donate
-        INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id";
+        INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id && donate.status=1";
             $arr = [
                 'v_id' => $v_id,
 
@@ -60,7 +60,7 @@ class Profile extends Controller
             $query = "SELECT organization.name, event.name as e_name
         FROM organization
         INNER JOIN event ON event.org_gov_reg_no=organization.gov_reg_no
-        INNER JOIN donate ON donate.event_id=event.event_id where donate.donor_id= :v_id";
+        INNER JOIN donate ON donate.event_id=event.event_id where donate.donor_id= :v_id ";
             $arr = [
                 'v_id' => $v_id,
 
@@ -123,7 +123,7 @@ class Profile extends Controller
             //echo($event_data[1]->name);
             $query = "SELECT donate.amount,donate.date_time,event.name
             FROM donate
-            INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id";
+            INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id && donate.status=1";
             $arr = [
                 'v_id' => $v_id,
 
