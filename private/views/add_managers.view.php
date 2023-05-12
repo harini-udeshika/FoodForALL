@@ -1,5 +1,7 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css/styles_org.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/buttons.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/colors.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
@@ -71,30 +73,9 @@
     }
 
     .popup-delete-btn {
-        border: none;
-        cursor: pointer;
-        color: white;
-        height: 42px;
-        border-radius: 5px;
-        font-weight: 400;
-        font-size: 20px;
-        padding: 0px 15px;
-        width: 100%;
-
         margin: 20px 0px 0px 0px;
     }
 
-    .popup-delete-btn.red {
-        background-color: red;
-    }
-
-    .popup-delete-btn.green {
-        background-color: green;
-    }
-
-    .popup-delete-btn.blue {
-        background-color: red;
-    }
 
     .popup-close {
         position: absolute;
@@ -109,11 +90,11 @@
         cursor: pointer;
     }
 
-    .i-green{
+    .i-green {
         color: green;
     }
 
-    .i-red{
+    .i-red {
         color: red;
     }
 </style>
@@ -131,7 +112,7 @@
                     <div class="popup-message" id="popup-message">
                         Confirm you want to delete event manager michael jackson
                     </div>
-                    <button class="popup-delete-btn" id="popup_delete_btn">Delete</button>
+                    <button class="popup-delete-btn btn btn-md btn-block" id="popup_delete_btn">Delete</button>
                 </div>
             </div>
         </div>
@@ -278,15 +259,23 @@
     }
 
     function setpopup_delete(error_string, manager_mail) {
-        popup_hero_btn.classList="fa-solid fa-circle-exclamation i-red"
+        popup_hero_btn.classList = "fa-solid fa-circle-exclamation i-red"
         if (error_string != 'deletable') {
             popup_head.innerHTML = "Error!"
             popup_message.innerHTML = error_string
-            popup_btn.innerHTML = "Ok"
+            popup_btn.classList.remove("btn-red")
+            popup_btn.classList.add("btn-green")
+            popup_btn.innerHTML = "view profile"
+
+            popup_btn.addEventListener("click", function() {
+                window.location.href = "<?=ROOT?>/manager_profile?id=" + manager_mail
+            })
         } else {
             popup_head.innerHTML = "Delete event manager"
             popup_message.innerHTML = "Are you shour you want to delete this user?"
-
+            popup_btn.innerHTML="Delete"
+            popup_btn.classList.remove("btn-green")
+            popup_btn.classList.add("btn-red")
             popup_btn.addEventListener("click", function() {
                 delete_manager(manager_mail)
             })
@@ -298,13 +287,13 @@
     function setpopup_done() {
         popup_head.innerHTML = "Completed!"
         popup_message.innerHTML = "Manager deleted successfully"
-        
+
         popup_btn.innerHTML = "Ok"
         popup_btn.classList.add('green')
-        popup_btn.addEventListener('click',close_popup)
-        popup_hero_btn.classList="fa-sharp fa-solid fa-circle-check i-green"
+        popup_btn.addEventListener('click', close_popup)
+        popup_hero_btn.classList = "fa-sharp fa-solid fa-circle-check i-green"
     }
-    
+
     function updateFeed() {
         const table_body = document.getElementById('table_body')
         table_body.innerHTML = ''

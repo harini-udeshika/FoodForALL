@@ -1,0 +1,211 @@
+.box1{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+/* .familyform{
+    text-align: center;
+} */
+
+.childrenbox{
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+select{
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+
+div form {
+    list-style-type: none;
+    counter-reset: css-counter 0; /* initializes counter to 0; use -1 for zero-based numbering */
+  }
+
+
+  td{
+    border-color: black;
+  }
+
+
+  
+ .form_background2{
+    width: 100%;
+    max-width: 1000px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+
+  .center {
+    padding-top: 40px;
+    text-align: center;
+}
+
+.containor2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    
+        
+}
+.form_background{
+    background-image: url('backgroundform2.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+}
+
+/* .form_background {
+    position:;
+  }
+  
+  .form_background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('backgroundform2.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5; /* Decrease the opacity to 50% 
+  } */
+
+
+
+/* .familydetailform{
+    width: 900px;;
+    height: auto;
+    margin: 10px;
+    background-color: #F2F3F9;
+    border-radius: 50px;
+    background-image: url('./backgroundform.png');
+    background-size: cover;
+    border-radius: 50px;
+    border-color: black;
+    padding: 20px;
+    right: 10px;
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom:200px;
+    box-shadow: rgba(50, 50, 93, 0.25) -40px -30px 60px -12px, rgba(0, 0, 0, 0.3) 40px 18px 36px -18px;
+    
+} */
+
+label{
+    font-weight:bold;
+    font-family: "Inter";
+}
+
+
+.p1{
+    color: #000;
+}
+
+/* .box1 i{
+    position: absolute;
+    top: 140px;
+    right: 10px;
+} */
+
+.fillingbox{
+    height: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.filling{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.para{
+    font-weight: bold;
+    font-family: "Inter";
+}
+/* .children{
+    display:none;
+} */
+
+.coor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.coor2{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.coor3{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.form-footer{
+    color: white;
+    margin-top: 10px;
+}
+
+.t{
+    text-align: center;
+}
+
+.input_budget{
+    text-align: center;
+}
+
+
+.package_hold_div {
+    height: fit-content;
+}
+
+.budget_total_num {
+    border: 1px solid var(--projectPurple);
+    align-items: center;
+    border-radius: 15px;
+}
+
+.add_package_div {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0px 40px 30px 40px;
+}
+
+.package_name_input {
+    border: none;
+    text-align: center;
+}
+
+.text-size{
+    text-align:center;
+    font-size:16px;
+}
+
+.text-size1{
+    text-align:center;
+    font-size:30px;
+    font-weight: 800;
+}

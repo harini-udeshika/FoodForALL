@@ -2,9 +2,27 @@
 class Select_childrenhome extends Controller
 {
     function index(){
+
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'eventmanager')) {
+            $this->redirect('home');
+        }
+        
         $eventid=$_GET['eid'];
         $select_details = new select_details();
         $children = new Childrenhome();
+
+        $query_0 = "SELECT childrenhome.less_one_children ,childrenhome.less_five_children,childrenhome.higher_five_children,event.date,
+        ROW_NUMBER() OVER (ORDER BY childrenhome.id) AS ccount, select_details.id AS uniqueid,
+        childrenhome.children_num, area_coodinator.district, area_coodinator.area, 
+        childrenhome.id
+        FROM childrenhome
+        LEFT JOIN area_coodinator ON childrenhome.areacoordinator_email = area_coodinator.email 
+        LEFT JOIN select_details ON select_details.detail_id = childrenhome.id 
+        LEFT JOIN event ON event.event_id='$eventid'
+        where select_details.event_name= '$eventid' AND select_details.catagory='childrenhome'";
+
         $query_1 = "SELECT childrenhome.less_one_children ,childrenhome.less_five_children,childrenhome.higher_five_children,event.date,
         ROW_NUMBER() OVER (ORDER BY childrenhome.id) AS ccount, select_details.id AS uniqueid,
         childrenhome.children_num, area_coodinator.district, area_coodinator.area, 
@@ -13,7 +31,8 @@ class Select_childrenhome extends Controller
         FROM childrenhome
         LEFT JOIN area_coodinator ON childrenhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = childrenhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        WHERE select_details.catagory='childrenhome'
         group BY(childrenhome.id)
         HAVING month_diff <= 3
         ORDER BY month_diff DESC";
@@ -27,7 +46,8 @@ class Select_childrenhome extends Controller
         FROM childrenhome
         LEFT JOIN area_coodinator ON childrenhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = childrenhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        WHERE select_details.catagory='childrenhome'
         ) AS t
         WHERE 
         t.month_diff BETWEEN 4 AND 6
@@ -61,7 +81,8 @@ class Select_childrenhome extends Controller
             FROM childrenhome
             LEFT JOIN area_coodinator ON childrenhome.areacoordinator_email = area_coodinator.email 
             LEFT JOIN select_details ON select_details.detail_id = childrenhome.id 
-            INNER JOIN event ON event.event_id = select_details.event_name
+            LEFT JOIN event ON event.event_id=select_details.event_name
+            WHERE select_details.catagory='childrenhome'
             GROUP BY childrenhome.id
         ) AS t 
         WHERE t.month_diff BETWEEN 7 AND 12
@@ -76,28 +97,26 @@ class Select_childrenhome extends Controller
         FROM childrenhome
         LEFT JOIN area_coodinator ON childrenhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = childrenhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
-        WHERE PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(event.date, '%Y%m')) > 12
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        WHERE select_details.catagory='childrenhome' AND PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(event.date, '%Y%m')) > 12
         group BY(childrenhome.id)
         ORDER BY month_diff DESC";
 
         $query_5 = "SELECT childrenhome.less_one_children ,childrenhome.less_five_children,childrenhome.higher_five_children,
-        ROW_NUMBER() OVER (ORDER BY childrenhome.id) AS ccount,select_details.id AS uniqueid,
-        childrenhome.children_num, area_coodinator.district, area_coodinator.area, 
-        childrenhome.id,
-        PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(select_details.date_entered, '%Y%m')) AS month_diff
+        ROW_NUMBER() OVER (ORDER BY childrenhome.id) AS ccount,childrenhome.id AS uniqueid,
+        childrenhome.children_num, area_coodinator.district, area_coodinator.area 
         FROM childrenhome
         LEFT JOIN area_coodinator ON childrenhome.areacoordinator_email = area_coodinator.email 
-        LEFT JOIN select_details ON select_details.detail_id = childrenhome.id 
-        WHERE select_details.detail_id IS NULL
-        GROUP BY(childrenhome.id)";
+        WHERE childrenhome.id NOT IN (
+        SELECT detail_id FROM select_details WHERE catagory = 'childrenhome' AND detail_id IS NOT NULL)";
 
-
+        $data_0 = $children->query($query_0);
         $data_1 = $children->query($query_1);
         $data_2 = $children->query($query_2);
         $data_3 = $children->query($query_3);
         $data_4 = $children->query($query_4);
         $data_5 = $children->query($query_5);
+        // print_r($query_5);
 
         $query1 = "SELECT * FROM select_details WHERE catagory= 'family' AND event_name = $eventid";
         $query2 = "SELECT * FROM select_details WHERE catagory= 'childrenhome' AND event_name = $eventid";
@@ -123,7 +142,7 @@ class Select_childrenhome extends Controller
             //error
             $errors=$select_details->errors;
         }
-        $this->view('select_childrenhome', ['row' => $data_1,'row_2' => $data_2,'row_3' => $data_3,'row_4' => $data_4,'row_5' => $data_5,'event'=>$eventid, 'row1'=>$data1,'row2'=>$data2,'row3'=>$data3]);
+        $this->view('select_childrenhome', ['row0' => $data_0,'row' => $data_1,'row_2' => $data_2,'row_3' => $data_3,'row_4' => $data_4,'row_5' => $data_5,'event'=>$eventid, 'row1'=>$data1,'row2'=>$data2,'row3'=>$data3]);
     }
 
     public function delete(){

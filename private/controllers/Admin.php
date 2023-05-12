@@ -153,7 +153,7 @@ class Admin extends Controller
         $admin = new Admins();
 
 
-        $this->view('tmpindex');
+        $this->view('admin.view');
     }
 
     public function temp6()
@@ -186,7 +186,47 @@ class Admin extends Controller
         echo ($param);
     }
 
-    // event page
+    // upcomng events
+    public function upcoming()
+    {
+        $this->autherize_admin();
+
+        $event_model = new Admin_events_model();
+        $path = "../private/views/admin.events.upcoming.php";
+        $html = "";
+
+        $ongoing_events = $event_model->selectOngoing();
+        if ($ongoing_events == NULL) {
+            $ongoing_events = array();
+        }
+
+        ob_start();
+        include $path;
+        $html = ob_get_clean();
+
+        echo ($html);
+    }
+
+    //completed event page
+    public function completed()
+    {
+        $this->autherize_admin();
+
+        $event_model = new Admin_events_model();
+        $path = "../private/views/admin.events.completed.php";
+        $html = "";
+
+        $completed_events = $event_model->selectCompleted();
+        if ($completed_events == NULL) {
+            $completed_events = array();
+        }
+        ob_start();
+        include $path;
+        $html = ob_get_clean();
+
+        echo ($html);
+    }
+
     public function events($page_name = "")
     {
         $this->autherize_admin();
@@ -196,7 +236,7 @@ class Admin extends Controller
         $path = "../private/views/admin.events.$page_name.php";
         $html = "";
 
-        if($page_name == ""){
+        if ($page_name == "") {
             $this->view('admin.events');
             die;
         }
@@ -219,7 +259,7 @@ class Admin extends Controller
             $html = ob_get_clean();
         }
 
-        echo (json_encode($html));
+        echo ($html);
     }
     // search event
     function searchEvent($keyword = "")
@@ -242,8 +282,25 @@ class Admin extends Controller
         } else {
             $data = "redirect";
         }
+        echo (json_encode($data));
+    }
 
-        $data = json_encode($data);
-        echo $data;
+    // home/dashboard page
+    public function dashboard()
+    {
+        $this->autherize_admin();
+        $path = "../private/views/admin.home.view2.php";
+
+        $name = "this is name";
+        $result = "this is ressult";
+
+        $admin_model = new Admins();
+        $site_data = $admin_model->homepage_data();
+
+        ob_start();
+        include $path;
+        $html = ob_get_clean();
+
+        echo ($html);
     }
 }
