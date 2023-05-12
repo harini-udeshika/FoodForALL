@@ -200,13 +200,13 @@
     }
 
     /* hide search */
-    #sidebar_item-3 {
+    #sidebar_item-100 {
         visibility: hidden;
     }
 
     /* small screen size */
     @media screen and (max-width: 768px) {
-        #sidebar_item-3 {
+        #sidebar_item-100 {
             visibility: visible;
         }
 
@@ -228,9 +228,15 @@
 <body>
     <div class="main-cont">
         <div class="sidebar">
-            <div class="sidebar_item" data-param="upcoming, completed" data-subpages="Upcoming Events, Completed Events" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Events</div>
+            <div class="sidebar_item" data-param="dashboard" data-subpages="" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Dashboard</div>
 
-            <div class="sidebar_item" data-param="Search" data-subpages="none" id="sidebar_item-3">Search</div>
+            <div class="sidebar_item" data-param="upcoming, completed" data-subpages="Upcoming Events, Completed Events" data-search_url="<?= ROOT ?>/admin/searchEvent" id="sidebar_item-1">Events</div>
+
+            <div class="sidebar_item" data-param="upcoming" data-subpages="" data-search_url="<?= ROOT ?>" id="sidebar_item-2">Organizations</div>
+
+            <div class="sidebar_item" data-param="upcoming, completed,coffee" data-subpages="Upcoming Events, Completed Events,coffee" data-search_url="<?= ROOT ?>" id="sidebar_item-3">Area coordinators</div>
+
+            <div class="sidebar_item" data-param="Search" data-subpages="none" id="sidebar_item-100">Search</div>
         </div>
 
         <div class="content" id="content_div">
@@ -311,6 +317,9 @@
     const sidebar_item = document.querySelectorAll('.sidebar_item');
     const content = document.querySelector('.content');
     const content_div = document.querySelector('#content_data');
+    const root = document.querySelector(":root")
+
+    const sidebar_right = document.querySelector(".s-right")
 
     const title_span = document.querySelector('#title_span')
 
@@ -339,6 +348,21 @@
     sidebar_item.forEach(element => {
         element.addEventListener("click", () => active_sidebar_item(element))
     });
+    // close_search_div()
+    // close search div
+    function close_search_div() {
+        sidebar_right.style.visibility = 'hidden'
+       
+        const elementStyle = getComputedStyle(root);
+        root.style.setProperty("--sidebarWidth_right", "0px");
+    }
+
+    // open search div
+    function open_search_div() {
+        sidebar_right.style.visibility = 'visible'
+        const elementStyle = getComputedStyle(root);
+        root.style.setProperty("--sidebarWidth_right", "0px");
+    }
 
     // <-------------------------subpages------------------------->
     function create_subpage_item(name, param) {
@@ -423,9 +447,10 @@
     async function load_page(page_name) {
         try {
             // await delayss(2000)
-            const response = await fetch("<?= ROOT ?>/admin/events/" + page_name)
-            const data = await response.json()
+            const response = await fetch("<?= ROOT ?>/admin/" + page_name)
+            const data = await response.text()
             // console.log(data)
+            // history.pushState({}, page_name,"<?= ROOT ?>/admin/" + page_name);
             content_div.innerHTML = data
             end_load()
 
