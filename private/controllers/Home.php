@@ -5,7 +5,7 @@ class Home extends Controller{
         $event=new Event();
 
         $org=new Organization();
-        $query = "SELECT profile_pic from organization";
+        $query = "SELECT profile_pic from organization  order by rand() LIMIT 9 ";
         $pics=$org->query($query);
         //print_r($pics);
         $query = "SELECT * FROM event WHERE date>CURRENT_DATE && approved=1 ORDER BY date DESC LIMIT 4";
@@ -14,6 +14,6 @@ class Home extends Controller{
         $data = $user->findAll();
         $this->view('home', ['rows' => $data,'event_data'=>$event_data,'pics'=>$pics]);
 
-    }
+    } 
    
 }

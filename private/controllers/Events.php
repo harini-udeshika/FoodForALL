@@ -50,7 +50,7 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-                WHERE event.location= :location && event.date>CURRENT_DATE && event.approved=1 && donate.status=1
+                WHERE event.location= :location && event.date>CURRENT_DATE && event.approved=1 
                 GROUP BY event.event_id";
                 //$query = "select * from event where location= :location && date> CURRENT_DATE && approved=1";
                 $arr = ['location' => $location];

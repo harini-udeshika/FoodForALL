@@ -14,7 +14,7 @@ const select=document.getElementById("event");
 add.addEventListener('click', ()=>{
     console.log('add clicked');
     cert.classList.toggle("visible");
-    
+   
 })
 
 
