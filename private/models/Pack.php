@@ -1,4 +1,5 @@
 <?php
+//event manager created packs
 class Pack extends Model{
     protected $table ="food_pack_new_eventmanager";
     public function delete_pack($id)

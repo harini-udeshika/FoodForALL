@@ -1,4 +1,5 @@
 <?php
+//organization created packs
 class Food_pack extends Model{
     protected $table ="food_pack";
     public function delete_pack($id)
