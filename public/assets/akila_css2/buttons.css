@@ -195,3 +195,11 @@
     border: 1px solid var(--projectPurple);
     background-color: white;
 }
+
+.btn-disabled {
+    border: solid 2px;
+    border-color: black;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+}
