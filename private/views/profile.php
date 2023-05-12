@@ -51,7 +51,7 @@ if (file_exists($rows->profile_pic)) {
             <small>error message</small>
         </div>
 
-        <form method="post" enctype="multipart/form-data" class="file_form" id="change_pic">
+        <form method="post" enctype="multipart/form-data" class="file_form" id="change_cert">
 
             <label for="file" class="file_label" id="file_label">
 
@@ -62,7 +62,7 @@ if (file_exists($rows->profile_pic)) {
                 <input type="file" name="file" id="file" class="file">
             </label>
             <br>
-            <div class="select">
+            <div class="select"> 
                 <!-- <label for="event">Select the event:</label> -->
 
                 <select name="event" id="event">
@@ -272,5 +272,5 @@ $i = 0;?>
 
 <script src=" navbar.js"></script>
 <script src="<?=ROOT?>/assets/profile.js"></script>
-<script src="<?=ROOT?>/assets/change_pic.js"></script>
+<!-- <script src="<?=ROOT?>/assets/change_pic.js"></script> -->
 <?php $this->view('includes/footer')?>
