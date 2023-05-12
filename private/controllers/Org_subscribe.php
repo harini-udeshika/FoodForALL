@@ -21,12 +21,40 @@ class Org_subscribe extends Controller
                 $arr['id']=$data[0]->id;
                 subscription_checkout($arr);
             }
-            $this->view('org_subscribe.view');
+
+            $sub_data = $this->isSubscribed();
+            $this->view('org_subscribe.view',['sub_data'=>$sub_data]);
           
         } else {
             $this->redirect('home');
         }
        
+    }
+
+    public function isSubscribed()
+    {
+        $org = new Subscribe();
+        $query = "SELECT * FROM subscription Where org_gov_reg_no= :id 
+        && status = 1 ORDER BY date DESC";
+
+        $arr_2 = ['id' => Auth::gov_reg_no()];
+        $data = $org->query($query,$arr_2);
+
+        if ($data) {
+            $paid_date = new DateTime($data[0]->date);
+            $today = new DateTime(); 
+            $interval = $paid_date->diff($today);
+            $days = $interval->days;
+
+            if ($days > 30) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+        // die;
     }
 }
 ?> 

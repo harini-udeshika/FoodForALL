@@ -93,28 +93,37 @@ class Shop_org extends Controller
             FROM merchandise_item
             WHERE org_gov_reg_no= :id && added_date >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
         $arr_1 = ['id' => Auth::gov_reg_no()];
-        $items_30_days = $item->query($query, $arr_1);
-
-        // echo $items_30_days[0]->row_count;
+        $items_30_days = $item->query($query, $arr_1); 
 
         $org = new Subscribe();
-        $data = $org->where('org_gov_reg_no', Auth::gov_reg_no());
+        $query = "SELECT * FROM subscription Where org_gov_reg_no= :id 
+        && status = 1 ORDER BY date DESC";
+        // $query = "SELECT * FROM subscription Where org_gov_reg_no= :id 
+        // ORDER BY date DESC";
+        $arr_2 = ['id' => Auth::gov_reg_no()];
+        $data = $org->query($query,$arr_2);
+        // echo "<pre>";
+        // print_r($data);
+        // die;
 
         if ($data) {
             $paid_date = new DateTime($data[0]->date);
             $today = new DateTime(); // create a new DateTime object for today's date
             $interval = $paid_date->diff($today);
             $days = $interval->days;
+            // print_r($paid_date);
+            // die;
+            // echo $items_30_days[0]->row_count;
             // echo $days;
 
-            if ($days <= 30 && $items_30_days[0]->row_count < 3) {
-                echo "TRUE";
-            } else {
+            if ($days > 30 && $items_30_days[0]->row_count > 3) {
                 echo "FALSE";
+            } else {
+                echo "TRUE";
             }
         } else {
             echo "FALSE";
         }
-        die;
+        // die;
     }
 }
