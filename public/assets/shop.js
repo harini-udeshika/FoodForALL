@@ -10,6 +10,8 @@ const alert = document.getElementById("alert");
 let trash=document.getElementById("trash");
 let redo=document.getElementById("redo");
 let trash_conf=document.getElementById("trash_conf");
+let checkout=document.getElementById("checkout");
+
 var data;
 var quantity, i;
 console.log("hii");
@@ -70,6 +72,7 @@ for (let i = 0; i < sub_btns.length; i++) {
                 let updated_total = current_total - parseInt(price[i].innerHTML);
                 if (number == 0) {
                     rows[i].remove();
+                checkout.disabled=true;
                 }
 
                 bill_total.innerHTML = "Rs." + updated_total + ".00";
@@ -106,6 +109,7 @@ for (let i = 0; i < remove_btns.length; i++) {
         let updated_total = current_total - (parseInt(price[i].innerText) * parseInt(cart_qty[i].value));
         bill_total.innerText = "Rs." + updated_total + ".00";
         rows[i].remove();
+        checkout.disabled=true;
     })
 
 }

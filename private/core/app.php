@@ -4,6 +4,10 @@ class App {
     protected $method="index";
     protected $params=array();
 
+    
+      
+    
+
     public function __construct()
     {   
         $URL=$this->getURL();
@@ -26,8 +30,11 @@ class App {
         $this->params=$URL;
 
         call_user_func_array([$this->controller,$this->method],$this->params);
+
+       
     }
 
+    
     private function getURL()
     {
         $url=isset($_GET['url']) ? $_GET['url']:"home";

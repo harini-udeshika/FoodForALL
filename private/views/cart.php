@@ -47,11 +47,11 @@
 </div>
 <div class="checkout-button">
 <?php if (($_SESSION['CART'.$data->gov_reg_no])!=array()): ?>
-<a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout">Checkout</button></a>
+<a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout" id="checkout">Checkout</button></a>
 <?php endif;?>
 
 <?php if (($_SESSION['CART'.$data->gov_reg_no])==array()): ?>
-<a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout" disabled>Checkout</button></a>
+<a href="checkout?org=<?=$data->gov_reg_no?>"><button class="checkout"  disabled>Checkout</button></a>
 <?php endif;?>
 </div>
 <?php $this->view('includes/footer')?>

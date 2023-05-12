@@ -30,7 +30,7 @@
     <?php if ($i % 4 == 0 && $i != 0): ?>
         </div>
         <div class="row">
-    <?php endif?>
+    <?php endif?> 
 
             <div class="item">
                 <img src="images/merch_items/<?=$rows[$i]->image?> ">

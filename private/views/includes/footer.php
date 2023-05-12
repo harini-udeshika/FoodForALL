@@ -5,6 +5,7 @@
 </body>
 
 <script src=" <?=ROOT?>/assets/navbar.js"></script>
+
 <script src=" <?=ROOT?>/assets/submenu.js"></script>
 <script src=" <?=ROOT?>/assets/dropdown.js"></script>
 </html>
