@@ -2,9 +2,22 @@
 class Select_family extends Controller
 {
     function index(){
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'eventmanager')) {
+            $this->redirect('home');
+        }
                 $eventid=$_GET['eid'];
                 $select_details = new select_details();
                 $family=new Family();
+                $query_0="SELECT family.familymembers,ROW_NUMBER() OVER (ORDER BY family.id) AS  fcount, (family.less_one_children + family.less_five_children+family.higher_five_children) AS children,(family.familymembers- (family.less_one_children + family.less_five_children+family.higher_five_children))AS adults ,
+                area_coodinator.district, area_coodinator.area, family.cholesterol_patients, family.both_patients,family.less_one_children ,family.less_five_children,family.higher_five_children,event.date,
+                family.diabetes_patients,family.healthy_adults,family.id,select_details.id AS uniqueid FROM family
+                LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email  
+                LEFT JOIN select_details ON select_details.detail_id = family.id 
+                LEFT JOIN event ON event.event_id='$eventid'
+                where select_details.event_name= '$eventid' AND select_details.catagory='family'";
+
                 $query_1 = "SELECT family.familymembers,ROW_NUMBER() OVER (ORDER BY family.id) AS  fcount, (family.less_one_children + family.less_five_children+family.higher_five_children) AS children,(family.familymembers- (family.less_one_children + family.less_five_children+family.higher_five_children))AS adults ,
                 area_coodinator.district, area_coodinator.area, family.cholesterol_patients, family.both_patients,family.less_one_children ,family.less_five_children,family.higher_five_children,event.date,
                 family.diabetes_patients,family.healthy_adults,family.id,select_details.id AS uniqueid,
@@ -12,7 +25,8 @@ class Select_family extends Controller
                 FROM family
                 LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email 
                 LEFT JOIN select_details ON select_details.detail_id = family.id 
-                INNER JOIN event ON event.event_id=select_details.event_name
+                Left JOIN event ON event.event_id=select_details.event_name
+                WHERE select_details.catagory='family'
                 group BY(family.id)
                 HAVING month_diff <= 3 
                 ORDER BY month_diff DESC";
@@ -25,7 +39,8 @@ class Select_family extends Controller
                 FROM family
                 LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email 
                 LEFT JOIN select_details ON select_details.detail_id = family.id 
-                INNER JOIN event ON event.event_id=select_details.event_name
+                LEFT JOIN event ON event.event_id=select_details.event_name
+                WHERE select_details.catagory='family'
                 ) AS t
                 WHERE 
                 t.month_diff BETWEEN 4 AND 6
@@ -41,7 +56,8 @@ class Select_family extends Controller
                 FROM family
                 LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email 
                 LEFT JOIN select_details ON select_details.detail_id = family.id 
-                INNER JOIN event ON event.event_id=select_details.event_name
+                LEFT JOIN event ON event.event_id=select_details.event_name
+                WHERE select_details.catagory='family'
                 ) AS t 
                 WHERE
                 t.month_diff BETWEEN 7 AND 12
@@ -55,21 +71,20 @@ class Select_family extends Controller
                 FROM family
                 LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email 
                 LEFT JOIN select_details ON select_details.detail_id = family.id 
-                INNER JOIN event ON event.event_id=select_details.event_name
-                WHERE PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(event.date, '%Y%m')) > 12
+                left JOIN event ON event.event_id=select_details.event_name
+                WHERE select_details.catagory='family' AND PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(event.date, '%Y%m')) > 12
                 group BY(family.id)
                 ORDER BY month_diff DESC";
 
                 $query_5 = "SELECT family.familymembers,ROW_NUMBER() OVER (ORDER BY family.id) AS  fcount, (family.less_one_children + family.less_five_children+family.higher_five_children) AS children,(family.familymembers- (family.less_one_children + family.less_five_children+family.higher_five_children))AS adults ,
                 area_coodinator.district, area_coodinator.area, family.cholesterol_patients, family.both_patients,family.healthy_adults,
-                family.diabetes_patients,family.id,family.less_one_children ,family.less_five_children,family.higher_five_children,select_details.id AS uniqueid,
-                PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(select_details.date_entered, '%Y%m')) AS month_diff
+                family.diabetes_patients,family.id,(family.id) AS uniqueid,
+                family.less_one_children ,family.less_five_children,family.higher_five_children
                 FROM family
-                LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email 
-                LEFT JOIN select_details ON select_details.detail_id = family.id 
-                WHERE select_details.detail_id IS NULL
-                GROUP BY(family.id)";
+                LEFT JOIN area_coodinator ON family.area_coodinator_email = area_coodinator.email
+                WHERE family.id NOT IN (SELECT detail_id FROM select_details WHERE catagory = 'family' AND detail_id IS NOT NULL)";
 
+                $data_0 = $family->query($query_0);
                 $data_1 = $family->query($query_1);
                 $data_2 = $family->query($query_2);
                 $data_3 = $family->query($query_3);
@@ -106,7 +121,7 @@ class Select_family extends Controller
 
 
                 
-                $this->view('select_family', ['row' => $data_1,'row_2' => $data_2,'row_3' => $data_3,'row_4' => $data_4,'row_5' => $data_5,'event'=>$eventid, 'row1'=>$data1,'row2'=>$data2,'row3'=>$data3]);
+                $this->view('select_family', ['row0'=>$data_0,'row' => $data_1,'row_2' => $data_2,'row_3' => $data_3,'row_4' => $data_4,'row_5' => $data_5,'event'=>$eventid, 'row1'=>$data1,'row2'=>$data2,'row3'=>$data3]);
 
     }
 

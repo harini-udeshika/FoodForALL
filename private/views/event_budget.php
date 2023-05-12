@@ -3,10 +3,6 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/org_packages.css">
-<?php if(!Auth::logged_in()){
-    $this->view('home');
-}
-?>
 <?php $this->view('includes/navbar');?>
 <?php $this->view('includes/submenu');
 
@@ -24,6 +20,9 @@ $detail_elder_healthy_adults =0;
 $detail_elder_diabetes_patients =0;
 $detail_elder_both_patients =0;
 $detail_elder_cholesterol_patients =0;
+
+$budget1=0;
+$budget2=0;
 
 if ($row1) {
 // print('row1');
@@ -74,7 +73,7 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 <div class="containor2">
     <div class="form_background form_background2">
 
-        <form  method="POST" id="childrenform">
+        <form  method="POST" id="childrenform" name="childrenform">
         <div class="coor2">
             <h1>Adults</h1>
         </div>
@@ -131,23 +130,23 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                
         </form>
 
-        
+        <!-- packages from the organaization-->
 
         <div class="coor3">
             <h1>Packages</h1>
         </div>
-
+        <form method="post" id="organize_packges" name="organize_packges">
         <div class="container">
-
+        
             <div class="col-lg-12 grid-12 p-20 m-bottom-20 card " style="height: 560px; overflow: auto; ">
-
+            
             <?php
+            
             $i = 0;
             if ($food_pack) {
                 $count = count($food_pack);
                 // echo $count;
-                while ($count > 0) {
-            ?>
+                while ($count > 0) {?>
                     <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
                         <div class="txt-11 w-semibold"><?php echo $food_pack[$i]->package_name ?></div>
 
@@ -163,6 +162,9 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                             $price_arr = explode(',', $food_pack[$i]->item_price);
                             $item_arr = explode(',', $food_pack[$i]->item_name);
                             $quantity_arr = explode(',', $food_pack[$i]->quantity);
+                            $selectted_org_pack_quantity_arr = explode(',', $food_pack[0]->selected_package_org_quantity);
+                            
+                            
                             foreach ($item_arr as $key => $i_name) {
                             ?>
                                 <div class="txt-09 col-3 txt-gray"><?php echo $i_name ?></div>
@@ -177,15 +179,20 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 
                         <div class="row txt-al-center p-top-20">
                             <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Package Cost</div>
-                            <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num"><?php echo $tot ?></div>
+                            <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num"><?php echo $tot?></div>
                         </div>
-
-                        <form method="post">
+                        <?php
+                        // $selected_package_quantity_arr = explode(',', $food_pack->selected_package_org_quantity);
+                        // print_r($selectted_org_pack_quantity_arr );?>
                             <div class="row txt-al-center p-top-20">
                                 <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quantity</div>
-                                <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num"> 
+                                <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size"  name="quantity_new[]" value="<?php echo $selectted_org_pack_quantity_arr[$i]; ?>">
+                                <?php $budget_pack[$i]=$selectted_org_pack_quantity_arr[$i]*$tot;?>
+                                <input type="hidden"  value=<?=$food_pack[$i]->package_id?> name="pack_new[]">
+                                <input type="hidden" value=<?=$tot?> name='price_new[]'>
+                                
                             </div>
-                        </form>
+                        
 
                         
  
@@ -196,29 +203,51 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                     $count--;
                     $i++;
                 }
+                
+                
+            
             } else {
                 ?>
-                
+                <div class="No_detail">No packages are Available</div>
             <?php
             }
             ?>
+            <?php 
+            $count1 = count($food_pack);
+            // print_r($count1);
+            for($i=0;$i<$count1;$i++){
+                    $budget1+= $budget_pack[$i];
+                }?>
+            
 
-
-        </div>
-
+            
+            </div>
+            <div>
+                <div onclick="document.getElementById('organize_packges').submit();" style="margin-left:30%;">
+                <input type="submit" name="organize_packges" class="btn btn-sm btn-purple col-6" value="save quantity">
+                </div>
+                
+            
+            
+             <!-- <button type="submit" >submit</button> -->
+            </div>
         </div> 
+
+        </form>
         <div class="coor3">
             <h1>Add packages  and other expences package</h1>
         </div>
-
+        <form method="post" id="eventmanager_packges" name="eventmanager_packges">
         <div class="container">
 
-            <div class="col-lg-7 grid-12 p-20 m-bottom-20 card " style="height: 560px; overflow: auto;">
+            <div class="col-lg-12 grid-12 p-20 m-bottom-20 card " style="height: 560px; overflow: auto;">
 
             <?php
             $i = 0;
+            
             if ($package_data) {
                 $count = sizeof($package_data);
+
                 while ($count > 0) {
             ?>
                     <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
@@ -236,6 +265,7 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                             $price_arr = explode(',', $package_data[$i]->item_price);
                             $item_arr = explode(',', $package_data[$i]->item_name);
                             $quantity_arr = explode(',', $package_data[$i]->quantity);
+                            $selectted_event_pack_quantity_arr = explode(',', $package_data[0]->selected_package_event_quantity);
                             foreach ($item_arr as $key => $i_name) {
                             ?>
                                 <div class="txt-09 col-3 txt-gray"><?php echo $i_name ?></div>
@@ -252,35 +282,68 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                             <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Package Cost</div>
                             <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num"><?php echo $tot ?></div>
                         </div>
+                        
+                        <div class="row txt-al-center p-top-20">
+                            <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quntity</div>
+                            <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity[]" value=<?=$package_data[$i]->package_quantity?>>
+                            <input type="hidden" value='<?=$package_data[$i]->package_id?>' name="package_id[]">
+                            <?php $budget_pack2[$i]=($package_data[$i]->package_quantity)*$tot;?>
+                        </div>
 
                         <div class="row p-top-20">
                             <button class="btn btn-sm btn-gray col-6">edit</button>
-                            <a href="<?= ROOT ?>/event_budget/delete_package?id=<?= $package_data[$i]->package_id ?>">
+                            <a href="<?= ROOT ?>/event_budget/handle_pack_delete?id=<?= $package_data[$i]->package_id ?>">
                                 <button class="btn btn-sm btn-purple col-6">remove</button>
                             </a>
                         </div>
                     </div>
+                    
                 <?php
 
                     $i++;
                     $count--;
                 }
-            } else {
+                
+            } 
+            
+            else {
                 ?>
                 <div class="heading-3 col-12">No Packages Added</div>
             <?php
             }
             ?>
 
+            <?php 
+            $count2 = count($package_data);
+            // print_r($count2);
+            for($i=0;$i<$count2;$i++){
+                    $budget2+= $budget_pack2[$i];
+                }?>
 
+
+           </div>
+           <div>
+                <div onclick="document.getElementById('eventmanager_packges').submit();" style="margin-left:30%;">
+                <input type="submit" name="eventmanager_packges" class="btn btn-sm btn-purple col-6" value="save quantity">
+                </div>
+                
+            
+            
+             <!-- <button type="submit" >submit</button> -->
+            </div>
         </div>
+        </form>
 
-        <div class="blank col-5 m-20 add_package_div card" style="height: auto;">
+        <div class="coor3">
+            <h1>Add package</h1>
+        </div>
+        <div class="container">
 
-            <h2>Add package</h2>
+            <div class="col-sm-12 grid-12 p-20 m-bottom-20 card col-lg-6  " style="height: 560px; overflow: auto;">
+            
 
-            <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center">
-                <form action="" method="post">
+            <div class="card col-lg-12 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center">
+                <form action="" method="post" name="new_form">
                     <input class="txt-11 w-semibold package_name_input" name="pack_name" type="text" style="border: solid gray 1px;" placeholder="Package name">
 
 
@@ -297,24 +360,26 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                             <i class="fa-solid fa-circle-xmark col-1 txt-14" style="cursor:pointer; visibility:hidden;"></i>
                         </div>
                     </div>
-                
+                    <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quantity</div>
+                    <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity">
 
                     <div class=" row p-top-20">
-                        <button type="submit" class="btn btn-sm btn-green col-12">Add package</button>
+                        <input type="submit" value="Add package" name="new_form" class="btn btn-sm btn-green col-12">
                     </div>
                 </form>
 
 
             </div>
-            <!-- package item end -->
+            
         </div>
-        </div> 
         
+        </div> 
+        <?php $total_budget=$budget1+$budget2?>
         <div>
             <form method="post">
                 <div class="row txt-al-center p-top-20">
                     <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8 coor3"><h1>Total Budget</h1></div>
-                    <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num"> 
+                    <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size1" value="<?=$total_budget?>" readonly> 
                 </div>
             </form>
         </div>
@@ -322,10 +387,6 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
     </div>
 
 </div>
-
-
-
-
 
 
 

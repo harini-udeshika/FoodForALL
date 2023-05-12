@@ -1,6 +1,11 @@
 <?php
 class Selected_details extends Controller{
     function index(){
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'eventmanager')) {
+            $this->redirect('home');
+        }
         $event=$_GET['eid'];
         $select_detail = new Select_details();
         $query1 = "SELECT select_details.detail_id,select_details.catagory,select_details.event_name,ROW_NUMBER() OVER (ORDER BY select_details.id) AS  dcount from select_details WHERE select_details.event_name=$event order by select_details.catagory Asc ";
