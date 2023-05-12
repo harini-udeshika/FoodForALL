@@ -2,9 +2,25 @@
 class Select_elders extends Controller
 {
     function index(){
+        if (!Auth::logged_in()) {
+            $this->redirect('home');
+        } elseif (Auth::logged_in() && !(Auth::getusertype() == 'eventmanager')) {
+            $this->redirect('home');
+        }
         $eventid=$_GET['eid'];
         $select_details = new select_details();
         $elders = new Elderhome();
+
+        $query_0 = "SELECT elderhome.members AS elders,
+        ROW_NUMBER() OVER (ORDER BY elderhome.id) AS  ecount,
+        area_coodinator.district, area_coodinator.area, elderhome.cholesterol_patients, elderhome.Diabetes_patients,elderhome.both_patients,
+        elderhome.id,elderhome.Healthy_adults,select_details.id AS uniqueid
+        FROM elderhome
+        LEFT JOIN area_coodinator ON elderhome.areacoordinator_email = area_coodinator.email 
+        LEFT JOIN select_details ON select_details.detail_id = elderhome.id 
+        LEFT JOIN event ON event.event_id='$eventid'
+        where select_details.event_name= '$eventid' AND select_details.catagory='elderhome'";
+
         $query_1 = "SELECT elderhome.members AS elders,
         ROW_NUMBER() OVER (ORDER BY elderhome.id) AS  ecount,
         area_coodinator.district, area_coodinator.area, elderhome.cholesterol_patients, elderhome.Diabetes_patients,elderhome.both_patients,
@@ -13,9 +29,10 @@ class Select_elders extends Controller
         FROM elderhome
         LEFT JOIN area_coodinator ON elderhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = elderhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        where select_details.catagory='elderhome'
         group BY(elderhome.id)
-        HAVING month_diff <= 3 
+        HAVING month_diff <= 3
         ORDER BY month_diff DESC";
 
         $query_2 = "SELECT *
@@ -27,7 +44,8 @@ class Select_elders extends Controller
         FROM elderhome
         left JOIN area_coodinator ON elderhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = elderhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        where select_details.catagory='elderhome'
         ) AS t
         WHERE 
         t.month_diff BETWEEN 4 AND 6
@@ -44,7 +62,8 @@ class Select_elders extends Controller
         FROM elderhome
         LEFT JOIN area_coodinator ON elderhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = elderhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        where select_details.catagory='elderhome'
         )AS t 
         WHERE
         t.month_diff BETWEEN 7 AND 12
@@ -59,29 +78,27 @@ class Select_elders extends Controller
         FROM elderhome
         left JOIN area_coodinator ON elderhome.areacoordinator_email = area_coodinator.email 
         LEFT JOIN select_details ON select_details.detail_id = elderhome.id 
-        INNER JOIN event ON event.event_id=select_details.event_name
-        WHERE PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(event.date, '%Y%m')) > 12
+        LEFT JOIN event ON event.event_id=select_details.event_name
+        WHERE select_details.catagory='elderhome' AND PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(event.date, '%Y%m')) > 12
         group BY(elderhome.id)
         ORDER BY month_diff DESC";
 
         $query_5 = "SELECT elderhome.members AS elders,
         ROW_NUMBER() OVER (ORDER BY elderhome.id) AS  ecount,
         area_coodinator.district, area_coodinator.area, elderhome.cholesterol_patients, elderhome.Diabetes_patients,
-        elderhome.id,select_details.id AS uniqueid,elderhome.Healthy_adults,elderhome.both_patients,
-        PERIOD_DIFF(DATE_FORMAT(CURRENT_DATE(), '%Y%m'), DATE_FORMAT(select_details.date_entered, '%Y%m')) AS month_diff
+        elderhome.id,elderhome.id AS uniqueid,elderhome.Healthy_adults,elderhome.both_patients
         FROM elderhome
         left JOIN area_coodinator ON elderhome.areacoordinator_email = area_coodinator.email 
-        LEFT JOIN select_details ON select_details.detail_id = elderhome.id 
-        WHERE select_details.detail_id IS NULL
-        GROUP BY(elderhome.id)";
+        WHERE elderhome.id NOT IN (
+        SELECT detail_id FROM select_details WHERE catagory = 'elderhome' AND detail_id IS NOT NULL)";
 
-
+        $data_0 = $elders->query($query_0);
         $data_1 = $elders->query($query_1);
         $data_2 = $elders->query($query_2);
         $data_3 = $elders->query($query_3);
         $data_4 = $elders->query($query_4);
         $data_5 = $elders->query($query_5);
-        // print($query);
+        // print($query_5);
         $query1 = "SELECT * FROM select_details WHERE catagory= 'family' AND event_name = $eventid";
         $query2 = "SELECT * FROM select_details WHERE catagory= 'childrenhome' AND event_name = $eventid";
         $query3 = "SELECT * FROM select_details WHERE catagory= 'elderhome' AND event_name = $eventid";
@@ -106,7 +123,7 @@ class Select_elders extends Controller
             $errors=$select_details->errors;
             }
 
-        $this->view('select_elders', ['row' => $data_1,'row_2' => $data_2,'row_3' => $data_3,'row_4' => $data_4,'row_5' => $data_5,'event'=>$eventid, 'row1'=>$data1,'row2'=>$data2,'row3'=>$data3]);
+        $this->view('select_elders', ['row0' => $data_0,'row' => $data_1,'row_2' => $data_2,'row_3' => $data_3,'row_4' => $data_4,'row_5' => $data_5,'event'=>$eventid, 'row1'=>$data1,'row2'=>$data2,'row3'=>$data3]);
     }
 
     public function delete(){

@@ -8,83 +8,57 @@
 <div class="container">
   <!-- Launched events -->
    <div class="blank col-lg-1"></div>
-  <div class="card event-card grid-12 width-100 col-lg-10 p-20 p-top-0 m-top-60">
+  <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 m-top-60">
     <!-- heading -->
     <div class="heading-2 col-12">Launched Events</div>
 
     <!-- Launchedevent item -->
-    <div class="event-vard-i card-simple col-lg-6 grid-12 p-15 txt-gray">
+    <?php
+    $i=0;
+    if($rows1){
+      $count=count($rows1);
+      while($count>0){?>
+    <div class="event-vard-i card-simple col-lg-5 grid-12 p-15 ">
       <div class="col-7">
         <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
+          <div class="event-att grid-8 txt-09">
             <div class="title w-semibold col-3 p-right-15">Event</div>
-            <div class="details col-5">Api wenuwen api</div>
+            <div class="details col-5"><?=$rows1[$i]->name?>
+            <span>
+            <?php if($rows1[$i]->date==date("Y-m-d")){?>
+            <a href="<?= ROOT ?>/attendence?id=<?=$rows1[$i]->event_id?>"><i class="fa-solid fa-clipboard-user fa-beat fa-2xl" title="mark attendence"></i></a>
+            <?php }?>
+            </span>
+            </div>
+            
           </div>
         </div>
         <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
+          <div class="event-att grid-8 txt-09">
             <div class="title w-semibold col-3 p-right-15">Date</div>
-            <div class="details col-5">6 th Feb 2023</div>
+            <div class="details col-5"><?=$rows1[$i]->date?></div>
           </div>
         </div>
+        
       </div>
 
-      <div class="div col-5"></div>
+     
+      
 
-      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <button class="btn btn-xsm btn-green">Go to details</button>
+      <div class="sp-09 col-12 m-top-10 txt-07 p-left-8 p-right-5">
+        
+        <a href="<?= ROOT ?>/event_org?id=<?=$rows1[$i]->event_id?>"><button class="btn btn-xsm btn-green">Go to details</button></a>
       </div>
     </div>
-    <!--END Completed event item -->
+    <?php $count--;
+            $i++;
+      }
 
-    <!-- Completed event item -->
-    <div class="event-vard-i card-simple col-lg-6 grid-12 p-15 txt-gray">
-      <div class="col-7">
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Event</div>
-            <div class="details col-5">Api wenuwen api</div>
-          </div>
-        </div>
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Date</div>
-            <div class="details col-5">4 th March 2023</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="div col-5"></div>
-
-      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <button class="btn btn-xsm btn-green">Go to details</button>
-      </div>
-    </div>
-    <!--END Completed event item -->
-
-    <!-- Completed event item -->
-    <div class="event-vard-i card-simple col-lg-6 grid-12 p-15 txt-gray">
-      <div class="col-7">
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Event</div>
-            <div class="details col-5">Api wenuwen api</div>
-          </div>
-        </div>
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Date</div>
-            <div class="details col-5">8 th march 2023</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="div col-5"></div>
-
-      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <button class="btn btn-xsm btn-green">Go to details</button>
-      </div>
-    </div>
+        }
+        else { ?>
+            <div class="No_detail col-12">No Event Details Available</div>
+        <?php }
+        ?>
     <!--END Completed event item -->
   </div>
   <div class="blank col-lg-1"></div>
@@ -92,23 +66,28 @@
 
   <!-- Completed events -->
   <div class="blank col-lg-1"></div>
-  <div class="card event-card grid-12 width-100 col-lg-10 p-20 p-top-0 m-top-60">
+  <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 m-top-60">
     <!-- heading -->
     <div class="heading-2 col-12">Completed Events</div>
 
     <!-- Completed event item -->
-    <div class="event-vard-i card-simple col-lg-6 grid-12 p-15 txt-gray">
+    <?php
+    $i=0;
+    if($rows2){
+      $count=count($rows2);
+      while($count>0){?>
+    <div class="event-vard-i card-simple col-lg-5 grid-12 p-15 ">
       <div class="col-7">
         <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
+          <div class="event-att grid-8 txt-09">
             <div class="title w-semibold col-3 p-right-15">Event</div>
-            <div class="details col-5">Api wenuwen api</div>
+            <div class="details col-5"><?=$rows2[$i]->name?></div>
           </div>
         </div>
         <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
+          <div class="event-att grid-8 txt-09">
             <div class="title w-semibold col-3 p-right-15">Date</div>
-            <div class="details col-5">5 th Jan 2023</div>
+            <div class="details col-5"><?=$rows2[$i]->date?></div>
           </div>
         </div>
       </div>
@@ -116,61 +95,20 @@
       <div class="div col-5"></div>
 
       <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <button class="btn btn-xsm btn-green">Go to details</button>
+        <a href="<?= ROOT ?>/event_org?id=<?=$rows2[$i]->event_id?>"><button class="btn btn-xsm btn-green">Go to details</button></a>
       </div>
     </div>
+    
     <!--END Completed event item -->
-
-    <!-- Completed event item -->
-    <div class="event-vard-i card-simple col-lg-6 grid-12 p-15 txt-gray">
-      <div class="col-7">
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Event</div>
-            <div class="details col-5">Api wenuwen api</div>
-          </div>
-        </div>
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Date</div>
-            <div class="details col-5">23 rd Dec 2022</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="div col-5"></div>
-
-      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <button class="btn btn-xsm btn-green">Go to details</button>
-      </div>
-    </div>
-    <!--END Completed event item -->
-
-    <!-- Completed event item -->
-    <div class="event-vard-i card-simple col-lg-6 grid-12 p-15 txt-gray">
-      <div class="col-7">
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Event</div>
-            <div class="details col-5">Api wenuwen api</div>
-          </div>
-        </div>
-        <div class="m-bottom-10">
-          <div class="event-att grid-8 txt-08">
-            <div class="title w-semibold col-3 p-right-15">Date</div>
-            <div class="details col-5">4 th Dec 2022</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="div col-5"></div>
-
-      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <button class="btn btn-xsm btn-green">Go to details</button>
-      </div>
-    </div>
-    <!--END Completed event item -->
+    <?php $count--;
+                    $i++;
+            }
+        } else { ?>
+            <div class="No_detail col-12">No Event Details Available</div>
+        <?php }
+        ?>
   </div>
+  
   <div class="blank col-lg-1"></div>
   <!--END completed events -->
 </div>

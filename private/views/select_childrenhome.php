@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/select_copy.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/add.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/background.css">
 
 <?php $this->view('includes/submenu');
 $detail1 = array();
@@ -19,6 +20,13 @@ if ($row2) {
         $detail1[$i] = $row2[$i]->detail_id;
     }
 }
+
+if ($row0) {
+    $count = count($row0);
+    for ($i = 0; $i < $count; $i++) {
+      $detail0[$i] = $row0[$i]->id;
+    }
+  }
 
 
 if ($row) {
@@ -79,15 +87,83 @@ if ($row_4) {
             </thead>
         </table>
     </div>
-  <div class="col-12 divide_to_months">Selected Within 3 months</div>
+  <div class="col-12 divide_to_months">Selected Children Homes</div>
+<?php
+        $i=0;
+        if($row0){
+            $count=count($row0);
+            while($count>0){?>
+                
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
+                        <div class="m-bottom-10 m-top-15">
+                        <div class="event-att gap30 txt-09 ">
+                            <div class="title w-semibold col-4 p-right-15">Index</div>
+                            <div class="details col-4 tr3">Childrenhome <?=$row0[$i]->id?></div>
+                        </div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">District</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->district?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">City</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->area?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">Members</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->children_num?></div>
+                        </div>
+                    </div>
+
+                    <div class="div col-6 m-top-15" >
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-25">Children age below 1</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->less_one_children?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-25">Children above 1 and below 5</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->less_five_children?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-25">Children age above 5</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->higher_five_children?></div>
+                        </div>
+                         
+                    </div>  
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15">
+                        <?php
+                        $index1=in_array(($row0[$i]->id),$detail0);
+                        if($index1){?>
+                        <a href="<?=ROOT?>/select_childrenhome/delete?deleteid=<?=$row0[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
+                        <i class="fa-solid fa-circle-minus fa-xl" style="color: #98c03c;"></i></a>
+                        <?php
+                        }
+                        ?>
+                        
+                        </div>
+                    </div>  
+                </div>
+                <?php $count--;
+                    $i++;
+                }
+                } else { ?>
+                    <div class="No_detail col-12">No Children Homes</div>
+                <?php }
+                ?>
+
+<div class="col-12 divide_to_months">Selected Within 3 months</div>
 <?php
         $i=0;
         if($row){
             $count=count($row);
-            while($count>0){?>
+            while($count>0){
+              $index0=in_array(($row[$i]->id),$detail1);
+              if(!$index0){?>
                 
-                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                    <div class="div col-6 m-top-15">
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
                         <div class="m-bottom-10 m-top-15">
                         <div class="event-att gap30 txt-09 ">
                             <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -110,50 +186,45 @@ if ($row_4) {
 
                     <div class="div col-6 m-top-15">
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">less_one_children</div>
-                            <div class="details col-2 tr3"><?=$row[$i]->less_one_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children age below 1</div>
+                            <div class="details col-4 tr3"><?=$row[$i]->less_one_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">less_five_children</div>
-                            <div class="details col-2 tr3"><?=$row[$i]->less_five_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children above 1 and below 5</div>
+                            <div class="details col-4 tr3"><?=$row[$i]->less_five_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">higher_five_children</div>
-                            <div class="details col-2 tr3"><?=$row[$i]->higher_five_children?></div>
-                        </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                            <form  method="POST" id="select_details" class="select_details">
+                            <div class="title w-semibold col-4 p-right-15">Children age above 5</div>
+                            <div class="details col-4 tr3"><?=$row[$i]->higher_five_children?></div>
+                        </div>   
+                    </div> 
+                    
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15" >
+                            <form  method="POST" id="select_details1" class="select_details1">
                                 <input type="hidden" value="<?=$event?>" name="eid">
                                 <input type="hidden" value="<?=$row[$i]->id?>" name="id">
                                 <?php
                                 $index1=in_array(($row[$i]->id),$detail1);
                                 if(!$index1){?>
-                                <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                Select
-                                </button>
+                                <div onclick="select_detail_sub1()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
                                 <?php
                                 }
                                 ?>
                             </form>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                        <?php
-                        if($index1){?>
-                        <a href="<?=ROOT?>/select_childrenhome/delete?deleteid=<?=$row[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                        <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                        <?php
-                        }
-                        ?>
-                        </div>   
-                    </div>    
+                    </div>
                 </div>
-                <?php $count--;
+                <?php  }
+                    $count--;
                     $i++;
                 }
                 } else { ?>
                     <div class="No_detail col-12">No Children Homes</div>
                 <?php }
-                ?>
+                ?>                
 
 <div class="col-12 divide_to_months">Selected Within 6 months</div>
     <?php
@@ -163,8 +234,8 @@ if ($row_4) {
             while($count>0){
                 $index2=in_array(($row_2[$i]->id),$detail2);
                 if(!$index2){?>
-                    <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                        <div class="div col-6 m-top-15">
+                    <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                        <div class="div col-5 m-top-15">
                             <div class="m-bottom-10 m-top-15">
                             <div class="event-att gap30 txt-09 ">
                                 <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -187,42 +258,37 @@ if ($row_4) {
 
                         <div class="div col-6 m-top-15">
                             <div class="event-att gap30 txt-09 m-top-15">
-                                <div class="title w-semibold col-4 p-right-15">less_one_children</div>
-                                <div class="details col-2 tr3"><?=$row_2[$i]->less_one_children?></div>
+                                <div class="title w-semibold col-4 p-right-15">Children age below 1</div>
+                                <div class="details col-4 tr3"><?=$row_2[$i]->less_one_children?></div>
                             </div>
                             <div class="event-att gap30 txt-09 m-top-15">
-                                <div class="title w-semibold col-4 p-right-15">less_five_children</div>
-                                <div class="details col-2 tr3"><?=$row_2[$i]->less_five_children?></div>
+                                <div class="title w-semibold col-4 p-right-15">Children above 1 and below 5</div>
+                                <div class="details col-4 tr3"><?=$row_2[$i]->less_five_children?></div>
                             </div>
                             <div class="event-att gap30 txt-09 m-top-15">
-                                <div class="title w-semibold col-4 p-right-15">higher_five_children</div>
-                                <div class="details col-2 tr3"><?=$row_2[$i]->higher_five_children?></div>
-                            </div>
-                            <div class="event-att gap30 txt-09 m-top-15">
-                                <form  method="POST" id="select_details" class="select_details">
+                                <div class="title w-semibold col-4 p-right-15">Children age above 5</div>
+                                <div class="details col-4 tr3"><?=$row_2[$i]->higher_five_children?></div>
+                            </div>  
+                        </div>  
+                        
+                        <div class="div col-1 m-top-15" style="margin: auto;">
+                            <div class="m-bottom-10 m-top-15">
+                                <form  method="POST" id="select_details2" class="select_details2">
                                     <input type="hidden" value="<?=$event?>" name="eid">
                                     <input type="hidden" value="<?=$row_2[$i]->id?>" name="id">
                                     <?php
                                     $index1=in_array(($row_2[$i]->id),$detail1);
                                     if(!$index1){?>
-                                    <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                    Select
-                                    </button>
+                                    <div onclick="select_detail_sub2()">
+                                        <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                    </div>
                                     <?php
                                     }
                                     ?>
                                 </form>
                             </div>
-                            <div class="event-att gap30 txt-09 m-top-15">
-                            <?php
-                            if($index1){?>
-                            <a href="<?=ROOT?>/select_childrenhome/delete?deleteid=<?=$row_2[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                            <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                            <?php
-                            }
-                            ?>
-                            </div>   
-                        </div>    
+                        </div>
+
                     </div>
                     <?php
                 } 
@@ -245,8 +311,8 @@ if ($row_4) {
             $index3=in_array(($row_3[$i]->id),$detail2);
             $index4=in_array(($row_3[$i]->id),$detail3);
             if(!$index3 && !$index4){?>
-                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                    <div class="div col-6 m-top-15">
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
                         <div class="m-bottom-10 m-top-15">
                         <div class="event-att gap30 txt-09 ">
                             <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -269,42 +335,36 @@ if ($row_4) {
 
                     <div class="div col-6 m-top-15">
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">less_one_children</div>
-                            <div class="details col-2 tr3"><?=$row_3[$i]->less_one_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children age below 1</div>
+                            <div class="details col-4 tr3"><?=$row_3[$i]->less_one_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">less_five_children</div>
-                            <div class="details col-2 tr3"><?=$row_3[$i]->less_five_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children above 1 and below 5</div>
+                            <div class="details col-4 tr3"><?=$row_3[$i]->less_five_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">higher_five_children</div>
-                            <div class="details col-2 tr3"><?=$row_3[$i]->higher_five_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children age above 5</div>
+                            <div class="details col-4 tr3"><?=$row_3[$i]->higher_five_children?></div>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                            <form  method="POST" id="select_details" class="select_details">
+                    </div> 
+                    
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15">
+                            <form  method="POST" id="select_details3" class="select_details3">
                                 <input type="hidden" value="<?=$event?>" name="eid">
                                 <input type="hidden" value="<?=$row_3[$i]->id?>" name="id">
                                 <?php
                                 $index1=in_array(($row_3[$i]->id),$detail1);
                                 if(!$index1){?>
-                                <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                Select
-                                </button>
+                                <div onclick="select_detail_sub3()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
                                 <?php
                                 }
                                 ?>
                             </form>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                        <?php
-                        if($index1){?>
-                        <a href="<?=ROOT?>/select_childrenhome/delete?deleteid=<?=$row_3[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                        <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                        <?php
-                        }
-                        ?>
-                        </div>   
-                    </div>    
+                    </div>
                 </div>
                 <?php
             } 
@@ -328,8 +388,8 @@ if ($row_4) {
             $index4=in_array(($row_4[$i]->id),$detail3);
             $index5=in_array(($row_4[$i]->id),$detail4);
             if(!$index3 && !$index4 && !$index5){?>
-                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                    <div class="div col-6 m-top-15">
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
                         <div class="m-bottom-10 m-top-15">
                         <div class="event-att gap30 txt-09 ">
                             <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -352,42 +412,41 @@ if ($row_4) {
 
                     <div class="div col-6 m-top-15">
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">less_one_children</div>
+                            <div class="title w-semibold col-4 p-right-15">Children age below 1</div>
                             <div class="details col-2 tr3"><?=$row_4[$i]->less_one_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">less_five_children</div>
-                            <div class="details col-2 tr3"><?=$row_4[$i]->less_five_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children above 1 and below 5</div>
+                            <div class="details col-4 tr3"><?=$row_4[$i]->less_five_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <div class="title w-semibold col-4 p-right-15">higher_five_children</div>
-                            <div class="details col-2 tr3"><?=$row_4[$i]->higher_five_children?></div>
+                            <div class="title w-semibold col-4 p-right-15">Children age above 5</div>
+                            <div class="details col-4 tr3"><?=$row_4[$i]->higher_five_children?></div>
                         </div>
                         <div class="event-att gap30 txt-09 m-top-15">
-                            <form  method="POST" id="select_details" class="select_details">
+                            
+                        </div>   
+                    </div> 
+                    
+                    <div class="div col-1 m-top-15" style="margin:auto">
+                        <div class="m-bottom-10 m-top-15">
+                            <form  method="POST" id="select_details4" class="select_details4">
                                 <input type="hidden" value="<?=$event?>" name="eid">
                                 <input type="hidden" value="<?=$row_4[$i]->id?>" name="id">
                                 <?php
                                 $index1=in_array(($row_4[$i]->id),$detail1);
                                 if(!$index1){?>
-                                <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                Select
-                                </button>
+                                <div onclick="select_detail_sub4()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
+                               
                                 <?php
                                 }
                                 ?>
                             </form>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                        <?php
-                        if($index1){?>
-                        <a href="<?=ROOT?>/select_childrenhome/delete?deleteid=<?=$row_4[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                        <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                        <?php
-                        }
-                        ?>
-                        </div>   
-                    </div>    
+                        
+                    </div>
                 </div>
                 <?php
             } 
@@ -406,12 +465,12 @@ if ($row_4) {
     if($row_5){
         $count=count($row_5);
         while($count>0){?>
-            <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                <div class="div col-6 m-top-15">
+            <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                <div class="div col-5 m-top-15">
                     <div class="m-bottom-10 m-top-15">
                     <div class="event-att gap30 txt-09 ">
                         <div class="title w-semibold col-4 p-right-15">Index</div>
-                        <div class="details col-4 tr3">Childrenhome <?=$row_5[$i]->id?></div>
+                        <div class="details col-4 tr3">Childrenhome <?=$row_5[$i]->uniqueid?></div>
                     </div>
                     </div>
                     <div class="event-att gap30 txt-09 m-top-15">
@@ -430,33 +489,39 @@ if ($row_4) {
 
                 <div class="div col-6 m-top-15">
                     <div class="event-att gap30 txt-09 m-top-15">
-                        <div class="title w-semibold col-4 p-right-15">less_one_children</div>
-                        <div class="details col-2 tr3"><?=$row_5[$i]->less_one_children?></div>
+                        <div class="title w-semibold col-4 p-right-15">Children age below 1</div>
+                        <div class="details col-4 tr3"><?=$row_5[$i]->less_one_children?></div>
                     </div>
                     <div class="event-att gap30 txt-09 m-top-15">
-                        <div class="title w-semibold col-4 p-right-15">less_five_children</div>
-                        <div class="details col-2 tr3"><?=$row_5[$i]->less_five_children?></div>
+                        <div class="title w-semibold col-4 p-right-15">Children above 1 and below 5</div>
+                        <div class="details col-4 tr3"><?=$row_5[$i]->less_five_children?></div>
                     </div>
                     <div class="event-att gap30 txt-09 m-top-15">
-                        <div class="title w-semibold col-4 p-right-15">higher_five_children</div>
-                        <div class="details col-2 tr3"><?=$row_5[$i]->higher_five_children?></div>
+                        <div class="title w-semibold col-4 p-right-15">Children age above 5</div>
+                        <div class="details col-4 tr3"><?=$row_5[$i]->higher_five_children?></div>
                     </div>
                     <div class="event-att gap30 txt-09 m-top-15">
-                        <form  method="POST" id="select_details" class="select_details">
+                        
+                    </div>  
+                </div> 
+                
+                <div class="div col-1 m-top-15" style="margin:auto">
+                    <div class="m-bottom-10 m-top-15">
+                        <form  method="POST" id="select_details5" class="select_details5">
                             <input type="hidden" value="<?=$event?>" name="eid">
-                            <input type="hidden" value="<?=$row_5[$i]->id?>" name="id">
+                            <input type="hidden" value="<?=$row_5[$i]->uniqueid?>" name="id">
                             <?php
-                            $index1=in_array(($row_5[$i]->id),$detail1);
+                            $index1=in_array(($row_5[$i]->uniqueid),$detail1);
                             if(!$index1){?>
-                            <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                            Select
-                            </button>
+                                <div onclick="select_detail_sub5()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
                             <?php
                             }
                             ?>
                         </form>
-                    </div>  
-                </div>    
+                    </div>
+                </div>
             </div>
             <?php $count--;
             $i++;
@@ -480,5 +545,6 @@ if ($row_4) {
             <button class="button">Next<i class="fa-solid fa-angles-right"></i></button>
             </a>
         </div>
-
+        
+<script src=" <?=ROOT?>/assets/select_details.js"></script>
 <?php $this->view('includes/footer') ?>

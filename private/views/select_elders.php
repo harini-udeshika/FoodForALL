@@ -3,9 +3,11 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/add.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/select_copy.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/background.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ;
 
+$detail0 = array();
 $detail1 = array();
 $detail2 = array();
 $detail3 = array();
@@ -20,6 +22,12 @@ if ($row3) {
     }
 }
 
+if ($row0) {
+    $count = count($row0);
+    for ($i = 0; $i < $count; $i++) {
+      $detail0[$i] = $row0[$i]->id;
+    }
+  }
 
 if ($row) {
     $count = count($row);
@@ -79,15 +87,88 @@ if ($row_4) {
             </thead>
         </table>
     </div>
-  <div class="col-12 divide_to_months">Selected Within 3 months</div>
+
+    <div class="col-12 divide_to_months">Selected Elder's Homes</div>
 <?php
         $i=0;
-        if($row){
-            $count=count($row);
+        if($row0){
+            $count=count($row0);
             while($count>0){?>
                 
-                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
+                        <div class="m-bottom-10 m-top-15">
+                        <div class="event-att gap30 txt-09 ">
+                            <div class="title w-semibold col-4 p-right-15">Index</div>
+                            <div class="details col-4 tr3">Elderhome <?=$row0[$i]->id?></div>
+                        </div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">District</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->district?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">City</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->area?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">Members</div>
+                            <div class="details col-4 tr3"><?=$row0[$i]->elders?></div>
+                        </div>
+                    </div>
+
                     <div class="div col-6 m-top-15">
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">Patients without Diabetes and Cholesterol</div>
+                            <div class="details col-2 tr3"><?=$row0[$i]->Healthy_adults?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">Diabetes and Cholesterol patients</div>
+                            <div class="details col-2 tr3"><?=$row0[$i]->both_patients?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">Diabetes patients</div>
+                            <div class="details col-2 tr3"><?=$row0[$i]->Diabetes_patients?></div>
+                        </div>
+                        <div class="event-att gap30 txt-09 m-top-15">
+                            <div class="title w-semibold col-4 p-right-15">Cholesterol patients</div>
+                            <div class="details col-2 tr3"><?=$row0[$i]->cholesterol_patients?></div>
+                        </div>
+                    </div>  
+
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15" >
+                        <?php
+                        $index1=in_array(($row0[$i]->id),$detail0);
+                        if($index1){?>
+                        <a href="<?=ROOT?>/select_elders/delete?deleteid=<?=$row0[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
+                        <i class="fa-solid fa-circle-minus fa-xl" style="color: #98c03c;"></i></a>
+                        <?php
+                        }
+                        ?>
+                        </div>   
+                    </div>    
+                </div>
+                <?php $count--;
+                    $i++;
+                }
+                } else { ?>
+                    <div class="No_detail col-12">No Elders Homes</div>
+                <?php }
+                ?>
+
+                
+    <div class="col-12 divide_to_months">Selected Within 3 months</div>
+       <?php
+       $i=0;
+       if($row){
+           $count=count($row);
+           while($count>0){
+             $index0=in_array(($row[$i]->id),$detail1);
+             if(!$index0){?>
+                
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
                         <div class="m-bottom-10 m-top-15">
                         <div class="event-att gap30 txt-09 ">
                             <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -125,33 +206,29 @@ if ($row_4) {
                             <div class="title w-semibold col-4 p-right-15">Cholesterol patients</div>
                             <div class="details col-2 tr3"><?=$row[$i]->cholesterol_patients?></div>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                            <form  method="POST" id="select_details" class="select_details">
+                    </div> 
+                    
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15" >
+                            <form  method="POST" id="select_details1" class="select_details1">
                                 <input type="hidden" value="<?=$event?>" name="eid">
                                 <input type="hidden" value="<?=$row[$i]->id?>" name="id">
                                 <?php
                                 $index1=in_array(($row[$i]->id),$detail1);
                                 if(!$index1){?>
-                                <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                Select
-                                </button>
+                                <div onclick="select_detail_sub1()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
                                 <?php
                                 }
                                 ?>
                             </form>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                        <?php
-                        if($index1){?>
-                        <a href="<?=ROOT?>/select_elders/delete?deleteid=<?=$row[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                        <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                        <?php
-                        }
-                        ?>
-                        </div>   
                     </div>    
                 </div>
-                <?php $count--;
+                <?php 
+                    }
+                    $count--;
                     $i++;
                 }
                 } else { ?>
@@ -167,8 +244,8 @@ if ($row_4) {
             while($count>0){
                 $index2=in_array(($row_2[$i]->id),$detail2);
                 if(!$index2){?>
-                    <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                        <div class="div col-6 m-top-15">
+                    <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                        <div class="div col-5 m-top-15">
                             <div class="m-bottom-10 m-top-15">
                             <div class="event-att gap30 txt-09 ">
                                 <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -206,30 +283,25 @@ if ($row_4) {
                                 <div class="title w-semibold col-4 p-right-15">Cholesterol patients</div>
                                 <div class="details col-2 tr3"><?=$row_2[$i]->cholesterol_patients?></div>
                             </div>
-                            <div class="event-att gap30 txt-09 m-top-15">
-                                <form  method="POST" id="select_details" class="select_details">
+                        </div>
+
+                        <div class="div col-1 m-top-15" style="margin: auto;">
+                            <div class="m-bottom-10 m-top-15">
+                                <form  method="POST" id="select_details2" class="select_details2">
                                     <input type="hidden" value="<?=$event?>" name="eid">
                                     <input type="hidden" value="<?=$row_2[$i]->id?>" name="id">
                                     <?php
                                     $index1=in_array(($row_2[$i]->id),$detail1);
                                     if(!$index1){?>
-                                    <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                    Select
-                                    </button>
+                                    <div onclick="select_detail_sub2()">
+                                        <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                    </div>
                                     <?php
                                     }
                                     ?>
                                 </form>
                             </div>
-                            <div class="event-att gap30 txt-09 m-top-15">
-                            <?php
-                            if($index1){?>
-                            <a href="<?=ROOT?>/select_elders/delete?deleteid=<?=$row_2[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                            <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                            <?php
-                            }
-                            ?>
-                            </div>   
+                              
                         </div>    
                     </div>
                     <?php
@@ -253,8 +325,8 @@ if ($row_4) {
             $index3=in_array(($row_3[$i]->id),$detail2);
             $index4=in_array(($row_3[$i]->id),$detail3);
             if(!$index3 && !$index4){?>
-                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                    <div class="div col-6 m-top-15">
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
                         <div class="m-bottom-10 m-top-15">
                         <div class="event-att gap30 txt-09 ">
                             <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -292,29 +364,23 @@ if ($row_4) {
                             <div class="title w-semibold col-4 p-right-15">Cholesterol patients</div>
                             <div class="details col-2 tr3"><?=$row_3[$i]->cholesterol_patients?></div>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                            <form  method="POST" id="select_details" class="select_details">
+                    </div>
+
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15" >
+                            <form  method="POST" id="select_details3" class="select_details3">
                                 <input type="hidden" value="<?=$event?>" name="eid">
                                 <input type="hidden" value="<?=$row_3[$i]->id?>" name="id">
                                 <?php
                                 $index1=in_array(($row_3[$i]->id),$detail1);
                                 if(!$index1){?>
-                                <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                Select
-                                </button>
+                                <div onclick="select_detail_sub3()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
                                 <?php
                                 }
                                 ?>
                             </form>
-                        </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                        <?php
-                        if($index1){?>
-                        <a href="<?=ROOT?>/select_elders/delete?deleteid=<?=$row_3[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                        <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                        <?php
-                        }
-                        ?>
                         </div>   
                     </div>    
                 </div>
@@ -340,8 +406,8 @@ if ($row_4) {
             $index4=in_array(($row_4[$i]->id),$detail3);
             $index5=in_array(($row_4[$i]->id),$detail4);
             if(!$index3 && !$index4 && !$index5){?>
-                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                    <div class="div col-6 m-top-15">
+                <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                    <div class="div col-5 m-top-15">
                         <div class="m-bottom-10 m-top-15">
                         <div class="event-att gap30 txt-09 ">
                             <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -379,30 +445,24 @@ if ($row_4) {
                             <div class="title w-semibold col-4 p-right-15">Cholesterol patients</div>
                             <div class="details col-2 tr3"><?=$row_4[$i]->cholesterol_patients?></div>
                         </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                            <form  method="POST" id="select_details" class="select_details">
+                    </div> 
+                    
+                    <div class="div col-1 m-top-15" style="margin: auto;">
+                        <div class="m-bottom-10 m-top-15" >
+                            <form  method="POST" id="select_details4" class="select_details4">
                                 <input type="hidden" value="<?=$event?>" name="eid">
                                 <input type="hidden" value="<?=$row_4[$i]->id?>" name="id">
                                 <?php
                                 $index1=in_array(($row_4[$i]->id),$detail1);
                                 if(!$index1){?>
-                                <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                                Select
-                                </button>
+                                <div onclick="select_detail_sub4()">
+                                    <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                                </div>
                                 <?php
                                 }
                                 ?>
                             </form>
-                        </div>
-                        <div class="event-att gap30 txt-09 m-top-15">
-                        <?php
-                        if($index1){?>
-                        <a href="<?=ROOT?>/select_elders/delete?deleteid=<?=$row_4[$i]->uniqueid?>&eid=<?=$event?>" title="Delete">
-                        <button class="btn btn-xsm btn-block btn-black m-bottom-10 selectbtn">Selected</button></a>
-                        <?php
-                        }
-                        ?>
-                        </div>   
+                        </div>  
                     </div>    
                 </div>
                 <?php
@@ -422,8 +482,8 @@ if ($row_4) {
     if($row_5){
         $count=count($row_5);
         while($count>0){?>
-            <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0">
-                <div class="div col-6 m-top-15">
+            <div class="card event-card grid-12 width-100 col-lg-12 p-20 p-top-0 back">
+                <div class="div col-5 m-top-15">
                     <div class="m-bottom-10 m-top-15">
                     <div class="event-att gap30 txt-09 ">
                         <div class="title w-semibold col-4 p-right-15">Index</div>
@@ -461,16 +521,20 @@ if ($row_4) {
                         <div class="title w-semibold col-4 p-right-15">Cholesterol patients</div>
                         <div class="details col-2 tr3"><?=$row_5[$i]->cholesterol_patients?></div>
                     </div>
-                    <div class="event-att gap30 txt-09 m-top-15">
-                        <form  method="POST" id="select_details" class="select_details">
+                </div> 
+                
+                <div class="div col-1 m-top-15" style="margin:auto">
+                    <div class="m-bottom-10 m-top-15">
+                        <form  method="POST" id="select_details5" class="select_details5">
                             <input type="hidden" value="<?=$event?>" name="eid">
                             <input type="hidden" value="<?=$row_5[$i]->id?>" name="id">
                             <?php
-                            $index1=in_array(($row_5[$i]->id),$detail1);
+                            $index1=in_array(($row_5[$i]->uniqueid),$detail1);
+                            print($index1);
                             if(!$index1){?>
-                            <button class="btn btn-xsm btn-block btn-green m-bottom-10 selectbtn " type="submit" > 
-                            Select
-                            </button>
+                            <div onclick="select_detail_sub5()">
+                                <i class="fa-solid fa-circle-plus fa-xl" style="color: #98c03c;"></i>
+                            </div>
                             <?php
                             }
                             ?>
@@ -501,4 +565,5 @@ if ($row_4) {
             </a>
         </div>
 
+<script src=" <?=ROOT?>/assets/select_details.js"></script>
 <?php $this->view('includes/footer') ?>
