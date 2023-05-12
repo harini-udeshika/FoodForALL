@@ -130,17 +130,25 @@ if ($tot_volunteers) {
 
                         <div class="progress">
                             <div class="progress-bar">
-                                <div></div>
+                            <div style="width:<?=$volunteerp?>%"></div>
                             </div>
-                            <span>50%</span>
+                            <span><?=$volunteerp?>%</span>
                         </div>
                     </div>
 
                     <div class="event-button">
+                        <?php if(Auth::logged_in()):?>
                         <button class="b1"> <a
                                 href="<?=ROOT?>/eventpage?id=<?=$ongoing[$i]->event_id?>/#donate">Donate</a></button>
                         <button class="b2"> <a
                                 href="<?=ROOT?>/eventpage?id=<?=$ongoing[$i]->event_id?>/#volunteer">Volunteer</a></button>
+                                <?php endif?>
+                                <?php if(!Auth::logged_in()):?>
+                        <button class="b1"> <a
+                                href="login">Donate</a></button>
+                        <button class="b2"> <a
+                                href="login">Volunteer</a></button>
+                                <?php endif?>
                     </div>
 
                 </div>

@@ -15,7 +15,7 @@
                 <a href="">Donate/Volunteer</a>
             </div> -->
         <div class="nav-i">
-            <a href="login">Organizations</a>
+            <a href="search_org">Organizations</a>
         </div>
         <div class="nav-i">
             <a href="login">Events</a>

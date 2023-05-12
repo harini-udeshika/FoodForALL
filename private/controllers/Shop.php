@@ -7,7 +7,7 @@ class Shop extends Controller
         $item = new Merchandise_item();
         $org = new Organization();
 
-        if (Auth::logged_in()) {
+      
             if (isset($_GET['product_id'])) {
                 $item_id = $_GET['product_id'];
                 $item_data = $item->where('item_no', $item_id);
@@ -114,12 +114,12 @@ class Shop extends Controller
             } else {
                 $this->view('404');
             }
-        } else {
-            $this->redirect('login');
-        }
+       
     }
+
     public function add_to_cart()
     {
+        if (Auth::logged_in()) {
         $item = new Merchandise_item();
         $org_id = $_GET['item'];
         $org_id = explode(" ", $org_id)[1];
@@ -208,6 +208,10 @@ class Shop extends Controller
             // $this->redirect('shop?id=' . $data[1]);
         }
         echo ('<i class="fa-solid fa-circle-check"></i>&nbsp;&nbsp;item added to cart sucessfully!');
+    }
+    else{
+        $this->redirect('login');
+    }
     }
 
     public function add_qty()
