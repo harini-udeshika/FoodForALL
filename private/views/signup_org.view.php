@@ -71,36 +71,38 @@
                         <div class="eminput-control">
                             <!-- <input type="text" value="<?= get_var('city') ?>"
                     name="city" id="city-org" placeholder="City" > -->
-                            <select type="text" value="District" name="city" id="city-org" placeholder="District" style="width: 100%;">
+                            <select type="text" name="city" id="city-org" style="width: 100%;">
                                 <option style="color:  rgb(204, 235, 226);" value='<?= get_var('city') ?>'><?php if (get_var('city')) {
                                                                             get_var('city');
                                                                         } else {
-                                                                            echo "District";
-                                                                        } ?></option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
-                                <option value=''>District</option>
+                                                                            echo "-District-";
+                                                                        } ?>
+                                                                        </option>
+                                <option value='Ampara'>Ampara</option>
+                                <option value='Anuradhapura'>Anuradhapura</option>
+                                <option value='Badulla'>Badulla</option>
+                                <option value='Batticaloa'>Batticaloa</option>
+                                <option value='Colombo'>Colombo</option>  
+                                <option value='Galle'>Galle</option>
+                                <option value='Gampaha'>Gampaha</option>
+                                <option value='Hambantota'>Hambantota</option>
+                                <option value='Jaffna'>Jaffna</option>
+                                <option value='Kalutara'>Kalutara</option>
+                                <option value='Kandy'>Kandy</option>
+                                <option value='Kegalle'>Kegalle</option>
+                                <option value='Kilinochchi'>Kilinochchi</option>
+                                <option value='Kurunegala'>Kurunegala</option>
+                                <option value='Mannar'>Mannar</option>
+                                <option value='Matale'>Matale</option>
+                                <option value='Matara'>Matara</option>
+                                <option value='Monaragala'>Monaragala</option>
+                                <option value='Mullaitivu'>Mullaitivu</option>
+                                <option value='Nuwara Eliya'>Nuwara Eliya</option>
+                                <option value='Polonnaruwa'>Polonnaruwa</option>
+                                <option value='Puttalam'>Puttalam</option>
+                                <option value='Ratnapura'>Ratnapura</option>
+                                <option value='Trincomalee'>Trincomalee</option>
+                                <option value='Vavuniya'>Vavuniya</option>
                             </select>
                             <br>
                             <div class="client-error"></div>

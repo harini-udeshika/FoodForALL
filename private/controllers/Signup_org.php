@@ -16,11 +16,16 @@ class Signup_org extends Controller
                 $arr['address'] = $_POST['address'];
                 $arr['city'] = $_POST['city'];
                 $arr['postal'] = $_POST['postal-code'];
+                $arr['profile_pic'] = "images/Logo_jpg.jpg";
+
+                $image = new Image();
+                $image->crop_image($arr['profile_pic'], $arr['profile_pic'], 800, 800);
+                // echo "hello " . $_POST['organization'];
+                // echo $newImg;
+                // die;
 
 
                 $org->insert($arr);
-
-                
                 $this->redirect('login');
             }
             else{
