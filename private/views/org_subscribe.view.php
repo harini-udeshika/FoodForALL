@@ -26,8 +26,18 @@
                 </div>
             </div>
             <div class="txt-center">
-                <div class="heading-1 p-bottom-20">Pay subscription Here</div>
-                <a href="org_subscribe?pay=true"><button class="btn btn-lg btn-black"><i class="fa-sharp fa-light fa-circle-dollar"></i> 1000.00 LKR</button></a>
+                <?php
+                if ($sub_data) {  ?>
+                    <div class="heading-1 p-bottom-20">Your Subscription has not yet expired</div>
+                    <button class="btn btn-lg btn-disabled ">1000.00 LKR</button>
+                <?php
+                } else { ?>
+                    <div class="heading-1 p-bottom-20">Pay subscription Here</div>
+                    <a href="org_subscribe?pay=true"><button class="btn btn-lg btn-black"><i class="fa-sharp fa-light fa-circle-dollar"></i> 1000.00 LKR</button></a>
+                <?php
+                }
+                ?>
+
 
             </div>
         </div>

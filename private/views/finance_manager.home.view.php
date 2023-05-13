@@ -186,159 +186,21 @@
 <body>
     <div class="main-cont">
         <div class="sidebar">
-            <div class="sidebar_item" data-param="upcoming" data-page_name="Budget Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Budget Requests</div>
-            <div class="sidebar_item" data-param="completed" data-page_name="Subscription Mails" data-search_url="<?= ROOT ?>" id="sidebar_item-2">Subscription Mails</div>
+            <div class="sidebar_item" data-param="budeget_requests" data-page_name="Pending budget Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Budget Requests</div>
+
+            <div class="sidebar_item" data-param="budeget_requests?id=accepted" data-page_name="Accepted Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-2">Accepted Requests</div>
+
+            <div class="sidebar_item" data-param="budeget_requests?id=rejected" data-page_name="Rejected Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-4">Rejected Requests</div>
+
+            <!-- <div class="sidebar_item" data-param="completed" data-page_name="Subscription Mails" data-search_url="<?= ROOT ?>" id="sidebar_item-5">Subscription Mails</div> -->
+
             <div class="sidebar_item" data-param="Search" data-page_name="Search" id="sidebar_item-3">Search</div>
         </div>
 
         <div class="content" id="content_div">
             <div class="title_bar"><span class="w-bold">Finance Admin</span> - <span class="w-regular" id="title_span">Budget Requests</span></div>
 
-            <div class="content_data grid-12" id="content_data">
-
-                <!-- <button id="to-top" class="btn btn-gray btn-md" style="position:absolute; right:15px; bottom:15px;display:none;">&uparrow;</button> -->
-
-
-                <!-- budget item -->
-                <div class="card-simple col-12 grid-12 p-20 m-bottom-20" style="background-color: white;">
-                    <div class="col-12 txt-15 w-bold txt-al-center m-bottom-15">Event name</div>
-
-                    <div class="col-12 txt-11 w-semibold m-top-40">No of recepients</div>
-                    <div class="col-12 m-0">
-                        <hr>
-                    </div>
-                    <div class="col-12 grid-12">
-                        <div class="col-4 flex jf-center al-center">
-                            <div>children</div>
-                            <div style="width:8px;"></div>
-                            <div class="p-4 txt-al-center" style="border:1px solid var(--projectPurple); border-radius:5px; min-width:42px;">15</div>
-                        </div>
-                        <div class="col-4 flex jf-center al-center">
-                            <div>Adults</div>
-                            <div style="width:8px;"></div>
-                            <div class="p-4 txt-al-center" style="border:1px solid var(--projectPurple); border-radius:5px; min-width:42px;">15</div>
-                        </div>
-                        <div class="col-4 flex jf-center al-center">
-                            <div>Patients</div>
-                            <div style="width:8px;"></div>
-                            <div class="p-4 txt-al-center" style="border:1px solid var(--projectPurple); border-radius:5px; min-width:42px;">15</div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 txt-11 w-semibold m-top-40">Packages</div>
-                    <div class="col-12 m-0">
-                        <hr>
-                    </div>
-                    <div class="col-12 grid-12">
-                        <!-- package item start -->
-                        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
-                            <div class="txt-11 w-semibold">Package one</div>
-
-                            <div class="txt-purple txt-10 txt-al-left p-top-20 p-bottom-15">Package items</div>
-
-                            <div class="card-simple p-20 m-lr-auto grid-8">
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">890 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">2890 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">89 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">1890 LKR</div>
-                            </div>
-
-                            <div class="row txt-al-center p-top-20">
-                                <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Total</div>
-                                <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num">Price</div>
-                            </div>
-
-                            <div class="row p-top-20">
-                                <button class="btn btn-sm btn-gray col-6">edit</button>
-                                <button class="btn btn-sm btn-purple col-6">remove</button>
-                            </div>
-                        </div>
-                        <!-- package item end -->
-
-                        <!-- package item start -->
-                        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
-                            <div class="txt-11 w-semibold">Package one</div>
-
-                            <div class="txt-purple txt-10 txt-al-left p-top-20 p-bottom-15">Package items</div>
-
-                            <div class="card-simple p-20 m-lr-auto grid-8">
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">890 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">2890 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">89 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">1890 LKR</div>
-                            </div>
-
-                            <div class="row txt-al-center p-top-20">
-                                <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Total</div>
-                                <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num">Price</div>
-                            </div>
-
-                            <div class="row p-top-20">
-                                <button class="btn btn-sm btn-gray col-6">edit</button>
-                                <button class="btn btn-sm btn-purple col-6">remove</button>
-                            </div>
-                        </div>
-                        <!-- package item end -->
-                    </div>
-                    <div class="col-12 txt-11 w-semibold m-top-40">Other expenses</div>
-                    <div class="col-12 m-0">
-                        <hr>
-                    </div>
-                    <div class="col-12 grid-12">
-                        <!-- package item start -->
-                        <div class="card col-lg-6 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center package_hold_div">
-                            <div class="txt-11 w-semibold">Package one</div>
-
-                            <div class="txt-purple txt-10 txt-al-left p-top-20 p-bottom-15">Package items</div>
-
-                            <div class="card-simple p-20 m-lr-auto grid-8">
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">890 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">2890 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">89 LKR</div>
-
-                                <div class="txt-09 col-4 txt-gray">Item 1</div>
-                                <div class="txt-09 col-4 txt-gray">1890 LKR</div>
-                            </div>
-
-                            <div class="row txt-al-center p-top-20">
-                                <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Total</div>
-                                <div class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num">Price</div>
-                            </div>
-
-                            <div class="row p-top-20">
-                                <button class="btn btn-sm btn-gray col-6">edit</button>
-                                <button class="btn btn-sm btn-purple col-6">remove</button>
-                            </div>
-                        </div>
-                        <!-- package item end -->
-
-                        <div class="col-12 grid-12 m-top-30 m-bottom-20">
-                            <button class="btn btn-gray btn-sm col-6">Reject</button>
-                            <button class="btn btn-green btn-sm col-6">Approve</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- END : budget item -->
-            </div>
+            <div class="content_data grid-12" id="content_data"></div>
         </div>
 
         <div class="sidebar s-right" style="float:right;">
@@ -371,13 +233,20 @@
     const result_div = document.getElementById("result_div")
     const page_home = document.querySelector("#sidebar_item-1")
 
+    var active_sidebar;
     // define global varibales
 
-    // // onload function
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     const clickEvent = new Event("click");
-    //     page_home.dispatchEvent(clickEvent);
-    // });
+    // onload function
+    document.addEventListener("DOMContentLoaded", function() {
+        const clickEvent = new Event("click")
+        page_home.dispatchEvent(clickEvent)
+    });
+
+    // click active element
+    function click_active_element() {
+        const new_event = new Event("click")
+        active_sidebar.dispatchEvent(new_event)
+    }
 
     sidebar_item.forEach(element => {
         element.addEventListener("click", () => active_sidebar_item(element))
@@ -389,6 +258,8 @@
             newelement.classList.remove('active')
         });
         element.classList.add('active')
+        active_sidebar = element
+
         load_page(element.dataset.param)
         title_span.innerHTML = element.dataset.page_name
         search_func_url = element.dataset.search_url
@@ -396,8 +267,8 @@
 
     async function load_page(page_name) {
         try {
-            const response = await fetch("<?= ROOT ?>/admin/events/" + page_name)
-            const data = await response.json()
+            const response = await fetch("<?= ROOT ?>/finance_manager/" + page_name)
+            const data = await response.text()
             // console.log(data)
             content_div.innerHTML = data
 
@@ -470,9 +341,9 @@
         search_result_div.classList.add("search_result")
         event_name.classList.add("col-12", "w-semibold", "txt-12")
         event_name.classList.add("col-12", "w-semibold", "txt-12")
-        hr_line.classList.add("h-line","txt-gray")
-        org_name.classList.add("col-12", "w-medium", "txt-09","txt-gray")
-        event_date.classList.add("col-12", "w-medium", "txt-09","txt-gray")
+        hr_line.classList.add("h-line", "txt-gray")
+        org_name.classList.add("col-12", "w-medium", "txt-09", "txt-gray")
+        event_date.classList.add("col-12", "w-medium", "txt-09", "txt-gray")
 
         // set attributes
         search_result_div.setAttribute("style", "position: relative;")
