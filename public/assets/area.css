@@ -1,0 +1,55 @@
+.container-main {
+    height: 35rem;
+    width: 100%;
+    /* background-color: rgba(152, 192, 60, 0.2); */
+    background-image: url('../images/bgnew.png');
+    display: flex;
+    flex-direction: row;
+
+}
+
+/* .content {
+    margin-top: 8rem;
+    margin-left: 5rem;
+} */
+
+.main-image {
+    height: 30rem;
+    width: 30rem;
+
+}
+
+.main {
+    font-size: 4rem;
+    font-weight: bolder;
+    color: #98C03C;
+    margin-bottom: 1rem;
+}
+
+.sub1 {
+    /* color: #2E3561; */
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.image_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.description {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-card .heading-2 {
+    text-align: center;
+
+  }
+  img {
+  width: 80%;
+  height: auto;
+}

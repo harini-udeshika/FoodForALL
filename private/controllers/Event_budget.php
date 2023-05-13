@@ -10,7 +10,6 @@ class Event_budget extends Controller
         } elseif (Auth::logged_in() && !(Auth::getusertype() == 'eventmanager')) {
             $this->redirect('home');
         }
-        
             $eventmanager=new EventManager;
             $food_pack = new Food_pack();
             $pack = new Pack();
@@ -48,10 +47,8 @@ class Event_budget extends Controller
             LEFT JOIN selected_pakage_org ON selected_pakage_org.eid='$eventid' WHERE 
             food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no"; //organization food packages 
 
-            
-
             if (count($_POST) > 0) {
-                // print_r($_POST);
+                print_r($_POST);
                 // die;
 
                 if (isset($_POST['new_form'])) {
@@ -115,6 +112,22 @@ class Event_budget extends Controller
                         $query_2 = "UPDATE food_pack_new_eventmanager SET package_quantity = $quantity WHERE package_id = $pack_id";
                         $food_pack->query($query_2);
                     }
+                }elseif(isset($_POST['send'])){
+
+                    $event=new Eventmanager;
+                    $query_8 = "UPDATE event SET budget = 1 WHERE event_id = $eventid";
+                    print_r($query_8);
+                    $event->query($query_8);
+                    $this->redirect('Eventmanager_myevents');
+                }
+                elseif(isset($_POST['draft'])) {
+                    $event=new Eventmanager;
+                    $query_9 = "UPDATE event SET budget = 2 WHERE event_id = $eventid";
+                    $event->query($query_9);
+                    $this->redirect('Eventmanager_myevents');
+                }
+                else{
+                    echo "hi";
                 }
                
             }

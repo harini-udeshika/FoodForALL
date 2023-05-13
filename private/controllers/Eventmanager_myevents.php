@@ -12,7 +12,7 @@ class Eventmanager_myevents extends Controller
         $event = new Event();
         // $data = $user->findAll();
         // $query1 = "SELECT * FROM event WHERE event_manager_email ='{$_SESSION["USER"]->email}' AND approved=1 AND budget=1 And launch=0 AND date > CAST( GETDATE() AS Date) ORDER BY date ASC";//Approved events have to launch
-        $query1 = "SELECT * FROM event WHERE event_manager_email = '{$_SESSION["USER"]->email}'AND approved = 1 AND budget = 1 AND launch = 0 AND date > CURDATE()ORDER BY date ASC";
+        $query1 = "SELECT * FROM event WHERE event_manager_email = '{$_SESSION["USER"]->email}'AND approved = 1 AND budget = 1 AND launch = 0 AND date > CURDATE()ORDER BY date ASC"; //still not launch
         $query2 = "SELECT * FROM event WHERE event_manager_email ='{$_SESSION["USER"]->email}' AND approved=0 AND budget=1 And launch=0  AND date > CURDATE() ORDER BY date ASC";//Approve pending- financial actor
         $query3 = "SELECT * FROM event WHERE event_manager_email ='{$_SESSION["USER"]->email}' AND approved=0 AND budget=0 And launch=0  AND date > CURDATE() ORDER BY date ASC";//budget not created
         $query4 = "SELECT * FROM event WHERE event_manager_email ='{$_SESSION["USER"]->email}' AND approved=0 AND budget=2 And launch=0  AND date > CURDATE() ORDER BY date ASC";//budget  created still draft does not send to the financial actor
