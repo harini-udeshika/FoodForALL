@@ -81,8 +81,7 @@
                                         </div><br>
                                         <label for="date" class="heading-4">Event Date</label><br>
                                         <div class="inputControl">
-                                                <input name="date" id="date" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="date
-                                                "><br>
+                                                <input name="date" id="date" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="date"><br>
                                                 <div class="client-error"></div>
                                         </div>
 

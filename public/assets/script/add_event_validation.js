@@ -56,7 +56,7 @@ const setSuccess = element => {
     errorDisplay.innerText = '';
     inputControl.classList.add('success');
     inputControl.classList.remove('error');
-    num = num + 1;
+    // num = num + 1;
 };
 
 const validateInputs = (event) => {

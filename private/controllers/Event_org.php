@@ -11,16 +11,34 @@ class Event_org extends Controller
             $event = new Event();
             $em = new Eventmanager();
             $requests = new Volunteer_request();
+            $accepted_request = new Volunteer();
 
             $event_details = $event->where('event_id', $id);
 
-            $query = "SELECT * FROM volunteer_request WHERE event_id = :id && message = 'pending'";
+            // $query = "SELECT * FROM volunteer_request WHERE event_id = :id && message = 'pending'";
+            $query = "SELECT *
+            FROM volunteer_request
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM volunteer
+            WHERE volunteer.user_id = volunteer_request.id && volunteer.event_id = volunteer_request.event_id) 
+            && event_id = :id && message = 'pending'";
             $arr = ['id' => $id];
             $volunteer_req = $requests->query($query, $arr);
 
-            $query = "SELECT * FROM volunteer_request WHERE event_id = :id && message = 'accepted'";
+            // $query = "SELECT * FROM volunteer_request WHERE event_id = :id && message = 'accepted'";
+            // $arr = ['id' => $id];
+            // $volunteer_accepted = $requests->query($query, $arr);
+            // print_r($volunteer_accepted);
+            // die;
+
+            $query = "SELECT * FROM volunteer WHERE event_id = :id";
             $arr = ['id' => $id];
-            $volunteer_accepted = $requests->query($query, $arr);
+            $volunteer_accepted = $accepted_request->query($query, $arr);
+
+            $query = "SELECT * FROM volunteer WHERE event_id = :id && attendance = 1";
+            $arr = ['id' => $id];
+            $volunteer_attended = $accepted_request->query($query, $arr);
 
             // $volunteer_req = $requests->where('event_id', $id);
             // echo "<pre>";
@@ -38,7 +56,10 @@ class Event_org extends Controller
             $event_images = $event->get_images($id);
             // print_r($event_images);
 
-            $this->view('event_org.view', ['event_details' => $event_details, 'em_details' => $em_details, 'volunteer_req' => $volunteer_req, 'accepted_vol' => $volunteer_accepted, 'event_images' => $event_images]);
+            $this->view('event_org.view', [
+                'event_details' => $event_details, 'em_details' => $em_details, 'volunteer_req' => $volunteer_req,
+                'accepted_vol' => $volunteer_accepted, 'event_images' => $event_images, 'volunteer_attended' => $volunteer_attended
+            ]);
         }
 
         if (count($_POST) > 0) {
@@ -69,6 +90,8 @@ class Event_org extends Controller
         $volunteer = new Volunteer();
 
         $query = "SELECT * FROM volunteer_request WHERE event_id = :id && id = :uid";
+
+
         $arr = ['id' => $event_id, 'uid' => $uid];
         $request = $vol_request->query($query, $arr);
         $request = $request[0];
@@ -135,10 +158,10 @@ class Event_org extends Controller
                 $input_img_count = count($_FILES['images']['name']);
                 $img_arr = $event->get_images($event_id);
                 $stored_img_count = 0;
-                if($img_arr[0]){
+                if ($img_arr[0]) {
                     $stored_img_count = sizeof($img_arr);
                 }
-                
+
 
                 // echo "<pre>";
                 // print_r($_FILES['images']);
@@ -147,12 +170,12 @@ class Event_org extends Controller
                 // echo sizeof($img_arr) . "<br>";
                 // die;
 
-                
 
-                if (count($_FILES['images']) > 0 && $input_img_count+$stored_img_count <= 3) {
+
+                if (count($_FILES['images']) > 0 && $input_img_count + $stored_img_count <= 3) {
                     // echo count($_FILES['images']);
 
-                    $event_images = $event->add_images($event_id,$stored_img_count);
+                    $event_images = $event->add_images($event_id, $stored_img_count);
 
                     // echo "<pre>";
                     // echo "hello";

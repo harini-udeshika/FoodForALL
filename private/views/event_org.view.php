@@ -59,7 +59,7 @@
 
 
             </div>
-            <button class="btn btn-sm btn-green float-right m-top-30 m-bottom-30 m-right-20" type="submit">Edit info</button>
+            <!-- <button class="btn btn-sm btn-green float-right m-top-30 m-bottom-30 m-right-20" type="submit">Edit info</button> -->
         </div>
         <div class="card col-lg-5 height-auto grid-10">
             <div class="blank col-lg-2 col-md-2"></div>
@@ -384,6 +384,8 @@
 
     <div class="blank col-lg-12 height-75px"></div>
 
+
+    <!-- Accepted volunteers section -->
     <div class="container">
         <div class="blank col-1"></div>
         <div class="card col-lg-10 height-auto p-top-30 p-bottom-15">
@@ -400,9 +402,10 @@
                         while ($count > 0) {
                             $volunteer = new User();
                             $query = "SELECT * FROM user WHERE id = :id";
-                            $arr = ['id' => $accepted_vol[$i]->id];
+                            $arr = ['id' => $accepted_vol[$i]->user_id];
                             $user_volunteer = $volunteer->query($query, $arr);
                             $user_volunteer = $user_volunteer[0];
+                            // print_r($user_volunteer);
 
                             $image = "./images/user_icon.png";
                             if (file_exists($user_volunteer->profile_pic)) {
@@ -442,6 +445,71 @@
             </div>
         </div>
     </div>
+
+    <div class="blank col-lg-12 height-75px"></div>
+    <!-- Attended volunteers section -->
+
+    <?php if ($event_details->date < date("Y-m-d")) { ?>
+        <div class="container">
+            <div class="blank col-1"></div>
+            <div class="card col-lg-10 height-auto p-top-30 p-bottom-15">
+                <div class="heading-2 col-lg-2 p-left-25 p-top-20">Attended Volunteers</div>
+                <div class="row">
+
+                    <div class="blank col-2"></div>
+                    <div class="card-simple col-8 height-275px p-20 grid-10 accepted_scroll">
+
+                        <?php
+                        $i = 0;
+                        if ($volunteer_attended) {
+                            $count = count($volunteer_attended);
+                            while ($count > 0) {
+                                $volunteer = new User();
+                                $query = "SELECT * FROM user WHERE id = :id";
+                                $arr = ['id' => $volunteer_attended[$i]->user_id];
+                                $user_volunteer = $volunteer->query($query, $arr);
+                                $user_volunteer = $user_volunteer[0];
+
+                                $image = "./images/user_icon.png";
+                                if (file_exists($user_volunteer->profile_pic)) {
+                                    $image = $user_volunteer->profile_pic;
+                                    // echo $user["profile_pic"];
+                                }
+
+                                // print_r($user_volunteer);
+                                // die;
+
+                        ?>
+                                <div class="card col-5 height-80px grid-8">
+                                    <div class="col-lg-2" style="display: flex; justify-content: center;">
+                                        <img src="<?php echo $image ?>" alt="" class="m-top-7" style="height:4rem; border-radius: 50%; margin-left:5px;">
+                                    </div>
+                                    <div class="col-6 heading-event2 p-top-20 p-left-20 txt-purple"><a href="profile?id=<?php echo $user_volunteer->id ?>">
+                                            <?php echo $user_volunteer->first_name . " " . $user_volunteer->last_name; ?>
+                                        </a><br>
+                                        <div class="txt-purple" style="font-size: 0.8rem; font-weight:500;"><?php echo $accepted_vol[$i]->volunteer_type; ?></div>
+                                    </div>
+
+                                </div>
+
+                            <?php
+                                $count--;
+                                $i++;
+                            }
+                        } else { ?>
+                            <div class="heading-3 col-lg-12 p-left-25 m-top-5 m-bottom-5">No Volunteers Accepted</div>
+                        <?php }
+                        ?>
+
+
+                    </div>
+                    <div class="blank col-2"></div>
+
+                </div>
+            </div>
+        </div>
+    <?php
+    } ?>
 
     <!-- Email sending button -->
     <div class="container">

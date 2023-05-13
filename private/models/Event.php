@@ -45,6 +45,10 @@ class Event extends Model
         $volunteer = new Volunteer();
         $user = new User();
         $mail = new Mail();
+        $event = new Event();
+        $event_data = $event->where('event_id', $event_id);
+        $event_data = $event_data[0];
+
         $vol_data = $volunteer->where('event_id', $event_id);
         // echo "<pre>";
         // print_r($vol_data);
@@ -55,7 +59,10 @@ class Event extends Model
 
                 $receipient = $user_data->email;
                 $subject = "Event Reminder FoodForALL";
-                $message = "Hello ";
+                // $message = "Hello " . $user_data->first_name . ",/nWe would like to inform 
+                //             you that your request to volunteer for the event " . $event_data->name . " has been accepted";
+                $message = strtr(file_get_contents('http://localhost/FoodForAll/private/views/reminder_mail.html'),array('%event_name%' => $event_data->name,
+                '%date%' => $event_data->date));
                 $mail->send_mail($receipient, $subject, $message);
                 // print_r($user_data);
                 // echo $receipient;

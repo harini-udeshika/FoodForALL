@@ -32,6 +32,7 @@ class Org_admin_events extends Controller
         // print_r($past);
         // die;
         $this->view('org.admin.events', ['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past]);
+        // $this->view('org_admin_events_2.view', ['pending' => $pending, 'ongoin' => $ongoing, 'past' => $past]);
     }
 
     public function delete_pending()
@@ -42,10 +43,27 @@ class Org_admin_events extends Controller
         $item_del = new Event();
         $item_del->delete_event($id);
 
+        // $this->redirect('org_admin_events');
         $this->redirect('org_admin_events');
     }
 
+    public function upcoming(){
+        $org_reg = $_SESSION['USER']->gov_reg_no;
+        $org = new Organization();
+        $ongoing_events = $org->selectOngoing($org_reg);
+        $path = "../private/views/org.events.upcoming.php";
+        $html = "";
 
+        if ($ongoing_events == NULL) {
+            $ongoing_events = array();
+        }
+
+        ob_start();
+        include $path;
+        $html = ob_get_clean();
+
+        echo ($html);
+    }
 
 
     public function search_events()

@@ -32,6 +32,7 @@ class Add_event extends Controller
             // print_r($arr);
             // die;
             $event->insert($arr);
+            $this->redirect('org_admin_events');
         } else {
             // echo "hello error";
             // die;
