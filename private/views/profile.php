@@ -4,9 +4,12 @@ use function PHPSTORM_META\type;
 
 $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/user_profile.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/popup.css">
 
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?>
+
+
 <div class="intro">
     <div class="profile_pic">
         <?php
@@ -77,11 +80,17 @@ if (file_exists($rows->profile_pic)) {
                 </select>
             </div>
             <textarea name="description" placeholder="Write your thoughts" class="form_text"></textarea>
-            <button type="submit" class="save">Submit</button>
-
-        </form>
-
+            <button type="submit" class="save" id="send">Submit</button>
+            <div class="popup" id="popup">
+            <img src="./images/check.png" alt="">
+            <h2>Sending for verification</h2>
+            <p>Certificate will be displayed once approved by the organization.</p>
+            <button class="proceed" id="ok">OK</button>
     </div>
+        </form>
+   
+    </div>
+    
     <?php endif?>
     <div class="certificates">
 
@@ -272,5 +281,6 @@ $i = 0;?>
 
 <script src=" navbar.js"></script>
 <script src="<?=ROOT?>/assets/profile.js"></script>
+<script src="<?=ROOT?>/assets/popup.js"></script>
 <!-- <script src="<?=ROOT?>/assets/change_pic.js"></script> -->
 <?php $this->view('includes/footer')?>

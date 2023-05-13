@@ -58,7 +58,7 @@ small{
     top:50%;
     transform: translate(-50%,-50%) scale(1);
 }
-.popup img{
+.popup img{ 
     width: 6rem;
     margin-top:2.5rem;
     border-radius:50%;

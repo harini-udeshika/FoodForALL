@@ -10,6 +10,9 @@ const changeCert= document.getElementById("change_cert");
 // const small=document.querySelector("small");
 const visible=document.getElementsByClassName("visible");
 const select=document.getElementById("event");
+const popup=document.getElementById('popup'); 
+const send=document.getElementById('send');
+const ok=document.getElementById('ok');
 
 add.addEventListener('click', ()=>{
     console.log('add clicked');
@@ -56,6 +59,13 @@ function isValidFile(image) {
     }
     else{
         small.parentElement.className=" visible";
-        changePic.submit();
+        send.addEventListener("click", function(){ 
+            popup.classList.add("open-popup");
+            })
+            ok.addEventListener("click", function(){
+                changeCert.submit();
+                popup.classList.remove("open-popup");
+            })
+        
     }
 }     

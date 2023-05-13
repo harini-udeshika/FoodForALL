@@ -12,12 +12,12 @@ const city=document.getElementById("city");
 const postalCode=document.getElementById("postal_code");
 
 
-let valid=true;
+var valid=true;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     inputChecker();
-    if(valid==true) {
+    if(valid===true) {
         form.submit();
     }
 })
@@ -138,7 +138,6 @@ function displayError(input, message) {
 }
 
 function displaySuccess(input) {
-    valid=true;
     const f = input.parentElement;
     if(input===check){
         f.className = "f12 success";
@@ -146,7 +145,7 @@ function displaySuccess(input) {
     else{
          f.className = "f success";
     }
-   
+   valid=true;
 }
 function checkEmail(email) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
@@ -154,7 +153,7 @@ function checkEmail(email) {
 
 function emailcheck(){
     const emailVal = email.value.trim();
-     ajax = new XMLHttpRequest();
+    var ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/duplicate', true);
 
 
@@ -170,13 +169,14 @@ function emailcheck(){
                 }
             }
            
+           
         }
     };
     ajax.send();
 }
 function niccheck(){
     const nicVal = nic.value.trim();
-     ajax = new XMLHttpRequest();
+    var ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/nic', true);
 
 
