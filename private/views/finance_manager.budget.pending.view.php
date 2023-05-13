@@ -62,10 +62,10 @@
                             <div class="package_text_field purpleText col-6 p-bottom-15 budget_total_num">Rs. <?= $event->total ?></div>
                         </div>
 
-                        <div class="row p-top-20">
+                        <!-- <div class="row p-top-20">
                             <button data-id="<? $event->event_id ?>" class="btn btn-sm btn-gray col-6">edit</button>
                             <button data-id="<? $event->event_id ?>" class="btn btn-sm btn-purple col-6">remove</button>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- package item end -->
                 <?php endforeach; ?>
@@ -106,17 +106,22 @@
                             <div class="package_text_field purpleText col-6 p-bottom-15 budget_total_num">Rs. <?= $event->total ?></div>
                         </div>
 
-                        <div class="row p-top-20">
+                        <!-- <div class="row p-top-20">
                             <button data-id="<? $event->event_id ?>" class="btn btn-sm btn-gray col-6">edit</button>
                             <button data-id="<? $event->event_id ?>" class="btn btn-sm btn-purple col-6">remove</button>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- package item end -->
                 <?php endforeach; ?>
 
                 <div class="col-12 grid-12 m-top-30 m-bottom-20">
-                    <button class="btn btn-gray btn-sm col-6">Reject</button>
-                    <button class="btn btn-green btn-sm col-6">Approve</button>
+                    <a class="col-6" href="<?=ROOT?>/finance_manager/reject_budget?id=<?=$budget->event_id?>">
+                        <button class="btn btn-gray btn-sm btn-block">Reject</button>
+                    </a>
+
+                    <a class="col-6" href="<?=ROOT?>/finance_manager/approve_budget?id=<?=$budget->event_id?>">
+                        <button class="btn btn-green btn-sm btn-block">Approve</button>
+                    </a>
                 </div>
             </div>
         </div>

@@ -185,22 +185,6 @@
 
 <body>
     <div class="main-cont">
-        <!-- <div class="popup-div" id="popup-div">
-            <div class="popup-contain">
-                <div class="card popup-card">
-                    <div class="popup-header">
-                        <div class="popup-heading" id="popup-head">Edit Package</div>
-                        <i class="fa-solid fa-circle-xmark popup-close" id="popup-close-btn"></i>
-                    </div>
-                    <div class="popup-body">
-                        <i class="fa-solid fa-circle-exclamation" id="popup-hero-btn"></i>
-                        <div class="popup-message" id="popup-message"></div>
-                        <button type="submit" id="popup_delete_btn" class="btn btn-sm btn-green col-12">Edit package</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <div class="sidebar">
             <div class="sidebar_item" data-param="budeget_requests" data-page_name="Pending budget Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-1">Budget Requests</div>
 
@@ -208,7 +192,7 @@
 
             <div class="sidebar_item" data-param="budeget_requests?id=rejected" data-page_name="Rejected Requests" data-search_url="<?= ROOT ?>" id="sidebar_item-4">Rejected Requests</div>
 
-            <div class="sidebar_item" data-param="completed" data-page_name="Subscription Mails" data-search_url="<?= ROOT ?>" id="sidebar_item-5">Subscription Mails</div>
+            <!-- <div class="sidebar_item" data-param="completed" data-page_name="Subscription Mails" data-search_url="<?= ROOT ?>" id="sidebar_item-5">Subscription Mails</div> -->
 
             <div class="sidebar_item" data-param="Search" data-page_name="Search" id="sidebar_item-3">Search</div>
         </div>
@@ -249,13 +233,20 @@
     const result_div = document.getElementById("result_div")
     const page_home = document.querySelector("#sidebar_item-1")
 
+    var active_sidebar;
     // define global varibales
 
-    // // onload function
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     const clickEvent = new Event("click");
-    //     page_home.dispatchEvent(clickEvent);
-    // });
+    // onload function
+    document.addEventListener("DOMContentLoaded", function() {
+        const clickEvent = new Event("click")
+        page_home.dispatchEvent(clickEvent)
+    });
+
+    // click active element
+    function click_active_element() {
+        const new_event = new Event("click")
+        active_sidebar.dispatchEvent(new_event)
+    }
 
     sidebar_item.forEach(element => {
         element.addEventListener("click", () => active_sidebar_item(element))
@@ -267,8 +258,9 @@
             newelement.classList.remove('active')
         });
         element.classList.add('active')
+        active_sidebar = element
+
         load_page(element.dataset.param)
-        console.log(element.dataset.param)
         title_span.innerHTML = element.dataset.page_name
         search_func_url = element.dataset.search_url
     }

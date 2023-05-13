@@ -21,8 +21,9 @@ class Finance_managers extends Model
 
         $query = "select event_id,name from event where approved = $param AND date<'$currnet_date'";
         $events = $this->query($query);
-        if ($events == false) {
-            $events == array();
+
+        if (gettype($events) == "boolean") {
+            $events = array();
         }
 
         // turn each event to an object
@@ -140,6 +141,19 @@ class Finance_managers extends Model
         }
 
         $query = "update event set approved=-1 where event_id= $event_id";
+        $this->query($query);
+        return true;
+    }
+
+    public function undoReject($event_id){
+        $query = "select event_id from event where event_id= $event_id and approved = -1";
+        $result = $this->query($query);
+
+        if ($result == false) {
+            return false;
+        }
+
+        $query = "update event set approved = 0 where event_id= $event_id";
         $this->query($query);
         return true;
     }

@@ -3,6 +3,7 @@ class Finance_manager extends Controller
 {
     function index()
     {
+        $this->autherize_finance_manager();
         // $user = new User();
         // $data = $user->findAll();
         $admin = new Admins();
@@ -31,8 +32,16 @@ class Finance_manager extends Controller
         }
     }
 
+    public function autherize_finance_manager()
+    {
+        if (!Auth::isuser('finance_manager')) {
+            $this->redirect('login');
+        }
+    }
+
     public function current_password()
     {
+        $this->autherize_finance_manager();
         $errors = array();
 
         if ($_POST) {
@@ -145,6 +154,7 @@ class Finance_manager extends Controller
     // load budgets
     public function budeget_requests()
     {
+        $this->autherize_finance_manager();
         $f_manager_model = new Finance_managers();
         $budget_type = 0;
         $path =  "../private/views/finance_manager.budget.pending.view.php";
@@ -169,22 +179,35 @@ class Finance_manager extends Controller
     // approve budgets
     public function approve_budget()
     {
+        $this->autherize_finance_manager();
         $f_manager_model = new Finance_managers();
         if (isset($_GET['id'])) {
             $f_manager_model->approveBudget($_GET['id']);
         }
-
+        $this->redirect("finance_manager");
         $this->view('admin');
     }
 
     // reject budgets
     public function reject_budget()
     {
+        $this->autherize_finance_manager();
         $f_manager_model = new Finance_managers();
         if (isset($_GET['id'])) {
             $f_manager_model->rejectBudget($_GET['id']);
         }
-
+        $this->redirect("finance_manager");
         // $this->view('admin');
+    }
+
+    // undo reject
+    public function undo_reject()
+    {
+        $this->autherize_finance_manager();
+        $f_manager_model = new Finance_managers();
+        if (isset($_GET['id'])) {
+            $f_manager_model->undoReject($_GET['id']);
+        }
+        $this->redirect("finance_manager");
     }
 }
