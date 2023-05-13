@@ -11,7 +11,7 @@
         <img id="logo" src="./images/logo.png" alt="" width="710px" height="400px">
         <div class="form-box" style="height: 850px; margin-bottom:30px;">
 
-            <form id="reg-form" method="post" class="login-form" style="height: 90%; margin-top:-20px; margin-bottom:50px;">
+            <form id="reg-form" method="post" class="login-form" enctype="multipart/form-data" style="height: 90%; margin-top:-20px; margin-bottom:50px;">
 
                 <div class="eminput-control">
                     <input type="text" value="<?= get_var('organization') ?>" name="organization" id="name-org" placeholder="Name">
@@ -49,9 +49,9 @@
                                         font-family: 'Poppins'; font-weight: 100; color: rgb(149,149,149);">
                     <!-- <label for="image">Gov. Certificate</label> -->
                     <span>Please attach a copy of your Gov. certificate here</span>
-                    <input type="file" name="image" id="image" style="background-color: rgba(255, 255, 255, 0);
+                    <input type="file" name="pdf_file" id="pdf_file" style="background-color: rgba(255, 255, 255, 0);
                         font-size:15px; margin-left:-10px;
-                        box-shadow: 0 0px 0px 0px;" accept="image/png, image/jpeg, image/jpg"><br>
+                        box-shadow: 0 0px 0px 0px;" accept=".pdf"><br>
                 </div>
 
                 <div class="eminput-control">
