@@ -14,7 +14,9 @@ class Changepic extends Controller
             $data = $user->where('id', Auth::getid());
 
             $data = $data[0];
+
             $image = new Image();
+
             if ($_POST > 0) {
                 if ($image->pic_validate()) {
                     $id = Auth::getid();

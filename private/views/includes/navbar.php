@@ -18,7 +18,7 @@
             <a href="search_org">Organizations</a>
         </div>
         <div class="nav-i">
-            <a href="login">Events</a>
+            <a href="events">Events</a>
         </div>
         <div class="nav-i">
             <a href="about">About us</a>

@@ -6,12 +6,13 @@ class Change_password extends Controller
         $errors = array();
         if (isset($_POST['password'])) {
 
+            //validate passwords
             if (strlen($_POST['password']) < 8) {
                 $errors['password'] = "Password must be at least 8 characters";
             }else if (!preg_match("/[a-z]/i", $_POST['password'])) {
                 $errors['password'] = "Password must contain at least one letter";
             }else if (!preg_match("/[0-9]/", $_POST['password'])) {
-                $errors['password'] = "Password must contain at least one digit";
+                $errors['password'] = "Password must contain at least one digit"; 
             }else if ($_POST['password'] !== $_POST['password_check']) {
                 $errors['password'] = "Passwords do not match";
             }
@@ -23,7 +24,16 @@ class Change_password extends Controller
                 $org = new Organization();
                 $areaC = new AreaCoordinator();
                 $em = new EventManager();
-                $email = $_SESSION['email'];
+
+                //change password
+                if(Auth::logged_in()){
+                    $email = Auth::getemail();
+                }
+                //forgot password
+                else{
+                    $email = $_SESSION['email'];
+                }
+              
                 if ($user->where('email', $email)) {
                     $arr['password_hash'] = password_hash($_POST["password"], PASSWORD_DEFAULT);
                     $data = $user->where('email', $email);
@@ -41,7 +51,9 @@ class Change_password extends Controller
                     $data = $em->where('email', $email);
                     $em->update($data[0]->email, $arr);
                 }
-
+                if(Auth::logged_in()&& Auth::getusertype()=="reg_user"){
+                    $this->redirect('profile');
+                }
                 $this->redirect('login');
                 unset($_SESSION['email']);
             }

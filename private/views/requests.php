@@ -9,13 +9,14 @@
             <p><i class="fa-solid fa-message"></i> No requests sent</p>
         </div>
     <?php endif?>
-    <div class="row">
+   
+    <?php if($data):?>
+        <div class="row">
         <p><b>Event Name</b></p>
         <p><b>Volunteer Category</b></p>
         <p><b>Date/Time</b></p>
         <p><b>Status</b></p>
     </div>
-    <?php if($data):?>
     <?php $i = 0?>
 <?php foreach ($data as $d): ?>
 <div class="row"><p><?=$data[$i]->name?></p><p><?=$data[$i]->volunteer_type?></p>
