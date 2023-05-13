@@ -26,7 +26,7 @@
             <div class="details col-5"><?=$rows1[$i]->name?>
             <span>
             <?php if($rows1[$i]->date==date("Y-m-d")){?>
-            <a href="<?= ROOT ?>/attendence?id=<?=$rows1[$i]->event_id?>"><i class="fa-solid fa-clipboard-user fa-beat fa-2xl" title="mark attendence"></i></a>
+            <a href="<?= ROOT ?>/attendance?eid=<?=$rows1[$i]->event_id?>"><i class="fa-solid fa-clipboard-user fa-beat fa-2xl" title="mark attendence"></i></a>
             <?php }?>
             </span>
             </div>

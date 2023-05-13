@@ -1,6 +1,7 @@
 <?php $this->view('includes/header')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/profile.css">
-<?php $this->view('includes/navbar')?>
+<?php $this->view('includes/navbar');?>
+<?php $this->view('includes/submenu');?>
 
 <div class="heading">
         <p>Edit your profile</p>
@@ -28,47 +29,31 @@
             </div>
 
             <div class="profile-details">
-                <form action="" class="form" method="post">
+                <form action="" class="form" method="post" name="detail_form">
 
                     <div class="name">
 
                         <div class="f1">
                             <label for="first-name">Name</label>
-                            <input type="text" value="<?php echo $rows->full_name?>" class="small"
-                                name="name" >
+                            <input type="text" value="<?php echo $rows->full_name?>" class="small" name="name" >
                         </div>
 
                         <div class="f2">
                             <label for="last-name">User NIC</label>
-                            <input type="text" value="<?php echo $rows->nic?>" class="small" name="username" >
+                            <input type="text" value="<?php echo $rows->nic?>" class="small" name="username" readonly>
 
                         </div>
                     </div>
                     <div class="f3">
                         <label for="NIC">orgnization name</label>
                         <!-- $Query="Select name from organization where gov_reg_no $row->nic"; -->
-                        <input type="text" value="<?php echo  $rows->org_gov_reg_no?>" class="small" name="org" readonly>
+                        <input type="text" value="<?php echo  $rows->name?>" class="small" name="org" readonly>
                     </div>
 
                     <div class="f4">
                         <label for="email">Email</label>
                         <input type="text" value="<?php echo $rows->email?>" class="small" name="email" readonly>
                     </div>
-                    <!-- <div class="address_n_city">
-                        <div class="f">
-                            <label for="address">District</label>
-                            <input type="text" value="<?php echo $rows->district?>" name="district" readonly>
-                        </div>
-                        <div class="f">
-                            <label for="city">Area</label>
-                            <input type="text" value="<?php echo $rows->area?>" class="small" name="area" readonly>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="f">
-                        <label for="postal_code">Phone Number</label>
-                        <input type="text" value="<?php echo $rows->phone_no?>" class="small" name="phone_no">
-                    </div>  -->
                     <button class="save" type="submit" name="submit">Save Changes</button>
                 </form>
             </div> 

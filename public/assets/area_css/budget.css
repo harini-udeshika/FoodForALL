@@ -213,3 +213,52 @@ label{
 .back{
     background-color:white;
   }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+  }
+  
+  .button1,
+  .button2 {
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    background-color: #98C03C;
+    border:solid #98C03C;
+    border-radius: 5px;
+  }
+
+  .button1:hover,
+  .button2:hover{
+    background-color:#fff;
+    color: #98C03C; 
+  }
+  
+  @media (min-width: 768px) {
+    .button-container {
+      flex-direction: row;
+    }
+    
+    .button1,
+    .button2 {
+      width: 70%;
+      margin-bottom: 0;
+    }
+    
+    .button1 {
+      margin-right: 10px;
+    }
+  }
+
+  .send{
+    text-align: center;
+    margin: auto;
+  }

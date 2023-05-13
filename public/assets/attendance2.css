@@ -1,0 +1,113 @@
+.container {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: auto;
+    background-image: url("../images/Backgrounds/background1.png");
+    background-size: contain;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px 10px rgba(0, 0, 0, 0.25);
+    /* margin:0 auto; */
+    }
+    
+        .input-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    .input-row input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    }
+    
+    .button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    }
+    
+    .button-row button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #7681BF;
+    color: #fff;
+    display: inline-block;
+    margin-right: 30px;
+    }
+    
+    .button-row button:first-child {
+    margin-right: 100%;
+    }
+    .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    }
+    
+    @media only screen and (max-width: 600px) {
+    .button-row {
+    flex-direction: column;
+    }
+    
+    .button-row button {
+    margin: 5px auto;
+    }
+    }
+    @media screen and (max-width: 600px) {
+    .container {
+    width: 90%;
+    }
+    
+    .button-row {
+    flex-direction: column;
+    align-items: center;
+    }
+    }
+    
+    label{
+        color: #7681BF;
+    }
+    
+    .input-container input{
+        border: solid #7681BF;
+    }
+    
+    .new_container{
+        padding-top: 40px;
+    }
+    .new_container2{
+        padding-top: 40px;
+    }
+    
+    .attendenceTitle{
+        font-size: 30px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    
+    #b1{
+        float: left;
+    }
+    
+    
+    .input-container button{
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #7681BF;
+        color: #fff;
+        display: inline-block;
+    }
