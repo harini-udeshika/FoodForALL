@@ -109,17 +109,18 @@ class Login extends Controller
                 }
             }
             else if ($row = $finance_manager->where('email', $_POST['email'])) {
+
                 $row = $row[0];
-                if (password_verify($_POST['password'], $row->password)) {
-                    print_r($row);
+                
+                if (password_verify($_POST['password'], $row->password_hash)) {
+
                     Auth::authenticate($row);
-                    $this->redirect('/Event_manager_home');   
+                             $this->redirect('finance_manager');
+                }else{
+                    $errors['password']="wrong password";
                 }
-                else{
-                    echo ("wrong password");
-                }
+
             }
-            $errors['email'] = "Incorrect email or password";
         }
         // echo($_SESSION['email']);
         $this->view('login', [
