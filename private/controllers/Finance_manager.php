@@ -121,7 +121,8 @@ class Finance_manager extends Controller
         }
     }
 
-    public function temp(){
+    public function temp()
+    {
         $admin = new Admins();
 
         $data = $admin->homepage_data();
@@ -129,15 +130,61 @@ class Finance_manager extends Controller
         $this->view('temp');
     }
 
-    public function temp5(){
+    public function temp5()
+    {
         $f_manager = new Finance_managers();
         $f_manager->budget_details();
     }
 
-    public function temp2(){
+    public function temp2()
+    {
         $admin = new Admins();
+        // $name = $_GET("id");
+    }
 
+    // load budgets
+    public function budeget_requests()
+    {
+        $f_manager_model = new Finance_managers();
+        $budget_type = 0;
+        $path =  "../private/views/finance_manager.budget.pending.view.php";
 
-        $this->view('temp_fetch');
+        if (isset($_GET['id'])) {
+            if ($_GET['id'] == "rejected") {
+                $budget_type = -1;
+                $path =  "../private/views/finance_manager.budget.rejected.view.php";
+            } else if ($_GET['id'] == "accepted") {
+                $budget_type = 1;
+                $path =  "../private/views/finance_manager.budget.accepted.view.php";
+            }
+        }
+
+        $budgets = $f_manager_model->budget_details($budget_type);
+        ob_start();
+        include($path);
+        $html = ob_get_clean();
+        echo ($html);
+    }
+
+    // approve budgets
+    public function approve_budget()
+    {
+        $f_manager_model = new Finance_managers();
+        if (isset($_GET['id'])) {
+            $f_manager_model->approveBudget($_GET['id']);
+        }
+
+        $this->view('admin');
+    }
+
+    // reject budgets
+    public function reject_budget()
+    {
+        $f_manager_model = new Finance_managers();
+        if (isset($_GET['id'])) {
+            $f_manager_model->rejectBudget($_GET['id']);
+        }
+
+        // $this->view('admin');
     }
 }
