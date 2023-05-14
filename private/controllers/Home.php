@@ -12,6 +12,7 @@ class Home extends Controller{
         $event_data = $event->query($query);
         //print_r($event_data);
         $data = $user->findAll();
+        $notify_data=array();
         if(Auth::getusertype()=='reg_user'){
             $id=Auth::getid();
             $event=new Event();
@@ -25,6 +26,7 @@ class Home extends Controller{
             $data=$event->query($query,['id'=>$id]);
             $notify_data=$data;
         }
+
         if(!$notify_data){
             $notify_data=array();
         }

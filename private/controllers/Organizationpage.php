@@ -53,7 +53,7 @@ class Organizationpage extends Controller
                 $comment_data = $comment->query($query, $arr);
                 // print_r($comment_data);
     
-                $query = "SELECT event.name
+                $query = "SELECT distinct event.name
                FROM event
                INNER JOIN organization ON event.org_gov_reg_no=organization.gov_reg_no
                INNER JOIN donate ON donate.event_id=event.event_id
@@ -66,7 +66,7 @@ class Organizationpage extends Controller
     
                 $d_event_name = $org->query($query, $arr);
     
-                $query = "SELECT event.name
+                $query = "SELECT distinct event.name
                FROM event
                INNER JOIN organization ON event.org_gov_reg_no=organization.gov_reg_no
                INNER JOIN volunteer ON volunteer.event_id=event.event_id

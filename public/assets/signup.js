@@ -3,21 +3,22 @@ const firstName = document.getElementById("first_name");
 const lastName = document.getElementById("last_name");
 const nic = document.getElementById("nic");
 const email = document.getElementById("email");
-const telephone = document.getElementById("telephone"); 
+const telephone = document.getElementById("telephone");
 const password = document.getElementById("password");
 const rePassword = document.getElementById("re_enter_password");
 const check = document.getElementById("check");
-const address=document.getElementById("address_1");
-const city=document.getElementById("city");
-const postalCode=document.getElementById("postal_code");
+const address = document.getElementById("address_1");
+const city = document.getElementById("city");
+const postalCode = document.getElementById("postal_code");
 
 
-let valid=true;
+let valid = true;
 
 form.addEventListener("submit", (e) => {
+    valid = true;
     e.preventDefault();
     inputChecker();
-    if(valid==true) {
+    if (valid == true) {
         form.submit();
     }
 })
@@ -35,11 +36,11 @@ async function inputChecker() {
     const postalCodeVal = postalCode.value.trim();
     // const error=
     emailcheck();
-    niccheck()
+    niccheck();
     if (firstNameVal === "") {
         //error message
         displayError(firstName, "First name can't be empty");
-        
+
     } else {
         //display success tick
         displaySuccess(firstName);
@@ -48,7 +49,7 @@ async function inputChecker() {
     if (cityVal === "") {
         //error message
         displayError(city, "City can't be empty");
-        
+
     } else {
         //display success tick
         displaySuccess(city);
@@ -56,22 +57,22 @@ async function inputChecker() {
     if (postalCodeVal === "") {
         //error message
         displayError(postalCode, "Postal code can't be empty");
-        
+
     }
-    else if (postalCodeVal.length != 5 ) {
+    else if (postalCodeVal.length != 5) {
         //error message
         displayError(postalCode, "Enter a valid postal code");
-        
+
     }
     else {
         //display success tick
         displaySuccess(postalCode);
     }
-    
+
     if (addressVal === "") {
         //error message
         displayError(address, "Address can't be empty");
-        
+
     } else {
         //display success tick
         displaySuccess(address);
@@ -110,7 +111,7 @@ async function inputChecker() {
     }
     if (passwordVal !== rePasswordVal) {
         displayError(rePassword, "Passwords do not match");
-    }else if(rePasswordVal ===""){
+    } else if (rePasswordVal === "") {
         displayError(rePassword, "Password can't be empty");
     }
     else {
@@ -120,7 +121,7 @@ async function inputChecker() {
         displayError(check, "Accept terms and conditions");
     }
     else {
-        displaySuccess(check); 
+        displaySuccess(check);
     }
 }
 function displayError(input, message) {
@@ -129,29 +130,29 @@ function displayError(input, message) {
     if (input === check) {
         f.className = "f12 error";
     } else {
-        f.className = "f error";    
+        f.className = "f error";
     }
     //add error message
     small.innerText = message;
     //add error class
-    valid=false;
+    valid = false;
 }
 
 function displaySuccess(input) {
     const f = input.parentElement;
-    if(input===check){
+    if (input === check) {
         f.className = "f12 success";
     }
-    else{
-         f.className = "f success";
+    else {
+        f.className = "f success";
     }
-  
+
 }
 function checkEmail(email) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
-function emailcheck(){
+function emailcheck() {
     const emailVal = email.value.trim();
     var ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/duplicate', true);
@@ -160,20 +161,21 @@ function emailcheck(){
 
     ajax.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            let emails=JSON.parse(ajax.response);
+            let emails = JSON.parse(ajax.response);
             // console.log(emails[0].email);
-            for(i in emails) {
+            for (i in emails) {
                 // console.log(emails[i].email);
-                if(emails[i].email ==emailVal){
+                if (emails[i].email == emailVal) {
+                    valid=false;
                     displayError(email, "Email already exists");
                 }
             }
-           
+
         }
     };
     ajax.send();
 }
-function niccheck(){
+function niccheck() {
     const nicVal = nic.value.trim();
     var ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/nic', true);
@@ -182,15 +184,17 @@ function niccheck(){
 
     ajax.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            let nics=JSON.parse(ajax.response);
+            let nics = JSON.parse(ajax.response);
             // console.log(emails[0].email);
-            for(i in nics) {
+            for (i in nics) {
                 // console.log(nics[i].nic);
-                if(nics[i].nic ==nicVal){
+                if (nics[i].nic == nicVal) {
+                    valid=false;
                     displayError(nic, "NIC already exists");
+
                 }
             }
-           
+
         }
     };
     ajax.send();
