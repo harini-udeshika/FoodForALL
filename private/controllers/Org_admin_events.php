@@ -119,7 +119,7 @@ class Org_admin_events extends Controller
                     <!-- End of Search Result section -->
             <?php
                 }
-            } else echo "not found";
+            } else echo "Not found";
         }
     }
 }

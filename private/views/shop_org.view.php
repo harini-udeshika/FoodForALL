@@ -83,7 +83,7 @@
                 </div> -->
                 
                 <div class="eminput-control">
-                    <label for="description"></label>Event description:<br>&nbsp;&nbsp;
+                    <label for="description"></label>Item description:<br>&nbsp;&nbsp;
                     <textarea name="description" id="description" placeholder="--Description--" rows="5" cols="50"></textarea><br>
                     <div class="client-error"></div>
                 </div>
