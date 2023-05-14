@@ -18,9 +18,9 @@
                 <div class="txt-al-left txt-13 w-semibold p-left-10">Our monthly subscribtion plan</div>
                 <div class="txt-al-left txt-12" style="font-weight: 450;">
                     <ul>
-                        <li>Add new events, get donations and publicity</li>
+                        <li>Add more than 3 events Monthly, get donations and publicity</li>
                         <li>A platform to showcase your events with images</li>
-                        <li>Adding new merchendise to your stores</li>
+                        <li>Adding more than 5 merchendise to your stores per Monthly</li>
                         <li>All for a Monthly Subscription fee of <span class="txt-purple">1000.00 LKR</span></li>
                     </ul>
                 </div>
@@ -29,7 +29,7 @@
                 <?php
                 if ($sub_data) {  ?>
                     <div class="heading-1 p-bottom-20">Your Subscription has not yet expired</div>
-                    <button class="btn btn-lg btn-disabled ">1000.00 LKR</button>
+                    <button class="btn btn-lg btn-disabled ">SUBSCRIBED</button>
                 <?php
                 } else { ?>
                     <div class="heading-1 p-bottom-20">Pay subscription Here</div>

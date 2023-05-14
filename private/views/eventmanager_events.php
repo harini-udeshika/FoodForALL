@@ -49,6 +49,10 @@
         
         <a href="<?= ROOT ?>/event_org?id=<?=$rows1[$i]->event_id?>"><button class="btn btn-xsm btn-green">Go to details</button></a>
       </div>
+
+      <div class="sp-09 col-12 m-top-10 txt-07 p-left-8 p-right-5">
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows1[$i]->event_id?>"><button class="btn btn-xsm btn-purple">See the budget</button></a>
+      </div>
     </div>
     <?php $count--;
             $i++;
@@ -95,7 +99,15 @@
       <div class="div col-5"></div>
 
       <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
-        <a href="<?= ROOT ?>/event_org?id=<?=$rows2[$i]->event_id?>"><button class="btn btn-xsm btn-green">Go to details</button></a>
+        <a href="<?= ROOT ?>/certificate_validate?event_id=<?=$rows2[$i]->event_id?>"><button class="btn btn-sm btn-purple">Approve certificates</button></a>
+      </div>
+
+      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
+        <a href="<?= ROOT ?>/event_org?id=<?=$rows2[$i]->event_id?>"><button class="btn btn-sm btn-green">Go to details</button></a>
+      </div>
+
+      <div class="sp-2 col-12 m-top-10 txt-07 p-left-8">
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows2[$i]->event_id?>"><button class="btn btn-sm btn-purple">See the event budget</button></a>
       </div>
     </div>
     

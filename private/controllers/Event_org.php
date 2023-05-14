@@ -1,4 +1,5 @@
 <?php
+require_once 'phpqrcode/qrlib.php';
 class Event_org extends Controller
 {
     function index()
@@ -88,6 +89,7 @@ class Event_org extends Controller
 
         $vol_request = new Volunteer_request();
         $volunteer = new Volunteer();
+        $user = new User();
 
         $query = "SELECT * FROM volunteer_request WHERE event_id = :id && id = :uid";
 
@@ -96,18 +98,36 @@ class Event_org extends Controller
         $request = $vol_request->query($query, $arr);
         $request = $request[0];
 
+
+        //QR Code generate
+        $user_data_qr=$user->where('id',$uid);
+        $id = $user_data_qr[0]->nic;
+        $eid = $event_id;
+        $key = "my_secret_key";
+        $iv = "1234567890123456"; // Initialization vector must be 16 bytes for AES encryption in CBC mode
+        $cipher = "AES-256-CBC";
+        $encrypted = openssl_encrypt($id, $cipher, $key, 0, $iv);
+        $encoded = urlencode($encrypted);
+        $qrtext1 = ROOT . "/attendance?id=" . $encoded . "&eid=" . $eid;
+        $qrtext = $qrtext1;
+        $qrimage = $this->generateUniqueFilename(); 
+        $qrcode = 'qrcodes/' . $qrimage;
+        QRcode::png($qrtext, $qrcode, 'H', 4, 4);
+       
+
         // print_r($request);
         // die;
 
         $arr_data['user_id'] = $uid;
         $arr_data['volunteer_type'] = $request->volunteer_type;
         $arr_data['event_id'] = $event_id;
+        $arr_data['qr_code'] = $qrimage; //QR image
 
         $query = "UPDATE volunteer_request SET message = 'accepted' WHERE event_id = :id && id = :uid";
         $arr = ['id' => $event_id, 'uid' => $uid];
         // $update_req = $vol_request->query($query, $arr);
 
-        // $volunteer->insert($arr_data);
+        $volunteer->insert($arr_data);
         $update_req = $vol_request->query($query, $arr);
         // $vol_request->delete_request($uid,$event_id);
 
@@ -332,5 +352,12 @@ class Event_org extends Controller
         print_r($vol_data);
         die;
         $this->redirect('event_org?id=' . $event_id);
+    }
+
+     //unique file generation
+     function generateUniqueFilename() {
+        $timestamp = time();
+        $random = substr(md5(mt_rand()), 0, 7);
+        return "{$timestamp}_{$random}.png";
     }
 }

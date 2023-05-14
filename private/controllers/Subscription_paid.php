@@ -15,6 +15,7 @@ class Subscription_paid extends Controller
                 $data = $sub->query($query, $arr);
                 $this->view('subscription_paid');
             } else {
+                // $this->view('subscription_paid');
                 $this->view('404');
             }
 

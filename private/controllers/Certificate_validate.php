@@ -2,7 +2,13 @@
 class Certificate_validate extends Controller
 {
    public function index(){
-    if(Auth::logged_in()){
+
+    if (!Auth::logged_in()) {
+        $this->redirect('event_budget');
+    } elseif (Auth::logged_in() && !(Auth::getusertype() == 'eventmanager')) {
+        $this->redirect('home');
+    }
+   
         $cert=new Certificate();
         if(isset($_GET['event_id'])){
          
@@ -36,7 +42,7 @@ class Certificate_validate extends Controller
         else{
             $this->view('404');
         }
-    }
+
 
     
    }

@@ -66,20 +66,20 @@ if ($allevents) {
                 <img src="<?php echo $image ?>" alt="" class="" style="border:solid 1px black; width: 35%; border-radius: 8px; ">
             </div>
             <div class="card-simple txt-align-left grid-10 card-green" style="background-color: rgba(173, 211, 116, 0.886);">
-                <div class="col-6 ">
+                <div class="col-10 ">
                     <div class="heading-2 p-bottom-15" style="text-decoration: underline; text-decoration-thickness: 2px;">Your Details</div>
                     <div class="m-left-20">
                         <div class="txt-14 w-medium p-8"><?php echo $rows->name ?></div>
                         <div class="txt-14 w-medium p-8"><?php echo $rows->email ?></div>
                         <div class="txt-14 w-medium p-8"><?php echo $rows->address ?></div>
-                        <div class="txt-14 w-medium p-8"><?php echo $rows->city ?></div>
+                        <div class="txt-14 w-medium p-left-8"><?php echo $rows->city ?></div>
                     </div>
                 </div>
 
-                <div class="col-4">
-                    <div class="heading-2 p-bottom-15" style="text-decoration: underline; text-decoration-thickness: 2px;">About</div>
+                <div class="col-10">
+                    <div class="heading-2 p-bottom-10 p-top-8 m-top-1" style="text-decoration: underline; text-decoration-thickness: 2px;">About</div>
                     <div class="m-left-10">
-                        <div class="txt-11 w-medium p-8"><?php
+                        <div class="txt-11 w-medium p-8" style="overflow:auto; max-height:100px;"><?php
                                                             if ($rows->about) {
                                                                 echo $rows->about;
                                                             }
@@ -101,7 +101,7 @@ if ($allevents) {
 
             <div class="blank col-2 "></div>
             <div class="card col-8 m-bottom-10 grid-10">
-                <div class="txt-20 w-semibold  col-10 p-bottom-8" style="text-align: center;">Total Donations Acquired
+                <div class="txt-20 w-semibold  col-10 p-bottom-8" style="text-align: center;">Total Donations Acquired <br>
                     <div class="txt-24 w-bold  p-top-10 p-bottom-10 txt-purple"><?php echo $totamount ?>/=</div>
 
                 </div>

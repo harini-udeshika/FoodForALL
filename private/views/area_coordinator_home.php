@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_area_blocks.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_area.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/fq.css">
 <?php $this->view('includes/submenu');
 $name = array_column($rows1, 'name')[0];
 $email = array_column($rows1, 'email')[0];
@@ -86,7 +87,7 @@ $area = array_column($rows1, 'area')[0];
 </div>
 
 
-<div class="containor">
+<!-- <div class="containor">
     <h1>Frequently asked questions?</h1>
     <div class="tab">
         <input type="radio" name="acc" id="acc1">
@@ -131,11 +132,75 @@ $area = array_column($rows1, 'area')[0];
                 like to contribute some random paragraphs, please contact us.</p>
         </div>
     </div>
-</div>
+</div> -->
+
+
+<div class="container5">
+      <h2>Frequently Asked Questions</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button id="accordion-button-1" aria-expanded="false">
+            <span class="accordion-title">What inspired you to create this food donation website?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-content">
+            <p>
+            Our team was inspired by the fact that there are millions of people around the world who suffer from hunger and food insecurity, despite the fact that there is an abundance of food resources available. We wanted to create a platform that makes it easy for individuals and 
+            organizations to donate excess food to those in need.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button id="accordion-button-2" aria-expanded="false">
+            <span class="accordion-title">How do you ensure the safety and quality of donated food?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-content">
+            <p>
+            We work closely with our partner organizations to ensure that all donated food is safe and of high quality. We have strict guidelines in place for the types of food that can be donated, and we carefully inspect all donations to ensure that they meet our standards.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button id="accordion-button-3" aria-expanded="false">
+            <span class="accordion-title">How do you connect donors with organizations in need of food donations?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-content">
+            <p>
+            We have a network of partner organizations that work with us to distribute donated food to those in need. Donors can browse our database of partner organizations and choose the ones they would like to donate to. We also work with our partner organizations to help them identify the types of food that they need most.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button id="accordion-button-4" aria-expanded="false">
+            <span class="accordion-title">What kind of impact has your website had so far?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-content">
+            <p>
+            Since we launched our website, we have been able to help thousands of individuals and families who were struggling with food insecurity. We have also been able to reduce food waste by connecting donors with organizations that can make use of excess food resources.
+            
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button id="accordion-button-5" aria-expanded="false">
+            <span class="accordion-title">How do you plan to grow and expand your website in the future?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-content">
+            <p>
+            We are constantly looking for new ways to improve our platform and reach more people in need. In the future, we plan to expand our network of partner organizations, improve our donation tracking and reporting systems, and explore new ways to raise awareness about food insecurity and the impact of food waste.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
-    
+    <script src=" <?=ROOT?>/assets/fq.js"></script>
     <?php $this->view('includes/footer')?>  
     
 
