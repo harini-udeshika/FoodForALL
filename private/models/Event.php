@@ -2,6 +2,8 @@
 class Event extends Model
 {
     protected $table = "event";
+
+    //getting an array of sent requests by each user
     public function sent_requests($req_data){
         for($i=0;$i<sizeof($req_data);$i++) {
             if($req_data[$i]->volunteer_type=='Moderate'){

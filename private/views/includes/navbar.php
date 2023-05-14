@@ -14,15 +14,23 @@
             <!-- <div class="nav-i">
                 <a href="">Donate/Volunteer</a>
             </div> -->
-            <div class="nav-i">
-                <a href="login">Organizations</a>
-            </div>
-            <div class="nav-i">
-                <a href="login">Events</a>
-            </div>
-            <div class="nav-i">
-                <a href="about">About us</a>
-            </div>
+
+        <div class="nav-i">
+            <a href="search_org">Organizations</a>
+        </div>
+        <div class="nav-i">
+            <a href="events">Events</a>
+        </div>
+        <div class="nav-i">
+            <a href="about">About us</a>
+        </div>
+
+        <div class="nav-i">
+            <a href="login">Login/Sign in</a>
+        </div>
+        <?php endif?>
+        <?php if (Auth::getusertype() == 'reg_user'): ?>
+
 
             <div class="nav-i">
                 <a href="login">Login/Sign in</a>

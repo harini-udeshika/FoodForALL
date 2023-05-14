@@ -44,6 +44,7 @@ a {
     right: 2rem;
     border: none;
     background-color: #fff;
+    
 }
 
 .filter {
@@ -62,6 +63,7 @@ a {
     height: 2.5rem;
     border-radius: 0.8rem;
     border: 0.15rem solid #dfe1da;
+    padding: 0 1rem 0 1rem;
 }
 
 .search-btn {
@@ -85,15 +87,12 @@ select {
 
 .event-container {
     width: 80%;
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     /* background-color: #F2F3F9; */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    }
+}
 
 .event-details img {
 

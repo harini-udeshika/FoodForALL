@@ -138,7 +138,6 @@ function displayError(input, message) {
 }
 
 function displaySuccess(input) {
-    valid=true;
     const f = input.parentElement;
     if(input===check){
         f.className = "f12 success";
@@ -146,7 +145,7 @@ function displaySuccess(input) {
     else{
          f.className = "f success";
     }
-   
+  
 }
 function checkEmail(email) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
@@ -154,7 +153,7 @@ function checkEmail(email) {
 
 function emailcheck(){
     const emailVal = email.value.trim();
-     ajax = new XMLHttpRequest();
+    var ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/duplicate', true);
 
 
@@ -176,7 +175,7 @@ function emailcheck(){
 }
 function niccheck(){
     const nicVal = nic.value.trim();
-     ajax = new XMLHttpRequest();
+    var ajax = new XMLHttpRequest();
     ajax.open('GET', 'http://localhost/food_for_all/public/signup/nic', true);
 
 

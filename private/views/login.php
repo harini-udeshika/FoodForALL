@@ -15,7 +15,7 @@
 
             </div>
 
-            <?php if (!$is_verified || count($errors)>0) : ?>
+            <?php if (!$is_verified || count($errors)>0) : ?> 
 
                 <div class="error">
                     <i class="fa-solid fa-circle-exclamation"></i>

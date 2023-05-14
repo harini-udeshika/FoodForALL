@@ -7,7 +7,15 @@
  <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 
 <div class="container">
-
+<?php if($notify_data):?>
+    <?php foreach($notify_data as $notify):?>
+    <div class="notify" id="notify_body">
+    
+        <small>"<?=$notify->name?>" you'll be volunteering is happening soon!</small>
+        <a href="eventpage?id=<?=$notify->event_id?>"><button>View details</button></a>
+    </div>
+    <?php endforeach;?>
+    <?php endif?>
     <div class="description">
         <div class="content">
             <div class="main">
@@ -143,7 +151,7 @@
         <span><?=$event_data[$i]->time?></span><br>
         <span><?=$event_data[$i]->location?></span><br>
 
-        <a href=""><button class="readmore">More details</button></a>
+        <a href="events"><button class="readmore">More details</button></a>
     </div>
     <?php $i++;?>
     <?php endforeach;?>
@@ -168,15 +176,15 @@
         
         <div class="row">
 
-    <?php if ($pics): ?>
+    <?php if ($pics): ?> 
     <?php $i = 0;?>
     <?php foreach ($pics as $value): ?>
-       
-        <img src="<?=$pics[$i]->profile_pic?>" alt="">
-    <?php if ($i % 3 == 0 && $i != 0): ?>
+        <?php if ($i % 3 == 0 && $i != 0): ?>
     </div>
     <div class="row">
     <?php endif?>
+    <img src="<?=$pics[$i]->profile_pic?>" alt="">
+   
 
     <?php $i++;?>
     <?php endforeach;?>
@@ -206,5 +214,5 @@
 
 </div>
 <?php endif; ?>
-
+<!-- <script src="<?=ROOT?>/assets/notify.js"></script> -->
 <?php $this->view('includes/footer')?>

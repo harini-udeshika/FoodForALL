@@ -19,14 +19,14 @@ class Login extends Controller
             if ($row = $user->where('email', $_POST['email'])) {
                
                 $row = $row[0];
+                $id=$row->id;
                 // print_r($row) ;
                 if (password_verify($_POST['password'], $row->password_hash)) {
 
                     Auth::authenticate($row);
                     if (Auth::check_verified()) {
-                        // if($row->usertype=="reg_user"){
-                             $this->redirect('/home');
-                        //}
+                        $this->redirect('/home');
+                    
                        
                     } else {
                         $this->redirect('/email_verify');

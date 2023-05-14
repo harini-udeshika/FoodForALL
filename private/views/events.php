@@ -19,7 +19,7 @@ $districts = array(
     'Kilinochchi',
     'Kurunegala',
     'Mannar',
-    'Matale',
+    'Matale', 
     'Matara',
     'Monaragala',
     'Mullaitivu',
@@ -45,9 +45,9 @@ $districts = array(
 
             <label for="date" >Date</label>
             <input type="date" name="date" value="<?=isset($_GET['date']) ? $_GET['date'] : ''?>">
-            <label for="location">Location</label>
-            <select name="location" id="location" >
-                <option value="default" ><?=isset($_GET['location']) ? $_GET['location'] : 'Select'?></option>
+            <label for="district">District</label>
+            <select name="district" id="district" >
+                <option value="default" ><?=isset($_GET['district']) ? $_GET['district'] : 'Select'?></option>
                 <?php $i = 0;?>
         <?php foreach ($districts as $dist): ?>
             <option value="<?=$districts[$i]?>"><?=$districts[$i]?></option>

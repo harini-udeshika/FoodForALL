@@ -3,6 +3,7 @@ class Order_history extends Controller
 {
     public function index()
     {
+        if((Auth::logged_in()) && (Auth::getusertype()=="reg_user")){
         $order=new Merchandise_purchase();
         $query='SELECT merchandise_purchase.* ,order_details.* ,merchandise_item.*
         from merchandise_purchase inner join order_details INNER JOIN merchandise_item 
@@ -13,6 +14,12 @@ class Order_history extends Controller
         $data=$order->query($query,$arr);
         // print_r($data);
         $this->view('order_history',['data'=>$data]);
-
+        }
+        else if(Auth::logged_in()){
+            $this->redirect('404');
+        }
+        else{
+            $this->redirect('home');
+        }
     }
 }
