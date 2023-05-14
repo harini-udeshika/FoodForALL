@@ -35,6 +35,7 @@ class Eventpage extends Controller
             $arr1['id'] = $order_id;
             donate_checkout($arr1);  
         }
+
         if (isset($_GET['id'])) {
 
             $id = $_GET['id'];
@@ -89,7 +90,7 @@ class Eventpage extends Controller
                 'volunteer_count' => $volunteer_count,
                 'volunteerp' => $volunteerp]);
 
-        } else if (isset($_GET['type'])) {
+        } else if (Auth::logged_in() && Auth::getusertype()=="reg_user" && isset($_GET['type'])) {
             $type = $_GET['type']; 
             $data = explode(" ", $type);
             $v_type = (lcfirst($data[0]));
@@ -118,7 +119,9 @@ class Eventpage extends Controller
             $this->redirect('events');
         }
 
-        
+        else if(!Auth::logged_in()){
+            $this->redirect('login');
+        }
         else {
             $this->view('404');
         }

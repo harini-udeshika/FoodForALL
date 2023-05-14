@@ -30,7 +30,7 @@ class Profile extends Controller
             $v_id = $id;
             $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
         FROM volunteer
-        INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id";
+        INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
             $arr = [
                 'v_id' => $v_id,
 
@@ -39,7 +39,7 @@ class Profile extends Controller
             //echo($event_data[1]->name);
             $query = "SELECT donate.amount,donate.date_time,event.name
         FROM donate
-        INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id && donate.status=1";
+        INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id && donate.status=1 order by donate.date_time desc";
             $arr = [
                 'v_id' => $v_id,
 
@@ -108,7 +108,7 @@ class Profile extends Controller
             $v_id = Auth::getid();
             $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.event_id,event.date,event.org_gov_reg_no
             FROM volunteer
-            INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id";
+            INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
             $arr = [
                 'v_id' => $v_id,
 
@@ -123,7 +123,7 @@ class Profile extends Controller
             //echo($event_data[1]->name);
             $query = "SELECT donate.amount,donate.date_time,event.name
             FROM donate
-            INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id && donate.status=1";
+            INNER JOIN event ON event.event_id=donate.event_id WHERE donate.donor_id= :v_id && donate.status=1 order by donate.date_time desc";
             $arr = [
                 'v_id' => $v_id,
 

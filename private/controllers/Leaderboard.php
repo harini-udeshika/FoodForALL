@@ -3,7 +3,7 @@ class Leaderboard extends Controller
 {
     public function index()
     {
-        if(Auth::logged_in()){
+        if(Auth::logged_in() && (Auth::getusertype()=="reg_user" || Auth::getusertype()=="admin")){
              $user = new User();
         $donor = new Donate();
         $query = "SELECT sum(donate.amount) as tot_amount ,user.first_name,user.city,user.profile_pic 

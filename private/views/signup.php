@@ -100,7 +100,7 @@ print_r($errors);
                 </div>
                 <div class="log-button">
                     <button id="register">Register</button>
-                </div>
+                </div> 
 
             </form>
         </div>

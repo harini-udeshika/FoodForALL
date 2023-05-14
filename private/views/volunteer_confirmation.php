@@ -18,7 +18,7 @@
             <h2>Request sent</h2>
             <p>You'll receive a notification once approved!</p>
             <a href="eventpage?type=<?=$data[0]?>+<?=$data[1]?>&req=true"><button class="proceed" id="ok">OK</button></a>
-        </div>
+    </div>
 </div>
 <script src="<?=ROOT?>/assets/popup.js"></script>
-<?php $this->view('includes/footer')?>
+<?php $this->view('includes/footer')?> 

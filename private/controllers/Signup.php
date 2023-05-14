@@ -17,9 +17,8 @@ class Signup extends Controller
                 $arr['postal_code'] = $_POST["postal_code"];
                 $arr['telephone'] = $_POST["telephone"];
                 $arr['password_hash']=password_hash($_POST["password"],PASSWORD_DEFAULT);
-
-
-                
+                $arr['tnc']=$_POST['check'];
+                print_r($_POST);
 
                 $arr['usertype'] = "reg_user";
 
