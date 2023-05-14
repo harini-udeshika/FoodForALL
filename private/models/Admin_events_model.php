@@ -5,10 +5,10 @@ class Admin_events_model extends Model
 
     public function selectOngoing()
     {
-        // $ongoing_date = date('y-m-d');
-        $ongoing_date = '23-01-01';
+        $ongoing_date = date('y-m-d');
+        // $ongoing_date = '23-01-01';
         
-        $query = "SELECT * FROM event WHERE date >= '$ongoing_date' ORDER BY date DESC";
+        $query = "SELECT * FROM event WHERE date >= '$ongoing_date' ORDER BY date";
         $data = $this->query($query);
 
         if ($data != NULL) {
@@ -47,6 +47,7 @@ class Admin_events_model extends Model
                     $event->donation_percentage = (int)($collected_donations * 100 / $event->total_amount);
                 }
                 $event->collected_donations = $collected_donations;
+                $event->event_url = ROOT . "/Event_org?id=".$event->event_id;
             }
         }
         return $data;
