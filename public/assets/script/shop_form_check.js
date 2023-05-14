@@ -2,7 +2,7 @@ const form_shop = document.getElementById('input-form-shop');
     const name_item = document.getElementById('name-item');
     const stock_item = document.getElementById('stock-item');
     const price_item = document.getElementById('price-item');
-    const code_item = document.getElementById('code-item');
+    const des_item = document.getElementById('description');
     // const result_hold_div = document.getElementById('result_hold_div');
 
     var num = 0;
@@ -71,7 +71,7 @@ const form_shop = document.getElementById('input-form-shop');
         const name_itemValue = name_item.value.trim();
         const price_itemValue = price_item.value.trim();
         const stock_itemValue = stock_item.value.trim();
-        const code_itemValue = code_item.value.trim();
+        const des_itemValue = des_item.value.trim();
 
         if (name_itemValue === '') {
             setError(event, name_item, 'Item name is Required');
@@ -87,12 +87,10 @@ const form_shop = document.getElementById('input-form-shop');
             setSuccess(price_item);
         }
 
-        if (code_itemValue === '') {
-            setError(event, code_item, 'Item code is required');
-        } else if (code_itemValue < 0) {
-            setError(event, code_item, 'Provide a valid code');
+        if (des_itemValue === '') {
+            setError(event, des_item, 'Item description is required');
         } else {
-            setSuccess(code_item);
+            setSuccess(des_item);
         }
 
         if (stock_itemValue === '') {

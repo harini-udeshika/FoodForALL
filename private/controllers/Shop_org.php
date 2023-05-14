@@ -18,7 +18,7 @@ class Shop_org extends Controller
             $arr['price'] = $_POST['price'];
             $arr['stock'] = $_POST['stock'];
             
-            // $arr['item_no'] = $_POST['code'];
+            $arr['description'] = $_POST['description'];
 
 
             if (isset($_FILES['image'])) {

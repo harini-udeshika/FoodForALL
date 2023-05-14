@@ -5,7 +5,12 @@
 <div class="card">
 <h3><span class="one">Food</span><span class="two">For</span><span class="one">ALL</span></h3>
 <h3> Hello <?php 
-echo $rows->first_name;?>!</h3>
+if(isset($rows->first_name)){
+    echo $rows->first_name;
+} else {
+    echo $rows->name;
+}
+?>!</h3>
 <p>To proceed please verify your account</p>
 <small>A verification code has been sent to your account <?php echo $rows->email?></small>
 <form action="" method="post" class="form">

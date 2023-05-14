@@ -242,4 +242,16 @@ class Admins extends Model
 
         return $data;
     }
+
+    // organization requests
+    public function orgRequests(){
+        $query = "select * from organization where approve=0";
+        $data = $this->query($query);
+
+        if($data==null){
+            $data = array();
+        }
+
+        return $data;
+    }
 }

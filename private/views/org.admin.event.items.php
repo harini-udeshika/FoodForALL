@@ -25,8 +25,8 @@
             <div class=" w-semibold txt-al-center m-top-20 txt-12">Stock : <?php echo $item_data->stock ?></div>
 
             <div class="flex jf-btwn width-88 m-lr-auto m-top-35">
-                <button class="btn btn-gray btn-sm">Delete</button>
-                
+                <!-- <button class="btn btn-gray btn-sm">Delete</button> -->
+
             </div>
 
         </div>
@@ -38,13 +38,20 @@
                 <input class="input-field input-field-block txt-08 w-medium m-bottom-15" name="item_name" id="item_name" value="<?php echo $item_data->name ?>" type="text">
 
                 <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Unit Price</label>
-                <input class="input-field input-field-block txt-08 w-medium m-bottom-15" name="unit_price" id="unit_price" value="<?php echo $item_data->price ?>" type="text">
+                <input class="input-field input-field-block txt-08 w-medium m-bottom-15" name="unit_price" id="unit_price" value="<?php echo $item_data->price ?>" readonly type="text">
 
                 <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Available Stock</label>
                 <input class="input-field input-field-block txt-08 w-medium m-bottom-15" name="stock_count" id="stock_count" value="<?php echo $item_data->stock ?>" type="text">
 
-                <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Item Code</label>
-                <input class="input-field input-field-block txt-08 w-medium m-bottom-15" name="code" id="code" value="<?php echo $item_data->item_no ?>" type="text">
+                <label class="txt-08 width-100 p-left-5 w-semibold txt-gray" for="">Description</label>
+                <textarea class="input-field input-field-block txt-09 w-medium m-bottom-15" name="descrption" id="description" cols="30" rows="5" value="" style="height: 70px;">
+                    <?php if(isset($item_data->description)){
+                        $des = trim($item_data->description);
+                        echo $des;
+                     }
+                    ?>
+                </textarea>
+                <!-- <input class="input-field input-field-block txt-08 w-medium m-bottom-15" name="code" id="code" value="<?php echo $item_data->description ?>" type="text"> -->
 
                 <div class="flex">
                     <label class="p-10 width-60 txt-al-center m-lr-auto m-top-10 sp-1" style="cursor:pointer;" for="inputTag">

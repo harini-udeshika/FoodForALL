@@ -67,6 +67,11 @@ class Email_verify extends Controller
         $data = $user->where('id', Auth::getid());
         $data = $data[0];
 
+        if (Auth::getusertype() == 'organization'){
+            $data = $user->where('id', Auth::getid());
+            $data = $data[0];
+        }
+
         $this->view('email_verify', ['rows' => $data,'error'=>$error]);
     }
 }

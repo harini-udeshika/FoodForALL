@@ -10,12 +10,12 @@
         </div>
     <?php endif?>
     <?php if($data):?>
-   
-<?php foreach ($data as $d): ?>
-    <div class="row">
+   <div class="row">
        <b> <p>Event name</p> </b>
        <b><p>Volunteer</p> </b>  <b><p class='cert'>Certificate</p>  </b> <b><p>Status</p> </b>
 </div>
+<?php foreach ($data as $d): ?>
+    
 <div class="row"><p><?=$d->name?></p>
 <p><?=$d->fullname?></p>
     <p> <a href="profile?cert_id=<?=$d->id?>">Show credential &nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
