@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 class Admin extends Controller
 {
     function index()
@@ -175,15 +178,32 @@ class Admin extends Controller
 
     public function temp5()
     {
-        $this->autherize_admin();
-        $admin = new Admins();
+        // $this->autherize_admin();
 
-        $this->view('section');
+        $event_model = new Admin_events_model();
+        $path = "../private/views/admin.events.upcoming.php";
+        $html = "";
+
+        $ongoing_events = $event_model->selectOngoing();
+        if ($ongoing_events == NULL) {
+            $ongoing_events = array();
+        }
+        ob_start();
+        include("../private/views/mail.newsletter.php");
+        $html = ob_get_clean();
+
+        // echo $html;
+        // $this->view("mail.newsletter",[
+        //     "ongoing_events"=>$ongoing_events
+        // ]);
+
+        $mail_model = new Mail();
+        echo ($mail_model->send_mail("anjunaserasingha@gmail.com", "test mail 1", $html));
     }
 
-    public function temp8($param)
+    public function temp8()
     {
-        echo ($param);
+        $this->view('mail.subscription_notice');
     }
 
     // upcomng events
@@ -302,5 +322,19 @@ class Admin extends Controller
         $html = ob_get_clean();
 
         echo ($html);
+    }
+
+    public function temp15(){
+        echo("called");
+        $this->view("temp3");
+    }
+
+    public function temp16(){
+        if(isset($_POST)){
+            $result =  json_encode($_POST);
+            echo($result);
+        }else{
+            echo(json_encode("no post"));
+        }
     }
 }

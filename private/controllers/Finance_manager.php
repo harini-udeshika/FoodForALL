@@ -200,14 +200,26 @@ class Finance_manager extends Controller
         // $this->view('admin');
     }
 
-    // undo reject
-    public function undo_reject()
+    // modify budgets
+    public function modify_budget()
     {
         $this->autherize_finance_manager();
         $f_manager_model = new Finance_managers();
         if (isset($_GET['id'])) {
-            $f_manager_model->undoReject($_GET['id']);
+            $f_manager_model->rejectBudget($_GET['id']);
         }
         $this->redirect("finance_manager");
+        // $this->view('admin');
     }
+
+    // // undo reject
+    // public function undo_reject()
+    // {
+    //     $this->autherize_finance_manager();
+    //     $f_manager_model = new Finance_managers();
+    //     if (isset($_GET['id'])) {
+    //         $f_manager_model->undoReject($_GET['id']);
+    //     }
+    //     $this->redirect("finance_manager");
+    // }
 }
