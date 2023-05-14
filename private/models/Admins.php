@@ -73,7 +73,7 @@ class Admins extends Model
 
     public function select_orgs_bydate()
     {
-        $query = "SELECT * FROM  organization  ORDER BY sub_fee_paid_date DESC";
+        $query = "SELECT * FROM  organization WHERE approve = 1 ORDER BY sub_fee_paid_date DESC";
         $data = $this->query($query);
         return $data;
     }

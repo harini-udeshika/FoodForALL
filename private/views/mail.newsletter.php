@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Subscription Reminder</title>
+    <title>Newsletter</title>
 </head>
 
 <body>
-
+    <h1>Upcoming Events of next week</h1>
     <div style="margin:0 auto; width:350px;">
         <?php if (!empty($ongoing_events)) : ?>
             <?php foreach ($ongoing_events as $event) : ?>
@@ -16,7 +16,8 @@
                     <div style="font-weight: 700;font-size: 1.1rem;padding-bottom: 8px; text-align:center; margin-top:4px; margin-bottom:4px;">
                         <?= $event->name ?>
                     </div>
-                    <img style="width: 100%; max-height:150px;border-radius: 5px; margin-bottom:4px;" src="/img.jpeg" alt="" srcset="">
+                    <!-- <a href=""><img src="<?= ROOT ?>/images/logo.png" alt="foodforall" style="display: block; margin: 0 auto; max-height:120px; max-width: 100%; "></a> -->
+                    <a href=""><img src="https://github.com/harini-udeshika/FoodForALL/blob/main/public/images/logo.png?raw=true" alt="foodforall" style="display: block; margin: 0 auto; max-height:120px; max-width: 100%; "></a>
 
                     <div style="text-align:center; font-size: 0.9rem;font-weight: bold;">Event date - <?= $event->date ?></div>
 

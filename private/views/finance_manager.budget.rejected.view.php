@@ -104,12 +104,6 @@
                     </div>
                     <!-- package item end -->
                 <?php endforeach; ?>
-
-                <div class="col-12 grid-12 m-top-30 ">
-                    <a class="col-12" href="<?= ROOT ?>/finance_manager/undoReject?id=<?= $budget->event_id ?>">
-                        <button class="btn btn-red btn-sm btn-block">Undo Reject</button>
-                    </a>
-                </div>
             </div>
         </div>
         <!-- END : budget item -->

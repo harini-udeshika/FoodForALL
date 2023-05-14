@@ -8,7 +8,8 @@
 
 <body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333; background-color: #f5f5f5; padding: 20px; ">
     <div style="width: 550px;margin: 50px auto 0 auto; background-color: white; padding:36px; box-sizing: border-box;">
-        <a href=""><img src="<?= ROOT ?>/images/logo.png" alt="foodforall" style="display: block; margin: 0 auto; max-height:120px; max-width: 100%; "></a>
+        <!-- <a href=""><img src="<?= ROOT ?>/images/logo.png" alt="foodforall" style="display: block; margin: 0 auto; max-height:120px; max-width: 100%; "></a> -->
+        <a href=""><img src="https://github.com/harini-udeshika/FoodForALL/blob/main/public/images/logo.png?raw=true" alt="foodforall" style="display: block; margin: 0 auto; max-height:120px; max-width: 100%; "></a>
         <h1 style="text-align: center; margin-top: 40px; margin-bottom: 30px;">Registration of <?=$organization->name?> Rejected</h1>
         <div>
             Dear <?=$organization->name?>,

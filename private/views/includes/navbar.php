@@ -97,7 +97,7 @@ notifications_active
                 <a href="<?=ROOT?>/admin_events">Events</a>
             </div>
             <div class="nav-i">
-                <a href="<?=ROOT?>/Admin_search_org">Organizations</a>
+                <a href="<?=ROOT?>/admin/organizations">Organizations</a>
             </div>
             <div class="nav-i">
                 <a href="<?=ROOT?>/Admin_search_areacoords">Area Coordinators</a>
@@ -107,6 +107,18 @@ notifications_active
             </div>
         <?php endif?>
 
+        <?php if (Auth::getusertype() == 'finance_manager'): ?>
+            <div class="nav-i">
+                <a href="<?=ROOT?>/admin/home">Change password</a>
+            </div>
+            <!-- <div class="nav-i">
+                <a href="">Donate/Volunteer</a>
+            </div> -->
+            <div class="nav-i">
+                <a href="<?=ROOT?>/admin_events">Log out</a>
+            </div>
+            
+        <?php endif?>
 
         <?php if (Auth::getusertype() == 'organization'): ?>
             <div class="nav-i">

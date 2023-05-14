@@ -93,6 +93,14 @@
     overflow-y: auto;
 }
 
+.content_data.active {
+    height: calc(100vh - var(--titlebar_height) - 4.5rem - 150px);
+    background-color: #f1f1f1;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .sidebar_item {
     width: 100%;
     height: 56px;
@@ -133,9 +141,9 @@ footer {
 }
 
 #result_div {
-    max-width: 600px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    background-color: white;
     border-radius: 50px;
     border-radius: 10px;
     padding: 10px 0px;
@@ -145,6 +153,9 @@ footer {
     overflow-x: hidden;
     overflow-y: auto;
     visibility: hidden;
+    max-height: 400px;
+    width: 100%;
+    max-width: 600px;
 }
 
 #search_input_div:focus~#result_div {
