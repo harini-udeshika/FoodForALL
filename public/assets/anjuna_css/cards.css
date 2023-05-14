@@ -27,6 +27,6 @@
     background-size: cover;
 }
 
-.card-back-red{
+.card-back-red {
     background-color: var(--errorRed);
 }

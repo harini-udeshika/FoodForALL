@@ -1,0 +1,100 @@
+.popup-div {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+
+.popup-contain {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-card {
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    text-align: center;
+}
+
+.popup-body {
+    padding: 30px;
+}
+
+.popup-header {
+    position: relative;
+}
+
+.popup-heading {
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.popup-message {
+    max-width: 300px;
+    font-size: 1.4rem;
+    /* margin: 40px; */
+}
+
+.popup-delete-btn {
+    border: none;
+    cursor: pointer;
+    color: white;
+    height: 42px;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0px 15px;
+    width: 100%;
+
+    margin: 20px 0px 0px 0px;
+}
+
+.popup-delete-btn.red {
+    background-color: red;
+}
+
+.popup-delete-btn.green {
+    background-color: green;
+}
+
+.popup-delete-btn.blue {
+    background-color: red;
+}
+
+.popup-close {
+    position: absolute;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 1.8rem;
+    top: 32%;
+    right: 20px;
+}
+
+.popup-close:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.i-green {
+    color: green;
+}
+
+.i-red {
+    color: red;
+}

@@ -140,21 +140,32 @@ class Finance_managers extends Model
             return false;
         }
 
-        $query = "update event set approved=-1 where event_id= $event_id";
+        $query = "update event set approved=2 where event_id= $event_id";
         $this->query($query);
         return true;
     }
 
-    public function undoReject($event_id){
-        $query = "select event_id from event where event_id= $event_id and approved = -1";
+    public function modifyBudget($event_id){
+        $query = "select event_id from event where event_id= $event_id";
         $result = $this->query($query);
 
         if ($result == false) {
             return false;
         }
-
-        $query = "update event set approved = 0 where event_id= $event_id";
-        $this->query($query);
+        $query = "update event set approved=3 where event_id= $event_id";
         return true;
     }
+
+    // public function undoReject($event_id){
+    //     $query = "select event_id from event where event_id= $event_id and approved = -1";
+    //     $result = $this->query($query);
+
+    //     if ($result == false) {
+    //         return false;
+    //     }
+
+    //     $query = "update event set approved = 0 where event_id= $event_id";
+    //     $this->query($query);
+    //     return true;
+    // }
 }

@@ -27,13 +27,13 @@
     background-color: var(--projectGreen);
 }
 
-.event-holder{
+.event-holder {
     /* overflow: auto; */
-    
     width: 100%;
 }
-.event_scroll{
+
+.event_scroll {
     /* background-color: red; */
     height: 500px;
-    overflow: auto; 
+    overflow: auto;
 }
