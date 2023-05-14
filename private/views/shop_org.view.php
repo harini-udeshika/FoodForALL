@@ -21,7 +21,7 @@
                     <div class="popup-message" id="popup-message">
                         <!-- editing form -->
                         <div class="" style="display:flex;justify-content:center;">
-                            You have not paid for our subscripion.<br> 
+                            You have not paid for our subscripion.<br>
                             To add more than 3 items to your store during the next 30 days, please Subscribe.
                         </div>
                         <!--end editing form -->
@@ -76,11 +76,18 @@
                     <div class="client-error"></div>
                 </div>
 
-                <div class="eminput-control">
+                <!-- <div class="eminput-control">
                     <label for="code"></label>Item code:<br>&nbsp;&nbsp;
                     <input type="text" name="code" id="code-item" placeholder="Item code"><br>
                     <div class="client-error"></div>
+                </div> -->
+                
+                <div class="eminput-control">
+                    <label for="description"></label>Event description:<br>&nbsp;&nbsp;
+                    <textarea name="description" id="description" placeholder="--Description--" rows="5" cols="50"></textarea><br>
+                    <div class="client-error"></div>
                 </div>
+                
                 <label for="image">Item Image:</label><br>&nbsp;&nbsp;
                 <input type="file" name="image" id="image" style="background-color: rgba(255, 255, 255, 0);
             box-shadow: 0 0px 0px 0px;" accept="image/png, image/jpeg, image/jpg"><br>
