@@ -136,7 +136,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>NIC</th>
-                            <th>Events</th>
+                            <!-- <th>Events</th> -->
                             <th></th>
                             <th></th>
                         </tr>
@@ -150,8 +150,8 @@
                                 <td><?= $manager->full_name ?></td>
                                 <td><?= $manager->email ?></td>
                                 <td><?= $manager->nic ?></td>
-                                <td>0</td>
-                                <td id='button-col'>
+                                <!-- <td>0</td> -->
+                                <td id='button-col' style="padding-top: 8px;">
                                     <i id='delete-edit-btn-2' class='fa-regular fa-trash-can' onclick="before_delete('<?= $manager->email ?>')"></i>
                                 </td>
 

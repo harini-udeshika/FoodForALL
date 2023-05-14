@@ -56,7 +56,7 @@
                 <div class="heading-3 col-lg-12 p-left-20 p-top-15 p-bottom-20">Event Description</div>
 
                 <div class="blank col-lg-1"></div>
-                <div class="card-simple col-lg-9 p-bottom-1 p-top-1 height-120px" style="border: 2px solid black; text-align:left;"><?php echo $event_details->description ?></div>
+                <div class="card-simple col-lg-9 p-bottom-1 p-top-1 height-120px" style="border: 2px solid black; text-align:left; overflow:auto;"><?php echo $event_details->description ?></div>
                 <div class="blank col-lg-2"></div>
 
 
@@ -245,7 +245,7 @@
                                 <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
                                     Please add a description for volunteer activities of mild difficulty level.
                                 </div>
-                                <textarea name="mild-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"><?php
+                                <textarea name="mild-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%; overflow:auto;" cols="30" rows="5"><?php
                                                                                                                                                                     if (isset($event_details->mild_description)) {
                                                                                                                                                                         echo $event_details->mild_description;
                                                                                                                                                                     }
@@ -266,7 +266,7 @@
                                 <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
                                     Please add a description for volunteer activities of moderate difficulty level.
                                 </div>
-                                <textarea name="moderate-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"><?php
+                                <textarea name="moderate-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%; overflow:auto;" cols="30" rows="5"><?php
                                                                                                                                                                         if (isset($event_details->moderate_description)) {
                                                                                                                                                                             echo $event_details->moderate_description;
                                                                                                                                                                         }
@@ -287,7 +287,7 @@
                                 <div class="heading-4" style="font-weight: 500; font-size: 0.8rem;">
                                     Please add a description for volunteer activities of Heavy difficulty level.
                                 </div>
-                                <textarea name="heavy-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%;" cols="30" rows="5"><?php
+                                <textarea name="heavy-des" class="input-field input-field-block width-70 m-bottom-15 m-top-5" style="height:20%; overflow:auto;" cols="30" rows="5"><?php
                                                                                                                                                                         if (isset($event_details->heavy_description)) {
                                                                                                                                                                             echo $event_details->heavy_description;
                                                                                                                                                                         }
