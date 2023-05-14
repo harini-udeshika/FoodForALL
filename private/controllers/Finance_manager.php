@@ -212,6 +212,10 @@ class Finance_manager extends Controller
         // $this->view('admin');
     }
 
+    public function send_rejected_mail(){
+        
+    }
+
     // // undo reject
     // public function undo_reject()
     // {
