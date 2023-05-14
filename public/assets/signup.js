@@ -12,12 +12,12 @@ const city=document.getElementById("city");
 const postalCode=document.getElementById("postal_code");
 
 
-var valid=true;
+let valid=true;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     inputChecker();
-    if(valid===true) {
+    if(valid==true) {
         form.submit();
     }
 })
@@ -145,7 +145,7 @@ function displaySuccess(input) {
     else{
          f.className = "f success";
     }
-   valid=true;
+  
 }
 function checkEmail(email) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
@@ -168,7 +168,6 @@ function emailcheck(){
                     displayError(email, "Email already exists");
                 }
             }
-           
            
         }
     };

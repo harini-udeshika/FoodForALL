@@ -9,8 +9,8 @@
 <div class="container">
 <?php if($notify_data):?>
     <?php foreach($notify_data as $notify):?>
-    <div class="notify">
-    <i class="fa-regular fa-circle-xmark"></i>
+    <div class="notify" id="notify_body">
+    
         <small>"<?=$notify->name?>" you'll be volunteering is happening soon!</small>
         <a href="eventpage?id=<?=$notify->event_id?>"><button>View details</button></a>
     </div>
@@ -214,5 +214,5 @@
 
 </div>
 <?php endif; ?>
-
+<!-- <script src="<?=ROOT?>/assets/notify.js"></script> -->
 <?php $this->view('includes/footer')?>

@@ -442,16 +442,18 @@ table {
     border: 0.01rem solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0.5rem;
+    min-height: 4rem;
+   
 }
 
 .table_row>td {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 10rem;
+   width: 10rem;
     height: 3rem;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
 
 }
 

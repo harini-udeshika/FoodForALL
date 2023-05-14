@@ -528,14 +528,8 @@ hr {
     cursor: pointer;
     font-size: smaller;
 }
-.notify i{
-    position: relative;
-    left:9rem;
-   bottom:0.5rem
-}
-.notify:hover{
-background-color: rgb(255, 255, 229);
-}
+
+
 @keyframes MoveUpDown {
     0%, 100% {
       transform: translateY(0);
