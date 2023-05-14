@@ -3,7 +3,10 @@ class Merchandise_item extends Model{
     protected $table ="merchandise_item";
     public function delete_item($id)
     {
-        $query = "delete from $this->table where item_no = :item_no";
+        // $query = "delete from $this->table where item_no = :item_no";
+        $query = "UPDATE $this->table
+        SET deactivated = 1
+        WHERE item_no = :item_no";
         $data['item_no'] = $id;
         return $this->query($query, $data);
     }
@@ -24,4 +27,3 @@ class Merchandise_item extends Model{
 
    
 }
-?>

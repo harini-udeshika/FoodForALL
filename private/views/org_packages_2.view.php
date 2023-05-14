@@ -1,6 +1,7 @@
 <?php $this->view('includes/header_2') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/edit_packs.css">
+<!-- <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/buttons.css"> -->
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/form_validations.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/org_packages.css">
 <?php $this->view('includes/navbar') ?>
@@ -73,9 +74,9 @@
                     <!-- editing form -->
                     <div class="" style="display:flex;justify-content:center;">
                         <form id="formUpdatePack" action="" method="post">
-                            
+
                             <div class="inputControl">
-                            <input class="txt-11 w-semibold package_name_input_edit" id="pack_name" name="pack_name_update" type="text" style="border: solid gray 1px;" placeholder="Package name">
+                                <input class="txt-11 w-semibold package_name_input_edit" id="pack_name" name="pack_name_update" type="text" style="border: solid gray 1px;" placeholder="Package name">
                                 <div class="client-error"></div>
                             </div>
 
@@ -164,9 +165,32 @@
 
                     <div class="row p-top-20">
                         <!-- <button class="btn btn-sm btn-gray col-6"  onclick="before_delete('<?= $package_data[$i]->package_id ?>')">edit</button> -->
-                        <button class="btn btn-sm btn-gray col-6" onclick="open_popup('<?= $package_data[$i]->package_id ?>')">edit</button>
+                        <?php
+
+                        $added_dateTime = $package_data[$i]->added_date;
+
+                        // Create a new DateTime object using the value in $added_dateTime
+                        $added_dateTime_obj = new DateTime($added_dateTime, new DateTimeZone('Asia/Colombo'));
+                        
+
+                        // Add 30 minutes to the DateTime object using the DateInterval class
+                        $added_dateTime_obj->add(new DateInterval('PT30M'));
+
+                        // Get the current date and time using the DateTime class
+                        $current_time_obj = new DateTime(null, new DateTimeZone('Asia/Colombo'));
+
+                        // Compare the two DateTime objects to see if the current time is 30 minutes past the time in $added_dateTime
+                        if ($current_time_obj < $added_dateTime_obj) { ?>
+                            <button class="btn btn-sm btn-gray col-6" onclick="open_popup('<?= $package_data[$i]->package_id ?>')">Edit</button>
+                            <?php 
+                        } else { ?>
+                            <button class="btn btn-sm btn-gray col-6" disabled>Edit <i class="fa-solid fa-lock"></i></button>
+                            <?php 
+                        }
+                        ?>
+                        <!-- <button class="btn btn-sm btn-gray col-6" onclick="open_popup('<?= $package_data[$i]->package_id ?>')">edit</button> -->
                         <a href="<?= ROOT ?>/Org_packages/delete_package?id=<?= $package_data[$i]->package_id ?>">
-                            <button class="btn btn-sm btn-purple col-6">remove</button>
+                            <button class="btn btn-sm btn-purple col-6">Remove</button>
                         </a>
                     </div>
                 </div>

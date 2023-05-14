@@ -49,8 +49,12 @@ class Org_packages extends Controller
             // die;
         }
 
+        $query = "SELECT *
+        FROM food_pack
+        WHERE org_gov_reg_no = :id && deactivated = 0";
+        $arr = ['id' => $reg_no];
 
-        $package_data = $food_pack->where('org_gov_reg_no', $reg_no);
+        $package_data = $food_pack->query($query, $arr);
         // print_r($package_data);
         // $price_arr = explode(',',$package_data[0]->item_price);
         // print_r($package_data[0]->item_price);
