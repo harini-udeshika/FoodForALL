@@ -10,6 +10,20 @@ class Familytable extends Controller
 
         $user=new Family();
         // $data=$user->where('area_coodinator_email',$_SESSION['USER']->email);
+        
+        //can not delete selected families
+        $query10="SELECT family.id AS id from family INNER JOIN select_details ON select_details.detail_id=family.id
+        LEFT JOIN event ON event.event_id=select_details.event_name WHERE (
+        (approved = 1 AND budget = 1 AND launch = 0 AND date > CURDATE()) OR   /*still not launch>*/
+        (approved=0 AND budget=1 And launch=0  AND date > CURDATE()) OR /* Approve pending- financial actor */
+        (approved=0 AND budget=2 And launch=0  AND date > CURDATE()) OR /* budget  created still draft does not send to the financial actor*/
+        (approved=3 AND budget=1 And launch=0  AND date > CURDATE()) OR /*request to modify*/ 
+        (approved=1 AND budget=1 AND launch=1 AND date >= CURDATE())) /* ongoing*/
+        AND select_details.catagory='family'
+        AND select_details.detail_id=family.id "; 
+
+        $data10=$user->query($query10);
+        // print_r($query10);
 
         if(isset($_GET['find1'],$_GET['find2'])){
             // $find1=trim($_GET['find1']," ");
@@ -23,14 +37,14 @@ class Familytable extends Controller
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('familytable',['row'=>$data]);
+                    $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                 }else{
                     $new2=$find2;
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND address LIKE '%$new2%' ORDER BY id ASC";
                     // print($new2);
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('familytable',['row'=>$data]);
+                    $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                 }
                 
             }else{
@@ -39,13 +53,13 @@ class Familytable extends Controller
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND CONCAT(FullName,Iname) LIKE '%$new%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('familytable',['row'=>$data]);
+                    $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                 }else{
                     $new2=$find2;
                     $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND CONCAT(FullName,Iname) LIKE '%$new%' AND address LIKE '%$new2%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('familytable',['row'=>$data]);
+                    $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                 }
             } 
         }
@@ -81,7 +95,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -89,7 +103,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -99,7 +113,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -107,7 +121,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -120,14 +134,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -137,14 +151,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -158,7 +172,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -166,7 +180,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -176,7 +190,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -184,7 +198,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -197,14 +211,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -214,14 +228,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -237,7 +251,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -245,7 +259,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -255,7 +269,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -263,7 +277,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -276,14 +290,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -293,14 +307,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -314,7 +328,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -322,7 +336,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -332,7 +346,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -340,7 +354,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -353,14 +367,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -370,14 +384,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -396,7 +410,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -404,7 +418,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -413,14 +427,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -433,14 +447,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -449,13 +463,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -469,7 +483,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -477,7 +491,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -486,14 +500,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -506,14 +520,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -522,13 +536,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -544,7 +558,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -552,7 +566,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -561,14 +575,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -581,14 +595,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -597,13 +611,13 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -617,7 +631,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -625,7 +639,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -634,14 +648,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -654,14 +668,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -670,12 +684,12 @@ class Familytable extends Controller
                                         (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (both_patients BETWEEN $bothMin AND $bothMax) AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -697,7 +711,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -705,7 +719,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -716,7 +730,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -724,7 +738,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -738,7 +752,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -746,7 +760,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -757,7 +771,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -765,7 +779,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -780,7 +794,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -788,7 +802,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -799,7 +813,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -807,7 +821,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -821,7 +835,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
@@ -830,7 +844,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -841,7 +855,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -849,7 +863,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -866,7 +880,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -874,7 +888,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -885,7 +899,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -893,7 +907,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -907,7 +921,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
@@ -916,7 +930,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -927,7 +941,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
@@ -935,7 +949,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -950,7 +964,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -958,7 +972,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -970,7 +984,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -979,7 +993,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -993,7 +1007,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND 
@@ -1002,7 +1016,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1013,14 +1027,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1040,7 +1054,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
@@ -1048,7 +1062,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1059,7 +1073,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1067,7 +1081,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1081,7 +1095,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
@@ -1089,7 +1103,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1099,7 +1113,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND 
@@ -1107,7 +1121,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1122,7 +1136,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1131,7 +1145,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1142,14 +1156,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1163,7 +1177,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
@@ -1171,7 +1185,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1181,13 +1195,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1204,7 +1218,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
@@ -1212,7 +1226,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1223,14 +1237,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
                                         (both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1244,7 +1258,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
@@ -1252,7 +1266,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1262,13 +1276,13 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1283,7 +1297,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (both_patients BETWEEN $bothMin AND $bothMax) AND
@@ -1291,7 +1305,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1301,13 +1315,13 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1321,13 +1335,13 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((both_patients BETWEEN $bothMin AND $bothMax) AND
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1335,12 +1349,12 @@ class Familytable extends Controller
                                         (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (both_patients BETWEEN $bothMin AND $bothMax)  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1367,7 +1381,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1375,7 +1389,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1385,7 +1399,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1393,7 +1407,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1406,14 +1420,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1423,14 +1437,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1444,7 +1458,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1452,7 +1466,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1462,7 +1476,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1470,7 +1484,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1483,14 +1497,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1500,14 +1514,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1523,7 +1537,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1531,7 +1545,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1541,7 +1555,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1549,7 +1563,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1562,14 +1576,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1579,14 +1593,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1600,7 +1614,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1608,7 +1622,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1618,7 +1632,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1626,7 +1640,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1639,14 +1653,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1656,14 +1670,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1682,7 +1696,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1690,7 +1704,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1699,14 +1713,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1719,14 +1733,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1735,13 +1749,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1755,7 +1769,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1763,7 +1777,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1772,14 +1786,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1792,14 +1806,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1808,13 +1822,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1830,7 +1844,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -1838,7 +1852,7 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1847,14 +1861,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1867,14 +1881,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1883,13 +1897,13 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax)AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1903,7 +1917,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) 
@@ -1911,7 +1925,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1920,14 +1934,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) 
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -1940,13 +1954,13 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1954,12 +1968,12 @@ class Familytable extends Controller
                                         (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((familymembers BETWEEN $familymemberMin AND $familymemberMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -1980,14 +1994,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -1997,14 +2011,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2017,14 +2031,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2034,14 +2048,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2055,14 +2069,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2072,14 +2086,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2092,14 +2106,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2109,14 +2123,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2132,14 +2146,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2149,14 +2163,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2169,14 +2183,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2186,14 +2200,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2207,14 +2221,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2224,7 +2238,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -2232,7 +2246,7 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2245,14 +2259,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax )
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2262,14 +2276,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) 
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2288,14 +2302,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2304,14 +2318,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2324,14 +2338,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)  AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2340,13 +2354,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax )AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ) AND (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2360,7 +2374,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         AND (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
@@ -2368,7 +2382,7 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2377,13 +2391,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2396,14 +2410,14 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2412,13 +2426,13 @@ class Familytable extends Controller
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2434,14 +2448,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2450,13 +2464,13 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ((healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2469,14 +2483,14 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2485,13 +2499,13 @@ class Familytable extends Controller
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2505,14 +2519,14 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax)
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2521,13 +2535,13 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND ( (healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax)
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
 
@@ -2540,13 +2554,13 @@ class Familytable extends Controller
                                         )  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' AND (
                                         (diabetes_patients BETWEEN $diabetesMin AND $diabetesMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }else{
                                     if($cholesterolMax && $cholesterolMin>0){
@@ -2554,12 +2568,12 @@ class Familytable extends Controller
                                         (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax))  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }else{
                                         $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}'  ORDER BY id ASC";
                                         $data = $user->query($query);
                                         // print($query);
-                                        $this->view('familytable',['row'=>$data]);
+                                        $this->view('familytable',['row'=>$data,'row10'=>$data10]);
                                     }
                                 }
                             }
@@ -2575,7 +2589,7 @@ class Familytable extends Controller
             $query = "SELECT * FROM family WHERE area_coodinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
             $data = $user->query($query);
             // print($query);
-            $this->view('familytable',['row'=>$data]);
+            $this->view('familytable',['row'=>$data,'row10'=>$data10]);
         }
 
         

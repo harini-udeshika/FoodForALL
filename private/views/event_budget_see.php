@@ -68,7 +68,7 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 ?>
 
 <div class="coor">
-    <h1>Event Budget-<?=$row[0]->name?> </h1>
+    <h1>Event Budget Summary-<?=$row[0]->name?> </h1>
 </div>
 <div class="containor2">
     <div class="form_background form_background2">
@@ -186,14 +186,14 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                         // print_r($selectted_org_pack_quantity_arr );?>
                          <div class="row txt-al-center p-top-20">
                                 <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quantity</div>
-                                <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size"  name="quantity_new[]" 
+                                <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size"  name="quantity_new[] "
                                 value=
                                 "<?php if (isset($selectted_org_pack_quantity_arr["$i"])) {
                                          echo $selectted_org_pack_quantity_arr[$i];
                                     } else {
                                         $selectted_org_pack_quantity_arr[$i]=0;
                                         echo $selectted_org_pack_quantity_arr[$i];
-                                    } ?>">
+                                    } ?>" readonly>
                                 <?php $budget_pack[$i]=$selectted_org_pack_quantity_arr[$i]*$tot;?>
                                 <input type="hidden"  value=<?=$food_pack[$i]->package_id?> name="pack_new[]">
                                 <input type="hidden" value=<?=$tot?> name='price_new[]'>
@@ -234,15 +234,7 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 
             
             </div>
-            <div>
-                <div onclick="document.getElementById('organize_packges').submit();" style="margin-left:30%;">
-                <input type="submit" name="organize_packges" class="btn btn-sm btn-purple col-6" value="save quantity">
-                </div>
-                
-            
-            
-             <!-- <button type="submit" >submit</button> -->
-            </div>
+         
         </div> 
 
         </form>
@@ -297,17 +289,12 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                         
                         <div class="row txt-al-center p-top-20">
                             <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quntity</div>
-                            <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity[]" value=<?=$package_data[$i]->package_quantity?>>
+                            <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity[]" value='<?=$package_data[$i]->package_quantity?>' readonly>
                             <input type="hidden" value='<?=$package_data[$i]->package_id?>' name="package_id[]">
                             <?php $budget_pack2[$i]=($package_data[$i]->package_quantity)*$tot;?>
                         </div>
 
-                        <div class="row p-top-20">
-                            <button class="btn btn-sm btn-gray col-6">edit</button>
-                            <a href="<?= ROOT ?>/event_budget/handle_pack_delete?id=<?= $package_data[$i]->package_id ?>">
-                                <button class="btn btn-sm btn-purple col-6">remove</button>
-                            </a>
-                        </div>
+                        
                     </div>
                     
                 <?php
@@ -336,58 +323,11 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 
 
            </div>
-           <div>
-                <div onclick="document.getElementById('eventmanager_packges').submit();" style="margin-left:30%;">
-                <input type="submit" name="eventmanager_packges" class="btn btn-sm btn-purple col-6" value="save quantity">
-                </div>
-                
-            
-            
-             <!-- <button type="submit" >submit</button> -->
-            </div>
+           
         </div>
         </form>
 
-        <div class="coor3">
-            <h1>Add package</h1>
-        </div>
-        <div class="container">
-
-            <div class="col-sm-12 grid-12 p-20 m-bottom-20 card col-lg-6  " style="height: 560px; overflow: auto;">
-            
-
-            <div class="card col-lg-12 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center back">
-                <form action="" method="post" name="new_form">
-                    <input class="txt-11 w-semibold package_name_input" name="pack_name" type="text" style="border: solid gray 1px;" placeholder="Package name">
-
-
-                    <div class="flex al-center jf-btwn p-10 p-top-28 p-bottom-15">
-                        <div class="txt-purple txt-10 txt-al-left ">Package items</div>
-                        <i id="add_package_items" class="fa-sharp fa-solid fa-square-plus txt-20" onclick="addInputField()" style="cursor:pointer;"></i>
-                    </div>
-
-                    <div id="field_holder" class="card-simple p-3 m-lr-auto">
-                        <div class="m-lr-auto grid-10 p-8 p-bottom-2">
-                            <div class="txt-09 col-3 txt-black w-medium">Item</div>
-                            <div class="txt-09 col-3 txt-black w-medium">Quantity</div>
-                            <div class="txt-09 col-3 txt-black w-medium">Unit price</div>
-                            <i class="fa-solid fa-circle-xmark col-1 txt-14" style="cursor:pointer; visibility:hidden;"></i>
-                        </div>
-                    </div>
-                    <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quantity</div>
-                    <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity">
-
-                    <div class=" row p-top-20">
-                        <input type="submit" value="Add package" name="new_form" class="btn btn-sm btn-green col-12">
-                    </div>
-                </form>
-
-
-            </div>
-            
-        </div>
         
-        </div> 
         <?php $total_budget=$budget1+$budget2;
         $formatted_num = number_format($total_budget, 2, '.', ',')?>
         <div>
@@ -405,38 +345,4 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 
 </div>
 
-<div class="button-container">
-            <form action="" method="POST" name="draft">
-            <div class="send" onclick="draft()" id="draft">
-            <input class="button1" value="Draft save" type="submit">
-            </div>
-            </form>
-            
-            <form action="" method="post" name="send">
-            <div class="send" onclick="send()" id="send">
-            <button class="button2">Send the budget</button>
-            </div>
-            </form>
-            
-            
-        </div>
-
-<script>
-    function draft(){
-    var form=document.getElementById("draft"); //budget draft
-    form.submit();
-}
-
-function send(){
-    var form=document.getElementById("send"); // budget send
-    form.submit();
-}
-</script>
-
-
-
-
-<!-- <script src="./assert/familyform.js"></script> -->
-<script src=" <?=ROOT?>/assets/packages.js"></script>
-<script src=" <?=ROOT?>/assets/submit.js"></script>
 <?php $this->view('includes/footer')?>

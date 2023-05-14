@@ -47,12 +47,10 @@
         <button class="btn btn-xsm btn-block btn-green m-bottom-10">
           Create budget
         </button></a>
-        <!-- <button class="btn btn-xsm btn-block btn-black m-bottom-10">
-          Select Donees
-        </button> -->
-        <button class="btn btn-xsm btn-block btn-purple m-bottom-10" >
-          Send budget
-        </button>
+
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows7[$j]->event_id?>"><button class="btn btn-xsm btn-block btn-purple m-bottom-10" >
+          See the budget 
+        </button></a>
 
       </div>
 
@@ -96,17 +94,17 @@
         <button class="btn btn-xsm btn-block btn-green m-bottom-10">
           Create budget
         </button></a>
-        <!-- <button class="btn btn-xsm btn-block btn-black m-bottom-10">
-          Select Donees
-        </button> -->
-        <button class="btn btn-xsm btn-block btn-purple m-bottom-10" >
-          Send budget
-        </button>
+
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows3[$j]->event_id?>"><button class="btn btn-xsm btn-block btn-purple m-bottom-10" >
+          See the budget 
+        </button></a>
       </div>
 
-      <div class="col-12 m-top-10 txt-08 p-left-8">
+      <div class="col-12 m-top-10 txt-08 p-left-8 m-top-20">
         <a href="<?= ROOT ?>/event_org?id=<?=$rows3[$i]->event_id?>">got to details</a>
       </div>
+
+  
     </div>
     <div class="blank col-lg-1"></div>
       <?php $count1--;
@@ -144,15 +142,19 @@
                   <button class="btn btn-xsm btn-block btn-green m-bottom-10">
                     Create budget
                   </button></a>
-                  <!-- <button class="btn btn-xsm btn-block btn-black m-bottom-10">
-                    Select Donees
-                  </button> -->
+
+                  <div>
+                  <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows4[$j]->event_id?>">
                   <button class="btn btn-xsm btn-block btn-purple m-bottom-10" >
-                    Send budget
-                  </button>
+                     See the budget 
+                    </button></a>
+                  </div>
+                  
+                  
+
                 </div>
           
-                <div class="col-12 m-top-10 txt-08 p-left-8">
+                <div class="col-12 m-top-20 txt-08 p-left-8">
                   <a href="<?= ROOT ?>/event_org?id=<?=$rows4[$j]->event_id?>">got to details</a>
                 </div>
               </div>
@@ -210,14 +212,18 @@
       <div class="div col-5">
       <form method="post" id="form2">
         <input type="hidden" name= "launch_eventid" value="<?=$rows1[$i]->event_id?>">
-        <a href="<?= ROOT ?>/eventmanager_myevents?updateid=<?=$rows1[$i]->event_id?>"><button type="submit" class="btn btn-xsm btn-block btn-black m-bottom-10" name="launch-event" value="1">
+        <a href="<?= ROOT ?>/eventmanager_myevents?updateid=<?=$rows1[$i]->event_id?>"><button type="submit" class="btn btn-xsm btn-block btn-green m-bottom-10" name="launch-event" value="1">
           Launch Event
         </button></a>
       </form>
+
+      <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows1[$i]->event_id?>"><button class="btn btn-xsm btn-block btn-purple m-bottom-10" >
+          See the budget
+        </button></a>
       </div>
       </div>
 
-      <div class="col-12 m-top-10 txt-07 p-left-8">
+      <div class="col-12 m-top-10 txt-07 p-left-8 m-top-20">
         <a href="<?= ROOT ?>/event_org?id=<?=$rows1[$i]->event_id?>">got to details</a>
       </div>
     </div>
@@ -274,6 +280,10 @@
       <div class="div col-5">
         <a href="<?= ROOT ?>/event_org?id=<?=$rows2[$i]->event_id?>"><button class="btn btn-xsm btn-block btn-green">
         Go to details
+        </button></a>
+
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows2[$i]->event_id?>"><button class="btn btn-xsm btn-block btn-purple m-top-20">
+        See the budget
         </button></a>
         
       </div>
@@ -334,6 +344,10 @@
         <a href="<?= ROOT ?>/event_org?id=<?=$rows5[$i]->event_id?>"><button class="btn btn-xsm btn-block btn-green">
         Go to details
         </button></a>
+
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows5[$i]->event_id?>"><button class="btn btn-xsm btn-block btn-purple m-top-20">
+        See the budget
+        </button></a>
         
       </div>
 
@@ -344,11 +358,13 @@
         <button class="btn btn-xsm btn-green">Go to details</button>
       </div> -->
     </div>
+
     <?php $count--;
                     $i++;
-            }
-        } ?>
+            }?>
             
+      <?php  } ?>
+      <div class="blank col-lg-1"></div>    
     <!--END Completed event item -->
 
     <!-- Completed event item -->
@@ -360,6 +376,7 @@
     if($rows6){
       $count=count($rows6);
       while($count>0){?>
+
     <div class="event-vard-i card-simple col-lg-5 grid-12 p-15 ">
       <div class="col-7">
         <div class="m-bottom-10">
@@ -385,6 +402,10 @@
         <a href="<?= ROOT ?>/event_org?id=<?=$rows6[$j]->event_id?>"><button class="btn btn-xsm btn-block btn-green">
         Go to details
         </button></a>
+
+        <a href="<?= ROOT ?>/event_budget_see?eid=<?=$rows6[$j]->event_id?>"><button class="btn btn-xsm btn-block btn-purple m-top-20">
+        See the budget
+        </button></a>
         
       </div>
 
@@ -395,6 +416,8 @@
         <button class="btn btn-xsm btn-green">Go to details</button>
       </div> -->
     </div>
+    
+    
     <?php $count--;
                     $j++;
             }
@@ -404,7 +427,7 @@
             <div class="No_detail col-12">No Event Details Available</div>
         <?php }
         ?>
-   
+   <div class="blank col-lg-1"></div>
   </div>
   
 
