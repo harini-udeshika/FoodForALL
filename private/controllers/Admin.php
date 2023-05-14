@@ -343,11 +343,87 @@ class Admin extends Controller
     // new organizations
     public function org_requests()
     {
+        $this->autherize_admin();
         $admin_model = new Admins();
         $organizations = $admin_model->orgRequests();
 
         $this->view("temp4", [
             "organizations" => $organizations
         ]);
+    }
+
+    // accept organizations
+    public function accept_org()
+    {
+        $this->autherize_admin();
+        if (!isset($_GET['id'])) {
+            $this->redirect('admin/org_requests');
+        }
+
+        $org_id = $_GET['id'];
+
+        $admin_model = new Admins();
+        $organization = $admin_model->acceptOrg($org_id);
+
+        if ($organization) {
+            $mail_model = new Mail();
+
+            ob_start();
+            include('../private/views/mail.org.accept.php');
+
+            $recipient = "anjunaserasingha@gmail.com";
+            // $recipient = $organization->email;
+            $html_mail = ob_get_clean();
+            $subject = "Registration Accepted";
+
+            $mail_model->send_mail($recipient, $subject, $html_mail);
+        } else {
+            $this->redirect('admin/org_requests');
+        }
+    }
+
+    // reject organizations
+    public function rejectOrg()
+    {
+        $this->autherize_admin();
+        if (!isset($_GET['id'])) {
+            $this->redirect('admin/org_requests');
+        }
+
+        $org_id = $_GET['id'];
+
+        $admin_model = new Admins();
+        $organization = $admin_model->rejectOrg($org_id);
+        
+        if ($organization) {
+            $mail_model = new Mail();
+            print_r($organization->name);
+
+            ob_start();
+            include('../private/views/mail.org.reject.php');
+
+            // $recipient = $organization->email;
+            $recipient = "anjunaserasingha@gmail.com";
+            $html_mail = ob_get_clean();
+            $subject = "Registration Rejected";
+
+            if ($mail_model->send_mail($recipient, $subject, $html_mail)) {
+                echo ("mail sent");
+            } else {
+                echo ("mail sent");
+            }
+        }
+        // $this->redirect('admin/org_requests');
+    }
+    public function reset_org_table(){
+        $query = "select * from organization";
+        $admin = new Admins();
+
+        $orgs = $admin->query($query);
+
+        foreach($orgs as $org){
+            $query = "update organization set approve =0 where gov_reg_no = '$org->gov_reg_no'";
+            $orgs = $admin->query($query);
+        }
     }
 }

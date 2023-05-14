@@ -80,7 +80,7 @@ class Admins extends Model
 
     public function search_in_org($keyword)
     {
-        $keyword=addslashes($keyword);
+        $keyword = addslashes($keyword);
         $query = "SELECT * FROM organization WHERE name LIKE '%$keyword%' OR gov_reg_no LIKE '%$keyword%'";
         $data = $this->query($query);
         return $data;
@@ -95,10 +95,10 @@ class Admins extends Model
 
     public function search_in_users($keyword)
     {
-        $keyword=addslashes($keyword);
+        $keyword = addslashes($keyword);
 
         $query = "SELECT * FROM user WHERE first_name LIKE '%$keyword%' OR last_name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR nic LIKE '%$keyword%' OR id LIKE '%$keyword%'";
-        
+
         $data = $this->query($query);
         return $data;
     }
@@ -117,11 +117,12 @@ class Admins extends Model
         return $data;
     }
 
-    public function search_in_areacoords($keyword){
-        $keyword=addslashes($keyword);
+    public function search_in_areacoords($keyword)
+    {
+        $keyword = addslashes($keyword);
 
         $query = "SELECT * FROM area_coodinator WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR nic LIKE '%$keyword%' OR id LIKE '%$keyword%'";
-        
+
         $data = $this->query($query);
         return $data;
     }
@@ -232,7 +233,7 @@ class Admins extends Model
             $monthly_donations = $this->query($query);
 
 
-            if (gettype($monthly_donations[0]->total_amount)=='NULL') {
+            if (gettype($monthly_donations[0]->total_amount) == 'NULL') {
                 $monthly_donations[0]->total_amount = 0;
             }
 
@@ -244,14 +245,43 @@ class Admins extends Model
     }
 
     // organization requests
-    public function orgRequests(){
+    public function orgRequests()
+    {
         $query = "select * from organization where approve=0";
-        $data = $this->query($query);
+        $data =  $this->query($query);
 
-        if($data==null){
+        if ($data == null) {
             $data = array();
         }
 
         return $data;
+    }
+
+    public function acceptOrg($orgId)
+    {
+        $query = "select * from organization where gov_reg_no = '$orgId'";
+        $results =  $this->query($query);
+
+        if ($results) {
+            $query = "update organization set approve=1 where gov_reg_no= '$orgId'";
+            $this->query($query);
+            return $results[0];
+        } else {
+            return false;
+        }
+    }
+
+    public function rejectOrg($orgId)
+    {
+        $query = "select * from organization where gov_reg_no= '$orgId'";
+        $results =  $this->query($query);
+
+        if ($results) {
+            $query = "update organization set approve=2 where gov_reg_no= '$orgId'";
+            $this->query($query);
+            return $results[0];
+        } else {
+            return false;
+        }
     }
 }
