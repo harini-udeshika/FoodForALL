@@ -70,9 +70,9 @@ class Org_order_history extends Controller
         }
 
         // echo "<pre>";
-        echo $start;
-        // echo $i;
-        echo $num_rows;
+        // echo $start;
+        // // echo $i;
+        // echo $num_rows;
         // die;
 
         $query = "SELECT merchandise_purchase.* ,order_details.* ,merchandise_item.*

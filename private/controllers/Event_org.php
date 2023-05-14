@@ -349,8 +349,13 @@ class Event_org extends Controller
         // $recipient = "akiladharmadasa1.1@gmail.com";
         // $mail_eg = new Mail();
         // $mail_eg->send_mail($recipient,$subject,$message);
-        print_r($vol_data);
-        die;
+        // print_r($vol_data);
+        // die;
+        $query_2 = "UPDATE event
+        SET cert_status = 1
+        WHERE event_id = :id";
+        $arr = ['id' => $event_id];
+        $event->query($query_2, $arr);
         $this->redirect('event_org?id=' . $event_id);
     }
 

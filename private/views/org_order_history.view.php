@@ -1,6 +1,7 @@
 <?php $this->view('includes/header')?>
 <?php $this->view('includes/navbar')?>
 <link rel="stylesheet" href="<?=ROOT?>/assets/order_history.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/akila_css2/buttons.css">
 <?php if (Auth::logged_in()) {
     $this->view('includes/submenu');
 }
@@ -29,16 +30,23 @@
     <?php $i++?>
     <?php endforeach ?>
 </div>
-<div class="pagination">
-    <div class="this-page">Page 1 of <?php echo $tot_pages; ?></div>
+<br><br>
+<center><div class="pagination">
+    <div class="this-page">Page <?php if(isset($_GET['pg_num'])){
+        echo $_GET['pg_num'];
+    } else {
+        echo "1";
+    }
+     ?> of <?php echo $tot_pages; ?></div></center>
+     <br>
     <div class="page-number">
-                <a href="?pg_num=1">First</a>
+                <a href="?pg_num=1"><button class="btn btn-xsm btn-disabled">First</button></a>
                 <?php 
                     if(isset($_GET['pg_num']) && $_GET['pg_num']>1){ ?>
-                            <a href="?pg_num=<?php echo $_GET['pg_num'] - 1; ?>">Prev</a>
+                            <a href="?pg_num=<?php echo $_GET['pg_num'] - 1; ?>"><button class="btn btn-xsm btn-green"><<</button></a>
                         <?php
                     }else{ ?>
-                            <a href="?pg_num=1">Prev</a>
+                            <a href="?pg_num=1"><button class="btn btn-xsm btn-green"><<</button></a>
                         <?php
                     }
                 ?>
@@ -46,7 +54,7 @@
                 <?php
                     for($counter=1;$counter<=$tot_pages;$counter){
                         for($i=$counter;$i<=5 && $i<=$tot_pages;$i++){ ?>
-                            <a href=""><?php echo $i ?></a>
+                            <a href="?pg_num=<?php echo $i ?>"><button class="btn btn-xsm btn-green"><?php echo $i ?></button></a>
                         <?php
                         
                         }
@@ -56,14 +64,14 @@
 
                 <?php 
                     if(isset($_GET['pg_num']) && $_GET['pg_num'] < $tot_pages){ ?>
-                            <a href="?pg_num=<?php echo $_GET['pg_num'] + 1; ?>">Next</a>
+                            <a href="?pg_num=<?php echo $_GET['pg_num'] + 1; ?>"><button class="btn btn-xsm btn-green">>></button></a>
                         <?php
                     }else{ ?>
-                            <a href="?pg_num=<?php echo $tot_pages?>">Next</a>
+                            <a href="?pg_num=<?php echo $tot_pages?>"><button class="btn btn-xsm btn-green">>></button></a>
                         <?php
                     }
                 ?>
-                <a href="?pg_num=<?php echo $tot_pages; ?>">Last</a>
+                <a href="?pg_num=<?php echo $tot_pages; ?>"><button class="btn btn-xsm btn-disabled">Last</button></a>
     </div>
 </div>
 <?php $this->view('includes/footer')?>

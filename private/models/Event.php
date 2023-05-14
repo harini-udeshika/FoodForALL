@@ -2,16 +2,17 @@
 class Event extends Model
 {
     protected $table = "event";
-    public function sent_requests($req_data){
-        for($i=0;$i<sizeof($req_data);$i++) {
-            if($req_data[$i]->volunteer_type=='Moderate'){
-                $volunteer_types['moderate']=1;
+    public function sent_requests($req_data)
+    {
+        for ($i = 0; $i < sizeof($req_data); $i++) {
+            if ($req_data[$i]->volunteer_type == 'Moderate') {
+                $volunteer_types['moderate'] = 1;
             }
-            if($req_data[$i]->volunteer_type=='Mild'){
-                $volunteer_types['mild']=1;
+            if ($req_data[$i]->volunteer_type == 'Mild') {
+                $volunteer_types['mild'] = 1;
             }
-            if($req_data[$i]->volunteer_type=='Heavy'){
-                $volunteer_types['heavy']=1;
+            if ($req_data[$i]->volunteer_type == 'Heavy') {
+                $volunteer_types['heavy'] = 1;
             }
         }
         return $volunteer_types;
@@ -57,12 +58,19 @@ class Event extends Model
                 $user_data = $user->where('id', $vols->user_id);
                 $user_data = $user_data['0'];
 
+                $image = "http://localhost/FoodForAll/public/" . $vols->qr_code;
+                // $image = "http://localhost/food_for_all/public/" . $vols->qr_code;
+
+
                 $receipient = $user_data->email;
                 $subject = "Event Reminder FoodForALL";
                 // $message = "Hello " . $user_data->first_name . ",/nWe would like to inform 
                 //             you that your request to volunteer for the event " . $event_data->name . " has been accepted";
-                $message = strtr(file_get_contents('http://localhost/FoodForAll/private/views/reminder_mail.html'),array('%event_name%' => $event_data->name,
-                '%date%' => $event_data->date));
+                $message = strtr(file_get_contents('http://localhost/FoodForAll/private/views/reminder_mail.html'), array(
+                    '%event_name%' => $event_data->name,
+                    '%date%' => $event_data->date,
+                    '%image%' => $image
+                ));
                 $mail->send_mail($receipient, $subject, $message);
                 // print_r($user_data);
                 // echo $receipient;
@@ -77,25 +85,25 @@ class Event extends Model
 
 
 
-    public function add_images($id,$count)
+    public function add_images($id, $count)
     {
-        if($count != 0){
+        if ($count != 0) {
             $event_images = $this->get_images($id);
         } else {
             $event_images = [];
         }
-        
+
         // print_r($event_images);
         // echo $count;
 
         $imageCount = count($_FILES['images']['name']);
         // echo $imageCount;
         // die;
-        for ($i = $count,$j = 0; $i <= 3 && $j < $imageCount; $i++,$j++) {
+        for ($i = $count, $j = 0; $i <= 3 && $j < $imageCount; $i++, $j++) {
             // echo $j;
             $image_name = $_FILES['images']['name'][$j];
             $img_extention = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
-            $new_imgName = "event-image-" . $id . '-' . $i+$j . '.' . $image_name;
+            $new_imgName = "event-image-" . $id . '-' . $i + $j . '.' . $image_name;
             // $new_imgName = "image-" . $id . '-' . $i . '.' . $img_extention;
             $img_upload_path = 'uploads/' . $new_imgName;
             move_uploaded_file($_FILES['images']['tmp_name'][$j], $img_upload_path);

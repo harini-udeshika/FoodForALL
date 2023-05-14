@@ -25,7 +25,7 @@
 
     <div class="col-12 grid-12 " id="search_result">
         <div class="blank col-3"></div>
-        <div class="col-6 grid-12 card-simple" style="max-height: 270px; overflow: auto;" id="dropdown">
+        <div class="col-6 grid-12 card-simple" style="max-height: 270px; min-height:50px; overflow: auto;" id="dropdown">
             
         </div>
         <div class="blank col-3"></div>
@@ -39,7 +39,7 @@
 
     <!-- pending events card -->
     <div class="events-card card event-holder col-lg-10 p-20 m-top-30 m-bottom-75 p-bottom-35 m-lr-auto">
-        <div class="heading-2 p-top-10">Pending Events</div>
+        <div class="heading-2 p-top-10">Approval Pending Events</div>
         <div class="event_scroll p-left-40 p-right-40">
             <div class="grid-9">
 
@@ -93,7 +93,7 @@
 
     <!-- ongoing events card -->
     <div class="events-card card event-holder col-lg-10 p-20 p-bottom-35 m-lr-auto">
-        <div class="heading-2 p-top-10">Ongoing Events</div>
+        <div class="heading-2 p-top-10">Upcoming Events</div>
         <div class="event_scroll p-left-40 p-right-40">
             <div class="grid-9">
 

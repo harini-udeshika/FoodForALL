@@ -27,7 +27,7 @@ class Reply_reviews extends Controller
         if (!isset($id)) {
             $query = "SELECT comments.comment,comments.comment_id,comments.date_time,comments.event_name,comments.user_type,comments.star_rate,comments.reply,user.first_name,user.profile_pic
             FROM comments
-            INNER JOIN user ON comments.id=user.id WHERE comments.gov_reg_no= :org_id ORDER BY comments.comment_id";
+            INNER JOIN user ON comments.id=user.id WHERE comments.gov_reg_no= :org_id ORDER BY comments.date_time DESC";
             $arr = [
                 'org_id' => $_SESSION['USER']->gov_reg_no,
 

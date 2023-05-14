@@ -26,13 +26,16 @@
                      <div class="col-8">
                          <div class="commentator-name txt-12 w-black"><?php echo $comment_data[$i]->first_name; ?></div>
                          <div class=" commentator-volunteer-level txt-11 w-medium p-left-1"><?php echo $comment_data[$i]->user_type; ?></div>
-                         <div class=" comment-time txt-10 w-medium"><?php echo $comment_data[$i]->date_time; ?></div>
+                         <div class=" commentator-volunteer-level txt-8 w-medium p-left-1">Commenting on:</div>
+                         <div class=" commentator-volunteer-level txt-10 w-medium p-left-20" style="color: #6973AD;"><?php echo $comment_data[$i]->event_name; ?></div>
+                         <div class=" commentator-volunteer-level txt-8 w-medium p-left-1">Rating : <span style="color: #6973AD;"><?php echo $comment_data[$i]->star_rate; ?>/5</span></div>
+                         <div class=" comment-time txt-10 w-medium p-top-5"><?php echo $comment_data[$i]->date_time; ?></div>
                      </div>
                  </div>
                  <!-- row segment for comment -->
                  <div class="row-flex jf-center p-top-5 p-bottom-5">
 
-                     <div class="comment-txt txt-8 p-top-10 p-bottom-5 height-100px">
+                     <div class="comment-txt txt-8 p-top-10 p-bottom-5 height-100px" style="overflow: auto;">
                          <?php echo $comment_data[$i]->comment; ?>
                      </div>
                  </div>
@@ -41,7 +44,7 @@
                  <form method="post" action="<?= ROOT ?>/reply_reviews?id=<?= $comment_data[$i]->comment_id ?>">
                      <div class="txt-11 w-semibold p-top-15">Reply</div>
                      <div class="row-flex p-top-12 p-bottom-12">
-                         <textarea type="text" name="reply" id="" class="input-reply txt-12" style="width:100%; text-align:left;"><?php if (isset($comment_data[$i]->reply)) {
+                         <textarea type="text" name="reply" id="" class="input-reply txt-12" style="width:100%; text-align:left; overflow: auto;"><?php if (isset($comment_data[$i]->reply)) {
                                                                                                                                         echo $comment_data[$i]->reply;
                                                                                                                                     } ?></textarea>
                      </div>
