@@ -324,17 +324,30 @@ class Admin extends Controller
         echo ($html);
     }
 
-    public function temp15(){
+    public function temp15()
+    {
         // echo("called");
-        $this->view("temp3");
+        $this->view("temp4");
     }
 
-    public function temp16(){
-        if(isset($_POST)){
+    public function temp16()
+    {
+        if (isset($_POST)) {
             $result =  json_encode($_POST);
-            echo($result);
-        }else{
-            echo(json_encode("no post"));
+            echo ($result);
+        } else {
+            echo (json_encode("no post"));
         }
+    }
+
+    // new organizations
+    public function org_requests()
+    {
+        $admin_model = new Admins();
+        $organizations = $admin_model->orgRequests();
+
+        $this->view("temp4", [
+            "organizations" => $organizations
+        ]);
     }
 }
