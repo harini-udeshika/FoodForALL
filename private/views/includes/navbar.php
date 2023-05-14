@@ -29,13 +29,7 @@
             <a href="login">Login/Sign in</a>
         </div>
         <?php endif?>
-        <?php if (Auth::getusertype() == 'reg_user'): ?>
-
-
-            <div class="nav-i">
-                <a href="login">Login/Sign in</a>
-            </div>
-            <?php endif?>
+    
             <?php if (Auth::getusertype() == 'reg_user'): ?>
             <div class="nav-i">
                 <a href="homepage">Home</a>

@@ -26,10 +26,10 @@ class Events extends Controller
             ) d ON event.event_id = d.event_id
             WHERE event.name LIKE :find
             AND event.date > CURRENT_DATE
-            AND event.approved = 1
+            AND event.launch = 1
             GROUP BY event.event_id;
             ";
-            //$query = "select * from event where name like :find && date> CURRENT_DATE && approved=1";
+            //$query = "select * from event where name like :find && date> CURRENT_DATE && launch=1";
             $arr = ['find' => $find];
 
             $search_data = $event->query($query, $arr);
@@ -51,9 +51,9 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-                WHERE event.district= :district && event.date>CURRENT_DATE && event.approved=1 
-                GROUP BY event.event_id";
-                //$query = "select * from event where location= :location && date> CURRENT_DATE && approved=1";
+                WHERE event.district= :district && event.date>CURRENT_DATE && event.launch=1 
+                GROUP BY event.event_id"; 
+                //$query = "select * from event where location= :location && date> CURRENT_DATE && launch=1";
                 $arr = ['district' => $location];
 
                 $search_data = $event->query($query, $arr);
@@ -69,7 +69,7 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-                        WHERE event.date= :date && event.date>CURRENT_DATE && event.approved=1
+                        WHERE event.date= :date && event.date>CURRENT_DATE && event.launch=1
                         GROUP BY event.event_id";
                 $arr = ['date' => $date];
                 $filter_data = $event->query($query, $arr);
@@ -87,7 +87,7 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-        WHERE event.date= :date && event.district = :district && event.date>CURRENT_DATE && event.approved=1
+        WHERE event.date= :date && event.district = :district && event.date>CURRENT_DATE && event.launch=1
         GROUP BY event.event_id";
                 $arr = ['date' => $date,
                     'district' => $location];
@@ -106,7 +106,7 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-        WHERE event.date>CURRENT_DATE && event.approved=1
+        WHERE event.date>CURRENT_DATE && event.launch=1
         GROUP BY event.event_id";
 
                 $data = $event->query($query);
@@ -125,7 +125,7 @@ class Events extends Controller
                 WHERE status = 1
                 GROUP BY event_id
             ) d ON event.event_id = d.event_id
-        WHERE event.date>CURRENT_DATE && event.approved=1
+        WHERE event.date>CURRENT_DATE && event.launch=1
         GROUP BY event.event_id";
             $data = $event->query($query);
             //print_r($data);
