@@ -145,14 +145,14 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
     datasets: [{
       data: [<?php echo $familyies;?>, <?php echo $childrenhomes; ?>, <?php echo $elderhomes; ?>],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)'
+        'rgba(127,180,50,0.6)',
+      'rgba(126, 117, 172, 0.6)',
+      'rgba(106,47,82, 0.6)'
       ],
       borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)'
+        'rgba(127,180,50,0.6)',
+        'rgba(126, 117, 172, 0.6)',
+        'rgba(106,47,82, 0.6)'
       ],
       borderWidth: 1
     }]
@@ -185,14 +185,14 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
   datasets: [{
     data: [<?php echo $All_less_one_children;?>, <?php echo $All_less_five_children; ?>, <?php echo $All_higher_five_children; ?>],
     backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)'
+      'rgba(127,180,50,0.6)',
+      'rgba(126, 117, 172, 0.6)',
+      'rgba(106,47,82, 0.6)'
     ],
     borderColor: [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)'
+      'rgba(127,180,50,1)',
+        'rgba(126, 117, 172, 1)',
+        'rgba(106,47,82, 1)'
     ],
     borderWidth: 1
   }]
@@ -241,16 +241,16 @@ const chartData3 = {
     datasets: [{
       data: [<?php echo $All_healthy_adults;?>, <?php echo $All_cholesterol_patients; ?>, <?php echo $All_diabetes_patients; ?>,<?php echo $All_both_patients; ?>],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(255, 206, 86, 0.2)'
+        'rgba(127,180,50,0.6)',
+        'rgba(126, 117, 172, 0.6)',
+        'rgba(106,47,82, 0.6)',
+        'rgba(106,102,47, 0.6)'
       ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(255, 206, 86, 1)'
+      borderColor:[
+        'rgba(127,180,50,1)',
+        'rgba(126, 117, 172, 1)',
+        'rgba(106,47,82, 1)',
+        'rgba(106,102,47, 1)'
       ],
       borderWidth: 1
     }]

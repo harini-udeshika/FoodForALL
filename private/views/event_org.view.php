@@ -4,6 +4,8 @@
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
+
+
 <div class="body-container">
     <div class="heading-1">Event Name : <?php echo $event_details->name ?></div>
     <div class="container">

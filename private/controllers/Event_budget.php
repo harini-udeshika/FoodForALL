@@ -48,7 +48,7 @@ class Event_budget extends Controller
             food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no"; //organization food packages 
 
             if (count($_POST) > 0) {
-                print_r($_POST);
+                // print_r($_POST);
                 // die;
 
                 if (isset($_POST['new_form'])) {
