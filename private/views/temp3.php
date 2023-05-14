@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/admin.home.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/admin.events.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/popups.css">
 <?php $this->view('includes/navbar') ?>
 
 
@@ -182,41 +183,31 @@
         }
     }
 </style>
-<style>
-    #disable_page {
-        width: 100vw;
-        height: calc(100vh - 4.5rem);
-
-        z-index: 999;
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .popup_card {}
-</style>
 
 <body>
-    <div id="disable_page">
-        <div class="popup-contain">
-            <div class="card popup-card">
-                <div class="popup-header">
-                    <div class="popup-heading" id="popup-head">Edit Package</div>
-                    <i class="fa-solid fa-circle-xmark popup-close" id="popup-close-btn"></i>
+    <div id="popup-div">
+        <!-- <div class="card popup_card"></div> -->
+        <div class="card popup-card">
+            <div class="popup-header">
+                <div class="popup-heading" id="popup-head">Edit Package</div>
+                <i class="fa-solid fa-circle-xmark popup-close" id="popup-close-btn"></i>
+            </div>
+            <div class="popup-body">
+                <i class="fa-solid fa-circle-exclamation txt-20" id="popup-hero-btn"></i>
+                <div class="popup-message" id="popup-message">
+                    this is popup message
                 </div>
-                <div class="popup-body">
-                    <i class="fa-solid txt-20 fa-circle-exclamation" id="popup-hero-btn"></i>
-                    <i class="fa-solid fa-circle-exclamation" id="popup-hero-btn"></i>
-                    <div class="popup-message" id="popup-message">
-                    </div>
-                    <button type="submit" id="popup_delete_btn" class="btn btn-sm btn-green col-12">Edit package</button>
+                <form id="popup_form">
+                    <div class="m-left-20" style="text-align: left;">reason for <span id="popup_form_span">reject</span></div>
+                    <textarea name="reason" id="reason_text" cols="30" rows="10" style="height: 100px; margin-bottom:30px; padding:20px;"></textarea>
+                    <button class="btn btn-sm btn-red btn-block" id="form_button" type="submit"></button>
+                </form>
+                <div class="grid-12">
+                    <button id="popup_delete_btn" class="btn btn-sm btn-green block col-12">Edit package</button>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- main content -->
     <div class="main-cont">
@@ -403,7 +394,7 @@
     create_result_holder("eventName", "OrgName", "eventDate")
     // <-------------------------search-result functions : End------------------------->
 </script>
-
+<script src=" <?= ROOT ?>/assets/budget_popup.js"></script>
 <script src=" <?= ROOT ?>/assets/navbar.js"></script>
 <script src=" <?= ROOT ?>/assets/submenu.js"></script>
 <script src=" <?= ROOT ?>/assets/dropdown.js"></script>

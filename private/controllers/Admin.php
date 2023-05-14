@@ -325,7 +325,7 @@ class Admin extends Controller
     }
 
     public function temp15(){
-        echo("called");
+        // echo("called");
         $this->view("temp3");
     }
 
