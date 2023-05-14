@@ -45,8 +45,10 @@ class Shop_org extends Controller
             // echo "hello error";
             // die;
         }
-
-        $data = $item->where('org_gov_reg_no', $_SESSION['USER']->gov_reg_no);
+        $query = "SELECT * FROM merchandise_item WHERE 
+        org_gov_reg_no = :id && deactivated = 0";
+        $data_arr = ['id'=>$_SESSION['USER']->gov_reg_no];
+        $data = $item->query($query,$data_arr);
         $this->view('shop_org.view', ['allitems' => $data]);
     }
 

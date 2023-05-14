@@ -4,6 +4,10 @@ const location_address = document.getElementById('locationInp')
 const date = document.getElementById('date')
 const manager = document.getElementById('manager')
 const description = document.getElementById('description')
+const district = document.getElementById('district')
+const latitude = document.getElementById('p-longitude')
+const longlitude = document.getElementById('p-latitude')
+const location_error = document.getElementById('location_error')
 
 var error_state = 0
 
@@ -38,9 +42,12 @@ const setError = (event, element, message) => {
     if (element.parentElement) {
         const inputControl = element.parentElement;
         const errorDisplay = inputControl.querySelector('.client-error');
-        const txt1 = '&emsp;&emsp;&emsp;';
+        const txt1 = '&emsp;&emsp;';
 
-        errorDisplay.innerHTML = txt1.concat("", message);
+        if(message != ''){
+            errorDisplay.innerHTML = txt1.concat("", message);
+        }
+        
         inputControl.classList.add('error');
         inputControl.classList.remove('success');
     }
@@ -56,7 +63,7 @@ const setSuccess = element => {
     errorDisplay.innerText = '';
     inputControl.classList.add('success');
     inputControl.classList.remove('error');
-    num = num + 1;
+    // num = num + 1;
 };
 
 const validateInputs = (event) => {
@@ -65,6 +72,9 @@ const validateInputs = (event) => {
     const date_Value = date.value;
     const manager_Value = manager.value.trim();
     const description_Value = description.value.trim();
+    const district_Value = district.value.trim();
+    const latitude_Value = latitude.value.trim();
+    const longitude_Value = longlitude.value.trim();
     
     if(name_Value === ''){
         setError(event,event_name, 'Event name is Required');
@@ -92,10 +102,22 @@ const validateInputs = (event) => {
         setSuccess(manager);
     }
 
+    if(district_Value === '' || district_Value === 'not selected'){
+        setError(event,district, 'Event District is Required');
+    }else{
+        setSuccess(district);
+    }
+
     if(description_Value === ''){
         setError(event,description, 'Event description is Required');
     }else{
         setSuccess(description);
+    }
+
+    if(latitude_Value === '' || longitude_Value === '' || location_Value === ''){
+        setError(event,location_error, '&emsp;&emsp;&emsp;Give Event Address');
+    }else{
+        setSuccess(location_error);
     }
     
 }

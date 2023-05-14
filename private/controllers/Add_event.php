@@ -22,6 +22,7 @@ class Add_event extends Controller
             $arr['org_gov_reg_no'] = $_SESSION['USER']->gov_reg_no;
             $arr['latitude'] = $_POST['latitude'];
             $arr['longitude'] = $_POST['longitude'];
+            $arr['district'] = $_POST['district'];
             if ($image->pic_validate()) {
                 $filename = $image->pic_validate();
                 $arr['thumbnail_pic'] = $filename;
@@ -32,6 +33,7 @@ class Add_event extends Controller
             // print_r($arr);
             // die;
             $event->insert($arr);
+            $this->redirect('org_admin_events');
         } else {
             // echo "hello error";
             // die;

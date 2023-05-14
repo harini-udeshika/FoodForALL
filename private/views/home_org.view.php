@@ -63,7 +63,7 @@ if ($allevents) {
             }
             ?>
             <div class="m-bottom-20" style="display: flex; justify-content: center;">
-                <img src="<?php echo $image ?>" alt="" class="" style="width: 35%; border-radius: 8px; ">
+                <img src="<?php echo $image ?>" alt="" class="" style="border:solid 1px black; width: 35%; border-radius: 8px; ">
             </div>
             <div class="card-simple txt-align-left grid-10 card-green" style="background-color: rgba(173, 211, 116, 0.886);">
                 <div class="col-6 ">

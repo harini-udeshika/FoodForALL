@@ -11,6 +11,32 @@
     
 }
 
+.inputControl.success select{
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #09c372;
+}
+
+.inputControl.error select{
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #ff3860;
+    
+}
+
+.inputControl.success textarea{
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #09c372;
+}
+
+.inputControl.error textarea{
+    outline: 1.5;
+    border: 2px solid #f0f0f0;
+    border-color: #ff3860;
+    
+}
+
 .inputControl .client-error{
     color: #ff3860;
     font-size: 13px;

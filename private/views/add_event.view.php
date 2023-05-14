@@ -67,22 +67,9 @@
                                                 <div class="client-error"></div>
                                         </div>
 
-                                        <!-- <label for="address" class="heading-4">Location</label> -->
-                                        <label for="location" class="heading-4">Location</label><br>
-                                        <div class="inputControl">
-                                                <input name="location" id="locationInp" class=" location width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="text"><br>
-                                                <div class="client-error"></div>
-                                        </div>
-                                        <input type="text" id="p-longitude" hidden name="longitude">
-                                        <input type="text" id="p-latitude" hidden name="latitude">
-                                        <!-- <input type="text" id="locationInp" class="location"> -->
-                                        <div class="map " id="map">
-
-                                        </div><br>
                                         <label for="date" class="heading-4">Event Date</label><br>
                                         <div class="inputControl">
-                                                <input name="date" id="date" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="date
-                                                "><br>
+                                                <input name="date" id="date" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="date"><br>
                                                 <div class="client-error"></div>
                                         </div>
 
@@ -111,7 +98,6 @@
                                                 </select>
                                                 <div class="client-error"></div>
                                         </div>
-                                        <br>
 
                                         <label for="description" class="heading-4">Event description</label><br>
                                         <div class="inputControl">
@@ -119,6 +105,55 @@
                                                 <div class="client-error"></div>
                                         </div>
 
+                                        <label for="district" class="heading-4 ">District</label><br>
+                                        <div class="inputControl">
+                                                <select name="district" id="district" class="width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5">
+                                                        <option value='not selected'>--Select District--</option>
+                                                        <option value='Ampara'>Ampara</option>
+                                                        <option value='Anuradhapura'>Anuradhapura</option>
+                                                        <option value='Badulla'>Badulla</option>
+                                                        <option value='Batticaloa'>Batticaloa</option>
+                                                        <option value='Colombo'>Colombo</option>
+                                                        <option value='Galle'>Galle</option>
+                                                        <option value='Gampaha'>Gampaha</option>
+                                                        <option value='Hambantota'>Hambantota</option>
+                                                        <option value='Jaffna'>Jaffna</option>
+                                                        <option value='Kalutara'>Kalutara</option>
+                                                        <option value='Kandy'>Kandy</option>
+                                                        <option value='Kegalle'>Kegalle</option>
+                                                        <option value='Kilinochchi'>Kilinochchi</option>
+                                                        <option value='Kurunegala'>Kurunegala</option>
+                                                        <option value='Mannar'>Mannar</option>
+                                                        <option value='Matale'>Matale</option>
+                                                        <option value='Matara'>Matara</option>
+                                                        <option value='Monaragala'>Monaragala</option>
+                                                        <option value='Mullaitivu'>Mullaitivu</option>
+                                                        <option value='Nuwara Eliya'>Nuwara Eliya</option>
+                                                        <option value='Polonnaruwa'>Polonnaruwa</option>
+                                                        <option value='Puttalam'>Puttalam</option>
+                                                        <option value='Ratnapura'>Ratnapura</option>
+                                                        <option value='Trincomalee'>Trincomalee</option>
+                                                        <option value='Vavuniya'>Vavuniya</option>
+                                                </select><br>
+                                                <div class="client-error"></div>
+                                        </div>
+
+                                        <!-- <label for="address" class="heading-4">Location</label> -->
+                                        <label for="location" class="heading-4">Location</label>
+                                        <div class="inputControl">
+                                                <input name="location" id="locationInp" class=" location width-80 input-field input-field-block m-bottom-15 m-left-15 m-top-5" type="text"><br>
+                                                <div class="client-error"></div>
+                                        </div>
+                                        <input type="text" id="p-longitude" hidden name="longitude">
+                                        <input type="text" id="p-latitude" hidden name="latitude">
+                                        <!-- <input type="text" id="locationInp" class="location"> -->
+                                        <div class="map " id="map">
+
+                                        </div>
+                                        <div class="inputControl">
+                                                <div id="location_error"></div>
+                                                <div class="client-error"></div>
+                                        </div><br>
                                         <button class="btn btn-sm btn-black float-right m-top-40 m-bottom-15 m-right-20" id="add_event" type="submit">Add Event</button>
                                         <a href="home_org">
                                                 <button class="btn btn-sm btn-black float-left m-top-40 m-bottom-15" style="margin-left: -70px;" type="button">Back</button>
