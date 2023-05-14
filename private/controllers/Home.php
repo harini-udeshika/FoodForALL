@@ -12,7 +12,23 @@ class Home extends Controller{
         $event_data = $event->query($query);
         //print_r($event_data);
         $data = $user->findAll();
-        $this->view('home', ['rows' => $data,'event_data'=>$event_data,'pics'=>$pics]);
+        if(Auth::getusertype()=='reg_user'){
+            $id=Auth::getid();
+            $event=new Event();
+            //getting events user participating within this week
+            $query='SELECT event.*
+            FROM event
+            INNER JOIN volunteer ON event.event_id = volunteer.event_id
+            WHERE volunteer.user_id = :id
+            AND event.date BETWEEN DATE_ADD(CURDATE(), INTERVAL(1-DAYOFWEEK(CURDATE())) DAY) 
+            AND DATE_ADD(CURDATE(), INTERVAL(7-DAYOFWEEK(CURDATE())) DAY)';
+            $data=$event->query($query,['id'=>$id]);
+            $notify_data=$data;
+        }
+        if(!$notify_data){
+            $notify_data=array();
+        }
+        $this->view('home', ['rows' => $data,'event_data'=>$event_data,'pics'=>$pics,'notify_data'=>$notify_data]);
 
     } 
    

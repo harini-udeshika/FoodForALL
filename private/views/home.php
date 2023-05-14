@@ -7,7 +7,15 @@
  <link rel="stylesheet" href="<?=ROOT?>/assets/homepage_new.css">
 
 <div class="container">
-
+<?php if($notify_data):?>
+    <?php foreach($notify_data as $notify):?>
+    <div class="notify">
+    <i class="fa-regular fa-circle-xmark"></i>
+        <small>"<?=$notify->name?>" you'll be volunteering is happening soon!</small>
+        <a href="eventpage?id=<?=$notify->event_id?>"><button>View details</button></a>
+    </div>
+    <?php endforeach;?>
+    <?php endif?>
     <div class="description">
         <div class="content">
             <div class="main">

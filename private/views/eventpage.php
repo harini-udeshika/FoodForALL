@@ -23,7 +23,7 @@
                 <div style="width:<?=$donorp?>%"></div>
             </div>
 
-        </div>  
+        </div>   
         <p class="goal">Volunteers joined<span><?=$rows->no_of_volunteers?> people</span></p>
         <div class="progress">
             <div class="progress-bar">

@@ -35,10 +35,11 @@ class Events extends Controller
             $search_data = $event->query($query, $arr);
 
             $this->view('events', ['rows' => $search_data]);
-        } else if (isset($_GET['date']) && isset($_GET['location'])) {
+
+        } else if (isset($_GET['date']) && isset($_GET['district'])) {
 
             $date = $_GET['date'];
-            $location = $_GET['location'];
+            $location = $_GET['district'];
 
             if (!$date && $location != "default") {
                 $query = "SELECT event.event_id, event.name, event.date, event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) AS volunteers, IFNULL(d.total_donated, 0) AS total_donated
@@ -50,15 +51,15 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-                WHERE event.location= :location && event.date>CURRENT_DATE && event.approved=1 
+                WHERE event.district= :district && event.date>CURRENT_DATE && event.approved=1 
                 GROUP BY event.event_id";
                 //$query = "select * from event where location= :location && date> CURRENT_DATE && approved=1";
-                $arr = ['location' => $location];
+                $arr = ['district' => $location];
 
                 $search_data = $event->query($query, $arr);
 
                 $this->view('events', ['rows' => $search_data]);
-            } else if ($date) {
+            } else if ($date && $location == "default") {
                 $query = "SELECT event.event_id, event.name, event.date, event.thumbnail_pic, event.total_amount, event.no_of_volunteers, COUNT(volunteer.user_id) AS volunteers, IFNULL(d.total_donated, 0) AS total_donated
                 FROM event
                 LEFT JOIN volunteer ON event.event_id = volunteer.event_id
@@ -86,10 +87,10 @@ class Events extends Controller
                     WHERE status = 1
                     GROUP BY event_id
                 ) d ON event.event_id = d.event_id
-        WHERE event.date= :date && event.location = :location event.date>CURRENT_DATE && event.approved=1
+        WHERE event.date= :date && event.district = :district && event.date>CURRENT_DATE && event.approved=1
         GROUP BY event.event_id";
                 $arr = ['date' => $date,
-                    'location' => $location];
+                    'district' => $location];
                 $filter_data = $event->query($query, $arr);
                 //$filter_data = $event->filter($date, $location, 'date', 'location');
                 $this->view('events', ['rows' => $filter_data]);
