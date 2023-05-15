@@ -1,10 +1,10 @@
 <?php $this->view('includes/header')?>
-<link rel="stylesheet" href="<?=ROOT?>/assets/event.css">
+<link rel="stylesheet" href="<?=ROOT?>/assets/eventnew.css">
 <?php $this->view('includes/navbar')?>
 <?php $this->view('includes/submenu')?> 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTET7frzRd7t4FvurRzw28rbqEE7_oWFU&callback=initMap&libraries=places"></script>
 <script src="http://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
+<link rel="stylesheet" href="<?=ROOT?>/assets/eventnew.css">
 
 <div class="main">
 <p class="event-name">
