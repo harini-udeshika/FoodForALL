@@ -1,15 +1,15 @@
-/* html {
+html {
     font-family: "Inter";
     scroll-behavior: smooth;
-} */
+}
 
-/* body {
+body {
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-} */
+}
 
 a {
     text-decoration: none;
@@ -44,6 +44,7 @@ a {
     right: 2rem;
     border: none;
     background-color: #fff;
+    
 }
 
 .filter {
@@ -62,6 +63,7 @@ a {
     height: 2.5rem;
     border-radius: 0.8rem;
     border: 0.15rem solid #dfe1da;
+    padding: 0 1rem 0 1rem;
 }
 
 .search-btn {
@@ -85,15 +87,12 @@ select {
 
 .event-container {
     width: 80%;
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     /* background-color: #F2F3F9; */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    }
+}
 
 .event-details img {
 
@@ -629,19 +628,9 @@ h4{
     color: #7681BF;
 }
 
-.card {
-    height: 25.7rem;
-    width: 22rem;
-    /* background-color: #97a27a; */
-    background-image: url("../images/bg1.png");
-    background-size: 20rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 1.2rem;
-    background-repeat: no-repeat;
+.review-right .date-time {
+    color: #979797;
+    font-size: small;
 }
 .admin{
     display: flex;
@@ -726,14 +715,8 @@ h4{
     color: #000;
 }
 
-
-.card form {
-    height: 25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-right: 1.5rem;
+.dropdown-role select:focus {
+    border: 0.1rem solid #7FB432;
 }
 
 .rating .tag-1 {
@@ -777,4 +760,3 @@ h4{
     visibility: visible;
     color: #ff8477;
 }
-
