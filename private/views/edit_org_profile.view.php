@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="data-row p-bottom-40 txt-12">
-                        <div class=" left-side w-semibold">Tel</div>
+                        <div class=" left-side w-semibold">Telephone</div>
                         <input class="right-side txt-al-left" name="tel" type="text" value="<?php echo $rows->tel ?>" style="border: none;">
                     </div>
 

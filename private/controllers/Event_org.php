@@ -249,6 +249,11 @@ class Event_org extends Controller
     function volunteer_levels()
     {
         $id = $_GET['id'];
+        $accepted_request = new Volunteer();
+        $query = "SELECT * FROM volunteer WHERE event_id = :id";
+        $arr_1 = ['id' => $id];
+        $volunteer_accepted = $accepted_request->query($query, $arr_1);
+
         if (Auth::getusertype() == 'organization' || 'eventmanager') {
             $event = new Event();
             $tot_volunteers = 0;
@@ -276,7 +281,16 @@ class Event_org extends Controller
                 }
                 $arr['no_of_volunteers'] = $tot_volunteers;
                 if (isset($arr)) {
-                    $event->update_event($id, $arr);
+                    if($volunteer_accepted && $tot_volunteers >= count($volunteer_accepted)){
+                        // echo "set";
+                        $event->update_event($id, $arr);
+                    } elseif(!$volunteer_accepted){
+                        $event->update_event($id, $arr);
+                        // echo "set";
+                    }
+                    // echo "not set";
+                    // die;
+                    
                 }
 
                 // die;
