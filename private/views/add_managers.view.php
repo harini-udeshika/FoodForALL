@@ -298,7 +298,8 @@
         const table_body = document.getElementById('table_body')
         table_body.innerHTML = ''
 
-        fetch('http://localhost/FoodForAll/public/add_managers/update_feed')
+        // fetch('http://localhost/FoodForAll/public/add_managers/update_feed')
+        fetch('http://localhost/food_for_all/public/add_managers/update_feed')
             .then(response => response.json())
             .then(data => {
                 data.forEach(manager => {

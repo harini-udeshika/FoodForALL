@@ -106,7 +106,8 @@ const form_shop = document.getElementById('input-form-shop');
 
     async function validateSubscription() {
         try {
-            const response = await fetch("http://localhost/FoodForAll/public/shop_org/isSubscribed/")
+            // const response = await fetch("http://localhost/FoodForAll/public/shop_org/isSubscribed/")
+            const response = await fetch("http://localhost/food_for_all/public/shop_org/isSubscribed/")
             const data = await response.text()
             console.log(data)
             if (data == "TRUE") {

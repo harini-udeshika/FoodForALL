@@ -96,7 +96,7 @@ class Admin extends Controller
                 if ($result == NULL) {
                     $_SESSION['USER']->password_hash = $password_hash;
                     unset($_SESSION['USER']->change_password_session_id);
-                    $this->redirect('admin/current_password');
+                    $this->redirect('admin/home');
                 }
             } else {
                 $errors['error'] = 'Re-entered password does not match!';
@@ -110,7 +110,7 @@ class Admin extends Controller
         $temp['first_name'] = "admin";
         $this->view('change_password', [
             'rows' => $name_object,
-            'error' => $errors
+            'errors' => $errors
         ]);
     }
 
@@ -164,7 +164,7 @@ class Admin extends Controller
         $admin = new Admins();
 
 
-        $this->view('shop_org.view');
+        $this->view('admin.ask.yesorno');
     }
 
     public function temp4()
@@ -340,14 +340,235 @@ class Admin extends Controller
         }
     }
 
-    // new organizations
-    public function org_requests()
+    // -------------------------organizations-------------------------------
+    public function organizations()
     {
+        $this->autherize_admin();
+        $this->view('admin.organization');
+    }
+
+    public function org_data()
+    {
+        $this->autherize_admin();
         $admin_model = new Admins();
         $organizations = $admin_model->orgRequests();
 
-        $this->view("temp4", [
-            "organizations" => $organizations
-        ]);
+        $path = "../private/views/admin.organization.data.php";
+
+        ob_start();
+        include($path);
+        $html = ob_get_clean();
+        echo ($html);
+    }
+
+    public function org_requests()
+    {
+        $this->autherize_admin();
+        $admin_model = new Admins();
+        $organizations = $admin_model->orgRequests();
+
+        $path = "../private/views/admin.organization.requests.php";
+
+        ob_start();
+        include($path);
+        $html = ob_get_clean();
+        echo ($html);
+    }
+    public function org_search()
+    {
+        $this->autherize_admin();
+        $admin_model = new Admins();
+        // $defaults=array();
+        $results = $admin_model->select_orgs_bydate();
+        $results['result_type'] = 'recent';
+
+        $path = "../private/views/admin.organization.search.php";
+
+        ob_start();
+        include($path);
+        $html = ob_get_clean();
+        echo ($html);
+    }
+
+    public function search_in_org($keyword)
+    {
+        $this->autherize_admin();
+        if (Auth::isuser('admin')) {
+            $data = array();
+
+            if ($keyword != "") {
+                $admin_model = new Admins();
+                $keyword = addslashes($keyword);
+
+                $query = "SELECT * FROM organization WHERE gov_reg_no LIKE '%$keyword%' OR name LIKE '%$keyword%'";
+
+                $data = $admin_model->query($query);
+
+                if ($data == null) {
+                    $data = array();
+                }
+            }
+        } else {
+            $data = "redirect";
+        }
+        echo (json_encode($data));
+    }
+
+    public function ask_blacklist_org()
+    {
+        $this->autherize_admin();
+        $admin_model = new Admins();
+
+        if (isset($_GET['id'])) {
+            $org_id = $_GET['id'];
+
+            $query = "select * from organization where gov_reg_no ='$org_id'";
+            $result=$admin_model->query($query);
+            
+            if($result == false){
+                $this->redirect('admin/organizations');
+                die;
+            }
+
+            $result = $result[0];
+            $this->view('admin.blacklist.org', [
+                "row" => $result
+            ]);
+        } else {
+            $this->redirect('admin/organizations');
+        }
+    }
+
+    public function blacklist_org()
+    {
+        print_r($_GET['id']);
+        $this->autherize_admin();
+        $admin_model = new Admins();
+        if (isset($_GET['id'])) {
+            $message = "";
+            
+            
+            $org_id = $_GET['id'];
+            $current_date = date('Y-m-d');
+            
+            $query = "select * from event where org_gov_reg_no = '$org_id' and date>='$current_date' ";
+            $result = $admin_model->query($query);
+
+            
+            $query = "select * from organization where gov_reg_no ='$org_id'";
+            $org=$admin_model->query($query);
+            
+            if($org == false){
+                $this->redirect('admin/organizations');
+                die;
+            }
+            $org = $org[0];
+            
+            if ($result == false) {
+                // blacklist
+                $query = "update organization set approve = 3 where gov_reg_no =  $org_id";
+                $admin_model->query($query);
+                $org->error = "organization Blacklisted.";
+                $this->view("admin.blacklist.org.done",[
+                    "row"=>$org
+                ]);
+
+            } else {
+                $org->error = "This organization has ongoing events!";
+                $this->view("admin.blacklist.org.err",[
+                    "row"=>$org
+                ]);
+            }
+        }else{
+            $this->redirect('admin/organizations');
+        }
+    }
+    // -----------------------organizations : END----------------------------
+
+    // new organizations
+    // public function org_requests()
+    // {
+    //     $this->autherize_admin();
+    //     $admin_model = new Admins();
+    //     $organizations = $admin_model->orgRequests();
+
+    //     $this->view("temp4", [
+    //         "organizations" => $organizations
+    //     ]);
+    // }
+
+    // accept organizations
+    public function accept_org()
+    {
+        $this->autherize_admin();
+        if (!isset($_GET['id'])) {
+            $this->redirect('admin/org_requests');
+        }
+
+        $org_id = $_GET['id'];
+
+        $admin_model = new Admins();
+        $organization = $admin_model->acceptOrg($org_id);
+
+        if ($organization) {
+            $mail_model = new Mail();
+
+            ob_start();
+            include('../private/views/mail.org.accept.php');
+
+            $recipient = "anjunaserasingha@gmail.com";
+            // $recipient = $organization->email;
+            $html_mail = ob_get_clean();
+            $subject = "Registration Accepted";
+
+            $mail_model->send_mail($recipient, $subject, $html_mail);
+        }
+        $this->redirect('admin/org_requests');
+    }
+
+    // reject organizations
+    public function rejectOrg()
+    {
+        $this->autherize_admin();
+        if (!isset($_GET['id'])) {
+            $this->redirect('admin/org_requests');
+        }
+
+        $org_id = $_GET['id'];
+
+        $admin_model = new Admins();
+        $organization = $admin_model->rejectOrg($org_id);
+
+        if ($organization) {
+            $mail_model = new Mail();
+            print_r($organization->name);
+
+            ob_start();
+            include('../private/views/mail.org.reject.php');
+
+            // $recipient = $organization->email;
+            $recipient = "anjunaserasingha@gmail.com";
+            $html_mail = ob_get_clean();
+            $subject = "Registration Rejected";
+
+            if ($mail_model->send_mail($recipient, $subject, $html_mail)) {
+                echo ("mail sent");
+            } else {
+                echo ("mail sent");
+            }
+        }
+        $this->redirect('admin/org_requests');
+    }
+    public function reset_org_table()
+    {
+        $query = "select * from organization";
+        $admin = new Admins();
+
+        $orgs = $admin->query($query);
+
+        foreach ($orgs as $org) {
+            $query = "update organization set approve =0 where gov_reg_no = '$org->gov_reg_no'";
+            $orgs = $admin->query($query);
+        }
     }
 }

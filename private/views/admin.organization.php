@@ -2,23 +2,20 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/admin.events.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/anjuna_css/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/admin.main.css">
-<link rel="stylesheet" href="<?= ROOT ?>/assets/admin.home.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
 <body>
-    <div id="root" style="display: none;"><?=ROOT?></div>
+    <div id="root" style="display: none;"><?= ROOT ?></div>
     <div class="main-cont">
         <div class="sidebar">
             <!-- <div class="sidebar_item" data-param="dashboard" data-subpages="" data-search_url="" id="sidebar_item-1">Dashboard</div> -->
 
-            <div class="sidebar_item" data-param="upcoming" data-subpages="" data-search_url="<?= ROOT ?>/admin/searchEvent" id="sidebar_item-1">Upcoming Events</div>
+            <!-- <div class="sidebar_item" data-param="organizations" data-subpages="" data-search_url="" id="sidebar_item-1">Organizations</div> -->
 
-            <div class="sidebar_item" data-param="completed" data-subpages="" data-search_url="<?= ROOT ?>/admin/searchEvent" id="sidebar_item-2">Completed Events</div>
+            <div class="sidebar_item" data-param="org_requests" data-subpages="" data-search_url="" id="sidebar_item-1">Requests</div>
 
-            <!-- <div class="sidebar_item" data-param="upcoming, completed,coffee" data-subpages="Upcoming Events, Completed Events,coffee" data-search_url="<?= ROOT ?>" id="sidebar_item-3">Area coordinators</div> -->
-
-            <div class="sidebar_item" data-param="Search" data-subpages="none" id="sidebar_item-100">Search</div>
+            <div class="sidebar_item" data-param="org_search" data-subpages="" data-search_url="<?= ROOT ?>/admin/search_in_org" id="sidebar_item-3">Search</div>
         </div>
 
         <div class="content" id="content_div">
@@ -37,23 +34,26 @@
                 </div>
             </div>
 
+            <div class="grid-12" id="search_holder" style="background-color: #f1f1f1;">
+                <!-- Search bar -->
+                <div class="blank col-lg-2"></div>
+
+                <div class="col-lg-8 m-top-50" style="position: relative;">
+                    <input class="search-field width-100" type="text" name="search_term" id="search_input_div" placeholder="Search oraganizations by name, registration number">
+                    <i class="fa-solid fa-magnifying-glass" style="position:absolute;top:16px;right:64px;"></i>
+                    <div class="" id="result_div">
+                        <!-- <div class="text-r-1">the result</div> -->
+                    </div>
+                </div>
+
+                <div class="blank col-lg-2"></div>
+                <!-- END : Search bar -->
+            </div>
+
             <div class="content_data grid-12" id="content_data"></div>
         </div>
 
         <div class="sidebar s-right" style="float:right;">
-            <!-- Search bar -->
-            <div class="blank col-lg-2"></div>
-
-            <div class="col-lg-8 ">
-                <input class="search-field width-100" type="text" name="search_term" id="search_input_div" placeholder="Search here by name">
-
-                <div class="" id="result_div">
-                    <!-- <div class="text-r-1">the result</div> -->
-                </div>
-            </div>
-
-            <div class="blank col-lg-2"></div>
-            <!-- END : Search bar -->
         </div>
     </div>
     <style>
@@ -94,8 +94,10 @@
     </style>
 </body>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src=" <?= ROOT ?>/assets/admin.main.js"></script>
+<script src=" <?= ROOT ?>/assets/admin.org.js"></script>
 <script src=" <?= ROOT ?>/assets/navbar.js"></script>
 <script src=" <?= ROOT ?>/assets/submenu.js"></script>
 <script src=" <?= ROOT ?>/assets/dropdown.js"></script>

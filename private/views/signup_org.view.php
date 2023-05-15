@@ -148,7 +148,7 @@
 
                 <div style="text-align: center;">
                     <input type="checkbox" name="remember" id="check" style="width: 15px; height: 15px; margin-left: 15%;">
-                    <span style="font-size: 15px; color: #7c89d2;">I agree to terms and conditions</span>
+                    <span style="font-size: 15px; color: #7c89d2; text-decoration:none;"><a href="terms">I agree to terms and conditions</a></span>
                 </div>
 
                 <hr size="1px" noshade style="width: 80%; opacity: 0.1; text-align: center;

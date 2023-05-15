@@ -1,6 +1,7 @@
 <?php $this->view('includes/header') ?>
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/autoload.css">
 <link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/event_page.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/akila_css2/form_validations.css">
 <?php $this->view('includes/navbar') ?>
 <?php $this->view('includes/submenu') ?>
 
@@ -222,6 +223,14 @@
             <div class="blank col-lg-1"></div>
 
         </div>
+        <?php
+        $volunteer_count = 0;
+        if ($event_details->no_of_volunteers) {
+            $volunteer_count = $event_details->no_of_volunteers;
+        }
+        // echo count($volunteer_accepted);
+        // die;
+        ?>
 
 
         <!-- Adding volunteer levels section -->
@@ -234,7 +243,7 @@
                     <div class="heading-2 col-lg-2 p-left-25 p-top-20">Set Volunteer Levels </div>
                     <div class="heading-4 col-lg-2 p-left-25 p-top-5" style="font-weight: 500;">You can have your required volunteers
                         divided into 3 categories according to the dificulty of their respective tasks(optional)</div>
-                    <form method="post" action="event_org/volunteer_levels?id=<?php echo $event_details->event_id ?>">
+                    <form method="post" id="vol_form" action="event_org/volunteer_levels?id=<?php echo $event_details->event_id ?>">
                         <div class="row grid-11">
 
                             <div class="blank col-lg-1"></div>
@@ -252,11 +261,11 @@
                                                                                                                                                                                         ?></textarea>
                                     <br>
                                     <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
-                                    <input class="input-field input-field-sm m-top-6" name="tot-mild" type="number" value="<?php
-                                                                                                                            if (isset($event_details->mild_vol_total)) {
-                                                                                                                                echo $event_details->mild_vol_total;
-                                                                                                                            }
-                                                                                                                            ?>" min="0">
+                                    <input id="num_1" class="input-field input-field-sm m-top-6" max="100" min="0" name="tot-mild" type="number" value="<?php
+                                                                                                                                                        if (isset($event_details->mild_vol_total)) {
+                                                                                                                                                            echo $event_details->mild_vol_total;
+                                                                                                                                                        }
+                                                                                                                                                        ?>" min="0">
                                 </div>
                             </div>
                             <div class="card card-back1 col-lg-3 height-300px m-25">
@@ -273,11 +282,11 @@
                                                                                                                                                                                             ?></textarea>
                                     <br>
                                     <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
-                                    <input class="input-field input-field-sm m-top-6" name="tot-moderate" type="number" value="<?php
-                                                                                                                                if (isset($event_details->moderate_vol_total)) {
-                                                                                                                                    echo $event_details->moderate_vol_total;
-                                                                                                                                }
-                                                                                                                                ?>" min="0">
+                                    <input id="num_2" class="input-field input-field-sm m-top-6" max="100" min="0" name="tot-moderate" type="number" value="<?php
+                                                                                                                                                            if (isset($event_details->moderate_vol_total)) {
+                                                                                                                                                                echo $event_details->moderate_vol_total;
+                                                                                                                                                            }
+                                                                                                                                                            ?>" min="0">
                                 </div>
                             </div>
                             <div class="card card-back1 col-lg-3 height-300px m-25">
@@ -294,18 +303,22 @@
                                                                                                                                                                                         ?></textarea>
                                     <br>
                                     <label for="total" class="heading-4 p-top-12 p-left-15" style="float: left; font-size: 0.9rem;">Amount required</label>
-                                    <input class="input-field input-field-sm m-top-6" name="tot-heavy" type="number" value="<?php
-                                                                                                                            if (isset($event_details->heavy_vol_total)) {
-                                                                                                                                echo $event_details->heavy_vol_total;
-                                                                                                                            }
-                                                                                                                            ?>" min="0">
+                                    <input id="num_3" class="input-field input-field-sm m-top-6" max="100" min="0" name="tot-heavy" type="number" value="<?php
+                                                                                                                                                            if (isset($event_details->heavy_vol_total)) {
+                                                                                                                                                                echo $event_details->heavy_vol_total;
+                                                                                                                                                            }
+                                                                                                                                                            ?>" min="0">
                                 </div>
                             </div>
                             <div class="blank col-lg-1"></div>
+                            <div class="InputControl" id="error_div">
+                                <div class="client-error"></div>
+                            </div>
 
                             <label for="total" class="heading-3 col-lg-2 p-left-25 p-top-12">Total Volunteers</label>
-                            <input class="input-field input-field-block col-lg-2 m-bottom-15 m-left-15 m-top-5" value="00" name="tot" type="text" readonly>
+                            <input class="input-field input-field-block col-lg-2 m-bottom-15 m-left-15 m-top-5" value="<?php echo $volunteer_count ?>" name="tot" type="text" readonly>
                             <div class="blank col-lg-7"></div>
+
 
                         </div>
                         <button class="btn btn-sm btn-green float-right m-top-30 m-bottom-25 m-right-20" type="submit">Save</button></button>
@@ -570,6 +583,64 @@
     ?>
     <!-- Adding images section -->
 
+
 </div>
 
 <?php $this->view('includes/footer') ?>
+<script>
+    const vol_count = <?php echo $volunteer_count ?>;
+
+    const vol_form = document.getElementById('vol_form')
+    const error_div = document.getElementById('error_div')
+    const num_1 = document.getElementById('num_1')
+    const num_2 = document.getElementById('num_2')
+    const num_3 = document.getElementById('num_3')
+
+    // console.log(vol_count)
+    // console.log(num_1.value)
+
+    vol_form.addEventListener('submit', (e) => {
+        console.log(vol_count)
+        e.preventDefault();
+        validateInputs(e);
+
+    });
+
+    const setError = (event, element, message) => {
+        if (element.parentElement) {
+            const inputControl = element.parentElement;
+            const errorDisplay = inputControl.querySelector('.client-error');
+            const txt1 = '&emsp;&emsp;';
+
+            if (message != '') {
+                errorDisplay.innerHTML = txt1.concat("", message);
+            }
+
+            inputControl.classList.add('error');
+            inputControl.classList.remove('success');
+        }
+        event.preventDefault();
+    };
+
+    const setSuccess = element => {
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector('.client-error');
+
+        errorDisplay.innerText = '';
+        inputControl.classList.add('success');
+        inputControl.classList.remove('error');
+        // event_form.submit()
+    };
+
+    const validateInputs = (event) => {
+        const num1_val = num_1.value
+        const num2_val = num_2.value
+        const num3_val = num_3.value
+
+        if (num1_val + num2_val + num_3 < vol_count) {
+            setError(event, error_div, 'You have already accepted more volunteers')
+        } else {
+            vol_form.submit()
+        }
+    }
+</script>
