@@ -5,7 +5,7 @@
             <div class="heading-event txt-al-center m-top-4 m-bottom-4">
                 <?= $event->name ?>
             </div>
-            <!-- <img class="event-image m-bottom-4" src="/img.jpeg" alt="" srcset=""> -->
+            <img class="event-image m-bottom-4" src="<?=ROOT?>/<?=$event->photographs ?>" alt="" srcset="">
 
             <div class="event-date txt-al-center txt-09 w-semibold">Event date - <?= $event->date ?></div>
 
@@ -49,7 +49,8 @@
             </div>
 
             <div class="row-flex jf-center">
-                <button class="btn btn-block btn-green btn-xsm m-top-50">View Details</button>
+                <a style="width: 100%;" href="<?=ROOT?>/Event_org?id=<?=$event->event_id ?>">
+                <button class="btn btn-block btn-green btn-xsm m-top-50">View Details</button></a>
             </div>
         </div>
         <!--end of EVENT-ONGOING -->

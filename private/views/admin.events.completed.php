@@ -13,7 +13,9 @@
                 <div class="event-date txt-al-center txt-12 m-top-30 w-bold">Completed</div>
 
                 <div class="row-flex jf-center">
-                    <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
+                    <a style="width: 100%;" href="<?= ROOT ?>/Event_org?id=<?= $event->event_id ?>">
+                        <button class="btn btn-green btn-block btn-xsm m-top-30">View Details</button>
+                    </a>
                 </div>
             </div>
             <!--end of EVENT-COMPLETED -->

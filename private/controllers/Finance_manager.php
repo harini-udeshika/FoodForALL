@@ -212,8 +212,13 @@ class Finance_manager extends Controller
         // $this->view('admin');
     }
 
-    public function send_rejected_mail(){
-        
+    public function send_rejected_mail()
+    {
+    }
+
+    public function temp12()
+    {
+       print_r($_SESSION['USER']);
     }
 
     // // undo reject

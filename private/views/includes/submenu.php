@@ -57,17 +57,17 @@
         <p>Hello FoodForALL!</p>
     </div>
     <hr>
-    <a href="profile" class="sub-menu-link">
+    <!-- <a href="profile" class="sub-menu-link">
         <i class="fa-solid fa-user"></i>
         <p>Statistics</p>
         <span>></span>
-    </a>
-    <a href="edit_profile" class="sub-menu-link">
+    </a> -->
+    <a href="current_password" class="sub-menu-link">
         <i class="fa-solid fa-pen-to-square"></i>
         <p>Edit profile</p>
         <span>></span>
     </a>
-    <a href="logout" class="sub-menu-link">
+    <a href="<?=ROOT?>/logout" class="sub-menu-link">
         <i class="fa-solid fa-right-from-bracket"></i>
         <p>Log out</p>
         <span>></span>
