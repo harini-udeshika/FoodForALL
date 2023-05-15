@@ -49,19 +49,19 @@
         </div>
 
         <div class="blank col-lg-1"></div>
-        <div class="card-simple col-lg-7 col-sm-12 height-750px">
+        <div class="card-simple col-lg-7 col-sm-12 height-750px" style="overflow:auto;">
             <div class="row grid-11">
                 <div class="heading-2 col-11 width-100" style="text-align: center;">Appointed events</div>
                 <div class="blank col-lg-1"></div>
 
-                <div class="row col-9 grid-9 event_scroll p-right-20 p-top-20">
+                <div class="row col-9 grid-9 event_scroll p-right-20 p-top-20" style="overflow:auto;">
                     <?php
                     $i = 0;
                     if ($ongoing) {
                         $count = sizeof($ongoing);
                         while ($count > 0) { ?>
                             <!-- EVENT -->
-                            <div class="card event-card-on col-lg-3 col-md-3 p-left-20 p-right-20 p-top-10 m-bottom-20 " style="max-height:400px; overflow:auto;">
+                            <div class="card event-card-on col-lg-3 col-md-3 p-left-20 p-right-20 p-top-10 m-bottom-20 " style="max-height:400px;">
 
                                 <img class="event-image m-bottom-1" src="<?= ROOT ?>/<?php echo $ongoing[$i]->thumbnail_pic ?>" alt="" srcset="">
 

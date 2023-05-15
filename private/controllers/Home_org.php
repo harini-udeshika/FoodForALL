@@ -26,6 +26,9 @@ class Home_org extends Controller
         $arr = ['id'=>$org_reg];
         $past = $event->query($query,$arr);
         $allevents = $user->selectAll($org_reg);
+        // echo "<pre>";
+        // print_r($allevents);
+        // die;
 
         $sub_data = $this->isSubscribed();
 

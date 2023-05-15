@@ -40,10 +40,14 @@ if ($past) {
 if ($allevents) {
     $num = 0;
     $count = sizeof($allevents);
+    // echo "<pre>";
+    // print_r($allevents);
+    // die;
 
     while ($count > 0) {
 
         $totamount = $totamount + $allevents[$num]->collected;
+
         // $totamount = $totamount + 50000;
 
         $count--;

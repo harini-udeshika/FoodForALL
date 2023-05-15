@@ -202,9 +202,12 @@ class Organization extends Model
     public function selectAll($org_reg)
     {
         $event_name = new Event();
-        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
+        // $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0 && date>=CURRENT_DATE";
+        $query = "SELECT * FROM event WHERE org_gov_reg_no= :id && approved!=0";
         $arr = ['id' => $org_reg];
         $allEvents = $event_name->query($query, $arr);
+        // echo "hello"
+        // print_r($allEvents);
 
         if ($allEvents) {
             foreach ($allEvents as $event) {
