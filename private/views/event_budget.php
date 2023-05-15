@@ -186,10 +186,11 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                         // print_r($selectted_org_pack_quantity_arr );?>
                          <div class="row txt-al-center p-top-20">
                                 <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quantity</div>
-                                <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size"  name="quantity_new[]" 
+                                <input type="number" min='0' class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size"  name="quantity_new[]" 
                                 value=
                                 "<?php if (isset($selectted_org_pack_quantity_arr["$i"])) {
-                                         echo $selectted_org_pack_quantity_arr[$i];
+                                            
+                                                echo $selectted_org_pack_quantity_arr["$i"]; 
                                     } else {
                                         $selectted_org_pack_quantity_arr[$i]=0;
                                         echo $selectted_org_pack_quantity_arr[$i];
@@ -297,13 +298,13 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                         
                         <div class="row txt-al-center p-top-20">
                             <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quntity</div>
-                            <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity[]" value=<?=$package_data[$i]->package_quantity?>>
+                            <input type="number" min='0' class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity[]"value=<?= $package_data[$i]->package_quantity < 0 ? 0 : $package_data[$i]->package_quantity ?>>
                             <input type="hidden" value='<?=$package_data[$i]->package_id?>' name="package_id[]">
                             <?php $budget_pack2[$i]=($package_data[$i]->package_quantity)*$tot;?>
                         </div>
 
                         <div class="row p-top-20">
-                            <button class="btn btn-sm btn-gray col-6">edit</button>
+                            <!-- <button class="btn btn-sm btn-gray col-6">edit</button> -->
                             <a href="<?= ROOT ?>/event_budget/handle_pack_delete?id=<?= $package_data[$i]->package_id ?>">
                                 <button class="btn btn-sm btn-purple col-6">remove</button>
                             </a>
@@ -358,7 +359,7 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 
             <div class="card col-lg-12 p-top-16 p-bottom-16 p-left-25 p-right-25 m-10 txt-al-center back">
                 <form action="" method="post" name="new_form">
-                    <input class="txt-11 w-semibold package_name_input" name="pack_name" type="text" style="border: solid gray 1px;" placeholder="Package name">
+                    <input class="txt-11 w-semibold package_name_input" name="pack_name" type="text" style="border: solid gray 1px;" placeholder="Package name" required>
 
 
                     <div class="flex al-center jf-btwn p-10 p-top-28 p-bottom-15">
@@ -375,7 +376,7 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
                         </div>
                     </div>
                     <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8">Quantity</div>
-                    <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" name="package_quantity">
+                    <input type="number" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size" min='0' name="package_quantity" required>
 
                     <div class=" row p-top-20">
                         <input type="submit" value="Add package" name="new_form" class="btn btn-sm btn-green col-12">
@@ -391,10 +392,10 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
         <?php $total_budget=$budget1+$budget2;
         $formatted_num = number_format($total_budget, 2, '.', ',')?>
         <div>
-            <form method="post">
-                <div class="row txt-al-center p-top-20">
+            <form method="post"  id="form_total">
+                <div class="row txt-al-center p-top-20 ">
                     <div class="package_items_heading_2 purpleText col-6 p-top-8 p-bottom-8 coor3"><h1>Total Budget    (LKR)</h1></div>
-                    <input type="text" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size1" value="<?=$formatted_num?>" readonly> 
+                    <input type="text" name="total_budget" class="package_text_field purpleText col-6 p-top-8 p-bottom-8 budget_total_num text-size1" value="<?=$formatted_num?>" readonly> 
                 </div>
             </form>
         </div>
@@ -406,29 +407,20 @@ $All_higher_five_children=$detail_fam_higher_five_children+$detail_children_high
 </div>
 
 <div class="button-container">
-            <form action="" method="POST" name="draft">
-            <div class="send" onclick="draft()" id="draft">
-            <input class="button1" value="Draft save" type="submit">
-            </div>
-            </form>
             
-            <form action="" method="post" name="send">
-            <div class="send" onclick="send()" id="send">
-            <button class="button2">Send the budget</button>
-            </div>
-            </form>
+    <!-- <form action="" method="post" name="send"> -->
+    <div class="send" onclick="send()" id="send">
+    <button class="button2">Send the budget</button>
+    </div>
+    <!-- </form> -->
             
             
-        </div>
+</div>
 
 <script>
-    function draft(){
-    var form=document.getElementById("draft"); //budget draft
-    form.submit();
-}
 
 function send(){
-    var form=document.getElementById("send"); // budget send
+    var form=document.getElementById("form_total"); // budget send
     form.submit();
 }
 </script>

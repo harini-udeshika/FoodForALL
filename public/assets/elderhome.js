@@ -67,7 +67,7 @@ function inputChecker(){
             // show error
             setErrorFor(nic, 'NIC number cannot be blank');  
         }
-        else if(nicValue.length<10||nicValue.length>11){
+        else if(nicValue.length<10||nicValue.length<11){
             setErrorFor(nic, 'Enter valid NIC');  
         }
         else{
@@ -90,7 +90,7 @@ function inputChecker(){
             setErrorFor(contact1, 'Contact details cannot be blank');
             
         }
-        else if(contact1Value.length<10 ||contact1Value.length>12){
+        else if(contact1Value.length<10){
             setErrorFor(contact1, 'Enter valid contact details');
         }
         else{

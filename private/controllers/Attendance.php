@@ -18,7 +18,10 @@ class Attendance extends Controller
             // 'event_budget?eid='. urlencode($eventid)
             
             if(isset($_POST['id'])){
-                $query2="UPDATE attendance SET attendance=1 WHERE volunteer_nic='$decrypted' AND event_id='$eid'" ;
+
+                $query2="UPDATE volunteer SET volunteer.attendance=1 
+                LEFT JOIN user ON user.id=volunteer.user_id
+                WHERE user.nic='$decrypted' AND event_id='$eid'" ;
                 $manager->query($query2);
                 // header('Location: attendance?eid=' . $eid);
                 exit();

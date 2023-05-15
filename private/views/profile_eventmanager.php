@@ -25,7 +25,6 @@
                     <form method="post" action="./delete_pic.php" class="remove_form"><button type="submit"
                             class="remove_button">Remove</button> </form>
                 </div>
-                <a href="current_password"><button class="change-pwd">Change Password</button></a>
             </div>
 
             <div class="profile-details">
@@ -35,7 +34,7 @@
 
                         <div class="f1">
                             <label for="first-name">Name</label>
-                            <input type="text" value="<?php echo $rows->full_name?>" class="small" name="name" >
+                            <input type="text" value="<?php echo $rows->full_name?>" class="small" name="name" required>
                         </div>
 
                         <div class="f2">

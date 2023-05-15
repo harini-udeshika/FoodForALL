@@ -36,12 +36,12 @@
                         <div class="f1">
                             <label for="name">Name</label>
                             <input type="text" value="<?php echo $rows->name?>" class="small"
-                                name="name" >
+                                name="name" required >
                         </div>
                     </div>
                     <div class="f3">
                         <label for="NIC">NIC</label>
-                        <input type="text" value="<?php echo $rows->nic?>" class="small" name="nic">
+                        <input type="text" value="<?php echo $rows->nic?>" class="small" name="nic" required>
                     </div>
 
                     <div class="f4">

@@ -9,6 +9,20 @@ class Childrentable extends Controller
         }
 
         $user=new Childrenhome();
+
+       //cannot delete selected childrenhomes
+        $query10="SELECT childrenhome.id AS id from childrenhome INNER JOIN select_details ON select_details.detail_id=childrenhome.id
+        LEFT JOIN event ON event.event_id=select_details.event_name WHERE (
+        (approved = 1 AND budget = 1 AND launch = 0 AND date > CURDATE()) OR   /*still not launch>*/
+        (approved=0 AND budget=1 And launch=0  AND date > CURDATE()) OR /* Approve pending- financial actor */
+        (approved=0 AND budget=2 And launch=0  AND date > CURDATE()) OR /* budget  created still draft does not send to the financial actor*/
+        (approved=3 AND budget=1 And launch=0  AND date > CURDATE()) OR /*request to modify*/ 
+        (approved=1 AND budget=1 AND launch=1 AND date >= CURDATE())) /* ongoing*/
+        AND select_details.catagory='childrenhome'
+        AND select_details.detail_id=childrenhome.id "; 
+
+        $data10=$user->query($query10);
+
         if(isset($_GET['find1'],$_GET['find2'])){
             // $find1=trim($_GET['find1']," ");
             $find1 = $_GET['find1'];
@@ -20,14 +34,14 @@ class Childrentable extends Controller
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('childrentable',['row'=>$data]);
+                    $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                 }else{
                     $new2=$find2;
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND address LIKE '%$new2%' ORDER BY id ASC";
                     // print($new2);
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('childrentable',['row'=>$data]);
+                    $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                 }
                 
             }else{
@@ -36,13 +50,13 @@ class Childrentable extends Controller
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND CONCAT(Name,OwnerName) LIKE '%$new%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('childrentable',['row'=>$data]);
+                    $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                 }else{
                     $new2=$find2;
                     $query = "SELECT * FROM childrenhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND CONCAT(Name,OwnerName) LIKE '%$new%' AND address LIKE '%$new2%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('childrentable',['row'=>$data]);
+                    $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                 }
             } 
         }
@@ -65,13 +79,13 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
                             (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }else{
                         if($higher_five_childrenMax && $higher_five_childrenMin>0){
@@ -80,13 +94,13 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
                             (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) )  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }
             
@@ -98,13 +112,13 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax) AND
                             (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }else{
                         if($higher_five_childrenMax && $higher_five_childrenMin>0){
@@ -112,12 +126,12 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((children_num BETWEEN $memberMin AND $memberMax))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }
                 }
@@ -130,13 +144,13 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                             (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) AND (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }else{
                         if($higher_five_childrenMax && $higher_five_childrenMin>0){
@@ -145,13 +159,13 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                             (less_one_children BETWEEN $less_one_childrenMin AND $less_one_childrenMax ) )  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }
             
@@ -163,13 +177,13 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                             (less_five_children BETWEEN $less_five_childrenMin AND $less_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }else{
                         if($higher_five_childrenMax && $higher_five_childrenMin>0){
@@ -177,12 +191,12 @@ class Childrentable extends Controller
                             (higher_five_children BETWEEN $higher_five_childrenMin AND $higher_five_childrenMax ))  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }else{
                             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}'  ORDER BY id ASC";
                             $data = $user->query($query);
                             // print($query);
-                            $this->view('childrentable',['row'=>$data]);
+                            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
                         }
                     }
                 }
@@ -193,7 +207,7 @@ class Childrentable extends Controller
             $query = "SELECT * FROM childrenhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
             $data = $user->query($query);
             // print($query);
-            $this->view('childrentable',['row'=>$data]);
+            $this->view('childrentable',['row'=>$data,'row10'=>$data10]);
         }
 
         

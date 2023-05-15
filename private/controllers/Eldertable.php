@@ -9,6 +9,20 @@ class Eldertable extends Controller
         }
 
         $user=new Elderhome();
+
+        //can not delete selected elderhome
+        $query10="SELECT elderhome.id AS id from elderhome INNER JOIN select_details ON select_details.detail_id=elderhome.id
+        LEFT JOIN event ON event.event_id=select_details.event_name WHERE (
+        (approved = 1 AND budget = 1 AND launch = 0 AND date > CURDATE()) OR   /*still not launch>*/
+        (approved=0 AND budget=1 And launch=0  AND date > CURDATE()) OR /* Approve pending- financial actor */
+        (approved=0 AND budget=2 And launch=0  AND date > CURDATE()) OR /* budget  created still draft does not send to the financial actor*/
+        (approved=3 AND budget=1 And launch=0  AND date > CURDATE()) OR /*request to modify*/ 
+        (approved=1 AND budget=1 AND launch=1 AND date >= CURDATE())) /* ongoing*/
+        AND select_details.catagory='elderhome'
+        AND select_details.detail_id=elderhome.id "; 
+
+        $data10=$user->query($query10);
+        // print_r($query10);
         if(isset($_GET['find1'],$_GET['find2'])){
             $find1 = $_GET['find1'];
             $find2 = $_GET['find2'];
@@ -20,14 +34,14 @@ class Eldertable extends Controller
                     $query = "SELECT * FROM elderhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('eldertable',['row'=>$data]);
+                    $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                 }else{
                     $new2=$find2;
                     $query = "SELECT * FROM elderhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND address LIKE '%$new2%' ORDER BY id ASC";
                     // print($new2);
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('eldertable',['row'=>$data]);
+                    $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                 }
                 
             }else{
@@ -36,13 +50,13 @@ class Eldertable extends Controller
                     $query = "SELECT * FROM elderhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND CONCAT(Name,OwnerName) LIKE '%$new%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('eldertable',['row'=>$data]);
+                    $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                 }else{
                     $new2=$find2;
                     $query = "SELECT * FROM elderhome WHERE 	areacoordinator_email='{$_SESSION["USER"]->email}' AND CONCAT(Name,OwnerName) LIKE '%$new%' AND address LIKE '%$new2%' ORDER BY id ASC";
                     $data = $user->query($query);
                     // print($query);
-                    $this->view('eldertable',['row'=>$data]);
+                    $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                 }
             } 
         }
@@ -68,14 +82,14 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -84,14 +98,14 @@ class Eldertable extends Controller
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -103,14 +117,14 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -118,13 +132,13 @@ class Eldertable extends Controller
                                 (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -138,13 +152,13 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -153,13 +167,13 @@ class Eldertable extends Controller
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -171,13 +185,13 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) AND
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -185,12 +199,12 @@ class Eldertable extends Controller
                                 (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND ((members BETWEEN $memberMin AND $memberMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -206,14 +220,14 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -222,14 +236,14 @@ class Eldertable extends Controller
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -241,14 +255,14 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) AND 
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -256,13 +270,13 @@ class Eldertable extends Controller
                                 (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) AND (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (Healthy_adults BETWEEN $healthyadultsMin AND $healthyadultsMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -276,13 +290,13 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) AND (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -291,13 +305,13 @@ class Eldertable extends Controller
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (both_patients BETWEEN $bothMin AND $bothMax))  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -309,13 +323,13 @@ class Eldertable extends Controller
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' AND (
                                 (Diabetes_patients BETWEEN $diabetesMin AND $diabetesMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }
                          }else{
                             if($cholesterolMax && $cholesterolMin>0){
@@ -323,12 +337,12 @@ class Eldertable extends Controller
                                 (cholesterol_patients BETWEEN $cholesterolMin AND $cholesterolMax) )  ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              }else{
                                 $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
                                 $data = $user->query($query);
                                 // print($query);
-                                $this->view('eldertable',['row'=>$data]);
+                                $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
                              } 
                          }
                         
@@ -342,7 +356,7 @@ class Eldertable extends Controller
             $query = "SELECT * FROM elderhome WHERE areacoordinator_email='{$_SESSION["USER"]->email}' ORDER BY id ASC";
             $data = $user->query($query);
             // print($query);
-            $this->view('eldertable',['row'=>$data]);
+            $this->view('eldertable',['row'=>$data,'row10'=>$data10]);
         }
     }
 
