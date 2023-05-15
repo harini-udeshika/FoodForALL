@@ -124,7 +124,8 @@ const validateInputs = (event) => {
 
 async function validateSubscription() {
     try {
-        const response = await fetch("http://localhost/FoodForAll/public/add_event/isSubscribed/")
+        // const response = await fetch("http://localhost/FoodForAll/public/add_event/isSubscribed/")
+        const response = await fetch("http://localhost/food_for_all/public/add_event/isSubscribed/")
         const data = await response.text()
         console.log(data)
         if (data == "TRUE") {

@@ -58,15 +58,19 @@ class Event extends Model
                 $user_data = $user->where('id', $vols->user_id);
                 $user_data = $user_data['0'];
 
-                $image = "http://localhost/FoodForAll/public/" . $vols->qr_code;
-                // $image = "http://localhost/food_for_all/public/" . $vols->qr_code;
+                // $image = "http://localhost/FoodForAll/public/" . $vols->qr_code;
+                $image = "http://localhost/food_for_all/public/" . $vols->qr_code;
 
 
                 $receipient = $user_data->email;
                 $subject = "Event Reminder FoodForALL";
-                // $message = "Hello " . $user_data->first_name . ",/nWe would like to inform 
-                //             you that your request to volunteer for the event " . $event_data->name . " has been accepted";
-                $message = strtr(file_get_contents('http://localhost/FoodForAll/private/views/reminder_mail.html'), array(
+                
+                // $message = strtr(file_get_contents('http://localhost/FoodForAll/private/views/reminder_mail.html'), array(
+                //     '%event_name%' => $event_data->name,
+                //     '%date%' => $event_data->date,
+                //     '%image%' => $image
+                // ));
+                $message = strtr(file_get_contents('http://localhost/food_for_all/private/views/reminder_mail.html'), array(
                     '%event_name%' => $event_data->name,
                     '%date%' => $event_data->date,
                     '%image%' => $image

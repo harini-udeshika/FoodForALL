@@ -63,7 +63,7 @@ class Login extends Controller
                             $this->redirect('/email_verify');
                         }
                     } else {
-                        $this->redirect('/home');
+                        $this->redirect('/Processing_request');
                     }
                 } else {
                     // echo("wrong password");
