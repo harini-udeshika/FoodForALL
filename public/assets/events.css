@@ -760,3 +760,21 @@ h4{
     visibility: visible;
     color: #ff8477;
 }
+
+.describe{
+    font-size: 16px;
+    font-weight:600
+}
+
+.title{
+    font-size: 20px;
+    font-weight:800
+}
+
+.card_1{
+    height: 300px;
+}
+
+.non_boder{
+    border: none;
+}
