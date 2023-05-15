@@ -5,9 +5,18 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/add.css">
 <?php $this->view('includes/navbar');?>
-<?php $this->view('includes/submenu');?>
+<?php $this->view('includes/submenu');
+$detail1 = array();
 
-
+if (!empty($row10)) {
+// print('row1');
+    $count = count($row10);
+    for ($i = 0; $i < $count; $i++) {
+        $detail1[$i] = $row10[$i]->id;
+    }
+}
+// print_r($detail1);
+?>
 <div class="coor">Elders' Home Details
     
 </div><br>
@@ -86,7 +95,7 @@
 </div>
 </section>
 <div class="add1"> 
-  <button class="add add2"><a href="./elderhomedetails" >Add +</a></button>
+  <button class="add"><a href="./elderhomedetails" class="add2">Add +</a></button>
 </div>
 
 
@@ -130,8 +139,13 @@
             <td><?=$row[$i]->cholesterol_patients?></td>
             <td><?=$row[$i]->Diabetes_patients?></td>
             <td ><?=$row[$i]->both_patients?></td>
+            <?php
+                 if( !in_array($row[$i]->id,$detail1)){?>
             <td><a href="<?=ROOT?>/elderhomedetails_edit?updateid=<?=$row[$i]->id?>" class="Edit" title="update"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
             <a href="<?=ROOT?>/eldertable/delete?deleteid=<?=$row[$i]->id?>" title="Delete"><i class="fa-solid fa-trash-can"></i></a></td>
+            <?php }
+                else{?>
+                <td><i class="fa-solid fa-ban"></i></td><?php }?>
         </tr>
         <?php $count--;
                     $i++;

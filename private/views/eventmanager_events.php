@@ -25,12 +25,12 @@
             <div class="title w-semibold col-3 p-right-15">Event</div>
             <div class="details col-5"><?=$rows1[$i]->name?>
             <span>
+
             <?php if($rows1[$i]->date==date("Y-m-d")){?>
             <a href="<?= ROOT ?>/attendance?eid=<?=$rows1[$i]->event_id?>"><i class="fa-solid fa-clipboard-user fa-beat fa-2xl" title="mark attendence"></i></a>
             <?php }?>
             </span>
             </div>
-            
           </div>
         </div>
         <div class="m-bottom-10">

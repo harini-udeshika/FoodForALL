@@ -42,10 +42,16 @@ class Event_budget extends Controller
             ON food_pack_new_eventmanager.eid = food_pack_new_eventmanager.eid
             where food_pack_new_eventmanager.eid='$eventid'";//event managers new food packages
 
-            $query5= "SELECT food_pack.package_id,food_pack.photograph,food_pack.package_name,food_pack.item_price,food_pack.item_name,food_pack.org_gov_reg_no,food_pack.quantity,COALESCE(selected_pakage_org.quantity, 0) AS selected_package_org_quantity FROM  food_pack 
+            $current_datetime = date('Y-m-d H:i:s');
+            $current_date = date('Y-m-d');
+
+            $query5= "SELECT food_pack.package_id, food_pack.photograph, food_pack.package_name, food_pack.item_price, food_pack.item_name, food_pack.org_gov_reg_no, food_pack.quantity, COALESCE(selected_pakage_org.quantity, 0) AS selected_package_org_quantity 
+            FROM food_pack 
             INNER JOIN eventmanager ON food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no
-            LEFT JOIN selected_pakage_org ON selected_pakage_org.eid='$eventid' WHERE 
-            food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no"; //organization food packages 
+            LEFT JOIN selected_pakage_org ON selected_pakage_org.eid='$eventid' 
+            LEFT JOIN event ON event.event_id='$eventid' 
+            WHERE (TIMESTAMPDIFF(minute, food_pack.added_date,  '$current_datetime') > 30 )  AND (event.created_date > food_pack.deactivated_date OR food_pack.deactivated=0 )
+            AND food_pack.org_gov_reg_no = eventmanager.org_gov_reg_no";//organization food packages  select only after add the package
 
             if (count($_POST) > 0) {
                 // print_r($_POST);
@@ -57,6 +63,7 @@ class Event_budget extends Controller
                     $i_name = $_POST['item_name'];
                     $price = $_POST['price'];
                     $quantity = $_POST['quantity'];
+                    
                     echo "<pre>";
                     // print_r($i_name);
                     // print_r($price);
@@ -112,22 +119,14 @@ class Event_budget extends Controller
                         $query_2 = "UPDATE food_pack_new_eventmanager SET package_quantity = $quantity WHERE package_id = $pack_id";
                         $food_pack->query($query_2);
                     }
-                }elseif(isset($_POST['send'])){
+                }elseif(isset($_POST['total_budget'])){
 
-                    $event=new Eventmanager;
-                    $query_8 = "UPDATE event SET budget = 1 WHERE event_id = $eventid";
+                    $event=new Event;
+                    $budget=$_POST['total_budget'];
+                    $query_8 = "UPDATE event SET budget = 1 , total_amount='$budget' WHERE event_id = $eventid";
                     print_r($query_8);
                     $event->query($query_8);
                     $this->redirect('Eventmanager_myevents');
-                }
-                elseif(isset($_POST['draft'])) {
-                    $event=new Eventmanager;
-                    $query_9 = "UPDATE event SET budget = 2 WHERE event_id = $eventid";
-                    $event->query($query_9);
-                    $this->redirect('Eventmanager_myevents');
-                }
-                else{
-                    echo "hi";
                 }
                
             }
@@ -148,13 +147,20 @@ class Event_budget extends Controller
 
     
 
-    public function handle_pack_delete()
-{
-    if(isset($_GET['id'])){
-        $delete = intval($_GET['id']); // Sanitize the id parameter
-        $food_pack = new Pack();
-        $food_pack->delete_pack($delete);
-    }
+    public function handle_pack_delete() {
+        if (isset($_GET['id'])) {
+          $delete = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+          $food_pack = new Pack();
+          $food_pack->delete_pack($delete);
+          // Redirect the user to a page that displays a success message
+          header('Location: /event_budget/pack_deleted');
+          exit();
+        } else {
+          // Redirect the user to an error page if the ID parameter is not set
+          header('Location: /event_budget/delete_error');
+          exit();
+        }
+      
     // Redirect or display a success message
 }
 

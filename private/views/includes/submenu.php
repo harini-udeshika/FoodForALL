@@ -163,9 +163,9 @@ if ($data->profile_pic) {
         <p>View profile</p>
         <span>></span>
     </a>
-    <a href="profile_eventmanager" class="sub-menu-link">
-        <i class="fa-solid fa-pen-to-square"></i>
-        <p>Edit profile</p>
+    <a href="eventmanager_change_password" class="sub-menu-link">
+    <i class="fa-solid fa-key" style="color:#7681BF"></i>
+        <p>Change password</p>
         <span>></span>
     </a>
     <a href="logout" class="sub-menu-link">

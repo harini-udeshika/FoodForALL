@@ -63,7 +63,7 @@
                         $k++;
                 }
             } 
-    if($rows3){
+    elseif($rows3){
       $count1=count($rows3);
       while($count1>0){?>
     
@@ -111,7 +111,7 @@
                         $i++;
                 }
             } 
-            if($rows4){
+            elseif($rows4){
                 $count2=count($rows4);
                 while($count2>0){?>
               

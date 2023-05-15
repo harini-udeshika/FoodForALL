@@ -5,7 +5,16 @@
 <link rel="stylesheet" href="<?=ROOT?>/assets/area_css/nav.css">
 <link rel="stylesheet" href="<?=ROOT?>/assets/add.css">
 <?php $this->view('includes/navbar');?>
-<?php $this->view('includes/submenu');?>
+<?php $this->view('includes/submenu');
+
+if (!empty($row10)) {
+    // print('row1');
+        $count = count($row10);
+        for ($i = 0; $i < $count; $i++) {
+            $detail1[$i] = $row10[$i]->id;
+        }
+    }
+?>
 
 <div class="coor">Children's Home Details
     
@@ -126,9 +135,15 @@
             <td ><?=$row[$i]->less_one_children?></td>
             <td ><?=$row[$i]->less_five_children?></td>
             <td ><?=$row[$i]->higher_five_children?></td>
+        <?php
+            if( !in_array($row[$i]->id,$detail1)){?>
             <td><a href="<?=ROOT?>/childrenhomedetails_edit?updateid=<?=$row[$i]->id?>" class="Edit" title="update"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
             <a href="<?=ROOT?>/childrentable/delete?deleteid=<?=$row[$i]->id?>" title="Delete"><i class="fa-solid fa-trash-can"></i></a></td>
+        <?php }
+            else{?>
+            <td><i class="fa-solid fa-ban"></i></td><?php }?>
         </tr>
+
        
         <?php $count--;
                     $i++;
