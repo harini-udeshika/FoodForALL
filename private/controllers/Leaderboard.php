@@ -12,12 +12,11 @@ class Leaderboard extends Controller
         GROUP BY user.id ORDER BY tot_amount DESC";
         $arr = [
 
-        ];
-
+        ]; 
+        //calling ranking function to get user ranks
         $data = $user->query($query);
         $data_ranked = $donor->ranking($data);
-        // print_r($data_ranked);
-        //print_r($data);
+        
         $this->view('leaderboard', ['data' => $data_ranked]);
         }
         else{

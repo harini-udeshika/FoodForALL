@@ -4,7 +4,10 @@ class Eventpage extends Controller
 
     public function index()
     {
-        $event = new Event();
+        if(Auth::logged_in()){
+            
+        }
+        $event = new Event(); 
         $org = new Organization();
         $requests = new Volunteer_request();
         $donate = new Donate();
@@ -116,14 +119,12 @@ class Eventpage extends Controller
               
                 // $this->view('eventpage?id='.$data[1]);
             }
-            $this->redirect('events');
+            // $this->redirect('events');
         }
 
-        else if(!Auth::logged_in()){
-            $this->redirect('login');
-        }
+       
         else {
-            $this->view('404');
+            $this->redirect('404');
         }
 
         

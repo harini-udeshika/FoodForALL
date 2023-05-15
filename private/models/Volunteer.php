@@ -13,7 +13,7 @@ class Volunteer extends Model
                 $arr[$i]->average_v = 0;
                 $arr[$i]->heavy_v = 0;
                 if ($arr[$i]->volunteer_type == "mild") {
-                    $arr[$i]->marks += $arr[$i]->v_count * 5;
+                    $arr[$i]->marks += $arr[$i]->v_count * 5; 
                     $arr[$i]->mild_v = $arr[$i]->v_count;
 
                 }

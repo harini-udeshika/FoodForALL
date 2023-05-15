@@ -126,7 +126,7 @@ class Shop extends Controller
         // echo($org_id);
         if (isset($_GET['item'])) {
 
-            $_SESSION['timeout'] = 1 * 10;
+            $_SESSION['timeout'] = 1 * 60 * 10;
             if (isset($_SESSION['timeout'])) {
                 if (isset($_SESSION['CART' . $org_id]) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $_SESSION['timeout']) {
                     foreach ($_SESSION['CART' . $org_id] as $key => $product) {

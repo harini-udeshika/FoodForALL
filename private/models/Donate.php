@@ -1,6 +1,7 @@
 <?php
 class Donate extends Model{
     protected $table ="donate";
+    //arrange donors donated amount according to the descending order of the donations
     public function ranking($arr){
         $place=1;
         $flag=0;
@@ -16,7 +17,7 @@ class Donate extends Model{
                 $arr[$i+1]->place=$place;
                 $flag=0;
                
-            }
+            } 
             else{
                 $arr[$i+1]->place=$place;
                 $flag++;
