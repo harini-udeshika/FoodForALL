@@ -242,13 +242,13 @@
     // }
 
     function before_delete(manager_email) {
-        fetch("http://localhost/FoodForAll/public/add_managers/before_delete/" + manager_email)
+        fetch("http://localhost/food_for_all/public/add_managers/before_delete/" + manager_email)
             .then(response => response.text()).then(data => setpopup_delete(data, manager_email))
             .catch(error => console.log(error))
     }
 
     function delete_manager(manager_email) {
-        fetch("http://localhost/FoodForAll/public/add_managers/delete_manager/" + manager_email).then(response => {
+        fetch("http://localhost/food_for_all/public/add_managers/delete_manager/" + manager_email).then(response => {
             response.text()
         }).then(data => {
             setpopup_done()

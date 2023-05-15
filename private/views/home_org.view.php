@@ -139,38 +139,38 @@ if ($allevents) {
 
 
 
-<div class="center-box-border" style="
+<!-- <div class="center-box-border" style="
     text-align: center; width: 1000px; height: 300px; margin-top: 50px; background-color:white; padding: 20px;">
 
     <div class="card-simple col-lg-12 height-auto width-90" style="border: none;">
         <div class="row height-auto width-960px" style="background-color:white;">
-            <!-- each image -->
+            each image
             <div class="added_image_holder col-4 m-15">
                 <div class="photo_holder"></div>
                 <div class="row-flex jf-center">
-                    <!-- <button class="btn btn-sm btn-gray remove_button">Remove</button> -->
+                    <button class="btn btn-sm btn-gray remove_button">Remove</button>
                 </div>
             </div>
 
-            <!-- each image -->
+            each image
             <div class="added_image_holder col-4 m-10">
                 <div class="photo_holder"></div>
                 <div class="row-flex jf-center">
-                    <!-- <button class="btn btn-sm btn-gray remove_button">Remove</button> -->
+                    <button class="btn btn-sm btn-gray remove_button">Remove</button>
                 </div>
             </div>
 
-            <!-- each image -->
+            each image
             <div class="added_image_holder col-4 m-10">
                 <div class="photo_holder"></div>
                 <div class="row-flex jf-center">
-                    <!-- <button class="btn btn-sm btn-gray remove_button">Remove</button> -->
+                    <button class="btn btn-sm btn-gray remove_button">Remove</button>
                 </div>
             </div>
         </div>
     </div>
 
-</div><br><br>
+</div><br><br> -->
 
 
 <h1 style="font-family: consolas; color: #000000; text-align: center;">Ongoing Events</h1>

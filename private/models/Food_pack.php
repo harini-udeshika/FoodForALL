@@ -6,7 +6,7 @@ class Food_pack extends Model{
     {
         $query = "delete from $this->table where package_id = :pack_id";
         $query = "UPDATE $this->table
-        SET deactivated = 1, deleted_date = NOW()
+        SET deactivated = 1, deactivated_date = CURDATE()
         WHERE package_id = :pack_id";
         $data['pack_id'] = $id;
         return $this->query($query, $data);
