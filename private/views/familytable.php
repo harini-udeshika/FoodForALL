@@ -131,8 +131,8 @@ if (!empty($row10)) {
             <th >NIC</th>
             <th >Profession</th>
             <th >Net Salary</th>
-            <th >Lane Phone Number</th>
             <th >Mobile Phone Number</th>
+            <th >Lane Phone Number</th>
             <th >Address</th>
             <th >Family Members</th>
             <th >Age of the children below 1 <br>(age<1)</th>

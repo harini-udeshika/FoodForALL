@@ -12,7 +12,7 @@
 </p>
 <a href="shop?id=<?=$org->gov_reg_no?>"><button>Explore the shop&nbsp;&nbsp;<i class="fa-solid fa-cart-shopping"></i></button></a>
 </div>
-<?php if ($rows->date < date("Y-m-d")): ?>
+<?php if ($rows->date < date("Y-m-d")): ?> 
 <?php $image_arr = explode(',', $rows->photographs)?>
 <div class="whole">
     <div class="stats">
@@ -122,7 +122,7 @@
             </div>
             <div><i class="fa-solid fa-sack-dollar fa-2xl"></i>
                 <p>Need more</p>
-                <p class="green"><?=$rows->total_amount - $amount?> LKR</p>
+                <p class="green" id="required"><?=$rows->total_amount - $amount?> LKR</p>
             </div>
             <div><i class="fa-solid fa-hourglass-start fa-2xl"></i>
                 <p>Closing date</p>
@@ -135,8 +135,10 @@
     <div class="card">
         <h2><b>Donate</b></h2>
         <p>Amount</p>
-        <form method="POST">
+        <form method="POST" id ="donate">
+        
             <div class="small-cards">
+               
                 <div class="button">
                     <input type="radio" name="packet" value="300" />
                     <label class="btn one" for="a25">1 packet Rs.300</label>
@@ -152,8 +154,10 @@
             </div>
        
             <p>OR</p>
-       
-            <input type="text" placeholder="Other Amount" name="amount">
+            <?php if($error):?>
+            <small id="error">You can't enter amount exceeding total</small>
+            <?php endif?>
+            <input type="number" placeholder="Other Amount" name="amount" id="inputvalue">
             <button class="continue">Continue</button>
         </form>
 
@@ -264,5 +268,6 @@
 </div>
 <?php endif?>
 <?php endif?>
+<!-- <script src="<?=ROOT?>/assets/eventpage.js"></script> -->
 <script src="<?=ROOT?>/assets/map_user.js"></script>
 <?php $this->view('includes/footer')?>

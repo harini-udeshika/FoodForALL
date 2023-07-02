@@ -202,7 +202,7 @@ class Admins extends Model
 
 
         // calcucalte data for chart 1 - most donated organizations
-        $query = "SELECT o.name, SUM(d.amount) AS total_donations FROM donate d JOIN event e ON d.event_id = e.event_id JOIN organization o ON e.org_gov_reg_no = o.gov_reg_no GROUP BY o.name ORDER BY total_donations DESC";
+        $query = "SELECT o.name, SUM(d.amount) AS total_donations FROM donate d JOIN event e ON d.event_id = e.event_id JOIN organization o ON e.org_gov_reg_no = o.gov_reg_no  ORDER BY total_donations DESC";
 
         $org_donations = $this->query($query);
 

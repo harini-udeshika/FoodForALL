@@ -151,6 +151,18 @@ if (file_exists($rows->profile_pic)) {
 <div class="activities_section" id="activities">
     <div class="heading_activities">
         <p>Recent Activities</p>
+        <form action="">
+
+
+<label for="category">category</label>
+<select name="category" id="category" >
+    <option value="default" >default</option>
+    <option value="mild" >mild</option>
+    <option value="moderate" >moderate</option>
+    <option value="heavy" >heavy</option>
+</select>
+<button class="search-btn">Search</button>
+</form>
     </div>
     <?php if (!$event_data): ?>
     <div class="no_cert"><i class="fa-solid fa-chart-line fa-xl"></i>&nbsp;&nbsp;&nbsp;<p>No activities yet!
@@ -253,6 +265,7 @@ $i = 0;?>
 
     </div>
     <div class="summary">
+        
         <div class="text">
             Total Volunteered Events
         </div>

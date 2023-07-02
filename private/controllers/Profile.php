@@ -28,14 +28,29 @@ class Profile extends Controller
 
             $data = $data[0];
             $v_id = $id;
-            $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
-        FROM volunteer
-        INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
-            $arr = [
-                'v_id' => $v_id,
-
-            ];
-            $event_data = $user->query($query, $arr);
+            //volunteer data
+            if(isset($_GET['category'])){
+                $v_type = $_GET['category'];
+                $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
+                FROM volunteer
+                INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id  && volunteer.volunteer_type= :v_type order by event.date desc";
+                    $arr = [
+                        'v_id' => $v_id,
+                        'type'=>$v_type
+                    ];
+                    $event_data = $user->query($query, $arr);
+            }
+            else{
+                $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
+                FROM volunteer
+                INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
+                    $arr = [
+                        'v_id' => $v_id,
+        
+                    ];
+                    $event_data = $user->query($query, $arr);
+            }
+         
             //echo($event_data[1]->name);
             $query = "SELECT donate.amount,donate.date_time,event.name
         FROM donate
@@ -106,14 +121,49 @@ class Profile extends Controller
             }
             $data = $data[0];
             $v_id = Auth::getid();
-            $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.event_id,event.date,event.org_gov_reg_no
-            FROM volunteer
-            INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
-            $arr = [
-                'v_id' => $v_id,
+            if(isset($_GET['category'])){
+                $v_type = $_GET['category'];
+                if($v_type =='default')
+                {
+                    $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
+                    FROM volunteer
+                    INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
+                        $arr = [
+                            'v_id' => $v_id,
+            
+                        ];
+                        $event_data = $user->query($query, $arr);
+                }
+                else{
+                    $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
+                    FROM volunteer
+                    INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id  && volunteer.volunteer_type= :v_type order by event.date desc";
+                        $arr = [
+                            'v_id' => $v_id,
+                            'v_type'=>$v_type
+                        ];
+                        $event_data = $user->query($query, $arr);
+                }
+                
+            }
+            else{
+                $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.date,event.org_gov_reg_no
+                FROM volunteer
+                INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
+                    $arr = [
+                        'v_id' => $v_id,
+        
+                    ];
+                    $event_data = $user->query($query, $arr);
+            }
+            // $query = "SELECT volunteer.volunteer_type,volunteer.user_id,event.name,event.event_id,event.date,event.org_gov_reg_no
+            // FROM volunteer
+            // INNER JOIN event ON volunteer.event_id=event.event_id WHERE volunteer.user_id= :v_id order by event.date desc";
+            // $arr = [
+            //     'v_id' => $v_id,
 
-            ];
-            $event_data = $user->query($query, $arr);
+            // ];
+            // $event_data = $user->query($query, $arr);
             $query="SELECT event.name, event.event_id
             FROM volunteer 
             INNER JOIN event ON volunteer.event_id = event.event_id 

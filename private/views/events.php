@@ -40,7 +40,7 @@ $districts = array(
 
 
         <div class="filter">
-            <p>Filter by</p>
+            <p>Filter by</p> 
             <form action="">
 
             <label for="date" >Date</label>

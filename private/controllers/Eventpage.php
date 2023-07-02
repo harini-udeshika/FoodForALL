@@ -4,14 +4,25 @@ class Eventpage extends Controller
 
     public function index()
     {
-        if(Auth::logged_in()){
-            
-        }
+       
         $event = new Event(); 
         $org = new Organization();
         $requests = new Volunteer_request();
         $donate = new Donate();
         
+$error=false;
+        
+        if (isset($_GET['id'])) {
+
+            $id = $_GET['id'];
+        }
+        $data = $event->where("event_id", $id);
+       
+        $donor = new Donate();
+        $query = "SELECT SUM(amount) AS total FROM donate WHERE status=1 && event_id= :id";
+        $amount = $donor->query($query, ['id' => $id]);
+        $amount = ($amount[0]->total);
+        $donorp = ($amount / $data[0]->total_amount) * 100;
         // donating process
         if (isset($_POST['amount']) || isset($_POST['packet'])) {
             // print_r($_POST);
@@ -36,7 +47,13 @@ class Eventpage extends Controller
             $order_id = $order_id[0]->donation_id;
             $arr1['name'] = $data[0]->name;
             $arr1['id'] = $order_id;
-            donate_checkout($arr1);  
+            if($arr1['amount']> $data[0]->total_amount){
+                $error=true;
+            }
+            else{
+                donate_checkout($arr1); 
+            }
+             
         }
 
         if (isset($_GET['id'])) {
@@ -91,7 +108,8 @@ class Eventpage extends Controller
                 'amount' => $amount,
                 'donorp' => $donorp,
                 'volunteer_count' => $volunteer_count,
-                'volunteerp' => $volunteerp]);
+                'volunteerp' => $volunteerp,
+            'error'=>$error]);
 
         } else if (Auth::logged_in() && Auth::getusertype()=="reg_user" && isset($_GET['type'])) {
             $type = $_GET['type']; 

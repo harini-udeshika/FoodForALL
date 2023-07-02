@@ -33,7 +33,7 @@ class Admin extends Controller
         $site_data = $admin_model->homepage_data();
 
         $this->view('admin.home.view', [
-            'name' => $name,
+            // 'name' => $name,
             'result' => $result,
             'site_data' => $site_data,
         ]);
